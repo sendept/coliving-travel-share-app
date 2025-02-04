@@ -10,10 +10,10 @@ export interface ParsedTravel {
 
 export const parseMessage = (message: string): ParsedTravel | null => {
   try {
-    // Enhanced name parsing logic with more patterns
-    const nameParts = message.match(/I(?:'|')?m\s+([A-Za-z]+)|([A-Za-z]+)\s+here|name(?:'s|:)?\s+([A-Za-z]+)|([A-Za-z]+)\s+from/i);
+    // Enhanced name parsing logic with more patterns and better priority
+    const nameParts = message.match(/I(?:'|')?m\s+([A-Za-z]+)|I\s+am\s+([A-Za-z]+)|([A-Za-z]+)\s+here|name(?:'s|:)?\s+([A-Za-z]+)|([A-Za-z]+)\s+(?:and|,)/i);
     const name = nameParts 
-      ? (nameParts[1] || nameParts[2] || nameParts[3] || nameParts[4])
+      ? (nameParts[1] || nameParts[2] || nameParts[3] || nameParts[4] || nameParts[5])
       : message.split(/[\s,!.]+/).find(word => /^[A-Z][a-z]+$/.test(word)) || "";
     
     if (!name) {
@@ -24,10 +24,19 @@ export const parseMessage = (message: string): ParsedTravel | null => {
     const spotsParts = message.match(/(\d+)\s+(?:free\s+)?spots?|(?:free\s+)?spots?:?\s+(\d+)|(?:take|have)\s+(\d+)/i);
     const availableSpots = spotsParts ? parseInt(spotsParts[1] || spotsParts[2] || spotsParts[3]) : 0;
 
-    const routeParts = message.match(/(?:from|via|to|through)\s+([A-Za-z\s,&]+)(?=\s|$)/gi);
-    const route = routeParts 
-      ? routeParts.map(part => part.replace(/(?:from|via|to|through)\s+/i, "")).join(" → ")
-      : "Unknown route";
+    // Enhanced route parsing to handle "from X to Y" pattern
+    const fromToPattern = /(?:from\s+([A-Za-z\s]+)\s+to\s+([A-Za-z\s]+))/i;
+    const fromToMatch = message.match(fromToPattern);
+    
+    let route;
+    if (fromToMatch) {
+      route = `${fromToMatch[1].trim()} → ${fromToMatch[2].trim()}`;
+    } else {
+      const routeParts = message.match(/(?:from|via|to|through)\s+([A-Za-z\s,&]+)(?=\s|$)/gi);
+      route = routeParts 
+        ? routeParts.map(part => part.replace(/(?:from|via|to|through)\s+/i, "")).join(" → ")
+        : "Unknown route";
+    }
 
     // Extract the first location as transportFrom
     const locations = route.split(" → ");
