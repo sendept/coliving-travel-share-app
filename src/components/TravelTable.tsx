@@ -9,15 +9,15 @@ import {
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { useState } from "react";
-import { useToast } from "@/components/ui/use-toast";
+import { useToast } from "@/hooks/use-toast";
 
 export interface TravelEntry {
   id: string;
   name: string;
-  travelersWith: number;
   availableSpots: number;
   route: string;
   transportFrom: string;
+  transport: string;
   taxiSharing: boolean;
   contact: string;
   claimedBy: string;
@@ -33,6 +33,16 @@ export const TravelTable = ({ entries, onClaimSpot }: TravelTableProps) => {
   const { toast } = useToast();
 
   const handleClaim = (id: string) => {
+    const entry = entries.find(e => e.id === id);
+    if (entry && entry.availableSpots <= 0) {
+      toast({
+        title: "No spots available",
+        description: "This travel option has no available spots",
+        variant: "destructive",
+      });
+      return;
+    }
+
     const name = claimName[id]?.trim();
     if (!name) {
       toast({
@@ -52,10 +62,10 @@ export const TravelTable = ({ entries, onClaimSpot }: TravelTableProps) => {
         <TableHeader>
           <TableRow>
             <TableHead>Name</TableHead>
-            <TableHead>Travelers With</TableHead>
             <TableHead>Available Spots</TableHead>
             <TableHead>Route</TableHead>
             <TableHead>Transport From</TableHead>
+            <TableHead>Transport</TableHead>
             <TableHead>Taxi Sharing</TableHead>
             <TableHead>Contact</TableHead>
             <TableHead>Claim Spot</TableHead>
@@ -65,10 +75,10 @@ export const TravelTable = ({ entries, onClaimSpot }: TravelTableProps) => {
           {entries.map((entry) => (
             <TableRow key={entry.id}>
               <TableCell className="font-medium">{entry.name}</TableCell>
-              <TableCell>{entry.travelersWith}</TableCell>
-              <TableCell>{entry.availableSpots}</TableCell>
+              <TableCell>{Math.max(0, entry.availableSpots)}</TableCell>
               <TableCell>{entry.route}</TableCell>
               <TableCell>{entry.transportFrom}</TableCell>
+              <TableCell>{entry.transport}</TableCell>
               <TableCell>{entry.taxiSharing ? "Yes" : "No"}</TableCell>
               <TableCell>{entry.contact}</TableCell>
               <TableCell>
@@ -92,6 +102,7 @@ export const TravelTable = ({ entries, onClaimSpot }: TravelTableProps) => {
                     <Button
                       variant="secondary"
                       onClick={() => handleClaim(entry.id)}
+                      disabled={entry.availableSpots <= 0}
                     >
                       Claim
                     </Button>

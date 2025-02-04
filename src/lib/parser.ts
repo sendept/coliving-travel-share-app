@@ -1,18 +1,22 @@
 export interface ParsedTravel {
   name: string;
-  travelersWith: number;
   availableSpots: number;
   route: string;
   transportFrom: string;
+  transport: string;
   taxiSharing: boolean;
   contact: string;
 }
 
 export const parseMessage = (message: string): ParsedTravel | null => {
   try {
-    // Basic parsing logic - this can be enhanced with more sophisticated NLP
-    const nameParts = message.match(/I['']m\s+([A-Za-z]+)|([A-Za-z]+)\s+here/i);
-    const name = nameParts ? (nameParts[1] || nameParts[2]) : "Anonymous";
+    // Enhanced name parsing logic
+    const nameParts = message.match(/I(?:'|')?m\s+([A-Za-z]+)|([A-Za-z]+)\s+here/i);
+    const name = nameParts ? (nameParts[1] || nameParts[2]) : "";
+    
+    if (!name) {
+      return null;
+    }
 
     const spotsParts = message.match(/(\d+)\s+(?:free\s+)?spots?|(?:free\s+)?spots?:?\s+(\d+)/i);
     const availableSpots = spotsParts ? parseInt(spotsParts[1] || spotsParts[2]) : 0;
@@ -22,6 +26,14 @@ export const parseMessage = (message: string): ParsedTravel | null => {
       ? routeParts.map(part => part.replace(/(?:from|via|to)\s+/i, "")).join(" → ")
       : "Unknown route";
 
+    // Extract the first location as transportFrom
+    const locations = route.split(" → ");
+    const transportFrom = locations[0] || "Unknown location";
+
+    // Detect transport type
+    const transportTypes = message.match(/\b(car|bus|train)\b/i);
+    const transport = transportTypes ? transportTypes[1].charAt(0).toUpperCase() + transportTypes[1].slice(1).toLowerCase() : "Car";
+
     const taxiParts = message.match(/taxi|cab/i);
     const taxiSharing = !!taxiParts;
 
@@ -30,10 +42,10 @@ export const parseMessage = (message: string): ParsedTravel | null => {
 
     return {
       name,
-      travelersWith: 1,
       availableSpots,
       route,
-      transportFrom: "Car",
+      transportFrom,
+      transport,
       taxiSharing,
       contact,
     };
