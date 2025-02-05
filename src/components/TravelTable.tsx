@@ -34,7 +34,7 @@ export const TravelTable = ({ entries, onClaimSpot }: TravelTableProps) => {
 
   const handleClaim = (id: string) => {
     const entry = entries.find(e => e.id === id);
-    if (entry && entry.availableSpots <= 0) {
+    if (!entry || entry.availableSpots <= 0) {
       toast({
         title: "No spots available",
         description: "This travel option has no available spots",
@@ -81,17 +81,13 @@ export const TravelTable = ({ entries, onClaimSpot }: TravelTableProps) => {
             {entries.map((entry) => (
               <TableRow key={entry.id}>
                 <TableCell className="font-medium">{entry.name}</TableCell>
-                <TableCell>{Math.max(0, entry.availableSpots)}</TableCell>
+                <TableCell>{entry.availableSpots}</TableCell>
                 <TableCell className="whitespace-pre-wrap">{entry.route}</TableCell>
                 <TableCell>{entry.transport}</TableCell>
                 <TableCell>{entry.taxiSharing ? "Yes" : "No"}</TableCell>
                 <TableCell>{entry.contact}</TableCell>
                 <TableCell>
-                  {entry.claimedBy ? (
-                    <span className="text-muted-foreground">
-                      Claimed by {entry.claimedBy}
-                    </span>
-                  ) : (
+                  {entry.availableSpots > 0 && (
                     <div className="flex gap-2">
                       <Input
                         placeholder="Your name"
@@ -108,7 +104,6 @@ export const TravelTable = ({ entries, onClaimSpot }: TravelTableProps) => {
                       <Button
                         variant="secondary"
                         onClick={() => handleClaim(entry.id)}
-                        disabled={entry.availableSpots <= 0}
                         className="bg-[#F97316] hover:bg-[#F97316]/90 text-white"
                       >
                         Claim

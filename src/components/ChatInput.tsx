@@ -1,3 +1,4 @@
+
 import { useState } from "react";
 import { Send } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -37,7 +38,7 @@ export const ChatInput = ({ onSubmit }: ChatInputProps) => {
       <Button 
         type="submit" 
         size="icon"
-        className="absolute bottom-2 right-2 bg-secondary hover:bg-secondary/90"
+        className="absolute bottom-2 right-2 bg-[#F97316] hover:bg-[#F97316]/90 text-white"
       >
         <Send className="h-4 w-4" />
       </Button>
