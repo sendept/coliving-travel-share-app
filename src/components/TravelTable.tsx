@@ -20,7 +20,7 @@ export interface TravelEntry {
   transport: string;
   taxiSharing: boolean;
   contact: string;
-  claimedBy: string;
+  claimedBy: string[];  // Changed to array to store multiple claims
 }
 
 interface TravelTableProps {
@@ -74,6 +74,7 @@ export const TravelTable = ({ entries, onClaimSpot }: TravelTableProps) => {
               <TableHead>Transport</TableHead>
               <TableHead>Taxi Sharing</TableHead>
               <TableHead>Contact</TableHead>
+              <TableHead>Claimed By</TableHead>
               <TableHead>Claim Spot</TableHead>
             </TableRow>
           </TableHeader>
@@ -82,10 +83,15 @@ export const TravelTable = ({ entries, onClaimSpot }: TravelTableProps) => {
               <TableRow key={entry.id}>
                 <TableCell className="font-medium">{entry.name}</TableCell>
                 <TableCell>{entry.availableSpots}</TableCell>
-                <TableCell className="whitespace-pre-wrap">{entry.route}</TableCell>
+                <TableCell className="whitespace-pre-line break-words max-w-[300px]">{entry.route}</TableCell>
                 <TableCell>{entry.transport}</TableCell>
                 <TableCell>{entry.taxiSharing ? "Yes" : "No"}</TableCell>
                 <TableCell>{entry.contact}</TableCell>
+                <TableCell className="whitespace-pre-line">
+                  {Array.isArray(entry.claimedBy) && entry.claimedBy.length > 0 
+                    ? entry.claimedBy.join('\n')
+                    : '-'}
+                </TableCell>
                 <TableCell>
                   {entry.availableSpots > 0 && (
                     <div className="flex gap-2">

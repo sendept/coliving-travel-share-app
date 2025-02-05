@@ -22,7 +22,7 @@ const Index = () => {
 
     const newEntry: TravelEntry = {
       id: crypto.randomUUID(),
-      claimedBy: "",
+      claimedBy: [],  // Initialize as empty array
       ...parsed,
     };
 
@@ -40,7 +40,7 @@ const Index = () => {
           ? {
               ...entry,
               availableSpots: entry.availableSpots - 1,
-              claimedBy: name,
+              claimedBy: [...(Array.isArray(entry.claimedBy) ? entry.claimedBy : []), name],
             }
           : entry
       )
