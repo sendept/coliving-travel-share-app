@@ -1,8 +1,8 @@
+
 export interface ParsedTravel {
   name: string;
   availableSpots: number;
   route: string;
-  transportFrom: string;
   transport: string;
   taxiSharing: boolean;
   contact: string;
@@ -38,18 +38,17 @@ export const parseMessage = (message: string): ParsedTravel | null => {
         : "Unknown route";
     }
 
-    // Extract the first location as transportFrom
-    const locations = route.split(" → ");
-    const transportFrom = locations[0] || "Unknown location";
-
-    // Detect transport type with more variations
-    const transportTypes = message.match(/\b(car|bus|train|driving|taking\s+(?:the\s+)?(?:bus|train))\b/i);
-    let transport = "Car";
+    // Detect transport type and convert to emoji
+    const transportTypes = message.match(/\b(car|bus|train|plane|van)\b/i);
+    let transport = "🚗";  // Default to car emoji
     if (transportTypes) {
       const match = transportTypes[1].toLowerCase();
-      if (match.includes('bus')) transport = "Bus";
-      else if (match.includes('train')) transport = "Train";
-      else if (match.includes('car') || match.includes('driving')) transport = "Car";
+      switch (match) {
+        case 'bus': transport = "🚌"; break;
+        case 'train': transport = "🚂"; break;
+        case 'plane': transport = "✈️"; break;
+        case 'van': transport = "🚐"; break;
+      }
     }
 
     const taxiParts = message.match(/taxi|cab/i);
@@ -58,13 +57,12 @@ export const parseMessage = (message: string): ParsedTravel | null => {
     const contactParts = message.match(/[@\w.-]+@[\w.-]+\.\w+|@\w+|(?:\+\d{1,3}\s?)?\d{9,}/);
     const contact = contactParts ? contactParts[0] : "";
 
-    console.log("Parsed travel data:", { name, availableSpots, route, transportFrom, transport, taxiSharing, contact });
+    console.log("Parsed travel data:", { name, availableSpots, route, transport, taxiSharing, contact });
 
     return {
       name,
       availableSpots,
       route,
-      transportFrom,
       transport,
       taxiSharing,
       contact,

@@ -1,3 +1,4 @@
+
 import { useState } from "react";
 import { ChatInput } from "@/components/ChatInput";
 import { TravelTable, type TravelEntry } from "@/components/TravelTable";

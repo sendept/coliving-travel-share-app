@@ -1,3 +1,4 @@
+
 import {
   Table,
   TableBody,
@@ -16,7 +17,6 @@ export interface TravelEntry {
   name: string;
   availableSpots: number;
   route: string;
-  transportFrom: string;
   transport: string;
   taxiSharing: boolean;
   contact: string;
@@ -56,63 +56,74 @@ export const TravelTable = ({ entries, onClaimSpot }: TravelTableProps) => {
     setClaimName((prev) => ({ ...prev, [id]: "" }));
   };
 
+  const handleKeyPress = (e: React.KeyboardEvent<HTMLInputElement>, id: string) => {
+    if (e.key === 'Enter') {
+      handleClaim(id);
+    }
+  };
+
   return (
-    <div className="rounded-md border">
-      <Table>
-        <TableHeader>
-          <TableRow>
-            <TableHead>Name</TableHead>
-            <TableHead>Available Spots</TableHead>
-            <TableHead>Route</TableHead>
-            <TableHead>Transport From</TableHead>
-            <TableHead>Transport</TableHead>
-            <TableHead>Taxi Sharing</TableHead>
-            <TableHead>Contact</TableHead>
-            <TableHead>Claim Spot</TableHead>
-          </TableRow>
-        </TableHeader>
-        <TableBody>
-          {entries.map((entry) => (
-            <TableRow key={entry.id}>
-              <TableCell className="font-medium">{entry.name}</TableCell>
-              <TableCell>{Math.max(0, entry.availableSpots)}</TableCell>
-              <TableCell>{entry.route}</TableCell>
-              <TableCell>{entry.transportFrom}</TableCell>
-              <TableCell>{entry.transport}</TableCell>
-              <TableCell>{entry.taxiSharing ? "Yes" : "No"}</TableCell>
-              <TableCell>{entry.contact}</TableCell>
-              <TableCell>
-                {entry.claimedBy ? (
-                  <span className="text-muted-foreground">
-                    Claimed by {entry.claimedBy}
-                  </span>
-                ) : (
-                  <div className="flex gap-2">
-                    <Input
-                      placeholder="Your name"
-                      value={claimName[entry.id] || ""}
-                      onChange={(e) =>
-                        setClaimName((prev) => ({
-                          ...prev,
-                          [entry.id]: e.target.value,
-                        }))
-                      }
-                      className="w-32"
-                    />
-                    <Button
-                      variant="secondary"
-                      onClick={() => handleClaim(entry.id)}
-                      disabled={entry.availableSpots <= 0}
-                    >
-                      Claim
-                    </Button>
-                  </div>
-                )}
-              </TableCell>
+    <>
+      <div className="rounded-md border">
+        <Table>
+          <TableHeader>
+            <TableRow>
+              <TableHead>Name</TableHead>
+              <TableHead>Available Spots</TableHead>
+              <TableHead className="min-w-[300px]">Route</TableHead>
+              <TableHead>Transport</TableHead>
+              <TableHead>Taxi Sharing</TableHead>
+              <TableHead>Contact</TableHead>
+              <TableHead>Claim Spot</TableHead>
             </TableRow>
-          ))}
-        </TableBody>
-      </Table>
-    </div>
+          </TableHeader>
+          <TableBody>
+            {entries.map((entry) => (
+              <TableRow key={entry.id}>
+                <TableCell className="font-medium">{entry.name}</TableCell>
+                <TableCell>{Math.max(0, entry.availableSpots)}</TableCell>
+                <TableCell className="whitespace-pre-wrap">{entry.route}</TableCell>
+                <TableCell>{entry.transport}</TableCell>
+                <TableCell>{entry.taxiSharing ? "Yes" : "No"}</TableCell>
+                <TableCell>{entry.contact}</TableCell>
+                <TableCell>
+                  {entry.claimedBy ? (
+                    <span className="text-muted-foreground">
+                      Claimed by {entry.claimedBy}
+                    </span>
+                  ) : (
+                    <div className="flex gap-2">
+                      <Input
+                        placeholder="Your name"
+                        value={claimName[entry.id] || ""}
+                        onChange={(e) =>
+                          setClaimName((prev) => ({
+                            ...prev,
+                            [entry.id]: e.target.value,
+                          }))
+                        }
+                        onKeyPress={(e) => handleKeyPress(e, entry.id)}
+                        className="w-32"
+                      />
+                      <Button
+                        variant="secondary"
+                        onClick={() => handleClaim(entry.id)}
+                        disabled={entry.availableSpots <= 0}
+                        className="bg-[#F97316] hover:bg-[#F97316]/90 text-white"
+                      >
+                        Claim
+                      </Button>
+                    </div>
+                  )}
+                </TableCell>
+              </TableRow>
+            ))}
+          </TableBody>
+        </Table>
+      </div>
+      <footer className="mt-8 text-center text-sm text-muted-foreground">
+        Feel free to use it. Built by sende.co
+      </footer>
+    </>
   );
 };
