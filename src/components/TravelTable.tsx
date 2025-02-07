@@ -11,16 +11,19 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { useState } from "react";
 import { useToast } from "@/hooks/use-toast";
+import { supabase } from "@/integrations/supabase/client";
 
 export interface TravelEntry {
   id: string;
   name: string;
-  availableSpots: number;
+  available_spots: number;  // Changed to match DB schema
   route: string;
   transport: string;
-  taxiSharing: boolean;
+  taxi_sharing: boolean;  // Changed to match DB schema
   contact: string;
-  claimedBy: string[];  // Changed to array to store multiple claims
+  claimed_by: string[];
+  created_at?: string;
+  updated_at?: string;
 }
 
 interface TravelTableProps {
@@ -34,7 +37,7 @@ export const TravelTable = ({ entries, onClaimSpot }: TravelTableProps) => {
 
   const handleClaim = (id: string) => {
     const entry = entries.find(e => e.id === id);
-    if (!entry || entry.availableSpots <= 0) {
+    if (!entry || entry.available_spots <= 0) {
       toast({
         title: "No spots available",
         description: "This travel option has no available spots",
@@ -82,18 +85,18 @@ export const TravelTable = ({ entries, onClaimSpot }: TravelTableProps) => {
             {entries.map((entry) => (
               <TableRow key={entry.id}>
                 <TableCell className="font-medium">{entry.name}</TableCell>
-                <TableCell>{entry.availableSpots}</TableCell>
+                <TableCell>{entry.available_spots}</TableCell>
                 <TableCell className="whitespace-pre-line break-words max-w-[300px]">{entry.route}</TableCell>
                 <TableCell>{entry.transport}</TableCell>
-                <TableCell>{entry.taxiSharing ? "Yes" : "No"}</TableCell>
+                <TableCell>{entry.taxi_sharing ? "Yes" : "No"}</TableCell>
                 <TableCell>{entry.contact}</TableCell>
                 <TableCell className="whitespace-pre-line">
-                  {Array.isArray(entry.claimedBy) && entry.claimedBy.length > 0 
-                    ? entry.claimedBy.join('\n')
+                  {Array.isArray(entry.claimed_by) && entry.claimed_by.length > 0 
+                    ? entry.claimed_by.join('\n')
                     : '-'}
                 </TableCell>
                 <TableCell>
-                  {entry.availableSpots > 0 && (
+                  {entry.available_spots > 0 && (
                     <div className="flex gap-2">
                       <Input
                         placeholder="Your name"
