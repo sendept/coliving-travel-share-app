@@ -16,10 +16,10 @@ import { supabase } from "@/integrations/supabase/client";
 export interface TravelEntry {
   id: string;
   name: string;
-  available_spots: number;  // Changed to match DB schema
+  available_spots: number;
   route: string;
   transport: string;
-  taxi_sharing: boolean;  // Changed to match DB schema
+  taxi_sharing: boolean;
   contact: string;
   claimed_by: string[];
   created_at?: string;
@@ -71,14 +71,14 @@ export const TravelTable = ({ entries, onClaimSpot }: TravelTableProps) => {
         <Table>
           <TableHeader>
             <TableRow>
-              <TableHead>Name</TableHead>
-              <TableHead>Available Spots</TableHead>
-              <TableHead className="min-w-[300px]">Route</TableHead>
-              <TableHead>Transport</TableHead>
-              <TableHead>Taxi Sharing</TableHead>
-              <TableHead>Contact</TableHead>
-              <TableHead>Claimed By</TableHead>
-              <TableHead>Claim Spot</TableHead>
+              <TableHead className="w-[150px]">Name</TableHead>
+              <TableHead className="w-[120px]">Available Spots</TableHead>
+              <TableHead className="min-w-[400px]">Route</TableHead>
+              <TableHead className="w-[120px]">Transport</TableHead>
+              <TableHead className="w-[100px]">Taxi Sharing</TableHead>
+              <TableHead className="w-[150px]">Contact</TableHead>
+              <TableHead className="w-[150px]">Claimed By</TableHead>
+              <TableHead className="w-[250px]">Claim Spot</TableHead>
             </TableRow>
           </TableHeader>
           <TableBody>
@@ -86,7 +86,9 @@ export const TravelTable = ({ entries, onClaimSpot }: TravelTableProps) => {
               <TableRow key={entry.id}>
                 <TableCell className="font-medium">{entry.name}</TableCell>
                 <TableCell>{entry.available_spots}</TableCell>
-                <TableCell className="whitespace-pre-line break-words max-w-[300px]">{entry.route}</TableCell>
+                <TableCell className="whitespace-pre-wrap break-words max-w-[400px] py-4">
+                  {entry.route}
+                </TableCell>
                 <TableCell>{entry.transport}</TableCell>
                 <TableCell>{entry.taxi_sharing ? "Yes" : "No"}</TableCell>
                 <TableCell>{entry.contact}</TableCell>
