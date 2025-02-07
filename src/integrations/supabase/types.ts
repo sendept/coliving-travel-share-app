@@ -9,6 +9,33 @@ export type Json =
 export type Database = {
   public: {
     Tables: {
+      page_settings: {
+        Row: {
+          created_at: string
+          id: string
+          language: string
+          subtitle: string
+          title: string
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          language?: string
+          subtitle?: string
+          title?: string
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          language?: string
+          subtitle?: string
+          title?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
       travel_entries: {
         Row: {
           available_spots: number
@@ -16,6 +43,9 @@ export type Database = {
           contact: string
           created_at: string
           id: string
+          language: string | null
+          last_edited_at: string | null
+          last_edited_by: string | null
           name: string
           route: string
           taxi_sharing: boolean
@@ -28,6 +58,9 @@ export type Database = {
           contact: string
           created_at?: string
           id?: string
+          language?: string | null
+          last_edited_at?: string | null
+          last_edited_by?: string | null
           name: string
           route: string
           taxi_sharing?: boolean
@@ -40,6 +73,9 @@ export type Database = {
           contact?: string
           created_at?: string
           id?: string
+          language?: string | null
+          last_edited_at?: string | null
+          last_edited_by?: string | null
           name?: string
           route?: string
           taxi_sharing?: boolean

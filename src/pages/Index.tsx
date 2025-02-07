@@ -1,7 +1,7 @@
-
 import { useState, useEffect } from "react";
 import { ChatInput } from "@/components/ChatInput";
 import { TravelTable, type TravelEntry } from "@/components/TravelTable";
+import { PageHeader } from "@/components/PageHeader";
 import { parseMessage } from "@/lib/parser";
 import { useToast } from "@/components/ui/use-toast";
 import { supabase } from "@/integrations/supabase/client";
@@ -85,6 +85,7 @@ const Index = () => {
       taxi_sharing: parsed.taxiSharing,
       contact: parsed.contact,
       claimed_by: [],
+      language: 'en', // Default language
     };
 
     const { error } = await supabase
@@ -137,12 +138,7 @@ const Index = () => {
 
   return (
     <div className="container py-8 space-y-8">
-      <div className="space-y-4">
-        <h1 className="text-4xl font-bold text-center">Travel Coordination</h1>
-        <p className="text-center text-muted-foreground">
-          Share your travel plans or find a ride by entering your details below
-        </p>
-      </div>
+      <PageHeader />
       
       <div className="max-w-2xl mx-auto">
         <ChatInput onSubmit={handleSubmit} />
