@@ -1,7 +1,8 @@
 
 import { useState, useEffect } from "react";
 import { ChatInput } from "@/components/ChatInput";
-import { TravelTable, type TravelEntry, type Project } from "@/components/travel-table/TravelTable";
+import { TravelTable } from "@/components/travel-table/TravelTable";
+import { TravelEntry, Project } from "@/components/travel-table/types";
 import { PageHeader } from "@/components/PageHeader";
 import { parseMessage } from "@/lib/parser";
 import { useToast } from "@/components/ui/use-toast";
