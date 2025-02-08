@@ -69,6 +69,7 @@ export const TravelTable = ({ entries, onClaimSpot }: TravelTableProps) => {
               <TableHead className="w-[120px]">Transport</TableHead>
               <TableHead className="w-[100px]">Taxi Sharing</TableHead>
               <TableHead className="w-[150px]">Contact</TableHead>
+              <TableHead className="w-[100px]">Language</TableHead>
               <TableHead className="w-[150px]">Claimed By</TableHead>
               <TableHead className="w-[250px]">Actions</TableHead>
             </TableRow>

@@ -17,6 +17,17 @@ interface TravelTableRowProps {
   onClaimSpot: (id: string, name: string) => void;
 }
 
+const getLanguageName = (code: string) => {
+  const languages = {
+    en: "English",
+    es: "Spanish",
+    fr: "French",
+    de: "German",
+    zh: "Chinese",
+  };
+  return languages[code as keyof typeof languages] || code;
+};
+
 export const TravelTableRow = ({
   entry,
   editingEntry,
@@ -49,6 +60,10 @@ export const TravelTableRow = ({
       return entry[field] ? "Yes" : "No";
     }
 
+    if (field === "language") {
+      return getLanguageName(entry[field] || "en");
+    }
+
     return entry[field];
   };
 
@@ -64,6 +79,7 @@ export const TravelTableRow = ({
       <TableCell>{renderCell("transport")}</TableCell>
       <TableCell>{renderCell("taxi_sharing")}</TableCell>
       <TableCell>{renderCell("contact")}</TableCell>
+      <TableCell>{renderCell("language")}</TableCell>
       <TableCell className="whitespace-pre-line">
         {renderCell("claimed_by")}
       </TableCell>

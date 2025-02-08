@@ -25,6 +25,22 @@ export const EditForm = ({ entry, editForm, setEditForm, field }: EditFormProps)
     );
   }
 
+  if (field === "language") {
+    return (
+      <select
+        value={editForm[field] || "en"}
+        onChange={(e) => setEditForm({ ...editForm, [field]: e.target.value })}
+        className="w-full p-2 border rounded"
+      >
+        <option value="en">English</option>
+        <option value="es">Spanish</option>
+        <option value="fr">French</option>
+        <option value="de">German</option>
+        <option value="zh">Chinese</option>
+      </select>
+    );
+  }
+
   if (field === "available_spots") {
     return (
       <Input
