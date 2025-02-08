@@ -2,52 +2,22 @@
 import { useState, useEffect } from "react";
 import { ChatInput } from "@/components/ChatInput";
 import { TravelTable } from "@/components/travel-table/TravelTable";
-import { TravelEntry, Project } from "@/components/travel-table/types";
+import { TravelEntry } from "@/components/travel-table/types";
 import { PageHeader } from "@/components/PageHeader";
 import { parseMessage } from "@/lib/parser";
 import { useToast } from "@/components/ui/use-toast";
 import { supabase } from "@/integrations/supabase/client";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 
 const Index = () => {
   const [entries, setEntries] = useState<TravelEntry[]>([]);
-  const [projects, setProjects] = useState<Project[]>([]);
-  const [selectedProject, setSelectedProject] = useState<string>("default");
   const { toast } = useToast();
 
-  // Fetch projects
-  useEffect(() => {
-    const fetchProjects = async () => {
-      const { data, error } = await supabase
-        .from('projects')
-        .select('*')
-        .order('created_at', { ascending: true });
-
-      if (error) {
-        console.error('Error fetching projects:', error);
-        toast({
-          title: "Error loading projects",
-          description: "Could not load projects",
-          variant: "destructive",
-        });
-        return;
-      }
-
-      if (data) {
-        setProjects(data);
-      }
-    };
-
-    fetchProjects();
-  }, [toast]);
-
-  // Fetch entries for selected project
+  // Fetch entries
   useEffect(() => {
     const fetchEntries = async () => {
       const { data, error } = await supabase
         .from('travel_entries')
         .select('*')
-        .eq('project_id', selectedProject)
         .order('created_at', { ascending: false });
 
       if (error) {
@@ -67,7 +37,7 @@ const Index = () => {
 
     fetchEntries();
 
-    // Subscribe to real-time updates for the selected project
+    // Subscribe to real-time updates
     const channel = supabase
       .channel('public:travel_entries')
       .on(
@@ -75,8 +45,7 @@ const Index = () => {
         {
           event: '*',
           schema: 'public',
-          table: 'travel_entries',
-          filter: `project_id=eq.${selectedProject}`
+          table: 'travel_entries'
         },
         (payload) => {
           console.log('Real-time update:', payload);
@@ -96,7 +65,7 @@ const Index = () => {
     return () => {
       supabase.removeChannel(channel);
     };
-  }, [selectedProject, toast]);
+  }, [toast]);
 
   const handleSubmit = async (message: string) => {
     const parsed = parseMessage(message);
@@ -118,7 +87,7 @@ const Index = () => {
       contact: parsed.contact,
       claimed_by: [],
       language: 'en',
-      project_id: selectedProject,
+      project_id: 'default'
     };
 
     const { error } = await supabase
@@ -174,23 +143,6 @@ const Index = () => {
       <PageHeader />
       
       <div className="max-w-2xl mx-auto space-y-4">
-        <div className="flex items-center space-x-2">
-          <label htmlFor="project-select" className="text-sm font-medium">
-            Select Project:
-          </label>
-          <Select value={selectedProject} onValueChange={setSelectedProject}>
-            <SelectTrigger className="w-[200px]">
-              <SelectValue placeholder="Select a project" />
-            </SelectTrigger>
-            <SelectContent>
-              {projects.map((project) => (
-                <SelectItem key={project.id} value={project.id}>
-                  {project.name}
-                </SelectItem>
-              ))}
-            </SelectContent>
-          </Select>
-        </div>
         <ChatInput onSubmit={handleSubmit} />
       </div>
 
