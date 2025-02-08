@@ -36,6 +36,27 @@ export type Database = {
         }
         Relationships: []
       }
+      projects: {
+        Row: {
+          created_at: string
+          description: string | null
+          id: string
+          name: string
+        }
+        Insert: {
+          created_at?: string
+          description?: string | null
+          id: string
+          name: string
+        }
+        Update: {
+          created_at?: string
+          description?: string | null
+          id?: string
+          name?: string
+        }
+        Relationships: []
+      }
       travel_entries: {
         Row: {
           available_spots: number
@@ -47,6 +68,7 @@ export type Database = {
           last_edited_at: string | null
           last_edited_by: string | null
           name: string
+          project_id: string
           route: string
           taxi_sharing: boolean
           transport: string
@@ -62,6 +84,7 @@ export type Database = {
           last_edited_at?: string | null
           last_edited_by?: string | null
           name: string
+          project_id?: string
           route: string
           taxi_sharing?: boolean
           transport: string
@@ -77,6 +100,7 @@ export type Database = {
           last_edited_at?: string | null
           last_edited_by?: string | null
           name?: string
+          project_id?: string
           route?: string
           taxi_sharing?: boolean
           transport?: string
