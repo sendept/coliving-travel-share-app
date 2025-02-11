@@ -33,11 +33,15 @@ const Index = () => {
   };
 
   return (
-    <div className="container py-8 space-y-8">
-      <PageHeader />
-      <TravelForm />
-      <div className="overflow-x-auto">
-        <TravelTable entries={entries} onClaimSpot={handleClaimSpot} />
+    <div className="product-hunt-container">
+      <div className="product-hunt-header">
+        <PageHeader />
+      </div>
+      <div className="py-8 space-y-8">
+        <TravelForm />
+        <div className="product-hunt-card p-6">
+          <TravelTable entries={entries} onClaimSpot={handleClaimSpot} />
+        </div>
       </div>
     </div>
   );

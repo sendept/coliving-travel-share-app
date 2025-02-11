@@ -1,3 +1,4 @@
+
 import type { Config } from "tailwindcss";
 
 export default {
@@ -55,6 +56,17 @@ export default {
           DEFAULT: "hsl(var(--card))",
           foreground: "hsl(var(--card-foreground))",
         },
+        'ph-orange': '#F97316',
+        'ph-gray': {
+          100: '#F6F6F6',
+          200: '#EAEAEA',
+          300: '#DDDDDD',
+          400: '#999999',
+          500: '#666666',
+          600: '#444444',
+          700: '#333333',
+          800: '#222222',
+        },
       },
       borderRadius: {
         lg: "var(--radius)",
@@ -74,6 +86,9 @@ export default {
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
+      },
+      boxShadow: {
+        'ph': '0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1)',
       },
     },
   },

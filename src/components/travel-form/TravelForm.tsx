@@ -49,7 +49,8 @@ export const TravelForm = () => {
   };
 
   return (
-    <div className="max-w-2xl mx-auto space-y-4">
+    <div className="product-hunt-card p-6 max-w-2xl mx-auto">
+      <h2 className="text-xl font-semibold mb-4 text-gray-900">Share Your Travel Plan</h2>
       <ChatInput onSubmit={handleSubmit} />
     </div>
   );
