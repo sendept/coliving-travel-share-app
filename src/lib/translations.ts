@@ -1,4 +1,6 @@
 
+import React from 'react';
+
 type TranslationKey = 'name' | 'availableSpots' | 'route' | 'transport' | 'taxiSharing' | 'contact' | 'claimedBy' | 'actions';
 
 const translations: Record<'en' | 'es', Record<TranslationKey, string>> = {
@@ -24,16 +26,16 @@ const translations: Record<'en' | 'es', Record<TranslationKey, string>> = {
   }
 };
 
-const splitTranslation = (text: string) => {
+const splitTranslation = (text: string): React.JSX.Element => {
   const [primary, secondary] = text.split(' / ');
   return (
-    <>
+    <React.Fragment>
       <span className="text-foreground">{primary}</span>
       <span className="text-muted-foreground text-sm ml-1">/ {secondary}</span>
-    </>
+    </React.Fragment>
   );
 };
 
-export const getTranslation = (key: TranslationKey, language: 'en' | 'es' = 'en'): JSX.Element => {
+export const getTranslation = (key: TranslationKey, language: 'en' | 'es' = 'en'): React.JSX.Element => {
   return splitTranslation(translations[language][key]);
 };
