@@ -10,6 +10,7 @@ import {
 import { useToast } from "@/hooks/use-toast";
 import { supabase } from "@/integrations/supabase/client";
 import { TravelTableRow } from "./TravelTableRow";
+import { getTranslation } from "@/lib/translations";
 import type { TravelEntry, TravelTableProps } from "./types";
 
 export type { TravelEntry } from "./types";
@@ -57,21 +58,23 @@ export const TravelTable = ({ entries, onClaimSpot }: TravelTableProps) => {
     setEditForm({});
   };
 
+  // Use the language of the first entry, or default to English
+  const language = entries[0]?.language || 'en';
+
   return (
     <>
       <div className="rounded-md border">
         <Table>
           <TableHeader>
             <TableRow>
-              <TableHead className="w-[150px]">Name</TableHead>
-              <TableHead className="w-[120px]">Available Spots</TableHead>
-              <TableHead className="min-w-[400px]">Route</TableHead>
-              <TableHead className="w-[120px]">Transport</TableHead>
-              <TableHead className="w-[100px]">Taxi Sharing</TableHead>
-              <TableHead className="w-[150px]">Contact</TableHead>
-              <TableHead className="w-[100px]">Language</TableHead>
-              <TableHead className="w-[150px]">Claimed By</TableHead>
-              <TableHead className="w-[250px]">Actions</TableHead>
+              <TableHead className="w-[150px]">{getTranslation('name', language)}</TableHead>
+              <TableHead className="w-[120px]">{getTranslation('availableSpots', language)}</TableHead>
+              <TableHead className="min-w-[400px]">{getTranslation('route', language)}</TableHead>
+              <TableHead className="w-[120px]">{getTranslation('transport', language)}</TableHead>
+              <TableHead className="w-[100px]">{getTranslation('taxiSharing', language)}</TableHead>
+              <TableHead className="w-[150px]">{getTranslation('contact', language)}</TableHead>
+              <TableHead className="w-[150px]">{getTranslation('claimedBy', language)}</TableHead>
+              <TableHead className="w-[250px]">{getTranslation('actions', language)}</TableHead>
             </TableRow>
           </TableHeader>
           <TableBody>
