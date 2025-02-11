@@ -3,6 +3,7 @@ import { TableCell, TableRow } from "@/components/ui/table";
 import { Button } from "@/components/ui/button";
 import { ClaimForm } from "./ClaimForm";
 import { EditForm } from "./EditForm";
+import { Plane, Car, Bike, Train, Bus, Van } from "lucide-react";
 import type { TravelEntry } from "./types";
 
 interface TravelTableRowProps {
@@ -15,6 +16,20 @@ interface TravelTableRowProps {
   onStartEdit: (entry: TravelEntry) => void;
   onClaimSpot: (id: string, name: string) => void;
 }
+
+const getTransportIcon = (transport: string) => {
+  const iconProps = { className: "inline-block mr-2", size: 18 };
+  const transport_lower = transport.toLowerCase();
+  
+  if (transport_lower.includes('plane')) return <Plane {...iconProps} />;
+  if (transport_lower.includes('car')) return <Car {...iconProps} />;
+  if (transport_lower.includes('bike') || transport_lower.includes('bicycle')) return <Bike {...iconProps} />;
+  if (transport_lower.includes('train')) return <Train {...iconProps} />;
+  if (transport_lower.includes('bus')) return <Bus {...iconProps} />;
+  if (transport_lower.includes('van')) return <Van {...iconProps} />;
+  
+  return null;
+};
 
 export const TravelTableRow = ({
   entry,
@@ -55,6 +70,15 @@ export const TravelTableRow = ({
 
     if (field === "taxi_sharing") {
       return entry[field] ? "Yes" : "No";
+    }
+
+    if (field === "transport") {
+      return (
+        <div className="flex items-center">
+          {getTransportIcon(entry[field])}
+          <span>{entry[field]}</span>
+        </div>
+      );
     }
 
     if (field === "language") {
