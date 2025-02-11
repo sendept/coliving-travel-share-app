@@ -3,27 +3,37 @@ type TranslationKey = 'name' | 'availableSpots' | 'route' | 'transport' | 'taxiS
 
 const translations: Record<'en' | 'es', Record<TranslationKey, string>> = {
   en: {
-    name: 'Name',
-    availableSpots: 'Available Spots',
-    route: 'Route',
-    transport: 'Transport',
-    taxiSharing: 'Taxi Sharing',
-    contact: 'Contact',
-    claimedBy: 'Claimed By',
-    actions: 'Actions'
+    name: 'Name / Nombre',
+    availableSpots: 'Available Spots / Plazas',
+    route: 'Route / Ruta',
+    transport: 'Transport / Transporte',
+    taxiSharing: 'Taxi Sharing / Compartir',
+    contact: 'Contact / Contacto',
+    claimedBy: 'Claimed By / Reservado Por',
+    actions: 'Actions / Acciones'
   },
   es: {
-    name: 'Nombre',
-    availableSpots: 'Plazas Disponibles',
-    route: 'Ruta',
-    transport: 'Transporte',
-    taxiSharing: 'Compartir Taxi',
-    contact: 'Contacto',
-    claimedBy: 'Reservado Por',
-    actions: 'Acciones'
+    name: 'Nombre / Name',
+    availableSpots: 'Plazas / Available Spots',
+    route: 'Ruta / Route',
+    transport: 'Transporte / Transport',
+    taxiSharing: 'Compartir / Taxi Sharing',
+    contact: 'Contacto / Contact',
+    claimedBy: 'Reservado Por / Claimed By',
+    actions: 'Acciones / Actions'
   }
 };
 
-export const getTranslation = (key: TranslationKey, language: 'en' | 'es' = 'en'): string => {
-  return translations[language][key];
+const splitTranslation = (text: string) => {
+  const [primary, secondary] = text.split(' / ');
+  return (
+    <>
+      <span className="text-foreground">{primary}</span>
+      <span className="text-muted-foreground text-sm ml-1">/ {secondary}</span>
+    </>
+  );
+};
+
+export const getTranslation = (key: TranslationKey, language: 'en' | 'es' = 'en'): JSX.Element => {
+  return splitTranslation(translations[language][key]);
 };

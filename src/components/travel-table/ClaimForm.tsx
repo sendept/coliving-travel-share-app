@@ -46,7 +46,7 @@ export const ClaimForm = ({ entry, onClaim }: ClaimFormProps) => {
   return (
     <div className="flex gap-2">
       <Input
-        placeholder="Your name"
+        placeholder="Your name / Tu nombre"
         value={claimName}
         onChange={(e) => setClaimName(e.target.value)}
         onKeyPress={handleKeyPress}
@@ -57,7 +57,8 @@ export const ClaimForm = ({ entry, onClaim }: ClaimFormProps) => {
         onClick={handleClaim}
         className="bg-[#F97316] hover:bg-[#F97316]/90 text-white"
       >
-        Claim
+        <span>Claim</span>
+        <span className="text-white/70 ml-1">/ Reservar</span>
       </Button>
     </div>
   );
