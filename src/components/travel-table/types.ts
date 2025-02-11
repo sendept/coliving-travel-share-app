@@ -12,7 +12,7 @@ export interface TravelEntry {
   updated_at?: string;
   last_edited_by?: string;
   last_edited_at?: string;
-  language?: string;
+  language: 'en' | 'es';  // Updated to be strictly typed
   project_id: string;
 }
 

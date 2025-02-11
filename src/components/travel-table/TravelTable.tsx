@@ -59,7 +59,7 @@ export const TravelTable = ({ entries, onClaimSpot }: TravelTableProps) => {
   };
 
   // Use the language of the first entry, or default to English
-  const language = entries[0]?.language || 'en';
+  const language: 'en' | 'es' = entries[0]?.language || 'en';
 
   return (
     <>
