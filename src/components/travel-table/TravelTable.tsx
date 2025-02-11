@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import {
   Table,
@@ -73,8 +72,7 @@ export const TravelTable = ({ entries, onClaimSpot }: TravelTableProps) => {
               <TableHead className="w-[120px]">{getTranslation('transport', language)}</TableHead>
               <TableHead className="w-[100px]">{getTranslation('taxiSharing', language)}</TableHead>
               <TableHead className="w-[150px]">{getTranslation('contact', language)}</TableHead>
-              <TableHead className="w-[150px]">{getTranslation('claimedBy', language)}</TableHead>
-              <TableHead className="w-[250px]">{getTranslation('actions', language)}</TableHead>
+              <TableHead className="w-[200px]">{getTranslation('claimedBy', language)}</TableHead>
             </TableRow>
           </TableHeader>
           <TableBody>

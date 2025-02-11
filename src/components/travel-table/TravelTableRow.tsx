@@ -1,7 +1,6 @@
 
 import { TableCell, TableRow } from "@/components/ui/table";
 import { Button } from "@/components/ui/button";
-import { Pencil, Check, X } from "lucide-react";
 import { ClaimForm } from "./ClaimForm";
 import { EditForm } from "./EditForm";
 import type { TravelEntry } from "./types";
@@ -16,17 +15,6 @@ interface TravelTableRowProps {
   onStartEdit: (entry: TravelEntry) => void;
   onClaimSpot: (id: string, name: string) => void;
 }
-
-const getLanguageName = (code: string) => {
-  const languages = {
-    en: "English",
-    es: "Spanish",
-    fr: "French",
-    de: "German",
-    zh: "Chinese",
-  };
-  return languages[code as keyof typeof languages] || code;
-};
 
 export const TravelTableRow = ({
   entry,
@@ -51,9 +39,18 @@ export const TravelTableRow = ({
     }
 
     if (field === "claimed_by") {
-      return Array.isArray(entry[field]) && entry[field].length > 0
-        ? entry[field].join("\n")
+      const claimedByContent = Array.isArray(entry[field]) && entry[field].length > 0
+        ? entry[field].join(", ")
         : "-";
+      
+      return (
+        <div>
+          <div className="whitespace-pre-line mb-2">{claimedByContent}</div>
+          {entry.available_spots > 0 && (
+            <ClaimForm entry={entry} onClaim={onClaimSpot} />
+          )}
+        </div>
+      );
     }
 
     if (field === "taxi_sharing") {
@@ -61,7 +58,7 @@ export const TravelTableRow = ({
     }
 
     if (field === "language") {
-      return getLanguageName(entry[field] || "en");
+      return entry[field];
     }
 
     return entry[field];
@@ -79,34 +76,8 @@ export const TravelTableRow = ({
       <TableCell>{renderCell("transport")}</TableCell>
       <TableCell>{renderCell("taxi_sharing")}</TableCell>
       <TableCell>{renderCell("contact")}</TableCell>
-      <TableCell>{renderCell("language")}</TableCell>
       <TableCell className="whitespace-pre-line">
         {renderCell("claimed_by")}
-      </TableCell>
-      <TableCell>
-        {editingEntry === entry.id ? (
-          <div className="flex gap-2">
-            <Button variant="ghost" size="icon" onClick={onSaveEdit}>
-              <Check className="h-4 w-4" />
-            </Button>
-            <Button variant="ghost" size="icon" onClick={onCancelEdit}>
-              <X className="h-4 w-4" />
-            </Button>
-          </div>
-        ) : (
-          <div className="flex gap-2">
-            <Button
-              variant="ghost"
-              size="icon"
-              onClick={() => onStartEdit(entry)}
-            >
-              <Pencil className="h-4 w-4" />
-            </Button>
-            {entry.available_spots > 0 && (
-              <ClaimForm entry={entry} onClaim={onClaimSpot} />
-            )}
-          </div>
-        )}
       </TableCell>
     </TableRow>
   );
