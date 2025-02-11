@@ -26,7 +26,7 @@ export const TravelForm = () => {
       taxi_sharing: parsed.taxiSharing,
       contact: parsed.contact,
       claimed_by: [],
-      language: 'en',
+      language: parsed.language as 'en' | 'es',
       project_id: 'default'
     };
 

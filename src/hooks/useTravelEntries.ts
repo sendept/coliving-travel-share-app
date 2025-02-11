@@ -26,7 +26,10 @@ export const useTravelEntries = () => {
       }
 
       if (data) {
-        setEntries(data);
+        setEntries(data.map(entry => ({
+          ...entry,
+          language: entry.language as 'en' | 'es'
+        })) as TravelEntry[]);
       }
     };
 
@@ -45,11 +48,19 @@ export const useTravelEntries = () => {
         (payload) => {
           console.log('Real-time update:', payload);
           if (payload.eventType === 'INSERT') {
-            setEntries((prev) => [payload.new as TravelEntry, ...prev]);
+            const newEntry = {
+              ...payload.new,
+              language: payload.new.language as 'en' | 'es'
+            } as TravelEntry;
+            setEntries((prev) => [newEntry, ...prev]);
           } else if (payload.eventType === 'UPDATE') {
+            const updatedEntry = {
+              ...payload.new,
+              language: payload.new.language as 'en' | 'es'
+            } as TravelEntry;
             setEntries((prev) =>
               prev.map((entry) =>
-                entry.id === payload.new.id ? (payload.new as TravelEntry) : entry
+                entry.id === payload.new.id ? updatedEntry : entry
               )
             );
           }
