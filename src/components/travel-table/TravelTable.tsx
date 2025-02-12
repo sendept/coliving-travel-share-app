@@ -1,3 +1,4 @@
+
 import { useState } from "react";
 import {
   Table,
@@ -93,7 +94,14 @@ export const TravelTable = ({ entries, onClaimSpot }: TravelTableProps) => {
         </Table>
       </div>
       <footer className="mt-8 text-center text-sm text-muted-foreground">
-        Feel free to use it. Built by sende.co
+        Feel free to use it. Built by{" "}
+        <a href="https://sende.co" target="_blank" rel="noopener noreferrer" className="inline-flex items-center">
+          <img 
+            src="/lovable-uploads/5939e496-5d0c-421e-9294-eb688e353313.png" 
+            alt="Sende" 
+            className="h-4 ml-1"
+          />
+        </a>
       </footer>
     </>
   );
