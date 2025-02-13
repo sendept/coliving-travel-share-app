@@ -93,8 +93,8 @@ export const TravelTable = ({ entries, onClaimSpot }: TravelTableProps) => {
           </TableBody>
         </Table>
       </div>
-      <footer className="mt-8 text-center text-sm text-muted-foreground">
-        <span className="mt-2 inline-block">
+      <footer className="mt-2 text-center text-sm text-muted-foreground">
+        <span className="inline-block">
           Feel free to use it. Built by{" "}
           <a href="https://sende.co" target="_blank" rel="noopener noreferrer" className="inline-flex items-center">
             <img 
