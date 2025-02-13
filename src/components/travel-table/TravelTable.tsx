@@ -63,10 +63,10 @@ export const TravelTable = ({ entries, onClaimSpot }: TravelTableProps) => {
 
   return (
     <>
-      <div className="rounded-md border">
+      <div>
         <Table>
           <TableHeader>
-            <TableRow>
+            <TableRow className="border-none">
               <TableHead className="w-[150px]">{getTranslation('name', language)}</TableHead>
               <TableHead className="w-[120px]">{getTranslation('availableSpots', language)}</TableHead>
               <TableHead className="min-w-[400px]">{getTranslation('route', language)}</TableHead>
@@ -94,13 +94,13 @@ export const TravelTable = ({ entries, onClaimSpot }: TravelTableProps) => {
         </Table>
       </div>
       <footer className="mt-2 text-center text-sm text-muted-foreground">
-        <span className="inline-block">
-          Feel free to use it. Built by{" "}
-          <a href="https://sende.co" target="_blank" rel="noopener noreferrer" className="inline-flex items-center">
+        <span className="inline-flex items-center">
+          Feel free to use it. Built by
+          <a href="https://sende.co" target="_blank" rel="noopener noreferrer" className="inline-flex items-center ml-1">
             <img 
               src="/lovable-uploads/5939e496-5d0c-421e-9294-eb688e353313.png" 
               alt="Sende" 
-              className="h-6 ml-1"
+              className="h-6"
             />
           </a>
         </span>
