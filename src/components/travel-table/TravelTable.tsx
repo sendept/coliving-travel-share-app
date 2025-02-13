@@ -100,7 +100,7 @@ export const TravelTable = ({ entries, onClaimSpot }: TravelTableProps) => {
             <img 
               src="/lovable-uploads/5939e496-5d0c-421e-9294-eb688e353313.png" 
               alt="Sende" 
-              className="h-6 ml-1 mt-2"
+              className="h-6 ml-1"
             />
           </a>
         </span>
