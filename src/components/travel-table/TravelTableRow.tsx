@@ -82,6 +82,12 @@ export const TravelTableRow = ({
       );
     }
 
+    if (field === "route") {
+      return (
+        <div className="whitespace-pre-line">{entry[field]}</div>
+      );
+    }
+
     return entry[field];
   };
 
@@ -91,7 +97,7 @@ export const TravelTableRow = ({
         {renderCell("name")}
       </TableCell>
       <TableCell>{renderCell("available_spots")}</TableCell>
-      <TableCell className="whitespace-pre-wrap break-words max-w-[400px] py-4">
+      <TableCell className="whitespace-pre-line py-4">
         {renderCell("route")}
       </TableCell>
       <TableCell>{renderCell("transport")}</TableCell>
