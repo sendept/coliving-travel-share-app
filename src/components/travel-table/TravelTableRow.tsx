@@ -3,7 +3,7 @@ import { TableCell, TableRow } from "@/components/ui/table";
 import { Button } from "@/components/ui/button";
 import { ClaimForm } from "./ClaimForm";
 import { EditForm } from "./EditForm";
-import { Plane, Car, Bike, Train, Bus } from "lucide-react";
+import { Plane, Car, Bike, Train, Bus, Edit2, Check, X } from "lucide-react";
 import type { TravelEntry } from "./types";
 
 interface TravelTableRowProps {
@@ -40,8 +40,10 @@ export const TravelTableRow = ({
   onStartEdit,
   onClaimSpot,
 }: TravelTableRowProps) => {
+  const isEditing = editingEntry === entry.id;
+
   const renderCell = (field: keyof TravelEntry) => {
-    if (editingEntry === entry.id) {
+    if (isEditing) {
       return (
         <EditForm
           entry={entry}
@@ -80,10 +82,6 @@ export const TravelTableRow = ({
       );
     }
 
-    if (field === "language") {
-      return entry[field];
-    }
-
     return entry[field];
   };
 
@@ -101,6 +99,37 @@ export const TravelTableRow = ({
       <TableCell>{renderCell("contact")}</TableCell>
       <TableCell className="whitespace-pre-line">
         {renderCell("claimed_by")}
+      </TableCell>
+      <TableCell className="w-[100px]">
+        {isEditing ? (
+          <div className="flex space-x-2">
+            <Button
+              variant="ghost"
+              size="icon"
+              onClick={onSaveEdit}
+              className="h-8 w-8"
+            >
+              <Check className="h-4 w-4" />
+            </Button>
+            <Button
+              variant="ghost"
+              size="icon"
+              onClick={onCancelEdit}
+              className="h-8 w-8"
+            >
+              <X className="h-4 w-4" />
+            </Button>
+          </div>
+        ) : (
+          <Button
+            variant="ghost"
+            size="icon"
+            onClick={() => onStartEdit(entry)}
+            className="h-8 w-8"
+          >
+            <Edit2 className="h-4 w-4" />
+          </Button>
+        )}
       </TableCell>
     </TableRow>
   );

@@ -62,7 +62,7 @@ export const TravelTable = ({ entries, onClaimSpot }: TravelTableProps) => {
   const language: 'en' | 'es' = entries[0]?.language || 'en';
 
   return (
-    <>
+    <div className="relative min-h-[calc(100vh-400px)]">
       <div>
         <Table>
           <TableHeader>
@@ -93,7 +93,7 @@ export const TravelTable = ({ entries, onClaimSpot }: TravelTableProps) => {
           </TableBody>
         </Table>
       </div>
-      <footer className="mt-1 text-center text-sm text-muted-foreground">
+      <footer className="fixed bottom-[60px] left-0 right-0 text-center text-sm text-muted-foreground">
         <span className="inline-flex items-center">
           Feel free to use it. Built by
           <a href="https://sende.co" target="_blank" rel="noopener noreferrer" className="inline-flex items-center ml-1">
@@ -105,6 +105,6 @@ export const TravelTable = ({ entries, onClaimSpot }: TravelTableProps) => {
           </a>
         </span>
       </footer>
-    </>
+    </div>
   );
 };
