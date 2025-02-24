@@ -7,14 +7,21 @@ import { LogoUpload } from "./LogoUpload";
 import { useToast } from "@/hooks/use-toast";
 import { Edit2, Check, X } from "lucide-react";
 
+interface PageSettings {
+  id?: string;
+  name: string;
+  subtitle: string;
+  logo_url: string;
+}
+
 export const PageHeader = () => {
-  const [settings, setSettings] = useState({
+  const [settings, setSettings] = useState<PageSettings>({
     name: "EVENT NAME",
     subtitle: "",
     logo_url: "",
   });
   const [editing, setEditing] = useState(false);
-  const [editForm, setEditForm] = useState(settings);
+  const [editForm, setEditForm] = useState<PageSettings>(settings);
   const { toast } = useToast();
 
   useEffect(() => {
