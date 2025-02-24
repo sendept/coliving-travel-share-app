@@ -4,16 +4,22 @@ import { TravelEntry } from "@/components/travel-table/types";
 import { useToast } from "@/hooks/use-toast";
 import { supabase } from "@/integrations/supabase/client";
 
-export const useTravelEntries = () => {
+export const useTravelEntries = (projectId?: string | null) => {
   const [entries, setEntries] = useState<TravelEntry[]>([]);
   const { toast } = useToast();
 
   useEffect(() => {
     const fetchEntries = async () => {
-      const { data, error } = await supabase
+      let query = supabase
         .from('travel_entries')
         .select('*')
         .order('created_at', { ascending: false });
+
+      if (projectId) {
+        query = query.eq('project_id', projectId);
+      }
+
+      const { data, error } = await query;
 
       if (error) {
         console.error('Error fetching entries:', error);
@@ -43,7 +49,8 @@ export const useTravelEntries = () => {
         {
           event: '*',
           schema: 'public',
-          table: 'travel_entries'
+          table: 'travel_entries',
+          filter: projectId ? `project_id=eq.${projectId}` : undefined
         },
         (payload) => {
           console.log('Real-time update:', payload);
@@ -71,7 +78,7 @@ export const useTravelEntries = () => {
     return () => {
       supabase.removeChannel(channel);
     };
-  }, [toast]);
+  }, [toast, projectId]);
 
   return entries;
 };

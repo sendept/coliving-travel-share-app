@@ -19,3 +19,20 @@ export const claimTravelSpot = async (entry: TravelEntry, name: string) => {
     .eq('id', entry.id);
   return { error };
 };
+
+export const resetProjectEntries = async (projectId: string) => {
+  const { error } = await supabase
+    .from('travel_entries')
+    .delete()
+    .eq('project_id', projectId);
+  return { error };
+};
+
+export const createProject = async (name: string, description?: string) => {
+  const { data, error } = await supabase
+    .from('projects')
+    .insert([{ name, description }])
+    .select()
+    .single();
+  return { data, error };
+};
