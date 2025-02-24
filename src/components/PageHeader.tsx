@@ -173,11 +173,21 @@ export const PageHeader = () => {
         {editing ? (
           <>
             <div className="space-y-2">
-              <Input
-                value={editForm.name}
-                onChange={(e) => setEditForm(prev => ({ ...prev, name: e.target.value }))}
-                className="text-3xl font-semibold tracking-tight text-center"
-              />
+              <div className="relative max-w-[700px] min-w-[350px] mx-auto">
+                <Input
+                  value={editForm.name}
+                  onChange={(e) => setEditForm(prev => ({ ...prev, name: e.target.value }))}
+                  className="text-3xl font-semibold tracking-tight text-center pr-10"
+                />
+                <Button
+                  variant="ghost"
+                  size="icon"
+                  onClick={handleSave}
+                  className="h-8 w-8 absolute right-2 top-1/2 -translate-y-1/2"
+                >
+                  <Check className="h-4 w-4" />
+                </Button>
+              </div>
               <div className="relative max-w-[700px] min-w-[350px] mx-auto">
                 <Input
                   value={editForm.subtitle}
@@ -230,31 +240,31 @@ export const PageHeader = () => {
                 </div>
               </div>
             </div>
-            <div className="flex justify-center space-x-2 mt-2">
-              <Button
-                variant="ghost"
-                size="icon"
-                onClick={handleSave}
-                className="h-8 w-8"
-              >
-                <Check className="h-4 w-4" />
-              </Button>
-              <Button
-                variant="ghost"
-                size="icon"
-                onClick={() => {
-                  setEditing(false);
-                  setEditForm(settings);
-                }}
-                className="h-8 w-8"
-              >
-                <X className="h-4 w-4" />
-              </Button>
-            </div>
+            <Button
+              variant="ghost"
+              size="icon"
+              onClick={() => {
+                setEditing(false);
+                setEditForm(settings);
+              }}
+              className="h-8 w-8"
+            >
+              <X className="h-4 w-4" />
+            </Button>
           </>
         ) : (
           <>
-            <h1 className="text-3xl font-semibold tracking-tight">{settings.name}</h1>
+            <div className="relative max-w-[700px] min-w-[350px] mx-auto">
+              <h1 className="text-3xl font-semibold tracking-tight">{settings.name}</h1>
+              <Button
+                variant="ghost"
+                size="icon"
+                onClick={() => setEditing(true)}
+                className="h-8 w-8 absolute right-2 top-1/2 -translate-y-1/2"
+              >
+                <Edit2 className="h-4 w-4" />
+              </Button>
+            </div>
             <p className={cn(
               "max-w-[700px] min-w-[350px] mx-auto px-4",
               fontSizes[settings.subtitle_style?.fontSize || "medium"],
@@ -263,14 +273,6 @@ export const PageHeader = () => {
             )}>
               {settings.subtitle}
             </p>
-            <Button
-              variant="ghost"
-              size="icon"
-              onClick={() => setEditing(true)}
-              className="h-8 w-8 mt-2"
-            >
-              <Edit2 className="h-4 w-4" />
-            </Button>
           </>
         )}
       </div>
