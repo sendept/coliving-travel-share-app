@@ -5,7 +5,12 @@ import { Upload } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import { supabase } from "@/integrations/supabase/client";
 
-export const LogoUpload = ({ onLogoUpdate }: { onLogoUpdate: (url: string) => void }) => {
+interface LogoUploadProps {
+  onLogoUpdate: (url: string) => void;
+  children?: React.ReactNode;
+}
+
+export const LogoUpload = ({ onLogoUpdate, children }: LogoUploadProps) => {
   const [uploading, setUploading] = useState(false);
   const { toast } = useToast();
 
@@ -56,10 +61,12 @@ export const LogoUpload = ({ onLogoUpdate }: { onLogoUpdate: (url: string) => vo
         className="absolute inset-0 w-full h-full opacity-0 cursor-pointer"
         disabled={uploading}
       />
-      <Button variant="ghost" className="w-full h-full" disabled={uploading}>
-        <Upload className="w-4 h-4 mr-2" />
-        {uploading ? "Uploading..." : "Upload Logo"}
-      </Button>
+      {children || (
+        <Button variant="ghost" className="w-full h-full" disabled={uploading}>
+          <Upload className="w-4 h-4 mr-2" />
+          {uploading ? "Uploading..." : "Upload Logo"}
+        </Button>
+      )}
     </div>
   );
 };

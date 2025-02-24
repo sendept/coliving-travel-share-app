@@ -55,10 +55,7 @@ export const ChatInput = ({ onSubmit }: ChatInputProps) => {
         placeholder={placeholder}
         className="min-h-[100px] pr-12 resize-none"
       />
-      <div className="absolute bottom-2 right-2 flex items-center gap-2">
-        <span className="text-xs text-muted-foreground">
-          {detectedLanguage === 'es' ? '🇪🇸 Español' : '🇬🇧 English'}
-        </span>
+      <div className="absolute bottom-2 right-2">
         <Button 
           type="submit" 
           size="icon"

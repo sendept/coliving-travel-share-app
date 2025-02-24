@@ -81,13 +81,26 @@ export const PageHeader = () => {
 
   return (
     <div className="space-y-4">
-      <div className="h-16 w-16 mx-auto mb-6">
+      <div className="h-24 w-24 mx-auto mb-6 relative group">
         {settings.logo_url ? (
-          <img 
-            src={settings.logo_url} 
-            alt="Event logo" 
-            className="w-full h-full object-contain"
-          />
+          <div className="relative">
+            <img 
+              src={settings.logo_url} 
+              alt="Event logo" 
+              className="w-full h-full object-contain"
+            />
+            <div className="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-50 transition-all flex items-center justify-center">
+              <LogoUpload onLogoUpdate={handleLogoUpdate}>
+                <Button
+                  variant="ghost"
+                  size="icon"
+                  className="opacity-0 group-hover:opacity-100 text-white"
+                >
+                  <Edit2 className="h-4 w-4" />
+                </Button>
+              </LogoUpload>
+            </div>
+          </div>
         ) : (
           <div className="w-full h-full rounded border-2 border-dashed border-gray-300 flex items-center justify-center">
             <LogoUpload onLogoUpdate={handleLogoUpdate} />
@@ -101,12 +114,12 @@ export const PageHeader = () => {
               <Input
                 value={editForm.name}
                 onChange={(e) => setEditForm(prev => ({ ...prev, name: e.target.value }))}
-                className="text-2xl font-semibold tracking-tight text-center"
+                className="text-3xl font-semibold tracking-tight text-center"
               />
               <Input
                 value={editForm.subtitle}
                 onChange={(e) => setEditForm(prev => ({ ...prev, subtitle: e.target.value }))}
-                className="text-2xl font-light text-center"
+                className="text-xl font-light text-center"
               />
             </div>
             <div className="flex justify-center space-x-2 mt-2">
@@ -133,8 +146,8 @@ export const PageHeader = () => {
           </>
         ) : (
           <>
-            <h1 className="text-2xl font-semibold tracking-tight">{settings.name}</h1>
-            <p className="text-2xl font-light text-muted-foreground">{settings.subtitle}</p>
+            <h1 className="text-3xl font-semibold tracking-tight">{settings.name}</h1>
+            <p className="text-xl font-light text-muted-foreground">{settings.subtitle}</p>
             <Button
               variant="ghost"
               size="icon"
