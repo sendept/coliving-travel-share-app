@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button";
 import { LogoUpload } from "./LogoUpload";
 import { useToast } from "@/hooks/use-toast";
 import { Edit2, Check, X, Type, AlignCenter } from "lucide-react";
+import { cn } from "@/lib/utils";
 import {
   DropdownMenu,
   DropdownMenuContent,
