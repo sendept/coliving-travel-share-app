@@ -1,3 +1,4 @@
+
 export interface ParsedTravel {
   name: string;
   availableSpots: number;
@@ -9,11 +10,12 @@ export interface ParsedTravel {
 }
 
 const spanishPatterns = {
-  name: /(?:soy|me llamo)\s+([A-Za-z]+)|([A-Za-z]+)\s+(?:con|y|,)/i,
-  spots: /(\d+)\s+(?:plazas?|asientos?|lugares?)/i,
-  route: /(?:desde|de|para|a|hacia|por)\s+([^,]+?)(?:\s+(?:a|hasta|hacia)\s+([^,]+?))?(?:\s+(?:y\s+)?(?:paro\s+en|paso\s+por)\s+([^,]+))?/i,
+  name: /(?:soy|me llamo)\s+([A-Za-zÀ-ÿ]+)|([A-Za-zÀ-ÿ]+)\s+(?:con|y|,)/i,
+  spots: /(\d+)\s+(?:plazas?|asientos?|lugares?|sitios?|personas?)/i,
+  route: /(?:desde|de|para|a|hacia|por)\s+([^,]+?)(?:\s+(?:a|hasta|hacia)\s+([^,]+?))?(?:\s+(?:y\s+)?(?:paro\s+en|paso\s+por|parando\s+en)\s+([^,]+))?/i,
   taxi: /taxi|cab/i,
-  dietary: /(?:alerg[ií]as?|dieta|no\s+puedo\s+comer|vegetariano?|vegano?|halal)\s*(?:a|:)?\s*([^,.]+)/i
+  dietary: /(?:alerg[ií]as?|dieta|no\s+puedo\s+comer|vegetariano?|vegano?|halal)\s*(?:a|:)?\s*([^,.]+)/i,
+  contact: /(?:contacto|teléfono|tel|móvil|celular|número)(?:\s*(?:es|:))?\s*([0-9+\s]+)/i
 };
 
 const englishPatterns = {
@@ -26,7 +28,8 @@ const englishPatterns = {
 
 const detectLanguage = (message: string): 'es' | 'en' => {
   const spanishIndicators = [
-    /soy|me llamo|hola|plazas?|asientos?|lugares?|desde|hasta|hacia/i
+    /soy|me llamo|hola|plazas?|asientos?|lugares?|desde|hasta|hacia|viajo|paro|paso/i,
+    /tengo|libre|disponible|sitios?|personas?|contacto|teléfono|móvil|celular/i
   ];
 
   const spanishMatches = spanishIndicators.reduce(
@@ -38,7 +41,7 @@ const detectLanguage = (message: string): 'es' | 'en' => {
 };
 
 const extractMultipleStops = (message: string): string[] => {
-  const cityPattern = /(?:stop\s+in|via|through|and)\s+([A-Za-z\s]+?)(?=\s+(?:and|,|$))/gi;
+  const cityPattern = /(?:stop\s+in|via|through|and|paro\s+en|paso\s+por|parando\s+en)\s+([A-Za-zÀ-ÿ\s]+?)(?=\s+(?:and|,|$|y))/gi;
   const matches = [...message.matchAll(cityPattern)];
   return matches.map(match => match[1].trim());
 };
@@ -51,7 +54,7 @@ export const parseMessage = (message: string): (ParsedTravel & { language: 'en' 
     const nameParts = message.match(patterns.name);
     const name = nameParts 
       ? (nameParts[1] || nameParts[2] || nameParts[3] || nameParts[4] || nameParts[5])
-      : message.split(/[\s,!.]+/).find(word => /^[A-Z][a-z]+$/.test(word)) || "";
+      : message.split(/[\s,!.]+/).find(word => /^[A-ZÀ-Ÿ][a-zà-ÿ]+$/.test(word)) || "";
     
     if (!name) {
       console.log("Could not find a name in the message");
@@ -97,8 +100,19 @@ export const parseMessage = (message: string): (ParsedTravel & { language: 'en' 
 
     const taxiSharing = patterns.taxi.test(message);
 
-    const contactParts = message.match(/[@\w.-]+@[\w.-]+\.\w+|@\w+|(?:\+\d{1,3}\s?)?\d{9,}/);
-    const contact = contactParts ? contactParts[0] : "";
+    let contact = "";
+    if (language === 'es') {
+      const contactMatch = message.match(patterns.contact);
+      if (contactMatch) {
+        contact = contactMatch[1]?.trim() || "";
+      } else {
+        const numberMatch = message.match(/(?:\+\d{1,3}\s?)?\d{9,}/);
+        contact = numberMatch ? numberMatch[0] : "";
+      }
+    } else {
+      const contactParts = message.match(/[@\w.-]+@[\w.-]+\.\w+|@\w+|(?:\+\d{1,3}\s?)?\d{9,}/);
+      contact = contactParts ? contactParts[0] : "";
+    }
 
     const dietaryMatch = message.match(patterns.dietary);
     let dietary_restrictions = "";
