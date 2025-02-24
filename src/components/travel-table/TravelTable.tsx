@@ -64,9 +64,9 @@ export const TravelTable = ({ entries, onClaimSpot }: TravelTableProps) => {
   return (
     <div className="relative min-h-[calc(100vh-400px)]">
       <div>
-        <div className="text-left mt-10 mb-2.5">
-          <p className="text-sm text-gray-500">Scroll to the right to edit your text</p>
-          <p className="text-sm text-gray-500">Desliza hacia derecha para editar tu texto</p>
+        <div className="text-left mt-5 mb-5">
+          <p className="text-[9px] text-gray-500">Scroll to the right to edit your text</p>
+          <p className="text-[9px] text-gray-500">Desliza hacia derecha para editar tu texto</p>
         </div>
         <Table>
           <TableHeader>
@@ -75,7 +75,6 @@ export const TravelTable = ({ entries, onClaimSpot }: TravelTableProps) => {
               <TableHead className="w-[120px]">{getTranslation('availableSpots', language)}</TableHead>
               <TableHead className="min-w-[400px]">{getTranslation('route', language)}</TableHead>
               <TableHead className="w-[120px]">{getTranslation('transport', language)}</TableHead>
-              <TableHead className="w-[100px]">{getTranslation('taxiSharing', language)}</TableHead>
               <TableHead className="w-[150px]">{getTranslation('contact', language)}</TableHead>
               <TableHead className="w-[200px]">{getTranslation('claimedBy', language)}</TableHead>
               <TableHead className="w-[150px]">Diet/Allergies</TableHead>
