@@ -3,7 +3,7 @@ import { TableCell, TableRow } from "@/components/ui/table";
 import { Button } from "@/components/ui/button";
 import { ClaimForm } from "./ClaimForm";
 import { EditForm } from "./EditForm";
-import { Plane, Car, Bike, Train, Bus, Edit2, Check, X } from "lucide-react";
+import { Plane, Car, Bike, Train, Bus, Edit2, Check, X, CarTaxiFront } from "lucide-react";
 import type { TravelEntry } from "./types";
 
 interface TravelTableRowProps {
@@ -19,8 +19,14 @@ interface TravelTableRowProps {
 
 const getTransportIcon = (transport: string) => {
   const iconProps = { className: "inline-block mr-2", size: 18 };
+  const taxiIconProps = { 
+    className: "inline-block mr-2 text-yellow-500", 
+    size: 18,
+    strokeWidth: 2 
+  };
   
   const transport_lower = transport.toLowerCase();
+  if (transport_lower.includes('taxi')) return <CarTaxiFront {...taxiIconProps} />;
   if (transport_lower.includes('plane')) return <Plane {...iconProps} />;
   if (transport_lower.includes('car')) return <Car {...iconProps} />;
   if (transport_lower.includes('bike') || transport_lower.includes('bicycle')) return <Bike {...iconProps} />;

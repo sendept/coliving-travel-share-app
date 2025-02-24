@@ -11,9 +11,9 @@ interface PageSubtitleProps {
 }
 
 const presetStyles = {
-  default: "text-muted-foreground font-medium",
-  minimal: "text-gray-600 font-light",
-  elegant: "text-gray-700 italic",
+  default: "text-muted-foreground font-medium mb-5",
+  minimal: "text-gray-400 font-light mb-5",
+  elegant: "text-gray-700 mb-5",
 };
 
 const positionStyles = {
@@ -33,7 +33,7 @@ export const PageSubtitle = ({
   className,
   position = "top",
   fontSize = "medium",
-  preset = "default",
+  preset = "minimal",
 }: PageSubtitleProps) => {
   return (
     <div
