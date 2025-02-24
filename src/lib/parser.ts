@@ -1,4 +1,3 @@
-
 export interface ParsedTravel {
   name: string;
   availableSpots: number;
@@ -9,7 +8,16 @@ export interface ParsedTravel {
   dietary_restrictions?: string;
 }
 
-const spanishPatterns = {
+interface PatternSet {
+  name: RegExp;
+  spots: RegExp;
+  route: RegExp;
+  taxi: RegExp;
+  dietary: RegExp;
+  contact: RegExp;
+}
+
+const spanishPatterns: PatternSet = {
   name: /(?:soy|me llamo)\s+([A-Za-zÀ-ÿ]+)|([A-Za-zÀ-ÿ]+)\s+(?:con|y|,)/i,
   spots: /(\d+)\s+(?:plazas?|asientos?|lugares?|sitios?|personas?)/i,
   route: /(?:desde|de|para|a|hacia|por)\s+([^,]+?)(?:\s+(?:a|hasta|hacia)\s+([^,]+?))?(?:\s+(?:y\s+)?(?:paro\s+en|paso\s+por|parando\s+en)\s+([^,]+))?/i,
@@ -18,12 +26,13 @@ const spanishPatterns = {
   contact: /(?:contacto|teléfono|tel|móvil|celular|número)(?:\s*(?:es|:))?\s*([0-9+\s]+)/i
 };
 
-const englishPatterns = {
+const englishPatterns: PatternSet = {
   name: /I(?:'|')?m\s+([A-Za-z]+)|I\s+am\s+([A-Za-z]+)|([A-Za-z]+)\s+here|name(?:'s|:)?\s+([A-Za-z]+)|([A-Za-z]+)\s+(?:and|,)/i,
   spots: /(\d+)\s+(?:free\s+)?spots?|(?:free\s+)?spots?:?\s+(\d+)|(?:take|have)\s+(\d+)/i,
   route: /(?:from|via)\s+([^,]+?)(?:\s+(?:to|towards)\s+([^,]+?))?(?:\s+(?:and\s+)?(?:stop(?:ping)?\s+in|via|through)\s+([^,.]+))?/i,
   taxi: /taxi|cab/i,
-  dietary: /(?:allerg(?:y|ic)\s+to|diet|cannot\s+eat|vegetarian|vegan|halal)\s*([^,.]+)/i
+  dietary: /(?:allerg(?:y|ic)\s+to|diet|cannot\s+eat|vegetarian|vegan|halal)\s*([^,.]+)/i,
+  contact: /(?:contact|phone|tel|mobile|cell|number)(?:\s*(?:is|:))?\s*([0-9+\s]+)/i
 };
 
 const detectLanguage = (message: string): 'es' | 'en' => {
