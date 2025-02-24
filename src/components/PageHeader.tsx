@@ -255,12 +255,12 @@ export const PageHeader = () => {
         ) : (
           <>
             <div className="relative max-w-[700px] min-w-[350px] mx-auto">
-              <h1 className="text-3xl font-semibold tracking-tight">{settings.name}</h1>
+              <h1 className="text-3xl font-semibold tracking-tight pr-8">{settings.name}</h1>
               <Button
                 variant="ghost"
                 size="icon"
                 onClick={() => setEditing(true)}
-                className="h-8 w-8 absolute right-2 top-1/2 -translate-y-1/2"
+                className="h-8 w-8 absolute right-0 top-1/2 -translate-y-1/2"
               >
                 <Edit2 className="h-4 w-4" />
               </Button>

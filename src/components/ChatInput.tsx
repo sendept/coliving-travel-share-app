@@ -44,8 +44,8 @@ export const ChatInput = ({ onSubmit }: ChatInputProps) => {
   };
 
   const placeholder = detectedLanguage === 'es' 
-    ? "Ingresa tu plan de viaje... (ej: 'Soy María desde Ourense con 2 plazas vía Santiago' o soy María y viajo desde Madrid a Lisboa. Voy a parar en Évora. Tengo 3 plazas libres. Mi contacto es 123456789)"
-    : "Enter your travel plan... (e.g., 'I'm Maria from Ourense with 2 free spots via Santiago')";
+    ? "Escribe aquí tu plan de viaje... (soy María y viajo desde Madrid a Lisboa. Voy a parar en Évora. Tengo 3 plazas libres. Mi contacto es 123456789)"
+    : "Enter your travel plan... (e.g., 'I'm Maria from Ourense with 2 free spots via Santiago') or (soy María y viajo desde Madrid a Lisboa. Voy a parar en Évora. Tengo 3 plazas libres. Mi contacto es 123456789)";
 
   return (
     <form onSubmit={handleSubmit} className="relative mt-5">
