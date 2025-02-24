@@ -6,20 +6,23 @@ export interface ParsedTravel {
   transport: string;
   taxiSharing: boolean;
   contact: string;
+  dietary_restrictions?: string;
 }
 
 const spanishPatterns = {
   name: /(?:soy|me llamo)\s+([A-Za-z]+)|([A-Za-z]+)\s+(?:con|y|,)/i,
   spots: /(\d+)\s+(?:plazas?|asientos?|lugares?)/i,
   route: /(?:desde|de|para|a|hacia)\s+([A-Za-z\s]+)(?:\s+(?:a|hasta|hacia)\s+([A-Za-z\s]+))?/i,
-  taxi: /taxi|cab/i
+  taxi: /taxi|cab/i,
+  dietary: /(?:alerg[ií]as?|dieta)\s*(?:a|:)?\s*([^,.]+)/i
 };
 
 const englishPatterns = {
   name: /I(?:'|')?m\s+([A-Za-z]+)|I\s+am\s+([A-Za-z]+)|([A-Za-z]+)\s+here|name(?:'s|:)?\s+([A-Za-z]+)|([A-Za-z]+)\s+(?:and|,)/i,
   spots: /(\d+)\s+(?:free\s+)?spots?|(?:free\s+)?spots?:?\s+(\d+)|(?:take|have)\s+(\d+)/i,
   route: /(?:from|via|to|through)\s+([A-Za-z\s]+)(?:\s+(?:to|towards)\s+([A-Za-z\s]+))?/i,
-  taxi: /taxi|cab/i
+  taxi: /taxi|cab/i,
+  dietary: /(?:allerg(?:y|ies)|diet)\s*(?:to|:)?\s*([^,.]+)/i
 };
 
 const detectLanguage = (message: string): 'es' | 'en' => {
@@ -89,7 +92,11 @@ export const parseMessage = (message: string): (ParsedTravel & { language: 'en' 
     const contactParts = message.match(/[@\w.-]+@[\w.-]+\.\w+|@\w+|(?:\+\d{1,3}\s?)?\d{9,}/);
     const contact = contactParts ? contactParts[0] : "";
 
-    console.log("Parsed travel data:", { name, availableSpots, route, transport, taxiSharing, contact, language });
+    // Parse dietary restrictions
+    const dietaryMatch = message.match(patterns.dietary);
+    const dietary_restrictions = dietaryMatch ? dietaryMatch[1].trim() : null;
+
+    console.log("Parsed travel data:", { name, availableSpots, route, transport, taxiSharing, contact, language, dietary_restrictions });
 
     return {
       name,
@@ -98,7 +105,8 @@ export const parseMessage = (message: string): (ParsedTravel & { language: 'en' 
       transport,
       taxiSharing,
       contact,
-      language
+      language,
+      dietary_restrictions
     };
   } catch (error) {
     console.error("Error parsing message:", error);
