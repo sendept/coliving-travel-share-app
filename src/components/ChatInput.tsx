@@ -48,7 +48,7 @@ export const ChatInput = ({ onSubmit }: ChatInputProps) => {
     : "Enter your travel plan... (e.g., 'I'm Maria from Ourense with 2 free spots via Santiago')";
 
   return (
-    <form onSubmit={handleSubmit} className="relative">
+    <form onSubmit={handleSubmit} className="relative mt-5">
       <Textarea
         value={message}
         onChange={handleMessageChange}

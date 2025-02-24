@@ -1,3 +1,4 @@
+
 import { useState } from "react";
 import {
   Table,
@@ -64,7 +65,8 @@ export const TravelTable = ({ entries, onClaimSpot }: TravelTableProps) => {
     <div className="relative min-h-[calc(100vh-400px)]">
       <div>
         <div className="text-left mt-5 mb-5">
-          <p className="text-[9px] text-gray-500">Desliza hacia derecha para editar tu texto</p>
+          <p className="text-[9px] text-gray-500">Scroll to the right to see or edit your text</p>
+          <p className="text-[9px] text-gray-500">Desliza hacia la derecha para editar o ver tu texto</p>
         </div>
         <Table>
           <TableHeader>

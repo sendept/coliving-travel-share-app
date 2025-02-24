@@ -5,28 +5,30 @@ type TranslationKey = 'name' | 'availableSpots' | 'route' | 'transport' | 'taxiS
 
 const translations: Record<'en' | 'es', Record<TranslationKey, string>> = {
   en: {
-    name: 'NAME\nNOMBRE',
-    availableSpots: 'AVAILABLE SPOTS\nPLAZAS',
-    route: 'ROUTE\nRUTA',
-    transport: 'TRANSPORT\nTRANSPORTE',
-    contact: 'CONTACT\nCONTACTO',
-    claimedBy: 'CLAIMED BY\nRESERVADO POR',
-    actions: 'ACTIONS\nACCIONES',
+    name: 'Name\nNombre',
+    availableSpots: 'Available Spots\nPlazas',
+    route: 'Route\nRuta',
+    transport: 'Transport\nTransporte',
+    taxiSharing: 'Taxi Sharing\nCompartir Taxi',
+    contact: 'Contact\nContacto',
+    claimedBy: 'Claimed By\nReservado Por',
+    actions: 'Actions\nAcciones',
     title: 'Share Your Travel Plan  Comparte tu plan de viaje',
     subtitle: 'Coordinate your journey  Coordina tu viaje',
-    diet: 'DIET/ALLERGIES\nDIETAS/ALERGIAS'
+    diet: 'Diet/Allergies\nDietas/Alergias'
   },
   es: {
-    name: 'NOMBRE\nNAME',
-    availableSpots: 'PLAZAS\nAVAILABLE SPOTS',
-    route: 'RUTA\nROUTE',
-    transport: 'TRANSPORTE\nTRANSPORT',
-    contact: 'CONTACTO\nCONTACT',
-    claimedBy: 'RESERVADO POR\nCLAIMED BY',
-    actions: 'ACCIONES\nACTIONS',
+    name: 'Nombre\nName',
+    availableSpots: 'Plazas\nAvailable Spots',
+    route: 'Ruta\nRoute',
+    transport: 'Transporte\nTransport',
+    taxiSharing: 'Compartir Taxi\nTaxi Sharing',
+    contact: 'Contacto\nContact',
+    claimedBy: 'Reservado Por\nClaimed By',
+    actions: 'Acciones\nActions',
     title: 'Comparte tu plan de viaje  Share Your Travel Plan',
     subtitle: 'Coordina tu viaje  Coordinate your journey',
-    diet: 'DIETAS/ALERGIAS\nDIET/ALLERGIES'
+    diet: 'Dietas/Alergias\nDiet/Allergies'
   }
 };
 
