@@ -11,7 +11,7 @@ interface PageSubtitleProps {
 }
 
 const presetStyles = {
-  default: "text-muted-foreground",
+  default: "text-muted-foreground font-medium",
   minimal: "text-gray-600 font-light",
   elegant: "text-gray-700 italic",
 };
@@ -39,7 +39,7 @@ export const PageSubtitle = ({
     <div
       className={cn(
         "mx-auto text-center max-w-[700px] min-w-[350px] px-4",
-        "font-playfair leading-relaxed",
+        "font-inter",
         positionStyles[position],
         fontSizeStyles[fontSize],
         presetStyles[preset],
