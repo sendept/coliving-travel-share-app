@@ -7,6 +7,7 @@ export interface ParsedTravel {
   taxiSharing: boolean;
   contact: string;
   dietary_restrictions?: string;
+  language: 'en' | 'es' | 'fr';
 }
 
 interface PatternSet {
@@ -72,31 +73,39 @@ const detectLanguage = (message: string): 'es' | 'en' | 'fr' => {
 };
 
 const extractMultipleStops = (message: string): string[] => {
-  // Match patterns for via/through/by/stop in all three languages
-  const patterns = [
+  // Match patterns for cities in the route for all three languages
+  const cityPatterns = [
     // English patterns
     /(?:stop(?:ping)?\s+(?:at|in)|via|through|by)\s+([A-Za-zÀ-ÿ\s]+?)(?=\s+(?:and|,|$))/gi,
+    /(?:from|to|towards)\s+([A-Za-zÀ-ÿ\s]+?)(?=\s+(?:to|and|,|$))/gi,
     // Spanish patterns
     /(?:par(?:o|ando)\s+(?:en|por)|via|pasando\s+por)\s+([A-Za-zÀ-ÿ\s]+?)(?=\s+(?:y|,|$))/gi,
+    /(?:desde|hasta|hacia)\s+([A-Za-zÀ-ÿ\s]+?)(?=\s+(?:hasta|y|,|$))/gi,
     // French patterns
-    /(?:arrêt(?:er)?\s+(?:à|en)|via|par|passant\s+par)\s+([A-Za-zÀ-ÿ\s]+?)(?=\s+(?:et|,|$))/gi
+    /(?:arrêt(?:er)?\s+(?:à|en)|via|par|passant\s+par)\s+([A-Za-zÀ-ÿ\s]+?)(?=\s+(?:et|,|$))/gi,
+    /(?:de|depuis|vers|jusqu'à)\s+([A-Za-zÀ-ÿ\s]+?)(?=\s+(?:vers|et|,|$))/gi
   ];
 
   const allStops: string[] = [];
   
-  patterns.forEach(pattern => {
+  cityPatterns.forEach(pattern => {
     const matches = [...message.matchAll(pattern)];
     matches.forEach(match => {
       if (match[1]) {
-        allStops.push(match[1].trim());
+        const city = match[1].trim();
+        // Only add if it's not already in the array and is not a conjunction word
+        if (!allStops.includes(city) && 
+            !/^(and|y|et|to|a|vers|hasta|jusqu'à)$/i.test(city)) {
+          allStops.push(city);
+        }
       }
     });
   });
 
-  return [...new Set(allStops)]; // Remove duplicates
+  return [...new Set(allStops)]; // Remove duplicates while preserving order
 };
 
-export const parseMessage = (message: string): (ParsedTravel & { language: 'en' | 'es' | 'fr' }) | null => {
+export const parseMessage = (message: string): ParsedTravel | null => {
   try {
     const language = detectLanguage(message);
     let patterns: PatternSet;
@@ -112,6 +121,7 @@ export const parseMessage = (message: string): (ParsedTravel & { language: 'en' 
         patterns = englishPatterns;
     }
     
+    // Extract name
     const nameParts = message.match(patterns.name);
     const name = nameParts 
       ? (nameParts[1] || nameParts[2] || nameParts[3] || nameParts[4] || nameParts[5])
@@ -122,31 +132,15 @@ export const parseMessage = (message: string): (ParsedTravel & { language: 'en' 
       return null;
     }
 
+    // Extract available spots
     const spotsParts = message.match(patterns.spots);
     const availableSpots = spotsParts ? parseInt(spotsParts[1] || spotsParts[2] || spotsParts[3]) : 0;
 
-    const routeMatch = message.match(patterns.route);
-    let route = "";
-    if (routeMatch) {
-      const from = routeMatch[1]?.trim();
-      const to = routeMatch[2]?.trim();
-      
-      // Get intermediate stops
-      const intermediateStops = extractMultipleStops(message);
-      
-      // Combine all route parts
-      const routeParts = [];
-      if (from) routeParts.push(from);
-      routeParts.push(...intermediateStops);
-      if (to) routeParts.push(to);
-      
-      // Remove duplicates and empty values, maintain order
-      const uniqueStops = [...new Set(routeParts.filter(Boolean))];
-      route = uniqueStops.join(" → ");
-    } else {
-      route = "Unknown route";
-    }
+    // Extract route with multiple stops
+    const allStops = extractMultipleStops(message);
+    const route = allStops.length > 0 ? allStops.join(" → ") : "Unknown route";
 
+    // Detect transport type
     const transportTypes = message.match(/\b(car|coche|auto|bus|autobus|train|tren|plane|avion|van|furgoneta|voiture|train|avion|van)\b/i);
     let transport = "🚗";  // Default to car emoji
     if (transportTypes) {
@@ -163,8 +157,10 @@ export const parseMessage = (message: string): (ParsedTravel & { language: 'en' 
       }
     }
 
+    // Extract taxi sharing preference
     const taxiSharing = patterns.taxi.test(message);
 
+    // Extract contact information
     let contact = "";
     const contactMatch = message.match(patterns.contact);
     if (contactMatch) {
@@ -174,23 +170,24 @@ export const parseMessage = (message: string): (ParsedTravel & { language: 'en' 
       contact = numberMatch ? numberMatch[0] : "";
     }
 
+    // Extract dietary restrictions
     const dietaryMatch = message.match(patterns.dietary);
     let dietary_restrictions = "";
     
     if (dietaryMatch) {
-      const dietText = dietaryMatch[1]?.trim().toLowerCase() || "";
-      if (dietText.includes('vegan') || dietText.includes('vegano') || dietText.includes('végan')) {
-        dietary_restrictions = "Vegan";
-      } else if (dietText.includes('vegetarian') || dietText.includes('vegetariano') || dietText.includes('végétarien')) {
-        dietary_restrictions = "Vegetarian";
-      } else if (dietText.includes('halal')) {
-        dietary_restrictions = "Halal";
-      } else {
-        dietary_restrictions = dietaryMatch[1].trim();
-      }
+      dietary_restrictions = dietaryMatch[1]?.trim() || "";
     }
 
-    console.log("Parsed travel data:", { name, availableSpots, route, transport, taxiSharing, contact, language, dietary_restrictions });
+    console.log("Parsed travel data:", {
+      name,
+      availableSpots,
+      route,
+      transport,
+      taxiSharing,
+      contact,
+      language,
+      dietary_restrictions
+    });
 
     return {
       name,
