@@ -3,7 +3,7 @@ import { TableCell, TableRow } from "@/components/ui/table";
 import { Button } from "@/components/ui/button";
 import { ClaimForm } from "./ClaimForm";
 import { EditForm } from "./EditForm";
-import { Plane, Car, Bike, Train, Bus, Edit2, Check, X } from "lucide-react";
+import { Plane, Car, CarTaxiFront, Bike, Train, Bus, Edit2, Check, X } from "lucide-react";
 import type { TravelEntry } from "./types";
 
 interface TravelTableRowProps {
@@ -17,9 +17,12 @@ interface TravelTableRowProps {
   onClaimSpot: (id: string, name: string) => void;
 }
 
-const getTransportIcon = (transport: string) => {
+const getTransportIcon = (transport: string, taxiSharing: boolean) => {
   const iconProps = { className: "inline-block mr-2", size: 18 };
   const transport_lower = transport.toLowerCase();
+  
+  // If taxi sharing is enabled, show taxi icon regardless of transport type
+  if (taxiSharing) return <CarTaxiFront {...iconProps} />;
   
   if (transport_lower.includes('plane')) return <Plane {...iconProps} />;
   if (transport_lower.includes('car')) return <Car {...iconProps} />;
@@ -76,7 +79,7 @@ export const TravelTableRow = ({
     if (field === "transport") {
       return (
         <div className="flex items-center">
-          {getTransportIcon(entry[field])}
+          {getTransportIcon(entry[field], entry.taxi_sharing)}
           <span>{entry[field]}</span>
         </div>
       );
