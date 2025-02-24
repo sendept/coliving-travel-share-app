@@ -12,17 +12,17 @@ export interface ParsedTravel {
 const spanishPatterns = {
   name: /(?:soy|me llamo)\s+([A-Za-z]+)|([A-Za-z]+)\s+(?:con|y|,)/i,
   spots: /(\d+)\s+(?:plazas?|asientos?|lugares?)/i,
-  route: /(?:desde|de|para|a|hacia)\s+([A-Za-z\s]+)(?:\s+(?:a|hasta|hacia)\s+([A-Za-z\s]+))?/i,
+  route: /(?:desde|de|para|a|hacia|por)\s+([^,]+?)(?:\s+(?:a|hasta|hacia)\s+([^,]+?))?(?:\s+(?:y\s+)?(?:paro\s+en|paso\s+por)\s+([^,]+))?/i,
   taxi: /taxi|cab/i,
-  dietary: /(?:alerg[ií]as?|dieta)\s*(?:a|:)?\s*([^,.]+)/i
+  dietary: /(?:alerg[ií]as?|dieta|no\s+puedo\s+comer)\s*(?:a|:)?\s*([^,.]+)/i
 };
 
 const englishPatterns = {
   name: /I(?:'|')?m\s+([A-Za-z]+)|I\s+am\s+([A-Za-z]+)|([A-Za-z]+)\s+here|name(?:'s|:)?\s+([A-Za-z]+)|([A-Za-z]+)\s+(?:and|,)/i,
   spots: /(\d+)\s+(?:free\s+)?spots?|(?:free\s+)?spots?:?\s+(\d+)|(?:take|have)\s+(\d+)/i,
-  route: /(?:from|via|to|through)\s+([A-Za-z\s]+)(?:\s+(?:to|towards)\s+([A-Za-z\s]+))?/i,
+  route: /(?:from|via)\s+([^,]+?)(?:\s+(?:to|towards)\s+([^,]+?))?(?:\s+(?:and\s+)?(?:stop(?:ping)?\s+in|via|through)\s+([^,.]+))?/i,
   taxi: /taxi|cab/i,
-  dietary: /(?:allerg(?:y|ies)|diet)\s*(?:to|:)?\s*([^,.]+)/i
+  dietary: /(?:allerg(?:y|ic)\s+to|diet|cannot\s+eat)\s*([^,.]+)/i
 };
 
 const detectLanguage = (message: string): 'es' | 'en' => {
@@ -38,6 +38,13 @@ const detectLanguage = (message: string): 'es' | 'en' => {
   );
 
   return spanishMatches >= 1 ? 'es' : 'en';
+};
+
+const extractMultipleStops = (message: string): string[] => {
+  // This function extracts all cities/stops mentioned in the message
+  const cityPattern = /(?:stop\s+in|via|through|and)\s+([A-Za-z\s]+?)(?=\s+(?:and|,|$))/gi;
+  const matches = [...message.matchAll(cityPattern)];
+  return matches.map(match => match[1].trim());
 };
 
 export const parseMessage = (message: string): (ParsedTravel & { language: 'en' | 'es' }) | null => {
@@ -58,14 +65,24 @@ export const parseMessage = (message: string): (ParsedTravel & { language: 'en' 
     const spotsParts = message.match(patterns.spots);
     const availableSpots = spotsParts ? parseInt(spotsParts[1] || spotsParts[2] || spotsParts[3]) : 0;
 
+    // Enhanced route parsing with multiple stops
     const routeMatch = message.match(patterns.route);
-    let route;
+    let route = "";
     if (routeMatch) {
-      if (routeMatch[2]) {
-        route = `${routeMatch[1].trim()} → ${routeMatch[2].trim()}`;
-      } else {
-        route = routeMatch[1].trim();
-      }
+      const from = routeMatch[1]?.trim();
+      const to = routeMatch[2]?.trim();
+      
+      // Get additional stops
+      const additionalStops = extractMultipleStops(message);
+      
+      // Combine all parts of the route
+      const routeParts = [from];
+      if (to) routeParts.push(to);
+      routeParts.push(...additionalStops);
+      
+      // Remove duplicates and filter out empty/undefined values
+      const uniqueStops = [...new Set(routeParts.filter(Boolean))];
+      route = uniqueStops.join(" → ");
     } else {
       route = "Unknown route";
     }
@@ -92,7 +109,7 @@ export const parseMessage = (message: string): (ParsedTravel & { language: 'en' 
     const contactParts = message.match(/[@\w.-]+@[\w.-]+\.\w+|@\w+|(?:\+\d{1,3}\s?)?\d{9,}/);
     const contact = contactParts ? contactParts[0] : "";
 
-    // Parse dietary restrictions
+    // Parse dietary restrictions with improved pattern matching
     const dietaryMatch = message.match(patterns.dietary);
     const dietary_restrictions = dietaryMatch ? dietaryMatch[1].trim() : null;
 
