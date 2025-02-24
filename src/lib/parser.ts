@@ -1,3 +1,4 @@
+
 export interface ParsedTravel {
   name: string;
   availableSpots: number;
@@ -27,7 +28,7 @@ const spanishPatterns: PatternSet = {
 };
 
 const englishPatterns: PatternSet = {
-  name: /I(?:'|')?m\s+([A-Za-z]+)|I\s+am\s+([A-Za-z]+)|([A-Za-z]+)\s+here|name(?:'s|:)?\s+([A-Za-z]+)|([A-Za-z]+)\s+(?:and|,)/i,
+  name: /(?:I(?:'|')?m|I\s+am|name(?:'s|\s+is)?:?)\s+([A-Za-zÀ-ÿ]+)|([A-Za-zÀ-ÿ]+)\s+(?:here|and|,)/i,
   spots: /(\d+)\s+(?:free\s+)?spots?|(?:free\s+)?spots?:?\s+(\d+)|(?:take|have)\s+(\d+)/i,
   route: /(?:from|via)\s+([^,]+?)(?:\s+(?:to|towards)\s+([^,]+?))?(?:\s+(?:and\s+)?(?:stop(?:ping)?\s+in|via|through)\s+([^,.]+))?/i,
   taxi: /taxi|cab/i,
@@ -35,10 +36,24 @@ const englishPatterns: PatternSet = {
   contact: /(?:contact|phone|tel|mobile|cell|number)(?:\s*(?:is|:))?\s*([0-9+\s]+)/i
 };
 
-const detectLanguage = (message: string): 'es' | 'en' => {
+const frenchPatterns: PatternSet = {
+  name: /(?:je\s+(?:suis|m'appelle))\s+([A-Za-zÀ-ÿ]+)|([A-Za-zÀ-ÿ]+)\s+(?:et|,)/i,
+  spots: /(\d+)\s+(?:place(?:s)?|siège(?:s)?|personne(?:s)?)/i,
+  route: /(?:de|depuis|par)\s+([^,]+?)(?:\s+(?:à|vers|jusqu'à)\s+([^,]+?))?(?:\s+(?:et\s+)?(?:arrêt\s+à|via|par)\s+([^,.]+))?/i,
+  taxi: /taxi/i,
+  dietary: /(?:allergie[s]?|régime|ne\s+(?:mange|peut)\s+pas|végétarien(?:ne)?|végan(?:e)?|halal)\s*(?:à|:)?\s*([^,.]+)/i,
+  contact: /(?:contact|téléphone|tél|portable|numéro)(?:\s*(?:est|:))?\s*([0-9+\s]+)/i
+};
+
+const detectLanguage = (message: string): 'es' | 'en' | 'fr' => {
   const spanishIndicators = [
     /soy|me llamo|hola|plazas?|asientos?|lugares?|desde|hasta|hacia|viajo|paro|paso/i,
     /tengo|libre|disponible|sitios?|personas?|contacto|teléfono|móvil|celular/i
+  ];
+
+  const frenchIndicators = [
+    /je\s+(?:suis|m'appelle)|bonjour|salut|place[s]?|siège[s]?|depuis|vers|jusqu'à/i,
+    /arrêt|voyage|personne[s]?|contact|téléphone|portable|numéro/i
   ];
 
   const spanishMatches = spanishIndicators.reduce(
@@ -46,19 +61,37 @@ const detectLanguage = (message: string): 'es' | 'en' => {
     0
   );
 
-  return spanishMatches >= 1 ? 'es' : 'en';
+  const frenchMatches = frenchIndicators.reduce(
+    (count, pattern) => count + (pattern.test(message) ? 1 : 0),
+    0
+  );
+
+  if (spanishMatches > frenchMatches) return 'es';
+  if (frenchMatches > 0) return 'fr';
+  return 'en';
 };
 
 const extractMultipleStops = (message: string): string[] => {
-  const cityPattern = /(?:stop\s+in|via|through|and|paro\s+en|paso\s+por|parando\s+en)\s+([A-Za-zÀ-ÿ\s]+?)(?=\s+(?:and|,|$|y))/gi;
+  const cityPattern = /(?:stop\s+in|via|through|and|paro\s+en|paso\s+por|parando\s+en|arrêt\s+à|via|par)\s+([A-Za-zÀ-ÿ\s]+?)(?=\s+(?:and|,|$|y|et))/gi;
   const matches = [...message.matchAll(cityPattern)];
   return matches.map(match => match[1].trim());
 };
 
-export const parseMessage = (message: string): (ParsedTravel & { language: 'en' | 'es' }) | null => {
+export const parseMessage = (message: string): (ParsedTravel & { language: 'en' | 'es' | 'fr' }) | null => {
   try {
     const language = detectLanguage(message);
-    const patterns = language === 'es' ? spanishPatterns : englishPatterns;
+    let patterns: PatternSet;
+    
+    switch (language) {
+      case 'es':
+        patterns = spanishPatterns;
+        break;
+      case 'fr':
+        patterns = frenchPatterns;
+        break;
+      default:
+        patterns = englishPatterns;
+    }
     
     const nameParts = message.match(patterns.name);
     const name = nameParts 
@@ -91,7 +124,7 @@ export const parseMessage = (message: string): (ParsedTravel & { language: 'en' 
       route = "Unknown route";
     }
 
-    const transportTypes = message.match(/\b(car|coche|auto|bus|autobus|train|tren|plane|avion|van|furgoneta)\b/i);
+    const transportTypes = message.match(/\b(car|coche|auto|bus|autobus|train|tren|plane|avion|van|furgoneta|voiture|train|avion|van)\b/i);
     let transport = "🚗";  // Default to car emoji
     if (transportTypes) {
       const match = transportTypes[1].toLowerCase();
@@ -110,17 +143,12 @@ export const parseMessage = (message: string): (ParsedTravel & { language: 'en' 
     const taxiSharing = patterns.taxi.test(message);
 
     let contact = "";
-    if (language === 'es') {
-      const contactMatch = message.match(patterns.contact);
-      if (contactMatch) {
-        contact = contactMatch[1]?.trim() || "";
-      } else {
-        const numberMatch = message.match(/(?:\+\d{1,3}\s?)?\d{9,}/);
-        contact = numberMatch ? numberMatch[0] : "";
-      }
+    const contactMatch = message.match(patterns.contact);
+    if (contactMatch) {
+      contact = contactMatch[1]?.trim() || "";
     } else {
-      const contactParts = message.match(/[@\w.-]+@[\w.-]+\.\w+|@\w+|(?:\+\d{1,3}\s?)?\d{9,}/);
-      contact = contactParts ? contactParts[0] : "";
+      const numberMatch = message.match(/(?:\+\d{1,3}\s?)?\d{9,}/);
+      contact = numberMatch ? numberMatch[0] : "";
     }
 
     const dietaryMatch = message.match(patterns.dietary);
@@ -128,9 +156,9 @@ export const parseMessage = (message: string): (ParsedTravel & { language: 'en' 
     
     if (dietaryMatch) {
       const dietText = dietaryMatch[1]?.trim().toLowerCase() || "";
-      if (dietText.includes('vegan') || dietText.includes('vegano')) {
+      if (dietText.includes('vegan') || dietText.includes('vegano') || dietText.includes('végan')) {
         dietary_restrictions = "Vegan";
-      } else if (dietText.includes('vegetarian') || dietText.includes('vegetariano')) {
+      } else if (dietText.includes('vegetarian') || dietText.includes('vegetariano') || dietText.includes('végétarien')) {
         dietary_restrictions = "Vegetarian";
       } else if (dietText.includes('halal')) {
         dietary_restrictions = "Halal";
