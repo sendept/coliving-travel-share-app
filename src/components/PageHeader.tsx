@@ -5,19 +5,53 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { LogoUpload } from "./LogoUpload";
 import { useToast } from "@/hooks/use-toast";
-import { Edit2, Check, X } from "lucide-react";
+import { Edit2, Check, X, Type, AlignCenter } from "lucide-react";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
 
 interface PageSettings {
   id?: string;
   name: string;
   subtitle: string;
+  subtitle_style?: {
+    fontSize?: "small" | "medium" | "large";
+    position?: "top" | "center" | "bottom";
+    preset?: "default" | "elegant" | "minimal";
+  };
   logo_url: string;
 }
+
+const fontSizes = {
+  small: "text-sm md:text-base",
+  medium: "text-base md:text-lg",
+  large: "text-lg md:text-xl",
+};
+
+const positions = {
+  top: "mt-2",
+  center: "my-4",
+  bottom: "mb-6",
+};
+
+const presets = {
+  default: "text-muted-foreground",
+  elegant: "text-gray-700 italic font-playfair",
+  minimal: "text-gray-600 font-light",
+};
 
 export const PageHeader = () => {
   const [settings, setSettings] = useState<PageSettings>({
     name: "EVENT NAME",
     subtitle: "",
+    subtitle_style: {
+      fontSize: "medium",
+      position: "top",
+      preset: "default"
+    },
     logo_url: "",
   });
   const [editing, setEditing] = useState(false);
@@ -41,12 +75,26 @@ export const PageHeader = () => {
   };
 
   const handleSave = async () => {
+    // Validate subtitle length (45-85 characters per line)
+    const lines = editForm.subtitle.split('\n');
+    const isValidLength = lines.every(line => line.length >= 45 && line.length <= 85);
+
+    if (!isValidLength) {
+      toast({
+        title: "Invalid subtitle length",
+        description: "Each line should be between 45-85 characters",
+        variant: "destructive",
+      });
+      return;
+    }
+
     const { error } = await supabase
       .from('page_settings')
       .upsert({ 
         id: settings.id || undefined,
         name: editForm.name,
         subtitle: editForm.subtitle,
+        subtitle_style: editForm.subtitle_style,
       });
 
     if (error) {
@@ -77,6 +125,19 @@ export const PageHeader = () => {
     if (!error) {
       setSettings(prev => ({ ...prev, logo_url: url }));
     }
+  };
+
+  const updateSubtitleStyle = (
+    key: "fontSize" | "position" | "preset",
+    value: string
+  ) => {
+    setEditForm(prev => ({
+      ...prev,
+      subtitle_style: {
+        ...prev.subtitle_style,
+        [key]: value,
+      }
+    }));
   };
 
   return (
@@ -116,11 +177,57 @@ export const PageHeader = () => {
                 onChange={(e) => setEditForm(prev => ({ ...prev, name: e.target.value }))}
                 className="text-3xl font-semibold tracking-tight text-center"
               />
-              <Input
-                value={editForm.subtitle}
-                onChange={(e) => setEditForm(prev => ({ ...prev, subtitle: e.target.value }))}
-                className="text-xl font-light text-center"
-              />
+              <div className="relative max-w-[700px] min-w-[350px] mx-auto">
+                <Input
+                  value={editForm.subtitle}
+                  onChange={(e) => setEditForm(prev => ({ ...prev, subtitle: e.target.value }))}
+                  className={cn(
+                    "text-center",
+                    fontSizes[editForm.subtitle_style?.fontSize || "medium"],
+                    positions[editForm.subtitle_style?.position || "top"],
+                    presets[editForm.subtitle_style?.preset || "default"]
+                  )}
+                  placeholder="Enter subtitle (45-85 characters per line)"
+                />
+                <div className="absolute right-2 top-2 flex space-x-2">
+                  <DropdownMenu>
+                    <DropdownMenuTrigger asChild>
+                      <Button variant="ghost" size="icon">
+                        <Type className="h-4 w-4" />
+                      </Button>
+                    </DropdownMenuTrigger>
+                    <DropdownMenuContent>
+                      <DropdownMenuItem onClick={() => updateSubtitleStyle("fontSize", "small")}>
+                        Small
+                      </DropdownMenuItem>
+                      <DropdownMenuItem onClick={() => updateSubtitleStyle("fontSize", "medium")}>
+                        Medium
+                      </DropdownMenuItem>
+                      <DropdownMenuItem onClick={() => updateSubtitleStyle("fontSize", "large")}>
+                        Large
+                      </DropdownMenuItem>
+                    </DropdownMenuContent>
+                  </DropdownMenu>
+                  <DropdownMenu>
+                    <DropdownMenuTrigger asChild>
+                      <Button variant="ghost" size="icon">
+                        <AlignCenter className="h-4 w-4" />
+                      </Button>
+                    </DropdownMenuTrigger>
+                    <DropdownMenuContent>
+                      <DropdownMenuItem onClick={() => updateSubtitleStyle("position", "top")}>
+                        Top
+                      </DropdownMenuItem>
+                      <DropdownMenuItem onClick={() => updateSubtitleStyle("position", "center")}>
+                        Center
+                      </DropdownMenuItem>
+                      <DropdownMenuItem onClick={() => updateSubtitleStyle("position", "bottom")}>
+                        Bottom
+                      </DropdownMenuItem>
+                    </DropdownMenuContent>
+                  </DropdownMenu>
+                </div>
+              </div>
             </div>
             <div className="flex justify-center space-x-2 mt-2">
               <Button
@@ -147,7 +254,14 @@ export const PageHeader = () => {
         ) : (
           <>
             <h1 className="text-3xl font-semibold tracking-tight">{settings.name}</h1>
-            <p className="text-xl font-light text-muted-foreground">{settings.subtitle}</p>
+            <p className={cn(
+              "max-w-[700px] min-w-[350px] mx-auto px-4",
+              fontSizes[settings.subtitle_style?.fontSize || "medium"],
+              positions[settings.subtitle_style?.position || "top"],
+              presets[settings.subtitle_style?.preset || "default"]
+            )}>
+              {settings.subtitle}
+            </p>
             <Button
               variant="ghost"
               size="icon"
