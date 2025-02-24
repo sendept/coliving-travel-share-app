@@ -5,7 +5,11 @@ import { useToast } from "@/hooks/use-toast";
 import { createTravelEntry } from "@/services/travelEntryService";
 import { PageSubtitle } from "@/components/PageSubtitle";
 
-export const TravelForm = () => {
+interface TravelFormProps {
+  projectId?: string | null;
+}
+
+export const TravelForm = ({ projectId }: TravelFormProps) => {
   const { toast } = useToast();
 
   const handleSubmit = async (message: string) => {
@@ -28,7 +32,7 @@ export const TravelForm = () => {
       contact: parsed.contact,
       claimed_by: [],
       language: parsed.language as 'en' | 'es',
-      project_id: 'default',
+      project_id: projectId || 'default',
       dietary_restrictions: parsed.dietary_restrictions || null
     };
 

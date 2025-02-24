@@ -31,8 +31,12 @@ export const resetProjectEntries = async (projectId: string) => {
 export const createProject = async (name: string, description?: string) => {
   const { data, error } = await supabase
     .from('projects')
-    .insert([{ name, description }])
-    .select()
+    .insert([{
+      id: crypto.randomUUID(), // Generate UUID for the project
+      name,
+      description
+    }])
+    .select('*')
     .single();
   return { data, error };
 };
