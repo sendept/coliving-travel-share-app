@@ -69,6 +69,7 @@ export type Database = {
           claimed_by: string[] | null
           contact: string
           created_at: string
+          dietary_restrictions: string | null
           id: string
           language: string | null
           last_edited_at: string | null
@@ -85,6 +86,7 @@ export type Database = {
           claimed_by?: string[] | null
           contact: string
           created_at?: string
+          dietary_restrictions?: string | null
           id?: string
           language?: string | null
           last_edited_at?: string | null
@@ -101,6 +103,7 @@ export type Database = {
           claimed_by?: string[] | null
           contact?: string
           created_at?: string
+          dietary_restrictions?: string | null
           id?: string
           language?: string | null
           last_edited_at?: string | null

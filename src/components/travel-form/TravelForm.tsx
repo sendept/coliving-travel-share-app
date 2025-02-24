@@ -27,7 +27,8 @@ export const TravelForm = () => {
       contact: parsed.contact,
       claimed_by: [],
       language: parsed.language as 'en' | 'es',
-      project_id: 'default'
+      project_id: 'default',
+      dietary_restrictions: parsed.dietary_restrictions || null
     };
 
     const { error } = await createTravelEntry(newEntry);
