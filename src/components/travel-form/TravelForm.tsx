@@ -3,6 +3,7 @@ import { ChatInput } from "@/components/ChatInput";
 import { parseMessage } from "@/lib/parser";
 import { useToast } from "@/hooks/use-toast";
 import { createTravelEntry } from "@/services/travelEntryService";
+import { PageSubtitle } from "@/components/PageSubtitle";
 
 export const TravelForm = () => {
   const { toast } = useToast();
@@ -55,9 +56,13 @@ export const TravelForm = () => {
         <h2 className="text-xl font-semibold mb-1 text-gray-900">
           Share Your Travel Plan
         </h2>
-        <p className="text-base text-muted-foreground">
+        <PageSubtitle
+          position="top"
+          fontSize="medium"
+          preset="elegant"
+        >
           Comparte tu plan de viaje
-        </p>
+        </PageSubtitle>
       </div>
       <ChatInput onSubmit={handleSubmit} />
     </div>
