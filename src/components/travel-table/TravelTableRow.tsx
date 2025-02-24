@@ -1,4 +1,3 @@
-
 import { TableCell, TableRow } from "@/components/ui/table";
 import { Button } from "@/components/ui/button";
 import { ClaimForm } from "./ClaimForm";
@@ -19,11 +18,16 @@ interface TravelTableRowProps {
 
 const getTransportIcon = (transport: string, taxiSharing: boolean) => {
   const iconProps = { className: "inline-block mr-2", size: 18 };
-  const transport_lower = transport.toLowerCase();
+  const taxiIconProps = { 
+    className: "inline-block mr-2 text-yellow-500", 
+    size: 18,
+    strokeWidth: 2.5 
+  };
   
   // If taxi sharing is enabled, show taxi icon regardless of transport type
-  if (taxiSharing) return <CarTaxiFront {...iconProps} />;
+  if (taxiSharing) return <CarTaxiFront {...taxiIconProps} />;
   
+  const transport_lower = transport.toLowerCase();
   if (transport_lower.includes('plane')) return <Plane {...iconProps} />;
   if (transport_lower.includes('car')) return <Car {...iconProps} />;
   if (transport_lower.includes('bike') || transport_lower.includes('bicycle')) return <Bike {...iconProps} />;
