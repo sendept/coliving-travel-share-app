@@ -72,9 +72,28 @@ const detectLanguage = (message: string): 'es' | 'en' | 'fr' => {
 };
 
 const extractMultipleStops = (message: string): string[] => {
-  const cityPattern = /(?:stop\s+in|via|through|and|paro\s+en|paso\s+por|parando\s+en|arrêt\s+à|via|par)\s+([A-Za-zÀ-ÿ\s]+?)(?=\s+(?:and|,|$|y|et))/gi;
-  const matches = [...message.matchAll(cityPattern)];
-  return matches.map(match => match[1].trim());
+  // Match patterns for via/through/by/stop in all three languages
+  const patterns = [
+    // English patterns
+    /(?:stop(?:ping)?\s+(?:at|in)|via|through|by)\s+([A-Za-zÀ-ÿ\s]+?)(?=\s+(?:and|,|$))/gi,
+    // Spanish patterns
+    /(?:par(?:o|ando)\s+(?:en|por)|via|pasando\s+por)\s+([A-Za-zÀ-ÿ\s]+?)(?=\s+(?:y|,|$))/gi,
+    // French patterns
+    /(?:arrêt(?:er)?\s+(?:à|en)|via|par|passant\s+par)\s+([A-Za-zÀ-ÿ\s]+?)(?=\s+(?:et|,|$))/gi
+  ];
+
+  const allStops: string[] = [];
+  
+  patterns.forEach(pattern => {
+    const matches = [...message.matchAll(pattern)];
+    matches.forEach(match => {
+      if (match[1]) {
+        allStops.push(match[1].trim());
+      }
+    });
+  });
+
+  return [...new Set(allStops)]; // Remove duplicates
 };
 
 export const parseMessage = (message: string): (ParsedTravel & { language: 'en' | 'es' | 'fr' }) | null => {
@@ -112,12 +131,16 @@ export const parseMessage = (message: string): (ParsedTravel & { language: 'en' 
       const from = routeMatch[1]?.trim();
       const to = routeMatch[2]?.trim();
       
-      const additionalStops = extractMultipleStops(message);
+      // Get intermediate stops
+      const intermediateStops = extractMultipleStops(message);
       
-      const routeParts = [from];
+      // Combine all route parts
+      const routeParts = [];
+      if (from) routeParts.push(from);
+      routeParts.push(...intermediateStops);
       if (to) routeParts.push(to);
-      routeParts.push(...additionalStops);
       
+      // Remove duplicates and empty values, maintain order
       const uniqueStops = [...new Set(routeParts.filter(Boolean))];
       route = uniqueStops.join(" → ");
     } else {
