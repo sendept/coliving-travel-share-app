@@ -1,36 +1,46 @@
 
 import React from 'react';
 
-type TranslationKey = 'name' | 'availableSpots' | 'route' | 'transport' | 'taxiSharing' | 'contact' | 'claimedBy' | 'actions' | 'title' | 'subtitle';
+type TranslationKey = 'name' | 'availableSpots' | 'route' | 'transport' | 'taxiSharing' | 'contact' | 'claimedBy' | 'actions' | 'title' | 'subtitle' | 'diet';
 
 const translations: Record<'en' | 'es', Record<TranslationKey, string>> = {
   en: {
-    name: 'Name  Nombre',
-    availableSpots: 'Available Spots  Plazas',
-    route: 'Route  Ruta',
-    transport: 'Transport  Transporte',
-    taxiSharing: 'Taxi Sharing  Compartir',
-    contact: 'Contact  Contacto',
-    claimedBy: 'Claimed By  Reservado Por',
-    actions: 'Actions  Acciones',
+    name: 'NAME\nNOMBRE',
+    availableSpots: 'AVAILABLE SPOTS\nPLAZAS',
+    route: 'ROUTE\nRUTA',
+    transport: 'TRANSPORT\nTRANSPORTE',
+    contact: 'CONTACT\nCONTACTO',
+    claimedBy: 'CLAIMED BY\nRESERVADO POR',
+    actions: 'ACTIONS\nACCIONES',
     title: 'Share Your Travel Plan  Comparte tu plan de viaje',
-    subtitle: 'Coordinate your journey  Coordina tu viaje'
+    subtitle: 'Coordinate your journey  Coordina tu viaje',
+    diet: 'DIET/ALLERGIES\nDIETAS/ALERGIAS'
   },
   es: {
-    name: 'Nombre  Name',
-    availableSpots: 'Plazas  Available Spots',
-    route: 'Ruta  Route',
-    transport: 'Transporte  Transport',
-    taxiSharing: 'Compartir  Taxi Sharing',
-    contact: 'Contacto  Contact',
-    claimedBy: 'Reservado Por  Claimed By',
-    actions: 'Acciones  Actions',
+    name: 'NOMBRE\nNAME',
+    availableSpots: 'PLAZAS\nAVAILABLE SPOTS',
+    route: 'RUTA\nROUTE',
+    transport: 'TRANSPORTE\nTRANSPORT',
+    contact: 'CONTACTO\nCONTACT',
+    claimedBy: 'RESERVADO POR\nCLAIMED BY',
+    actions: 'ACCIONES\nACTIONS',
     title: 'Comparte tu plan de viaje  Share Your Travel Plan',
-    subtitle: 'Coordina tu viaje  Coordinate your journey'
+    subtitle: 'Coordina tu viaje  Coordinate your journey',
+    diet: 'DIETAS/ALERGIAS\nDIET/ALLERGIES'
   }
 };
 
 const splitTranslation = (text: string): React.JSX.Element => {
+  if (text.includes('\n')) {
+    const [primary, secondary] = text.split('\n');
+    return (
+      <div className="text-center">
+        <div className="text-foreground">{primary}</div>
+        <div className="text-muted-foreground text-sm">{secondary}</div>
+      </div>
+    );
+  }
+  
   const [primary, secondary] = text.split('  ');
   return (
     <React.Fragment>
