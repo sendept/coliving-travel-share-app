@@ -74,6 +74,8 @@ export const TravelTable = ({ entries, onClaimSpot }: TravelTableProps) => {
               <TableHead className="w-[100px]">{getTranslation('taxiSharing', language)}</TableHead>
               <TableHead className="w-[150px]">{getTranslation('contact', language)}</TableHead>
               <TableHead className="w-[200px]">{getTranslation('claimedBy', language)}</TableHead>
+              <TableHead className="w-[150px]">Diet/Allergies</TableHead>
+              <TableHead className="w-[100px]"></TableHead>
             </TableRow>
           </TableHeader>
           <TableBody>
@@ -93,7 +95,7 @@ export const TravelTable = ({ entries, onClaimSpot }: TravelTableProps) => {
           </TableBody>
         </Table>
       </div>
-      <footer className="fixed bottom-[60px] left-0 right-0 text-center text-sm text-muted-foreground">
+      <footer className="fixed bottom-0 left-0 right-0 text-center text-sm text-muted-foreground py-4 mt-[90px] bg-white">
         <span className="inline-flex items-center">
           Feel free to use it. Built by
           <a href="https://sende.co" target="_blank" rel="noopener noreferrer" className="inline-flex items-center ml-1">

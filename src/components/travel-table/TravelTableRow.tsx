@@ -106,6 +106,18 @@ export const TravelTableRow = ({
       <TableCell className="whitespace-pre-line">
         {renderCell("claimed_by")}
       </TableCell>
+      <TableCell>
+        {isEditing ? (
+          <EditForm
+            entry={entry}
+            editForm={editForm}
+            setEditForm={setEditForm}
+            field="dietary_restrictions"
+          />
+        ) : (
+          entry.dietary_restrictions || "-"
+        )}
+      </TableCell>
       <TableCell className="w-[100px]">
         {isEditing ? (
           <div className="flex space-x-2">
