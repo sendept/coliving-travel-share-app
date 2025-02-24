@@ -13,7 +13,7 @@ interface ChatInputProps {
 export const ChatInput = ({ onSubmit }: ChatInputProps) => {
   const [message, setMessage] = useState("");
   const { toast } = useToast();
-  const [detectedLanguage, setDetectedLanguage] = useState<"en" | "es">("en");
+  const [detectedLanguage, setDetectedLanguage] = useState<"en" | "es" | "fr">("en");
 
   const handleMessageChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     const newMessage = e.target.value;
@@ -32,8 +32,16 @@ export const ChatInput = ({ onSubmit }: ChatInputProps) => {
     e.preventDefault();
     if (!message.trim()) {
       toast({
-        title: detectedLanguage === 'es' ? "Por favor escribe un mensaje" : "Please enter a message",
-        description: detectedLanguage === 'es' ? "Tu plan de viaje no puede estar vacío" : "Your travel plan cannot be empty",
+        title: detectedLanguage === 'es' 
+          ? "Por favor escribe un mensaje" 
+          : detectedLanguage === 'fr'
+          ? "Veuillez écrire un message"
+          : "Please enter a message",
+        description: detectedLanguage === 'es' 
+          ? "Tu plan de viaje no puede estar vacío" 
+          : detectedLanguage === 'fr'
+          ? "Votre plan de voyage ne peut pas être vide"
+          : "Your travel plan cannot be empty",
         variant: "destructive",
       });
       return;
@@ -43,16 +51,23 @@ export const ChatInput = ({ onSubmit }: ChatInputProps) => {
     setDetectedLanguage("en");
   };
 
-  const placeholder = detectedLanguage === 'es' 
-    ? "Escribe aquí tu plan de viaje... (soy María y viajo desde Madrid a Lisboa. Voy a parar en Évora. Tengo 3 plazas libres. Mi contacto es 123456789)"
-    : "Enter your travel plan... (e.g., 'I'm Maria from Ourense with 2 free spots via Santiago') or (soy María y viajo desde Madrid a Lisboa. Voy a parar en Évora. Tengo 3 plazas libres. Mi contacto es 123456789)";
+  const getPlaceholder = () => {
+    switch(detectedLanguage) {
+      case 'es':
+        return "Escribe aquí tu plan de viaje... (soy María y viajo desde Madrid a Lisboa. Voy a parar en Évora. Tengo 3 plazas libres. Mi contacto es 123456789)";
+      case 'fr':
+        return "Écrivez votre plan de voyage ici... (Je m'appelle Marie et je voyage de Paris à Lyon. J'ai 2 places libres. Mon numéro est 123456789)";
+      default:
+        return "Enter your travel plan... (e.g., 'I'm Maria from Ourense with 2 free spots via Santiago')";
+    }
+  };
 
   return (
     <form onSubmit={handleSubmit} className="relative mt-5">
       <Textarea
         value={message}
         onChange={handleMessageChange}
-        placeholder={placeholder}
+        placeholder={getPlaceholder()}
         className="min-h-[100px] pr-12 resize-none"
       />
       <div className="absolute bottom-2 right-2">
