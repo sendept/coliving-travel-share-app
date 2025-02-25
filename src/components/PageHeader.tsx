@@ -1,17 +1,14 @@
+
 import { useState, useEffect } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import { LogoUpload } from "./LogoUpload";
 import { useToast } from "@/hooks/use-toast";
-import { Edit2, Check, X, Type, AlignCenter } from "lucide-react";
+import { X } from "lucide-react";
 import { cn } from "@/lib/utils";
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
+import { LogoSection } from "./header/LogoSection";
+import { EditableTitle } from "./header/EditableTitle";
+import { SubtitleControls } from "./header/SubtitleControls";
 
 interface PageSettings {
   id?: string;
@@ -75,7 +72,6 @@ export const PageHeader = () => {
   };
 
   const handleSave = async () => {
-    // Validate subtitle length (45-85 characters per line)
     const lines = editForm.subtitle.split('\n');
     const isValidLength = lines.every(line => line.length >= 45 && line.length <= 85);
 
@@ -142,51 +138,21 @@ export const PageHeader = () => {
 
   return (
     <div className="space-y-4">
-      <div className="h-24 w-24 mx-auto mb-6 relative group">
-        {settings.logo_url ? (
-          <div className="relative">
-            <img 
-              src={settings.logo_url} 
-              alt="Event logo" 
-              className="w-full h-full object-contain"
-            />
-            <div className="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-50 transition-all flex items-center justify-center">
-              <LogoUpload onLogoUpdate={handleLogoUpdate}>
-                <Button
-                  variant="ghost"
-                  size="icon"
-                  className="opacity-0 group-hover:opacity-100 text-white"
-                >
-                  <Edit2 className="h-4 w-4" />
-                </Button>
-              </LogoUpload>
-            </div>
-          </div>
-        ) : (
-          <div className="w-full h-full rounded border-2 border-dashed border-gray-300 flex items-center justify-center">
-            <LogoUpload onLogoUpdate={handleLogoUpdate} />
-          </div>
-        )}
-      </div>
+      <LogoSection 
+        logoUrl={settings.logo_url} 
+        onLogoUpdate={handleLogoUpdate} 
+      />
       <div className="text-center space-y-2 px-4 sm:px-0">
         {editing ? (
           <>
             <div className="space-y-2">
-              <div className="relative max-w-[700px] min-w-[350px] mx-auto">
-                <Input
-                  value={editForm.name}
-                  onChange={(e) => setEditForm(prev => ({ ...prev, name: e.target.value }))}
-                  className="text-3xl font-semibold tracking-tight text-center pr-10"
-                />
-                <Button
-                  variant="ghost"
-                  size="icon"
-                  onClick={handleSave}
-                  className="h-8 w-8 absolute right-2 top-1/2 -translate-y-1/2"
-                >
-                  <Check className="h-4 w-4" />
-                </Button>
-              </div>
+              <EditableTitle
+                isEditing={true}
+                title={editForm.name}
+                onEdit={() => {}}
+                onChange={(value) => setEditForm(prev => ({ ...prev, name: value }))}
+                onSave={handleSave}
+              />
               <div className="relative max-w-[700px] min-w-[350px] mx-auto">
                 <Input
                   value={editForm.subtitle}
@@ -199,44 +165,7 @@ export const PageHeader = () => {
                   )}
                   placeholder="Enter subtitle (45-85 characters per line)"
                 />
-                <div className="absolute right-2 top-2 flex space-x-2">
-                  <DropdownMenu>
-                    <DropdownMenuTrigger asChild>
-                      <Button variant="ghost" size="icon">
-                        <Type className="h-4 w-4" />
-                      </Button>
-                    </DropdownMenuTrigger>
-                    <DropdownMenuContent>
-                      <DropdownMenuItem onClick={() => updateSubtitleStyle("fontSize", "small")}>
-                        Small
-                      </DropdownMenuItem>
-                      <DropdownMenuItem onClick={() => updateSubtitleStyle("fontSize", "medium")}>
-                        Medium
-                      </DropdownMenuItem>
-                      <DropdownMenuItem onClick={() => updateSubtitleStyle("fontSize", "large")}>
-                        Large
-                      </DropdownMenuItem>
-                    </DropdownMenuContent>
-                  </DropdownMenu>
-                  <DropdownMenu>
-                    <DropdownMenuTrigger asChild>
-                      <Button variant="ghost" size="icon">
-                        <AlignCenter className="h-4 w-4" />
-                      </Button>
-                    </DropdownMenuTrigger>
-                    <DropdownMenuContent>
-                      <DropdownMenuItem onClick={() => updateSubtitleStyle("position", "top")}>
-                        Top
-                      </DropdownMenuItem>
-                      <DropdownMenuItem onClick={() => updateSubtitleStyle("position", "center")}>
-                        Center
-                      </DropdownMenuItem>
-                      <DropdownMenuItem onClick={() => updateSubtitleStyle("position", "bottom")}>
-                        Bottom
-                      </DropdownMenuItem>
-                    </DropdownMenuContent>
-                  </DropdownMenu>
-                </div>
+                <SubtitleControls onUpdateStyle={updateSubtitleStyle} />
               </div>
             </div>
             <Button
@@ -253,17 +182,13 @@ export const PageHeader = () => {
           </>
         ) : (
           <>
-            <div className="relative max-w-[700px] min-w-[350px] mx-auto">
-              <h1 className="text-3xl font-semibold tracking-tight pr-8">{settings.name}</h1>
-              <Button
-                variant="ghost"
-                size="icon"
-                onClick={() => setEditing(true)}
-                className="h-8 w-8 absolute right-0 top-1/2 -translate-y-1/2"
-              >
-                <Edit2 className="h-4 w-4" />
-              </Button>
-            </div>
+            <EditableTitle
+              isEditing={false}
+              title={settings.name}
+              onEdit={() => setEditing(true)}
+              onChange={() => {}}
+              onSave={() => {}}
+            />
             <p className={cn(
               "max-w-[700px] min-w-[350px] mx-auto",
               fontSizes[settings.subtitle_style?.fontSize || "medium"],
