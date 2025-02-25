@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import { Input } from "@/components/ui/input";
@@ -169,7 +168,7 @@ export const PageHeader = () => {
           </div>
         )}
       </div>
-      <div className="text-center space-y-2">
+      <div className="text-center space-y-2 px-4 sm:px-0">
         {editing ? (
           <>
             <div className="space-y-2">
@@ -266,7 +265,7 @@ export const PageHeader = () => {
               </Button>
             </div>
             <p className={cn(
-              "max-w-[700px] min-w-[350px] mx-auto px-4",
+              "max-w-[700px] min-w-[350px] mx-auto",
               fontSizes[settings.subtitle_style?.fontSize || "medium"],
               positions[settings.subtitle_style?.position || "top"],
               presets[settings.subtitle_style?.preset || "default"]

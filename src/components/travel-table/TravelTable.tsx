@@ -71,13 +71,13 @@ export const TravelTable = ({ entries, onClaimSpot }: TravelTableProps) => {
         <Table>
           <TableHeader>
             <TableRow className="border-none">
-              <TableHead className="w-[150px] text-center">{getTranslation('name', language)}</TableHead>
-              <TableHead className="w-[120px] text-center">{getTranslation('availableSpots', language)}</TableHead>
-              <TableHead className="min-w-[400px] text-center">{getTranslation('route', language)}</TableHead>
-              <TableHead className="w-[120px] text-center">{getTranslation('transport', language)}</TableHead>
-              <TableHead className="w-[150px] text-center">{getTranslation('contact', language)}</TableHead>
-              <TableHead className="w-[200px] text-center">{getTranslation('claimedBy', language)}</TableHead>
-              <TableHead className="w-[150px] text-center">{getTranslation('diet', language)}</TableHead>
+              <TableHead className="w-[150px] text-center align-middle">{getTranslation('name', language)}</TableHead>
+              <TableHead className="w-[120px] text-center align-middle">{getTranslation('availableSpots', language)}</TableHead>
+              <TableHead className="min-w-[400px] text-center align-middle">{getTranslation('route', language)}</TableHead>
+              <TableHead className="w-[120px] text-center align-middle">{getTranslation('transport', language)}</TableHead>
+              <TableHead className="w-[150px] text-center align-middle">{getTranslation('contact', language)}</TableHead>
+              <TableHead className="w-[200px] text-center align-middle">{getTranslation('claimedBy', language)}</TableHead>
+              <TableHead className="w-[150px] text-center align-middle">{getTranslation('diet', language)}</TableHead>
               <TableHead className="w-[100px]"></TableHead>
             </TableRow>
           </TableHeader>
