@@ -10,13 +10,13 @@ export type { ParsedTravel } from './types';
 const convertWrittenToNumber = (text: string): number => {
   const numberMap: { [key: string]: number } = {
     // Spanish
-    'un': 1, 'uno': 1, 'una': 1, 'dos': 2, 'tres': 3, 'cuatro': 4, 'cinco': 5,
+    'uno': 1, 'una': 1, 'dos': 2, 'tres': 3, 'cuatro': 4, 'cinco': 5,
     'seis': 6, 'siete': 7, 'ocho': 8, 'nueve': 9, 'diez': 10,
     // English
     'one': 1, 'two': 2, 'three': 3, 'four': 4, 'five': 5,
     'six': 6, 'seven': 7, 'eight': 8, 'nine': 9, 'ten': 10,
     // French
-    'deux': 2, 'trois': 3, 'quatre': 4, 'cinq': 5,
+    'un': 1, 'une': 1, 'deux': 2, 'trois': 3, 'quatre': 4, 'cinq': 5,
     'six': 6, 'sept': 7, 'huit': 8, 'neuf': 9, 'dix': 10
   };
 
@@ -81,12 +81,21 @@ export const parseMessage = (message: string): ParsedTravel | null => {
       contact = numberMatch ? numberMatch[0] : "";
     }
 
-    // Extract dietary restrictions
+    // Extract dietary restrictions and allergies
     const dietaryMatch = message.match(patterns.dietary);
     let dietary_restrictions = "";
     
     if (dietaryMatch) {
-      dietary_restrictions = dietaryMatch[1]?.trim() || "";
+      const allergy = dietaryMatch[1]?.trim() || dietaryMatch[2]?.trim() || "";
+      if (allergy) {
+        dietary_restrictions = `Allergic to: ${allergy}`;
+      } else if (dietaryMatch[0].toLowerCase().includes('vegetarian')) {
+        dietary_restrictions = 'Vegetarian';
+      } else if (dietaryMatch[0].toLowerCase().includes('vegan')) {
+        dietary_restrictions = 'Vegan';
+      } else if (dietaryMatch[0].toLowerCase().includes('halal')) {
+        dietary_restrictions = 'Halal';
+      }
     }
 
     console.log("Parsed travel data:", {
