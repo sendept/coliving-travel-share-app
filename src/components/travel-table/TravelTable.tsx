@@ -53,21 +53,21 @@ export const TravelTable = ({
 
   const language: 'en' | 'es' = entries[0]?.language || 'en';
   return <div className="relative min-h-[calc(100vh-400px)]">
-      <div className="bg-[#F7E7D7] p-4 rounded-lg">
+      <div className="bg-[#FBF8F5] p-4 rounded-lg">
         <div className="text-left mb-2">
           <p className="text-[9px] text-gray-500">Desliza hacia la derecha para editar o ver tu texto</p>
           <p className="text-[9px] text-gray-500">Scroll to the right to see or edit your text</p>
         </div>
         <div className="overflow-x-auto overflow-y-auto scrollbar-visible" style={{
           scrollbarWidth: 'thin',
-          scrollbarColor: '#888 #F7E7D7',
+          scrollbarColor: '#888 #FBF8F5',
           transform: 'rotateX(180deg)'
         }}>
           <div style={{ transform: 'rotateX(180deg)' }}>
             <Table>
               <TableHeader>
                 <TableRow className="border-none">
-                  <TableHead className="w-[150px] text-center align-middle sticky left-0 bg-[#F7E7D7]">{getTranslation('name', language)}</TableHead>
+                  <TableHead className="w-[150px] text-center align-middle sticky left-0 bg-[#FBF8F5]">{getTranslation('name', language)}</TableHead>
                   <TableHead className="w-[120px] text-center align-middle py-0 my-0">
                     <div className="text-center">
                       <div className="text-foreground">Plazas</div>
