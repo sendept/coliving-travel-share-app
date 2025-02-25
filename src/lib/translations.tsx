@@ -6,7 +6,7 @@ type TranslationKey = 'name' | 'availableSpots' | 'route' | 'transport' | 'taxiS
 const translations: Record<'en' | 'es', Record<TranslationKey, string>> = {
   en: {
     name: 'Name\nNombre',
-    availableSpots: 'Available Spots  Plazas',
+    availableSpots: 'Available Spots\nPlazas',
     route: 'Route\nRuta',
     transport: 'Transport\nTransporte',
     taxiSharing: 'Taxi Sharing\nCompartir Taxi',
@@ -19,7 +19,7 @@ const translations: Record<'en' | 'es', Record<TranslationKey, string>> = {
   },
   es: {
     name: 'Nombre\nName',
-    availableSpots: 'Plazas  Available Spots',
+    availableSpots: 'Plazas\nAvailable Spots',
     route: 'Ruta\nRoute',
     transport: 'Transporte\nTransport',
     taxiSharing: 'Compartir Taxi\nTaxi Sharing',
@@ -45,9 +45,9 @@ const splitTranslation = (text: string): React.JSX.Element => {
   
   const [primary, secondary] = text.split('  ');
   return (
-    <div className="whitespace-nowrap">
-      <span className="text-foreground">{primary}</span>
-      <span className="text-muted-foreground text-sm ml-1">{secondary}</span>
+    <div className="text-center">
+      <div className="text-foreground">{primary}</div>
+      <div className="text-muted-foreground text-sm">{secondary}</div>
     </div>
   );
 };
