@@ -7,6 +7,23 @@ import { detectTransport } from './transportDetector';
 
 export type { ParsedTravel } from './types';
 
+const convertWrittenToNumber = (text: string): number => {
+  const numberMap: { [key: string]: number } = {
+    // Spanish
+    'un': 1, 'uno': 1, 'una': 1, 'dos': 2, 'tres': 3, 'cuatro': 4, 'cinco': 5,
+    'seis': 6, 'siete': 7, 'ocho': 8, 'nueve': 9, 'diez': 10,
+    // English
+    'one': 1, 'two': 2, 'three': 3, 'four': 4, 'five': 5,
+    'six': 6, 'seven': 7, 'eight': 8, 'nine': 9, 'ten': 10,
+    // French
+    'deux': 2, 'trois': 3, 'quatre': 4, 'cinq': 5,
+    'six': 6, 'sept': 7, 'huit': 8, 'neuf': 9, 'dix': 10
+  };
+
+  const cleanText = text.toLowerCase().trim();
+  return numberMap[cleanText] || parseInt(cleanText);
+};
+
 export const parseMessage = (message: string): ParsedTravel | null => {
   try {
     const language = detectLanguage(message);
@@ -34,9 +51,15 @@ export const parseMessage = (message: string): ParsedTravel | null => {
       return null;
     }
 
-    // Extract available spots
+    // Extract available spots with written number support
     const spotsParts = message.match(patterns.spots);
-    const availableSpots = spotsParts ? parseInt(spotsParts[1] || spotsParts[2] || spotsParts[3]) : 0;
+    let availableSpots = 0;
+    if (spotsParts) {
+      const numberText = spotsParts[1] || spotsParts[2] || spotsParts[3];
+      if (numberText) {
+        availableSpots = convertWrittenToNumber(numberText);
+      }
+    }
 
     // Extract route with multiple stops
     const allStops = extractMultipleStops(message);
