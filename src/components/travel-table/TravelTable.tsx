@@ -5,24 +5,27 @@ import { supabase } from "@/integrations/supabase/client";
 import { TravelTableRow } from "./TravelTableRow";
 import { getTranslation } from "@/lib/translations";
 import type { TravelEntry, TravelTableProps } from "./types";
+
 export type { TravelEntry } from "./types";
+
 export const TravelTable = ({
   entries,
   onClaimSpot
 }: TravelTableProps) => {
   const [editingEntry, setEditingEntry] = useState<string | null>(null);
   const [editForm, setEditForm] = useState<Partial<TravelEntry>>({});
-  const {
-    toast
-  } = useToast();
+  const { toast } = useToast();
+
   const handleStartEdit = (entry: TravelEntry) => {
     setEditingEntry(entry.id);
     setEditForm(entry);
   };
+
   const handleCancelEdit = () => {
     setEditingEntry(null);
     setEditForm({});
   };
+
   const handleSaveEdit = async () => {
     if (!editingEntry || !editForm) return;
     const {
@@ -47,19 +50,23 @@ export const TravelTable = ({
     setEditForm({});
   };
 
-  // Use the language of the first entry, or default to English
   const language: 'en' | 'es' = entries[0]?.language || 'en';
   return <div className="relative min-h-[calc(100vh-400px)]">
       <div>
         <div className="text-left mt-5 mb-5">
-          <p className="text-[9px] text-gray-500">Scroll to the right to see or edit your text</p>
           <p className="text-[9px] text-gray-500">Desliza hacia la derecha para editar o ver tu texto</p>
+          <p className="text-[9px] text-gray-500">Scroll to the right to see or edit your text</p>
         </div>
         <Table>
           <TableHeader>
             <TableRow className="border-none">
               <TableHead className="w-[150px] text-center align-middle">{getTranslation('name', language)}</TableHead>
-              <TableHead className="w-[120px] text-center align-middle py-0 my-0">{getTranslation('availableSpots', language)}</TableHead>
+              <TableHead className="w-[120px] text-center align-middle py-0 my-0">
+                <div className="text-center">
+                  <div className="text-foreground">Plazas</div>
+                  <div className="whitespace-nowrap">Available Spots</div>
+                </div>
+              </TableHead>
               <TableHead className="min-w-[400px] text-center align-middle">{getTranslation('route', language)}</TableHead>
               <TableHead className="w-[120px] text-center align-middle">{getTranslation('transport', language)}</TableHead>
               <TableHead className="w-[150px] text-center align-middle">{getTranslation('contact', language)}</TableHead>
