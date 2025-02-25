@@ -1,4 +1,3 @@
-
 import type { ParsedTravel, PatternSet } from './types';
 import { spanishPatterns, englishPatterns, frenchPatterns } from './patterns';
 import { detectLanguage } from './languageDetector';
@@ -16,8 +15,10 @@ const convertWrittenToNumber = (text: string): number => {
     'one': 1, 'two': 2, 'three': 3, 'four': 4, 'five': 5,
     'six': 6, 'seven': 7, 'eight': 8, 'nine': 9, 'ten': 10,
     // French
-    'un': 1, 'une': 1, 'deux': 2, 'trois': 3, 'quatre': 4, 'cinq': 5,
-    'six': 6, 'sept': 7, 'huit': 8, 'neuf': 9, 'dix': 10
+    'deux': 2, 'trois': 3, 'quatre': 4, 'cinq': 5,
+    'six': 6, 'sept': 7, 'huit': 8, 'neuf': 9, 'dix': 10,
+    // Special cases for un/une
+    'un': 1, 'une': 1
   };
 
   const cleanText = text.toLowerCase().trim();

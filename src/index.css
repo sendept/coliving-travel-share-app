@@ -33,17 +33,31 @@
     @apply border-border;
   }
 
+  html {
+    -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%;
+    touch-action: manipulation;
+  }
+
   body {
-    @apply bg-background text-foreground font-inter;
+    @apply bg-background text-foreground font-inter antialiased min-h-screen overflow-x-hidden;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
   }
 }
 
 .product-hunt-container {
-  @apply max-w-5xl mx-auto px-4 sm:px-6 lg:px-8;
+  @apply w-full mx-auto px-4 sm:px-6 lg:px-8;
+}
+
+@media (min-width: 1024px) {
+  .product-hunt-container {
+    @apply max-w-5xl;
+  }
 }
 
 .product-hunt-header {
-  @apply py-8 border-b border-gray-200;
+  @apply py-4 sm:py-6 lg:py-8 border-b border-gray-200;
 }
 
 .product-hunt-card {
@@ -51,11 +65,11 @@
 }
 
 .product-hunt-input {
-  @apply w-full px-4 py-3 rounded-lg border border-gray-200 focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition-all duration-200;
+  @apply w-full px-3 py-2 sm:px-4 sm:py-3 rounded-lg border border-gray-200 focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition-all duration-200 text-base sm:text-sm;
 }
 
 .product-hunt-button {
-  @apply bg-[#F97316] hover:bg-[#F97316]/90 text-white font-medium px-4 py-2 rounded-lg transition-colors duration-200;
+  @apply w-full sm:w-auto bg-[#F97316] hover:bg-[#F97316]/90 text-white font-medium px-4 py-2 rounded-lg transition-colors duration-200 text-sm sm:text-base;
 }
 
 .scrollbar-hidden::-webkit-scrollbar {
@@ -65,4 +79,56 @@
 .scrollbar-hidden {
   -ms-overflow-style: none;
   scrollbar-width: none;
+}
+
+/* Mobile-first table styles */
+@media (max-width: 767px) {
+  .responsive-table {
+    @apply block w-full overflow-x-auto -mx-4 px-4;
+  }
+
+  .responsive-table table {
+    @apply min-w-full;
+  }
+
+  .responsive-table th,
+  .responsive-table td {
+    @apply p-2 text-sm;
+    min-width: 120px;
+  }
+}
+
+/* Touch-friendly inputs */
+input, select, textarea {
+  @apply min-h-[44px] sm:min-h-[36px];
+}
+
+/* Better tap targets */
+button, a {
+  @apply min-h-[44px] sm:min-h-[36px] px-4 py-2;
+}
+
+/* Safe area insets for modern iOS devices */
+@supports (padding: max(0px)) {
+  .product-hunt-container {
+    padding-left: max(1rem, env(safe-area-inset-left));
+    padding-right: max(1rem, env(safe-area-inset-right));
+    padding-bottom: max(1rem, env(safe-area-inset-bottom));
+  }
+}
+
+/* Smooth scrolling */
+.smooth-scroll {
+  scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch;
+}
+
+/* Loading states */
+.loading {
+  @apply opacity-75 pointer-events-none select-none;
+}
+
+/* Focus states */
+.focus-ring {
+  @apply focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary;
 }
