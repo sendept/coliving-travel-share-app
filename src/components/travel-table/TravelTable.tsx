@@ -1,68 +1,55 @@
-
 import { useState } from "react";
-import {
-  Table,
-  TableBody,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from "@/components/ui/table";
+import { Table, TableBody, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { useToast } from "@/hooks/use-toast";
 import { supabase } from "@/integrations/supabase/client";
 import { TravelTableRow } from "./TravelTableRow";
 import { getTranslation } from "@/lib/translations";
 import type { TravelEntry, TravelTableProps } from "./types";
-
 export type { TravelEntry } from "./types";
-export const TravelTable = ({ entries, onClaimSpot }: TravelTableProps) => {
+export const TravelTable = ({
+  entries,
+  onClaimSpot
+}: TravelTableProps) => {
   const [editingEntry, setEditingEntry] = useState<string | null>(null);
   const [editForm, setEditForm] = useState<Partial<TravelEntry>>({});
-  const { toast } = useToast();
-
+  const {
+    toast
+  } = useToast();
   const handleStartEdit = (entry: TravelEntry) => {
     setEditingEntry(entry.id);
     setEditForm(entry);
   };
-
   const handleCancelEdit = () => {
     setEditingEntry(null);
     setEditForm({});
   };
-
   const handleSaveEdit = async () => {
     if (!editingEntry || !editForm) return;
-
-    const { error } = await supabase
-      .from('travel_entries')
-      .update({
-        ...editForm,
-        last_edited_at: new Date().toISOString(),
-      })
-      .eq('id', editingEntry);
-
+    const {
+      error
+    } = await supabase.from('travel_entries').update({
+      ...editForm,
+      last_edited_at: new Date().toISOString()
+    }).eq('id', editingEntry);
     if (error) {
       toast({
         title: "Error saving changes",
         description: "Could not save your changes",
-        variant: "destructive",
+        variant: "destructive"
       });
       return;
     }
-
     toast({
       title: "Changes saved",
-      description: "Your changes have been saved successfully",
+      description: "Your changes have been saved successfully"
     });
-
     setEditingEntry(null);
     setEditForm({});
   };
 
   // Use the language of the first entry, or default to English
   const language: 'en' | 'es' = entries[0]?.language || 'en';
-
-  return (
-    <div className="relative min-h-[calc(100vh-400px)]">
+  return <div className="relative min-h-[calc(100vh-400px)]">
       <div>
         <div className="text-left mt-5 mb-5">
           <p className="text-[9px] text-gray-500">Scroll to the right to see or edit your text</p>
@@ -72,7 +59,7 @@ export const TravelTable = ({ entries, onClaimSpot }: TravelTableProps) => {
           <TableHeader>
             <TableRow className="border-none">
               <TableHead className="w-[150px] text-center align-middle">{getTranslation('name', language)}</TableHead>
-              <TableHead className="w-[120px] text-center align-middle">{getTranslation('availableSpots', language)}</TableHead>
+              <TableHead className="w-[120px] text-center align-middle py-0 my-0">{getTranslation('availableSpots', language)}</TableHead>
               <TableHead className="min-w-[400px] text-center align-middle">{getTranslation('route', language)}</TableHead>
               <TableHead className="w-[120px] text-center align-middle">{getTranslation('transport', language)}</TableHead>
               <TableHead className="w-[150px] text-center align-middle">{getTranslation('contact', language)}</TableHead>
@@ -82,19 +69,7 @@ export const TravelTable = ({ entries, onClaimSpot }: TravelTableProps) => {
             </TableRow>
           </TableHeader>
           <TableBody>
-            {entries.map((entry) => (
-              <TravelTableRow
-                key={entry.id}
-                entry={entry}
-                editingEntry={editingEntry}
-                editForm={editForm}
-                setEditForm={setEditForm}
-                onSaveEdit={handleSaveEdit}
-                onCancelEdit={handleCancelEdit}
-                onStartEdit={handleStartEdit}
-                onClaimSpot={onClaimSpot}
-              />
-            ))}
+            {entries.map(entry => <TravelTableRow key={entry.id} entry={entry} editingEntry={editingEntry} editForm={editForm} setEditForm={setEditForm} onSaveEdit={handleSaveEdit} onCancelEdit={handleCancelEdit} onStartEdit={handleStartEdit} onClaimSpot={onClaimSpot} />)}
           </TableBody>
         </Table>
       </div>
@@ -102,14 +77,9 @@ export const TravelTable = ({ entries, onClaimSpot }: TravelTableProps) => {
         <span className="inline-flex items-center">
           Feel free to use it. Built by
           <a href="https://sende.co" target="_blank" rel="noopener noreferrer" className="inline-flex items-center ml-1">
-            <img 
-              src="/lovable-uploads/5939e496-5d0c-421e-9294-eb688e353313.png" 
-              alt="Sende" 
-              className="h-6"
-            />
+            <img src="/lovable-uploads/5939e496-5d0c-421e-9294-eb688e353313.png" alt="Sende" className="h-6" />
           </a>
         </span>
       </footer>
-    </div>
-  );
+    </div>;
 };

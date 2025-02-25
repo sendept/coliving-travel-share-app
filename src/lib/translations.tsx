@@ -1,8 +1,5 @@
-
 import React from 'react';
-
 type TranslationKey = 'name' | 'availableSpots' | 'route' | 'transport' | 'taxiSharing' | 'contact' | 'claimedBy' | 'actions' | 'title' | 'subtitle' | 'diet';
-
 const translations: Record<'en' | 'es', Record<TranslationKey, string>> = {
   en: {
     name: 'Name\nNombre',
@@ -31,27 +28,20 @@ const translations: Record<'en' | 'es', Record<TranslationKey, string>> = {
     diet: 'Dietas/Alergias\nDiet/Allergies'
   }
 };
-
 const splitTranslation = (text: string): React.JSX.Element => {
   if (text.includes('\n')) {
     const [primary, secondary] = text.split('\n');
-    return (
-      <div className="text-center">
-        <div className="text-foreground">{primary}</div>
-        <div className="text-muted-foreground text-sm">{secondary}</div>
-      </div>
-    );
+    return <div className="text-center">
+        <div className="text-foreground mx-0 py-0 my-0">{primary}</div>
+        <div className="text-muted-foreground text-sm py-0 my-0">{secondary}</div>
+      </div>;
   }
-  
   const [primary, secondary] = text.split('  ');
-  return (
-    <React.Fragment>
+  return <React.Fragment>
       <span className="text-foreground">{primary}</span>
       <span className="text-muted-foreground text-sm ml-1">{secondary}</span>
-    </React.Fragment>
-  );
+    </React.Fragment>;
 };
-
 export const getTranslation = (key: TranslationKey, language: 'en' | 'es' = 'en'): React.JSX.Element => {
   return splitTranslation(translations[language][key]);
 };

@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import { Input } from "@/components/ui/input";
@@ -9,7 +8,6 @@ import { cn } from "@/lib/utils";
 import { LogoSection } from "./header/LogoSection";
 import { EditableTitle } from "./header/EditableTitle";
 import { SubtitleControls } from "./header/SubtitleControls";
-
 interface PageSettings {
   id?: string;
   name: string;
@@ -21,25 +19,21 @@ interface PageSettings {
   };
   logo_url: string;
 }
-
 const fontSizes = {
   small: "text-sm md:text-base",
   medium: "text-base md:text-lg",
-  large: "text-lg md:text-xl",
+  large: "text-lg md:text-xl"
 };
-
 const positions = {
   top: "mt-2",
   center: "my-4",
-  bottom: "mb-6",
+  bottom: "mb-6"
 };
-
 const presets = {
   default: "text-muted-foreground",
   elegant: "text-gray-700 italic font-playfair",
-  minimal: "text-gray-600 font-light",
+  minimal: "text-gray-600 font-light"
 };
-
 export const PageHeader = () => {
   const [settings, setSettings] = useState<PageSettings>({
     name: "EVENT NAME",
@@ -49,157 +43,112 @@ export const PageHeader = () => {
       position: "top",
       preset: "default"
     },
-    logo_url: "",
+    logo_url: ""
   });
   const [editing, setEditing] = useState(false);
   const [editForm, setEditForm] = useState<PageSettings>(settings);
-  const { toast } = useToast();
-
+  const {
+    toast
+  } = useToast();
   useEffect(() => {
     fetchSettings();
   }, []);
-
   const fetchSettings = async () => {
-    const { data, error } = await supabase
-      .from('page_settings')
-      .select('*')
-      .single();
-
+    const {
+      data,
+      error
+    } = await supabase.from('page_settings').select('*').single();
     if (!error && data) {
       setSettings(data);
       setEditForm(data);
     }
   };
-
   const handleSave = async () => {
     const lines = editForm.subtitle.split('\n');
     const isValidLength = lines.every(line => line.length >= 45 && line.length <= 85);
-
     if (!isValidLength) {
       toast({
         title: "Invalid subtitle length",
         description: "Each line should be between 45-85 characters",
-        variant: "destructive",
+        variant: "destructive"
       });
       return;
     }
-
-    const { error } = await supabase
-      .from('page_settings')
-      .upsert({ 
-        id: settings.id || undefined,
-        name: editForm.name,
-        subtitle: editForm.subtitle,
-        subtitle_style: editForm.subtitle_style,
-      });
-
+    const {
+      error
+    } = await supabase.from('page_settings').upsert({
+      id: settings.id || undefined,
+      name: editForm.name,
+      subtitle: editForm.subtitle,
+      subtitle_style: editForm.subtitle_style
+    });
     if (error) {
       toast({
         title: "Error saving changes",
         description: "Could not save your changes",
-        variant: "destructive",
+        variant: "destructive"
       });
       return;
     }
-
     setSettings(editForm);
     setEditing(false);
     toast({
       title: "Changes saved",
-      description: "Your changes have been saved successfully",
+      description: "Your changes have been saved successfully"
     });
   };
-
   const handleLogoUpdate = async (url: string) => {
-    const { error } = await supabase
-      .from('page_settings')
-      .upsert({ 
-        id: settings.id || undefined,
-        logo_url: url 
-      });
-
+    const {
+      error
+    } = await supabase.from('page_settings').upsert({
+      id: settings.id || undefined,
+      logo_url: url
+    });
     if (!error) {
-      setSettings(prev => ({ ...prev, logo_url: url }));
+      setSettings(prev => ({
+        ...prev,
+        logo_url: url
+      }));
     }
   };
-
-  const updateSubtitleStyle = (
-    key: "fontSize" | "position" | "preset",
-    value: string
-  ) => {
+  const updateSubtitleStyle = (key: "fontSize" | "position" | "preset", value: string) => {
     setEditForm(prev => ({
       ...prev,
       subtitle_style: {
         ...prev.subtitle_style,
-        [key]: value,
+        [key]: value
       }
     }));
   };
-
-  return (
-    <div className="space-y-4">
-      <LogoSection 
-        logoUrl={settings.logo_url} 
-        onLogoUpdate={handleLogoUpdate} 
-      />
+  return <div className="space-y-4">
+      <LogoSection logoUrl={settings.logo_url} onLogoUpdate={handleLogoUpdate} />
       <div className="text-center space-y-2 px-4 sm:px-0">
-        {editing ? (
-          <>
+        {editing ? <>
             <div className="space-y-2">
-              <EditableTitle
-                isEditing={true}
-                title={editForm.name}
-                onEdit={() => {}}
-                onChange={(value) => setEditForm(prev => ({ ...prev, name: value }))}
-                onSave={handleSave}
-              />
+              <EditableTitle isEditing={true} title={editForm.name} onEdit={() => {}} onChange={value => setEditForm(prev => ({
+            ...prev,
+            name: value
+          }))} onSave={handleSave} />
               <div className="relative max-w-[700px] min-w-[350px] mx-auto">
-                <Input
-                  value={editForm.subtitle}
-                  onChange={(e) => setEditForm(prev => ({ ...prev, subtitle: e.target.value }))}
-                  className={cn(
-                    "text-center",
-                    fontSizes[editForm.subtitle_style?.fontSize || "medium"],
-                    positions[editForm.subtitle_style?.position || "top"],
-                    presets[editForm.subtitle_style?.preset || "default"]
-                  )}
-                  placeholder="Enter subtitle (45-85 characters per line)"
-                />
+                <Input value={editForm.subtitle} onChange={e => setEditForm(prev => ({
+              ...prev,
+              subtitle: e.target.value
+            }))} className={cn("text-center", fontSizes[editForm.subtitle_style?.fontSize || "medium"], positions[editForm.subtitle_style?.position || "top"], presets[editForm.subtitle_style?.preset || "default"])} placeholder="Enter subtitle (45-85 characters per line)" />
                 <SubtitleControls onUpdateStyle={updateSubtitleStyle} />
               </div>
             </div>
-            <Button
-              variant="ghost"
-              size="icon"
-              onClick={() => {
-                setEditing(false);
-                setEditForm(settings);
-              }}
-              className="h-8 w-8"
-            >
+            <Button variant="ghost" size="icon" onClick={() => {
+          setEditing(false);
+          setEditForm(settings);
+        }} className="h-8 w-8">
               <X className="h-4 w-4" />
             </Button>
-          </>
-        ) : (
-          <>
-            <EditableTitle
-              isEditing={false}
-              title={settings.name}
-              onEdit={() => setEditing(true)}
-              onChange={() => {}}
-              onSave={() => {}}
-            />
-            <p className={cn(
-              "max-w-[700px] min-w-[350px] mx-auto",
-              fontSizes[settings.subtitle_style?.fontSize || "medium"],
-              positions[settings.subtitle_style?.position || "top"],
-              presets[settings.subtitle_style?.preset || "default"]
-            )}>
+          </> : <>
+            <EditableTitle isEditing={false} title={settings.name} onEdit={() => setEditing(true)} onChange={() => {}} onSave={() => {}} />
+            <p className="text-base text-gray-500 font-normal">
               {settings.subtitle}
             </p>
-          </>
-        )}
+          </>}
       </div>
-    </div>
-  );
+    </div>;
 };
