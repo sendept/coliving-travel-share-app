@@ -20,6 +20,26 @@ export const extractMultipleStops = (message: string): string[] => {
     .replace(/([.,])\s*/g, ' $1 ')
     .trim();
 
+  // First try to extract from structured patterns (from/to + stops)
+  const mainRoutePatterns = [
+    // English
+    /(?:from|de|desde)\s+([A-Za-zÀ-ÿ\s]+?)\s+(?:to|hacia|à|hasta)\s+([A-Za-zÀ-ÿ\s]+)/i,
+  ];
+
+  let foundMainRoute = false;
+  for (const pattern of mainRoutePatterns) {
+    const match = normalizedMessage.match(pattern);
+    if (match && match[1] && match[2]) {
+      const fromCity = match[1].trim();
+      const toCity = match[2].trim();
+      if (!allStops.includes(fromCity)) allStops.push(fromCity);
+      if (!allStops.includes(toCity)) allStops.push(toCity);
+      foundMainRoute = true;
+      break;
+    }
+  }
+
+  // Then extract additional stops
   cityPatterns.forEach(pattern => {
     const matches = [...normalizedMessage.matchAll(pattern)];
     matches.forEach(match => {
@@ -34,21 +54,17 @@ export const extractMultipleStops = (message: string): string[] => {
     });
   });
 
-  // If no stops were found using patterns, try to extract from simple text
+  // If still no stops found, try simpler patterns
   if (allStops.length === 0) {
-    const simplePatterns = [
-      /(?:from|desde|de)\s+([A-Za-zÀ-ÿ\s]+?)\s+(?:to|hasta|à)\s+([A-Za-zÀ-ÿ\s]+)/i
-    ];
-
-    simplePatterns.forEach(pattern => {
-      const match = normalizedMessage.match(pattern);
-      if (match && match[1] && match[2]) {
-        const fromCity = match[1].trim();
-        const toCity = match[2].trim();
-        if (!allStops.includes(fromCity)) allStops.push(fromCity);
-        if (!allStops.includes(toCity)) allStops.push(toCity);
-      }
-    });
+    const simpleStops = normalizedMessage.match(/(?:in|at|en)\s+([A-Za-zÀ-ÿ\s]+?)(?=\s+(?:and|y|et|,|$))/gi);
+    if (simpleStops) {
+      simpleStops.forEach(stop => {
+        const city = stop.replace(/^(?:in|at|en)\s+/i, '').trim();
+        if (!allStops.includes(city)) {
+          allStops.push(city);
+        }
+      });
+    }
   }
 
   return [...new Set(allStops.filter(stop => 
