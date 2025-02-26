@@ -5,7 +5,7 @@ import { useToast } from "@/hooks/use-toast";
 import { supabase } from "@/integrations/supabase/client";
 import { TravelTableRow } from "./TravelTableRow";
 import { getTranslation } from "@/lib/translations";
-import { GreaterThan, LessThan } from "lucide-react";
+import { ChevronLeft, ChevronRight } from "lucide-react";
 import type { TravelEntry, TravelTableProps } from "./types";
 
 export type { TravelEntry } from "./types";
@@ -61,8 +61,8 @@ export const TravelTable = ({
             <p className="text-[9px] text-gray-500">Scroll to the right to see or edit your text</p>
           </div>
           <div className="flex items-center ml-2">
-            <LessThan className="h-4 w-4 text-gray-500" />
-            <GreaterThan className="h-4 w-4 text-gray-500" />
+            <ChevronLeft className="h-4 w-4 text-gray-500" />
+            <ChevronRight className="h-4 w-4 text-gray-500" />
           </div>
         </div>
         <div className="overflow-x-auto overflow-y-auto scrollbar-visible" style={{
