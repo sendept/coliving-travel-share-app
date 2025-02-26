@@ -75,19 +75,19 @@ export const TravelTableRow = ({
   };
 
   return <TableRow className={className}>
-      <TableCell className="font-medium">
+      <TableCell className="font-medium border-r">
         {renderCell("name")}
       </TableCell>
-      <TableCell>{renderCell("available_spots")}</TableCell>
-      <TableCell className="whitespace-pre-line py-4">
+      <TableCell className="border-r">{renderCell("available_spots")}</TableCell>
+      <TableCell className="whitespace-pre-line py-4 border-r">
         {renderCell("route")}
       </TableCell>
-      <TableCell className="mx-[90px]">{renderCell("transport")}</TableCell>
-      <TableCell>{renderCell("contact")}</TableCell>
-      <TableCell className="whitespace-pre-line">
+      <TableCell className="mx-[90px] border-r">{renderCell("transport")}</TableCell>
+      <TableCell className="border-r">{renderCell("contact")}</TableCell>
+      <TableCell className="whitespace-pre-line border-r">
         {renderCell("claimed_by")}
       </TableCell>
-      <TableCell>
+      <TableCell className="border-r">
         {isEditing ? <EditForm entry={entry} editForm={editForm} setEditForm={setEditForm} field="dietary_restrictions" /> : entry.dietary_restrictions || "-"}
       </TableCell>
       <TableCell className="w-[100px]">

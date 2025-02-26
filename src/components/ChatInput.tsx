@@ -68,7 +68,7 @@ export const ChatInput = ({ onSubmit }: ChatInputProps) => {
         value={message}
         onChange={handleMessageChange}
         placeholder={getPlaceholder()}
-        className="min-h-[100px] pr-12 resize-none"
+        className="min-h-[100px] pr-12 resize-none border-0 bg-[#FFFFFF]"
       />
       <div className="absolute bottom-2 right-2">
         <Button 
