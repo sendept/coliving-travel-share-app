@@ -8,7 +8,7 @@ interface EditFormProps {
   entry: TravelEntry;
   editForm: Partial<TravelEntry>;
   setEditForm: (form: Partial<TravelEntry>) => void;
-  field: keyof TravelEntry;
+  field: keyof TravelEntry;  // This type already includes all possible fields from TravelEntry
 }
 
 export const EditForm = ({ entry, editForm, setEditForm, field }: EditFormProps) => {
@@ -68,7 +68,7 @@ export const EditForm = ({ entry, editForm, setEditForm, field }: EditFormProps)
     );
   }
 
-  if (field === "route" || field === "dietary_restrictions") {
+  if (field === "dietary_restrictions" || field === "route") {
     return (
       <div className="relative">
         <Textarea
