@@ -1,9 +1,11 @@
+
 import { TableCell, TableRow } from "@/components/ui/table";
 import { Button } from "@/components/ui/button";
 import { ClaimForm } from "./ClaimForm";
 import { EditForm } from "./EditForm";
 import { Plane, Car, Bike, Train, Bus, Edit2, Check, X, CarTaxiFront } from "lucide-react";
 import type { TravelEntry } from "./types";
+
 interface TravelTableRowProps {
   entry: TravelEntry;
   editingEntry: string | null;
@@ -13,7 +15,9 @@ interface TravelTableRowProps {
   onCancelEdit: () => void;
   onStartEdit: (entry: TravelEntry) => void;
   onClaimSpot: (id: string, name: string) => void;
+  className?: string;
 }
+
 const getTransportIcon = (transport: string) => {
   const iconProps = {
     className: "inline-block mr-2",
@@ -33,6 +37,7 @@ const getTransportIcon = (transport: string) => {
   if (transport_lower.includes('bus') || transport_lower.includes('van')) return <Bus {...iconProps} />;
   return null;
 };
+
 export const TravelTableRow = ({
   entry,
   editingEntry,
@@ -41,9 +46,11 @@ export const TravelTableRow = ({
   onSaveEdit,
   onCancelEdit,
   onStartEdit,
-  onClaimSpot
+  onClaimSpot,
+  className = ""
 }: TravelTableRowProps) => {
   const isEditing = editingEntry === entry.id;
+
   const renderCell = (field: keyof TravelEntry) => {
     if (isEditing) {
       return <EditForm entry={entry} editForm={editForm} setEditForm={setEditForm} field={field} />;
@@ -66,7 +73,8 @@ export const TravelTableRow = ({
     }
     return entry[field];
   };
-  return <TableRow>
+
+  return <TableRow className={className}>
       <TableCell className="font-medium">
         {renderCell("name")}
       </TableCell>
