@@ -46,11 +46,11 @@ export const ClaimForm = ({ entry, onClaim }: ClaimFormProps) => {
   return (
     <div className="flex gap-2">
       <Input
-        placeholder="Your name / Tu nombre"
+        placeholder="Name/Nombre"
         value={claimName}
         onChange={(e) => setClaimName(e.target.value)}
         onKeyPress={handleKeyPress}
-        className="w-32"
+        className="w-32 bg-[#FFFFFF]"
       />
       <Button
         variant="secondary"

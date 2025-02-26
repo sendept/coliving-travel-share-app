@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { Circle } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -68,7 +67,7 @@ export const ChatInput = ({ onSubmit }: ChatInputProps) => {
         value={message}
         onChange={handleMessageChange}
         placeholder={getPlaceholder()}
-        className="min-h-[140px] pr-12 resize-none border-0 bg-[#FFFFFF]"
+        className="min-h-[140px] pr-12 resize-none border-0 bg-[#FFFFFF] rounded-lg"
       />
       <div className="absolute bottom-2 right-2">
         <Button 
@@ -76,10 +75,8 @@ export const ChatInput = ({ onSubmit }: ChatInputProps) => {
           size="icon"
           className="bg-gray-200 hover:bg-gray-300 text-gray-600 rounded-full p-2"
         >
-          <Circle className="h-4 w-4 relative">
-            <span className="absolute inset-0 flex items-center justify-center">
-              ↗
-            </span>
+          <Circle className="h-4 w-4">
+            <span className="absolute inset-0 flex items-center justify-center text-xs">↑</span>
           </Circle>
         </Button>
       </div>
