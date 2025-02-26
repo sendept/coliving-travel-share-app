@@ -1,6 +1,6 @@
 
 import { useState } from "react";
-import { Send } from "lucide-react";
+import { Circle } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import { useToast } from "@/hooks/use-toast";
@@ -68,15 +68,19 @@ export const ChatInput = ({ onSubmit }: ChatInputProps) => {
         value={message}
         onChange={handleMessageChange}
         placeholder={getPlaceholder()}
-        className="min-h-[120px] pr-12 resize-none border-0 bg-[#FFFFFF]"
+        className="min-h-[140px] pr-12 resize-none border-0 bg-[#FFFFFF]"
       />
       <div className="absolute bottom-2 right-2">
         <Button 
           type="submit" 
           size="icon"
-          className="bg-[#F97316] hover:bg-[#F97316]/90 text-white"
+          className="bg-gray-200 hover:bg-gray-300 text-gray-600 rounded-full p-2"
         >
-          <Send className="h-4 w-4" />
+          <Circle className="h-4 w-4 relative">
+            <span className="absolute inset-0 flex items-center justify-center">
+              ↗
+            </span>
+          </Circle>
         </Button>
       </div>
     </form>
