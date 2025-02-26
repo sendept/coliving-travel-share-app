@@ -67,19 +67,19 @@ export const TravelTable = ({
             <Table>
               <TableHeader>
                 <TableRow className="border-none bg-[#FFE4D0]">
-                  <TableHead className="w-[150px] text-center align-middle sticky left-0 bg-[#FFE4D0]">{getTranslation('name', language)}</TableHead>
-                  <TableHead className="w-[120px] text-center align-middle py-0 my-0 bg-[#FFE4D0]">
+                  <TableHead className="w-[150px] text-center align-middle">{getTranslation('name', language)}</TableHead>
+                  <TableHead className="w-[120px] text-center align-middle py-0 my-0">
                     <div className="text-center">
                       <div className="text-foreground">Plazas</div>
                       <div className="whitespace-nowrap">Available Spots</div>
                     </div>
                   </TableHead>
-                  <TableHead className="min-w-[400px] text-center align-middle bg-[#FFE4D0]">{getTranslation('route', language)}</TableHead>
-                  <TableHead className="w-[120px] text-center align-middle bg-[#FFE4D0]">{getTranslation('transport', language)}</TableHead>
-                  <TableHead className="w-[150px] text-center align-middle bg-[#FFE4D0]">{getTranslation('contact', language)}</TableHead>
-                  <TableHead className="w-[200px] text-center align-middle bg-[#FFE4D0]">{getTranslation('claimedBy', language)}</TableHead>
-                  <TableHead className="w-[150px] text-center align-middle bg-[#FFE4D0]">{getTranslation('diet', language)}</TableHead>
-                  <TableHead className="w-[100px] bg-[#FFE4D0]"></TableHead>
+                  <TableHead className="min-w-[400px] text-center align-middle">{getTranslation('route', language)}</TableHead>
+                  <TableHead className="w-[120px] text-center align-middle">{getTranslation('transport', language)}</TableHead>
+                  <TableHead className="w-[150px] text-center align-middle">{getTranslation('contact', language)}</TableHead>
+                  <TableHead className="w-[200px] text-center align-middle">{getTranslation('claimedBy', language)}</TableHead>
+                  <TableHead className="w-[150px] text-center align-middle">{getTranslation('diet', language)}</TableHead>
+                  <TableHead className="w-[100px]"></TableHead>
                 </TableRow>
               </TableHeader>
               <TableBody>
@@ -94,7 +94,7 @@ export const TravelTable = ({
                     onCancelEdit={handleCancelEdit} 
                     onStartEdit={handleStartEdit} 
                     onClaimSpot={onClaimSpot}
-                    className={index % 2 === 0 ? "bg-[#FFE4D0]/40" : "bg-[#FFE4D0]/20"}
+                    className="bg-[#FBF8F5]"
                   />
                 ))}
               </TableBody>

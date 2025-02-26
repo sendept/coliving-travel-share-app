@@ -1,20 +1,19 @@
+
 import { TravelTable } from "@/components/travel-table/TravelTable";
 import { PageHeader } from "@/components/PageHeader";
 import { TravelForm } from "@/components/travel-form/TravelForm";
 import { useTravelEntries } from "@/hooks/useTravelEntries";
 import { useToast } from "@/hooks/use-toast";
 import { claimTravelSpot } from "@/services/travelEntryService";
+
 const Index = () => {
   const entries = useTravelEntries();
-  const {
-    toast
-  } = useToast();
+  const { toast } = useToast();
+
   const handleClaimSpot = async (id: string, name: string) => {
     const entry = entries.find(e => e.id === id);
     if (!entry) return;
-    const {
-      error
-    } = await claimTravelSpot(entry, name);
+    const { error } = await claimTravelSpot(entry, name);
     if (error) {
       console.error('Error updating entry:', error);
       toast({
@@ -29,18 +28,20 @@ const Index = () => {
       description: `${name} has successfully claimed a spot.`
     });
   };
+
   return <div className="product-hunt-container">
-      <div className="product-hunt-header">
+      <div>
         <PageHeader />
       </div>
       <div className="py-8 space-y-8">
         <TravelForm />
         <div className="relative">
-          <div className="product-hunt-card p-6 bg-gray-50 px-0 py-0">
+          <div className="product-hunt-card px-0 py-0">
             <TravelTable entries={entries} onClaimSpot={handleClaimSpot} />
           </div>
         </div>
       </div>
     </div>;
 };
+
 export default Index;

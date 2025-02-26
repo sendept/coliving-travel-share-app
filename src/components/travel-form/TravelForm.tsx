@@ -3,7 +3,6 @@ import { ChatInput } from "@/components/ChatInput";
 import { parseMessage } from "@/lib/parser";
 import { useToast } from "@/hooks/use-toast";
 import { createTravelEntry } from "@/services/travelEntryService";
-import { PageSubtitle } from "@/components/PageSubtitle";
 
 interface TravelFormProps {
   projectId?: string | null;
@@ -55,19 +54,7 @@ export const TravelForm = ({ projectId }: TravelFormProps) => {
   };
 
   return (
-    <div className="product-hunt-card p-6 max-w-2xl mx-auto">
-      <div className="space-y-2">
-        <h2 className="text-xl font-semibold mb-1 text-gray-900">
-          Share Your Travel Plan
-        </h2>
-        <PageSubtitle
-          position="top"
-          fontSize="medium"
-          preset="elegant"
-        >
-          Comparte tu plan de viaje
-        </PageSubtitle>
-      </div>
+    <div className="bg-white rounded-lg shadow-sm max-w-2xl mx-auto">
       <ChatInput onSubmit={handleSubmit} />
     </div>
   );
