@@ -1,3 +1,4 @@
+
 import { useState } from "react";
 import { Table, TableBody, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { useToast } from "@/hooks/use-toast";
@@ -75,7 +76,7 @@ export const TravelTable = ({
                   </TableHead>
                   <TableHead className="w-[120px] text-center align-middle py-0 my-0 border-r">
                     <div className="text-sm">Plazas</div>
-                    <div className="text-[10px]">Available Spots</div>
+                    <div className="text-[10px] whitespace-nowrap">Available Spots</div>
                   </TableHead>
                   <TableHead className="min-w-[400px] text-center align-middle border-r">
                     <div className="text-sm">Ruta</div>
