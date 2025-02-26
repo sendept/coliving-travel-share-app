@@ -5,6 +5,7 @@ import { useToast } from "@/hooks/use-toast";
 import { supabase } from "@/integrations/supabase/client";
 import { TravelTableRow } from "./TravelTableRow";
 import { getTranslation } from "@/lib/translations";
+import { ChevronRight } from "lucide-react";
 import type { TravelEntry, TravelTableProps } from "./types";
 
 export type { TravelEntry } from "./types";
@@ -54,9 +55,12 @@ export const TravelTable = ({
   const language: 'en' | 'es' = entries[0]?.language || 'en';
   return <div className="relative min-h-[calc(100vh-400px)]">
       <div className="bg-[#FBF8F5] p-4 rounded-lg">
-        <div className="text-left mb-2">
-          <p className="text-[9px] text-gray-500">Desliza hacia la derecha para editar o ver tu texto</p>
-          <p className="text-[9px] text-gray-500">Scroll to the right to see or edit your text</p>
+        <div className="text-left mb-16 flex items-center">
+          <div>
+            <p className="text-[9px] text-gray-500">Desliza hacia la derecha para editar o ver tu texto</p>
+            <p className="text-[9px] text-gray-500">Scroll to the right to see or edit your text</p>
+          </div>
+          <ChevronRight className="h-4 w-4 ml-2 text-gray-500" />
         </div>
         <div className="overflow-x-auto overflow-y-auto scrollbar-visible" style={{
           scrollbarWidth: 'thin',
@@ -66,19 +70,35 @@ export const TravelTable = ({
           <div style={{ transform: 'rotateX(180deg)' }}>
             <Table>
               <TableHeader>
-                <TableRow className="border-none bg-[#FFE4D0]">
-                  <TableHead className="w-[150px] text-center align-middle">{getTranslation('name', language)}</TableHead>
-                  <TableHead className="w-[120px] text-center align-middle py-0 my-0">
-                    <div className="text-center">
-                      <div className="text-foreground">Plazas</div>
-                      <div className="whitespace-nowrap">Available Spots</div>
-                    </div>
+                <TableRow className="border-none bg-[#FBF8F5]">
+                  <TableHead className="w-[150px] text-center align-middle border-r">
+                    <div className="text-sm">Nombre</div>
+                    <div className="text-[10px]">Name</div>
                   </TableHead>
-                  <TableHead className="min-w-[400px] text-center align-middle">{getTranslation('route', language)}</TableHead>
-                  <TableHead className="w-[120px] text-center align-middle">{getTranslation('transport', language)}</TableHead>
-                  <TableHead className="w-[150px] text-center align-middle">{getTranslation('contact', language)}</TableHead>
-                  <TableHead className="w-[200px] text-center align-middle">{getTranslation('claimedBy', language)}</TableHead>
-                  <TableHead className="w-[150px] text-center align-middle">{getTranslation('diet', language)}</TableHead>
+                  <TableHead className="w-[120px] text-center align-middle py-0 my-0 border-r">
+                    <div className="text-sm">Plazas</div>
+                    <div className="text-[10px]">Available Spots</div>
+                  </TableHead>
+                  <TableHead className="min-w-[400px] text-center align-middle border-r">
+                    <div className="text-sm">Ruta</div>
+                    <div className="text-[10px]">Route</div>
+                  </TableHead>
+                  <TableHead className="w-[120px] text-center align-middle border-r">
+                    <div className="text-sm">Transporte</div>
+                    <div className="text-[10px]">Transport</div>
+                  </TableHead>
+                  <TableHead className="w-[150px] text-center align-middle border-r">
+                    <div className="text-sm">Contacto</div>
+                    <div className="text-[10px]">Contact</div>
+                  </TableHead>
+                  <TableHead className="w-[200px] text-center align-middle border-r">
+                    <div className="text-sm">Confirmados</div>
+                    <div className="text-[10px]">Claimed By</div>
+                  </TableHead>
+                  <TableHead className="w-[150px] text-center align-middle border-r">
+                    <div className="text-sm">Dieta</div>
+                    <div className="text-[10px]">Diet</div>
+                  </TableHead>
                   <TableHead className="w-[100px]"></TableHead>
                 </TableRow>
               </TableHeader>

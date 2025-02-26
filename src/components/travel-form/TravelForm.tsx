@@ -54,7 +54,7 @@ export const TravelForm = ({ projectId }: TravelFormProps) => {
   };
 
   return (
-    <div className="bg-white rounded-lg shadow-sm max-w-2xl mx-auto">
+    <div className="bg-[#FFFFFF] max-w-2xl mx-auto">
       <ChatInput onSubmit={handleSubmit} />
     </div>
   );
