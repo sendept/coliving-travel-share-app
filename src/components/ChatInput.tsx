@@ -70,17 +70,17 @@ export const ChatInput = ({
               <p className="text-base md:text-base text-[11px] text-left font-normal py-px my-0 flex items-start">
                 {helpText.main}
               </p>
-              {/* Show the subtitle help text only on desktop for Spanish or always for English */}
-              {(language === "en" || window.innerWidth >= 768) && (
+              {/* Show the subtitle help text only on desktop for both languages */}
+              {window.innerWidth >= 768 && (
                 <p className="text-[9px] font-normal my-0 text-left px-0 py-[6px] sm:text-[9px] text-[8px]">
                   {helpText.sub}
                 </p>
               )}
             </>
           )}
-          {/* Add blinking cursor when empty */}
+          {/* Add blinking cursor when empty - positioned with text spacing */}
           {!message && (
-            <div className="absolute top-[40px] left-[40px] h-[14px] w-[1px] bg-gray-500 animate-pulse"></div>
+            <div className="absolute top-[40px] left-[40px] ml-[calc(100%-4px)] h-[14px] w-[1px] bg-gray-500 animate-pulse"></div>
           )}
         </div>
       </div>
