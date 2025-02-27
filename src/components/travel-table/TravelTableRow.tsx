@@ -59,6 +59,11 @@ export const TravelTableRow = ({
       const claimedByContent = Array.isArray(entry[field]) && entry[field].length > 0 ? entry[field].join(", ") : "-";
       return <div>
           <div className="whitespace-pre-line mb-2">{claimedByContent}</div>
+          <div className="mb-2">
+            <span className="font-medium">{entry.available_spots} {entry.available_spots === 1 ? 'Plaza' : 'Plazas'}</span>
+            <br/>
+            <span className="text-xs text-gray-500">{entry.available_spots} spots available</span>
+          </div>
           {entry.available_spots > 0 && <ClaimForm entry={entry} onClaim={onClaimSpot} />}
         </div>;
     }
@@ -94,7 +99,6 @@ export const TravelTableRow = ({
       <TableCell className="border-r">
         {renderCell("claimed_by")}
       </TableCell>
-      <TableCell className="border-r">{renderCell("available_spots")}</TableCell>
       <TableCell className="whitespace-pre-line py-4 border-r">
         {renderCell("route")}
       </TableCell>

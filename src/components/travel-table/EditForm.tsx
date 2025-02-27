@@ -1,82 +1,78 @@
 
 import { Input } from "@/components/ui/input";
-import type { TravelEntry } from "./types";
 import { Textarea } from "@/components/ui/textarea";
+import type { TravelEntry } from "./types";
 
 interface EditFormProps {
   entry: TravelEntry;
   editForm: Partial<TravelEntry>;
   setEditForm: (form: Partial<TravelEntry>) => void;
-  field: keyof TravelEntry;  // This type already includes all possible fields from TravelEntry
+  field: keyof TravelEntry;
 }
 
 export const EditForm = ({ entry, editForm, setEditForm, field }: EditFormProps) => {
-  if (field === "taxi_sharing") {
-    return (
-      <div className="relative">
-        <select
-          value={editForm[field]?.toString()}
-          onChange={(e) =>
-            setEditForm({ ...editForm, [field]: e.target.value === "true" })
-          }
-          className="w-full p-2 border rounded bg-white"
-        >
-          <option value="true">Yes</option>
-          <option value="false">No</option>
-        </select>
-      </div>
-    );
-  }
+  const handleChange = (value: any) => {
+    setEditForm({ ...editForm, [field]: value });
+  };
 
-  if (field === "language") {
-    return (
-      <div className="relative">
-        <select
-          value={editForm[field] || "en"}
-          onChange={(e) => setEditForm({ ...editForm, [field]: e.target.value as 'en' | 'es' })}
-          className="w-full p-2 border rounded bg-white"
-        >
-          <option value="en">English</option>
-          <option value="es">Spanish</option>
-        </select>
-      </div>
-    );
-  }
+  if (field === 'claimed_by') {
+    // Special handling for editing claimed users
+    const claimedBy = Array.isArray(editForm.claimed_by) ? editForm.claimed_by : entry.claimed_by || [];
+    const claimedByValue = claimedBy.join('\n');
 
-  if (field === "available_spots") {
     return (
-      <div className="relative">
-        <Input
-          type="number"
-          value={editForm[field] || ""}
-          onChange={(e) =>
-            setEditForm({ ...editForm, [field]: parseInt(e.target.value) })
-          }
-          className="w-20 bg-white"
-        />
-      </div>
-    );
-  }
-
-  if (field === "dietary_restrictions" || field === "route") {
-    return (
-      <div className="relative">
+      <div className="space-y-2">
         <Textarea
-          value={editForm[field]?.toString() || ""}
-          onChange={(e) => setEditForm({ ...editForm, [field]: e.target.value })}
-          className={`${field === "route" ? "w-full min-w-[400px]" : "w-full"} bg-white rounded-lg`}
+          value={claimedByValue}
+          onChange={(e) => {
+            const newClaimedBy = e.target.value
+              .split('\n')
+              .map(line => line.trim())
+              .filter(line => line !== '');
+            handleChange(newClaimedBy);
+          }}
+          className="min-h-[80px]"
+          placeholder="Enter claimed users (one per line)"
         />
+        <div className="flex items-center gap-2">
+          <label htmlFor="available-spots" className="text-xs whitespace-nowrap">
+            Available Spots:
+          </label>
+          <Input
+            id="available-spots"
+            type="number"
+            value={editForm.available_spots !== undefined ? editForm.available_spots : entry.available_spots}
+            onChange={(e) => setEditForm({ ...editForm, available_spots: parseInt(e.target.value) || 0 })}
+            className="w-16 h-6 py-1 px-2 text-xs"
+            min="0"
+          />
+        </div>
       </div>
+    );
+  }
+
+  if (field === 'route' || field === 'dietary_restrictions') {
+    return (
+      <Textarea
+        value={editForm[field] !== undefined ? String(editForm[field]) : String(entry[field] || '')}
+        onChange={(e) => handleChange(e.target.value)}
+        className="min-h-[80px]"
+      />
     );
   }
 
   return (
-    <div className="relative">
-      <Input
-        value={editForm[field]?.toString() || ""}
-        onChange={(e) => setEditForm({ ...editForm, [field]: e.target.value })}
-        className="w-full bg-white rounded-lg"
-      />
-    </div>
+    <Input
+      value={editForm[field] !== undefined ? String(editForm[field]) : String(entry[field] || '')}
+      onChange={(e) => {
+        let value: any = e.target.value;
+        if (field === 'available_spots') {
+          value = parseInt(value) || 0;
+        }
+        handleChange(value);
+      }}
+      type={field === 'available_spots' ? 'number' : 'text'}
+      min={field === 'available_spots' ? 0 : undefined}
+    />
   );
 };
