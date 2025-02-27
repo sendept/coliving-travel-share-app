@@ -117,7 +117,12 @@ export const TravelTable = ({
         </div>
         {/* Vertical bug report link */}
         <div className="absolute bottom-4 right-1 origin-bottom-right rotate-90 transform">
-          <a href="https://airtable.com/appSEq5rTb2wminZh/shrevCpLAyaJQJXS5" target="_blank" rel="noopener noreferrer" className="text-[9px] text-gray-500 hover:text-gray-700 underline whitespace-nowrap px-0 py-0 mx-[10px] my-0">
+          <a 
+            href="https://airtable.com/appSEq5rTb2wminZh/shrevCpLAyaJQJXS5" 
+            target="_blank" 
+            rel="noopener noreferrer" 
+            className="text-[9px] text-gray-500 hover:text-gray-700 underline whitespace-nowrap px-0 py-0 mx-[10px] my-0 block mt-4"
+          >
             Report a bug or suggest changes
           </a>
         </div>
