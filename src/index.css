@@ -105,6 +105,20 @@
   scrollbar-width: none;
 }
 
+/* Responsive table styles */
+@media (min-width: 768px) {
+  .responsive-table table {
+    width: 100%;
+    table-layout: fixed;
+  }
+
+  /* Make the table fit on large screens without horizontal scrolling */
+  .product-hunt-card {
+    max-width: 100%;
+    overflow-x: visible;
+  }
+}
+
 /* Mobile-first table styles */
 @media (max-width: 767px) {
   .responsive-table {

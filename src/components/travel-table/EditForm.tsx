@@ -22,6 +22,15 @@ export const EditForm = ({ entry, editForm, setEditForm, field }: EditFormProps)
 
     return (
       <div className="space-y-2">
+        <div className="mb-2">
+          <label htmlFor="name-input" className="text-xs">Driver/Organizer Name:</label>
+          <Input
+            id="name-input"
+            value={editForm.name !== undefined ? editForm.name : entry.name}
+            onChange={(e) => setEditForm({ ...editForm, name: e.target.value })}
+            className="mt-1"
+          />
+        </div>
         <Textarea
           value={claimedByValue}
           onChange={(e) => {

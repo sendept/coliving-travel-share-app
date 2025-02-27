@@ -51,7 +51,7 @@ export const TravelTable = ({
   const language: 'en' | 'es' = entries[0]?.language || 'en';
   return <div className="relative min-h-[calc(100vh-400px)]">
       <div className="bg-[#F5F5F5] p-4 rounded-lg">
-        <div className="text-left mb-16 flex items-center">
+        <div className="text-left mb-16 md:hidden flex items-center">
           <div>
             <p className="text-[9px] text-gray-500">Desliza hacia la derecha para editar o ver tu texto</p>
             <p className="text-[9px] text-gray-500">Scroll to the right to see or edit your text</p>
@@ -60,7 +60,7 @@ export const TravelTable = ({
             <img src="/lovable-uploads/0347ed37-e470-46cd-a263-99763613105a.png" alt="Scroll" className="h-8 w-8 object-contain" />
           </div>
         </div>
-        <div className="overflow-x-auto overflow-y-auto scrollbar-visible" style={{
+        <div className="md:overflow-visible overflow-x-auto overflow-y-auto scrollbar-visible" style={{
         scrollbarWidth: 'thin',
         scrollbarColor: '#888 #F5F5F5',
         transform: 'rotateX(180deg)'
@@ -68,7 +68,7 @@ export const TravelTable = ({
           <div style={{
           transform: 'rotateX(180deg)'
         }}>
-            <Table>
+            <Table className="w-full">
               <TableHeader>
                 <TableRow className="border-none bg-[#F5F5F5]">
                   <TableHead className="w-[80px] text-center align-middle border-r">
@@ -79,7 +79,7 @@ export const TravelTable = ({
                     <div className="text-sm">Únete</div>
                     <div className="text-[10px]">Join ride</div>
                   </TableHead>
-                  <TableHead className="min-w-[400px] text-center align-middle border-r">
+                  <TableHead className="min-w-[400px] max-w-[500px] text-center align-middle border-r">
                     <div className="text-sm">Ruta</div>
                     <div className="text-[10px]">Route</div>
                   </TableHead>
