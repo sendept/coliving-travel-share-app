@@ -6,15 +6,18 @@ export interface ParsedTravel {
   transport: string;
   taxiSharing: boolean;
   contact: string;
-  dietary_restrictions?: string;
   language: 'en' | 'es' | 'fr';
+  dietary_restrictions?: string;
+  date_time?: string;
 }
 
 export interface PatternSet {
   name: RegExp;
   spots: RegExp;
-  route: RegExp;
+  from: RegExp;
+  to: RegExp;
+  via: RegExp;
   taxi: RegExp;
-  dietary: RegExp;
   contact: RegExp;
+  dietary: RegExp;
 }

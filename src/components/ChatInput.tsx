@@ -13,6 +13,7 @@ export const ChatInput = ({
   onSubmit
 }: ChatInputProps) => {
   const [message, setMessage] = useState("");
+  const [language, setLanguage] = useState<"en" | "es">("es");
   const {
     toast
   } = useToast();
@@ -35,21 +36,63 @@ export const ChatInput = ({
     setMessage("");
   };
 
+  const toggleLanguage = () => {
+    setLanguage(prev => prev === "en" ? "es" : "en");
+  };
+
+  const getHelpText = () => {
+    if (language === "es") {
+      return {
+        main: "Escribe tu ruta aquí: (Yo soy María y viajo desde Santiago hasta Lisboa. Voy a parar en Vigo. Tengo 3 plazas libres. Mi contacto: 123456789)",
+        sub: "Share your travel plans here (e.g. I am Fabrizio, and I want to share a taxi from Porto airport to Sende. There are 3 more spots in the car. My contact is 123456789)"
+      };
+    } else {
+      return {
+        main: "Write your route here: (I am John and I'm traveling from Lisbon to Santiago. I'll stop in Porto. I have 2 seats available. My contact: 987654321)",
+        sub: "Comparte tu plan de viaje aquí (p.ej. Soy Fabrizio, y quiero compartir un taxi desde el aeropuerto de Porto a Sende. Hay 3 plazas más en el coche. Mi contacto es 123456789)"
+      };
+    }
+  };
+
+  const helpText = getHelpText();
+
   return <form onSubmit={handleSubmit} className="relative mt-5">
-      <Textarea 
-        value={message} 
-        onChange={handleMessageChange} 
-        placeholder="" 
-        className="min-h-[156px] pr-12 resize-none border-0 bg-[#FFFFFF] rounded-none pt-[40px] pl-[40px]" 
-      />
-      <div className="absolute top-4 left-4 text-gray-500 pointer-events-none">
-        <p className="text-base mt-4 text-left mx-[15px] font-normal py-px my-0">
-          <span className="mr-2 inline-block w-[1px] h-[14px] bg-gray-500 animate-pulse"></span>Escribe tu ruta aquí: (Yo soy María y viajo desde Santiago hasta Lisboa. 
-Voy a parar en Vigo. Tengo 3 plazas libres. Mi contacto: 123456789)</p>
-        <p className="text-[9px] font-normal mx-[16px] my-0 text-left px-0 py-[6px] sm:text-[9px] text-[8px]">Share your travel plans here (e.g. I am Fabrizio, and I want to share a taxi from Porto airport to Sende. 
-There are 3 more spots in the car. My contact is 123456789)</p>
+      <div className="relative">
+        <Textarea 
+          value={message} 
+          onChange={handleMessageChange} 
+          placeholder="" 
+          className="min-h-[156px] pr-12 resize-none border-0 bg-[#FFFFFF] rounded-none pt-[40px] pl-[40px] focus:ring-0 focus:outline-none" 
+        />
+        <div className="absolute text-gray-500 w-full h-full top-0 left-0 flex flex-col justify-start px-[40px] pt-[40px] pointer-events-none">
+          {!message && (
+            <>
+              <p className="text-base text-left font-normal py-px my-0 flex items-start">
+                {helpText.main}
+              </p>
+              <p className="text-[9px] font-normal my-0 text-left px-0 py-[6px] sm:text-[9px] text-[8px]">
+                {helpText.sub}
+              </p>
+            </>
+          )}
+          {/* Add blinking cursor when empty */}
+          {!message && (
+            <div className="absolute top-[40px] left-[40px] h-[14px] w-[1px] bg-gray-500 animate-pulse"></div>
+          )}
+        </div>
       </div>
-      <div className="absolute bottom-2 right-2">
+      <div className="absolute bottom-2 right-2 flex items-center">
+        <div className="mr-3 text-xs">
+          <button 
+            type="button"
+            onClick={toggleLanguage} 
+            className="text-gray-500 hover:text-gray-700 focus:outline-none"
+          >
+            <span className={language === "en" ? "font-bold" : "font-normal"}>EN</span>
+            {" / "}
+            <span className={language === "es" ? "font-bold" : "font-normal"}>ES</span>
+          </button>
+        </div>
         <Button type="submit" className="p-0 m-0 h-auto w-auto bg-transparent hover:bg-transparent">
           <img src="/lovable-uploads/7c201b73-452d-4ae2-91c1-a85e6b1acd23.png" alt="Send" className="w-6 h-6" />
         </Button>

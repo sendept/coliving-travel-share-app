@@ -123,6 +123,14 @@ export const parseMessage = (message: string): ParsedTravel | null => {
       }
     }
 
+    // Extract date and time information if available
+    const dateTimeMatch = message.match(/(\d{1,2}\/\d{1,2}\/\d{2,4}|\d{1,2}-\d{1,2}-\d{2,4}|\d{1,2}\.\d{1,2}\.\d{2,4})(?:\s+at\s+|\s+a\s+las\s+)?(\d{1,2}:\d{2}(?:\s*[ap]m)?)?/i);
+    let date_time = "";
+    
+    if (dateTimeMatch) {
+      date_time = dateTimeMatch[0];
+    }
+
     console.log("Parsed travel data:", {
       name,
       availableSpots,
@@ -131,7 +139,8 @@ export const parseMessage = (message: string): ParsedTravel | null => {
       taxiSharing,
       contact,
       language,
-      dietary_restrictions
+      dietary_restrictions,
+      date_time
     });
 
     return {
@@ -142,7 +151,8 @@ export const parseMessage = (message: string): ParsedTravel | null => {
       taxiSharing,
       contact,
       language,
-      dietary_restrictions
+      dietary_restrictions,
+      date_time
     };
   } catch (error) {
     console.error("Error parsing message:", error);
