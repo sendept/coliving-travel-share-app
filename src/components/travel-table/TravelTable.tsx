@@ -57,7 +57,7 @@ export const TravelTable = ({
             <p className="text-[9px] text-gray-500">Scroll to the right to see or edit your text</p>
           </div>
           <div className="flex items-center ml-2">
-            <img src="/lovable-uploads/0347ed37-e470-46cd-a263-99763613105a.png" alt="Scroll" className="h-6 w-6 object-contain" />
+            <img src="/lovable-uploads/0347ed37-e470-46cd-a263-99763613105a.png" alt="Scroll" className="h-8 w-8 object-contain" />
           </div>
         </div>
         <div className="overflow-x-auto overflow-y-auto scrollbar-visible" style={{
@@ -75,7 +75,7 @@ export const TravelTable = ({
                     <div className="text-sm">Editar</div>
                     <div className="text-[10px]">Edit</div>
                   </TableHead>
-                  <TableHead className="w-[200px] text-center align-middle border-r">
+                  <TableHead className="w-[240px] text-center align-middle border-r">
                     <div className="text-sm">Únete</div>
                     <div className="text-[10px]">Join ride</div>
                   </TableHead>
@@ -98,10 +98,6 @@ export const TravelTable = ({
                   <TableHead className="w-[150px] text-center align-middle border-r">
                     <div className="text-sm">Dieta</div>
                     <div className="text-[10px]">Diet</div>
-                  </TableHead>
-                  <TableHead className="w-[150px] text-center align-middle border-r">
-                    <div className="text-sm">Nombre</div>
-                    <div className="text-[10px]">Name</div>
                   </TableHead>
                 </TableRow>
               </TableHeader>

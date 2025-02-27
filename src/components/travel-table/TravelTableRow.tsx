@@ -58,13 +58,21 @@ export const TravelTableRow = ({
     if (field === "claimed_by") {
       const claimedByContent = Array.isArray(entry[field]) && entry[field].length > 0 ? entry[field].join(", ") : "-";
       return <div>
-          <div className="whitespace-pre-line mb-2">{claimedByContent}</div>
+          <div className="mb-2">
+            <span className="font-medium text-black">{entry.name}</span> {/* Driver name in black */}
+            {claimedByContent !== "-" && (
+              <div className="text-gray-600">+ {claimedByContent}</div> /* Co-travelers in gray */
+            )}
+          </div>
           <div className="mb-2">
             <span className="text-xs text-gray-500">{entry.available_spots} {entry.available_spots === 1 ? 'Plaza' : 'Plazas'}</span>
             <br/>
             <span className="text-xs text-gray-500">{entry.available_spots} spots available</span>
           </div>
-          {entry.available_spots > 0 && <ClaimForm entry={entry} onClaim={onClaimSpot} />}
+          {entry.available_spots > 0 && <div>
+            <ClaimForm entry={entry} onClaim={onClaimSpot} />
+            <div className="text-[9px] text-gray-500 mt-1">unete/join as co-traveller</div>
+          </div>}
         </div>;
     }
     if (field === "transport") {
@@ -107,9 +115,6 @@ export const TravelTableRow = ({
       <TableCell className="border-r">{renderCell("contact")}</TableCell>
       <TableCell className="whitespace-pre-line border-r">
         {renderCell("dietary_restrictions")}
-      </TableCell>
-      <TableCell className="font-medium border-r">
-        {renderCell("name")}
       </TableCell>
     </TableRow>;
 };

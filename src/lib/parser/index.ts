@@ -49,6 +49,12 @@ const convertWrittenToNumber = (text: string): number => {
   return numberMap[cleanText] || parseInt(cleanText);
 };
 
+// List of common greetings to filter out from name detection
+const commonGreetings = [
+  'hi', 'hola', 'hello', 'hey', 'bonjour', 'oi', 'buenos dias', 'buenas', 
+  'good morning', 'good afternoon', 'good evening', 'saludos', 'greetings'
+];
+
 export const parseMessage = (message: string): ParsedTravel | null => {
   try {
     const language = detectLanguage(message);
@@ -67,9 +73,24 @@ export const parseMessage = (message: string): ParsedTravel | null => {
     
     // Extract name
     const nameParts = message.match(patterns.name);
-    const name = nameParts 
-      ? (nameParts[1] || nameParts[2] || nameParts[3] || nameParts[4] || nameParts[5])
-      : message.split(/[\s,!.]+/).find(word => /^[A-ZÀ-Ÿ][a-zà-ÿ]+$/.test(word)) || "";
+    let name = "";
+    
+    if (nameParts) {
+      name = (nameParts[1] || nameParts[2] || nameParts[3] || nameParts[4] || nameParts[5]);
+    } else {
+      // Fall back to finding a word with first letter capitalized
+      const words = message.split(/[\s,!.]+/);
+      for (const word of words) {
+        if (/^[A-ZÀ-Ÿ][a-zà-ÿ]+$/.test(word)) {
+          const lowercaseWord = word.toLowerCase();
+          // Check if the word is not a common greeting
+          if (!commonGreetings.includes(lowercaseWord)) {
+            name = word;
+            break;
+          }
+        }
+      }
+    }
     
     if (!name) {
       console.log("Could not find a name in the message");
