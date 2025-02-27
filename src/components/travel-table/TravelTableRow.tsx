@@ -19,23 +19,12 @@ interface TravelTableRowProps {
 }
 
 const getTransportIcon = (transport: string) => {
-  const iconProps = {
-    className: "inline-block mr-2",
-    size: 18
-  };
-  const taxiIconProps = {
-    className: "inline-block mr-2 text-yellow-500",
-    size: 18,
-    strokeWidth: 2
-  };
   const transport_lower = transport.toLowerCase();
-  if (transport_lower.includes('taxi')) return <CarTaxiFront {...taxiIconProps} />;
-  if (transport_lower.includes('plane')) return <Plane {...iconProps} />;
-  if (transport_lower.includes('car')) return <Car {...iconProps} />;
-  if (transport_lower.includes('bike') || transport_lower.includes('bicycle')) return <Bike {...iconProps} />;
-  if (transport_lower.includes('train')) return <Train {...iconProps} />;
-  if (transport_lower.includes('bus') || transport_lower.includes('van')) return <Bus {...iconProps} />;
-  return null;
+  if (transport_lower.includes('taxi') || transport_lower.includes('uber') || transport_lower.includes('bolt')) return "🚖";
+  if (transport_lower.includes('bus') || transport_lower.includes('van')) return "🚌";
+  if (transport_lower.includes('train')) return "🚂";
+  if (transport_lower.includes('car')) return "🚗";
+  return "🚗"; // Default to car if no match
 };
 
 export const TravelTableRow = ({
@@ -59,9 +48,9 @@ export const TravelTableRow = ({
       const claimedByContent = Array.isArray(entry[field]) && entry[field].length > 0 ? entry[field].join(", ") : "-";
       return <div>
           <div className="mb-2">
-            <span className="font-medium text-black">{entry.name}</span> {/* Driver name in black */}
+            <span className="font-medium text-black">{entry.name}</span>
             {claimedByContent !== "-" && (
-              <div className="text-gray-600">+ {claimedByContent}</div> /* Co-travelers in gray */
+              <div className="text-gray-600">+ {claimedByContent}</div>
             )}
           </div>
           <div className="mb-2">
@@ -75,17 +64,13 @@ export const TravelTableRow = ({
           </div>}
         </div>;
     }
-    if (field === "transport") {
-      return <div className="flex items-center">
-          {getTransportIcon(entry[field])}
-          <span className="text-center mx-[40px]">{entry[field]}</span>
-        </div>;
-    }
     if (field === "route") {
-      return <div className="whitespace-pre-line">{entry[field]}</div>;
+      return <div className="whitespace-pre-line">
+        <span className="mr-2">{getTransportIcon(entry.transport)}</span>
+        {entry[field]}
+      </div>;
     }
     if (field === "date_time") {
-      // Format the date if it exists, otherwise return "-"
       return entry[field] ? new Date(entry[field]).toLocaleString() : "-";
     }
     return entry[field];
@@ -111,7 +96,6 @@ export const TravelTableRow = ({
         {renderCell("route")}
       </TableCell>
       <TableCell className="border-r">{renderCell("date_time")}</TableCell>
-      <TableCell className="mx-[90px] border-r">{renderCell("transport")}</TableCell>
       <TableCell className="border-r">{renderCell("contact")}</TableCell>
       <TableCell className="whitespace-pre-line border-r">
         {renderCell("dietary_restrictions")}

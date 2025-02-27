@@ -5,9 +5,9 @@ import { useToast } from "@/hooks/use-toast";
 import { supabase } from "@/integrations/supabase/client";
 import { TravelTableRow } from "./TravelTableRow";
 import { getTranslation } from "@/lib/translations";
-import { ChevronLeft, ChevronRight } from "lucide-react";
 import type { TravelEntry, TravelTableProps } from "./types";
 export type { TravelEntry } from "./types";
+
 export const TravelTable = ({
   entries,
   onClaimSpot
@@ -86,10 +86,6 @@ export const TravelTable = ({
                   <TableHead className="w-[150px] text-center align-middle border-r">
                     <div className="text-sm whitespace-nowrap">Fecha/Hora</div>
                     <div className="text-[10px] whitespace-nowrap">Date/Hour</div>
-                  </TableHead>
-                  <TableHead className="w-[120px] text-center align-middle border-r">
-                    <div className="text-sm">Transporte</div>
-                    <div className="text-[10px]">Transport</div>
                   </TableHead>
                   <TableHead className="w-[150px] text-center align-middle border-r">
                     <div className="text-sm">Contacto</div>
