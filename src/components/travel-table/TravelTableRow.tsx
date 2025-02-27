@@ -75,6 +75,18 @@ export const TravelTableRow = ({
   };
 
   return <TableRow className={className}>
+      <TableCell className="w-[80px]">
+        {isEditing ? <div className="flex space-x-2">
+            <Button variant="ghost" size="icon" onClick={onSaveEdit} className="h-8 w-8">
+              <Check className="h-4 w-4" />
+            </Button>
+            <Button variant="ghost" size="icon" onClick={onCancelEdit} className="h-8 w-8">
+              <X className="h-4 w-4" />
+            </Button>
+          </div> : <Button variant="ghost" size="icon" onClick={() => onStartEdit(entry)} className="h-8 w-8">
+            <Edit2 className="h-4 w-4" />
+          </Button>}
+      </TableCell>
       <TableCell className="font-medium border-r">
         {renderCell("name")}
       </TableCell>
@@ -89,18 +101,6 @@ export const TravelTableRow = ({
       </TableCell>
       <TableCell className="border-r">
         {isEditing ? <EditForm entry={entry} editForm={editForm} setEditForm={setEditForm} field="dietary_restrictions" /> : entry.dietary_restrictions || "-"}
-      </TableCell>
-      <TableCell className="w-[100px]">
-        {isEditing ? <div className="flex space-x-2">
-            <Button variant="ghost" size="icon" onClick={onSaveEdit} className="h-8 w-8">
-              <Check className="h-4 w-4" />
-            </Button>
-            <Button variant="ghost" size="icon" onClick={onCancelEdit} className="h-8 w-8">
-              <X className="h-4 w-4" />
-            </Button>
-          </div> : <Button variant="ghost" size="icon" onClick={() => onStartEdit(entry)} className="h-8 w-8">
-            <Edit2 className="h-4 w-4" />
-          </Button>}
       </TableCell>
     </TableRow>;
 };

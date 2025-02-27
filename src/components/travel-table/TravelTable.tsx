@@ -74,6 +74,10 @@ export const TravelTable = ({
             <Table>
               <TableHeader>
                 <TableRow className="border-none bg-[#F5F5F5]">
+                  <TableHead className="w-[80px] text-center align-middle border-r">
+                    <div className="text-sm">Editar</div>
+                    <div className="text-[10px]">Edit</div>
+                  </TableHead>
                   <TableHead className="w-[150px] text-center align-middle border-r">
                     <div className="text-sm">Nombre</div>
                     <div className="text-[10px]">Name</div>
@@ -102,7 +106,6 @@ export const TravelTable = ({
                     <div className="text-sm">Dieta</div>
                     <div className="text-[10px]">Diet</div>
                   </TableHead>
-                  <TableHead className="w-[100px]"></TableHead>
                 </TableRow>
               </TableHeader>
               <TableBody>

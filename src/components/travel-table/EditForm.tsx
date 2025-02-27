@@ -1,6 +1,6 @@
 
 import { Input } from "@/components/ui/input";
-import { Pencil } from "lucide-react";
+import { Check } from "lucide-react";
 import type { TravelEntry } from "./types";
 import { Textarea } from "@/components/ui/textarea";
 
@@ -12,9 +12,9 @@ interface EditFormProps {
 }
 
 export const EditForm = ({ entry, editForm, setEditForm, field }: EditFormProps) => {
-  const renderEditIcon = () => (
+  const renderCheckIcon = () => (
     <div className="absolute bottom-1 right-1">
-      <Pencil className="h-3 w-3 text-gray-400" />
+      <Check className="h-3 w-3 text-gray-400" />
     </div>
   );
 
@@ -31,7 +31,7 @@ export const EditForm = ({ entry, editForm, setEditForm, field }: EditFormProps)
           <option value="true">Yes</option>
           <option value="false">No</option>
         </select>
-        {renderEditIcon()}
+        {renderCheckIcon()}
       </div>
     );
   }
@@ -47,7 +47,7 @@ export const EditForm = ({ entry, editForm, setEditForm, field }: EditFormProps)
           <option value="en">English</option>
           <option value="es">Spanish</option>
         </select>
-        {renderEditIcon()}
+        {renderCheckIcon()}
       </div>
     );
   }
@@ -63,7 +63,7 @@ export const EditForm = ({ entry, editForm, setEditForm, field }: EditFormProps)
           }
           className="w-20 bg-white"
         />
-        {renderEditIcon()}
+        {renderCheckIcon()}
       </div>
     );
   }
@@ -76,7 +76,7 @@ export const EditForm = ({ entry, editForm, setEditForm, field }: EditFormProps)
           onChange={(e) => setEditForm({ ...editForm, [field]: e.target.value })}
           className={`${field === "route" ? "w-full min-w-[400px]" : "w-full"} bg-white rounded-lg`}
         />
-        {renderEditIcon()}
+        {renderCheckIcon()}
       </div>
     );
   }
@@ -86,9 +86,9 @@ export const EditForm = ({ entry, editForm, setEditForm, field }: EditFormProps)
       <Input
         value={editForm[field]?.toString() || ""}
         onChange={(e) => setEditForm({ ...editForm, [field]: e.target.value })}
-        className={`${field === "route" ? "w-full min-w-[400px]" : "w-full"} bg-white rounded-lg`}
+        className="w-full bg-white rounded-lg"
       />
-      {renderEditIcon()}
+      {renderCheckIcon()}
     </div>
   );
 };
