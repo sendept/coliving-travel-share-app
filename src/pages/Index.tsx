@@ -1,4 +1,3 @@
-
 import { TravelTable } from "@/components/travel-table/TravelTable";
 import { PageHeader } from "@/components/PageHeader";
 import { TravelForm } from "@/components/travel-form/TravelForm";
@@ -6,15 +5,17 @@ import { useTravelEntries } from "@/hooks/useTravelEntries";
 import { useToast } from "@/hooks/use-toast";
 import { claimTravelSpot } from "@/services/travelEntryService";
 import { ChevronDown } from "lucide-react";
-
 const Index = () => {
   const entries = useTravelEntries();
-  const { toast } = useToast();
-
+  const {
+    toast
+  } = useToast();
   const handleClaimSpot = async (id: string, name: string) => {
     const entry = entries.find(e => e.id === id);
     if (!entry) return;
-    const { error } = await claimTravelSpot(entry, name);
+    const {
+      error
+    } = await claimTravelSpot(entry, name);
     if (error) {
       console.error('Error updating entry:', error);
       toast({
@@ -29,7 +30,6 @@ const Index = () => {
       description: `${name} has successfully claimed a spot.`
     });
   };
-
   return <div className="product-hunt-container relative pb-20">
       <div>
         <PageHeader />
@@ -39,7 +39,7 @@ const Index = () => {
         <div className="relative">
           <div className="text-center my-4">
             <div className="mt-4 mb-5 text-sm text-gray-500 flex items-center justify-center gap-2 font-medium">
-              <span>See other shared rides / Ver otros viajes compartidos</span>
+              <span className="py-px my-[9px]">See other shared rides / Ver otros viajes compartidos</span>
               <ChevronDown className="h-4 w-4" />
             </div>
           </div>
@@ -49,12 +49,7 @@ const Index = () => {
         </div>
       </div>
       <div className="absolute bottom-0 right-4 text-[9px] text-gray-500 pb-2">
-        <a 
-          href="https://airtable.com/appSEq5rTb2wminZh/shrevCpLAyaJQJXS5" 
-          target="_blank" 
-          rel="noopener noreferrer"
-          className="text-gray-500 hover:text-gray-700 underline"
-        >
+        <a href="https://airtable.com/appSEq5rTb2wminZh/shrevCpLAyaJQJXS5" target="_blank" rel="noopener noreferrer" className="text-gray-500 hover:text-gray-700 underline">
           Report a bug or suggest changes
         </a>
       </div>
@@ -68,5 +63,4 @@ const Index = () => {
       </footer>
     </div>;
 };
-
 export default Index;
