@@ -68,6 +68,7 @@ export const TravelTableRow = ({
       return <div className="whitespace-pre-line">
         <span className="mr-2">{getTransportIcon(entry.transport)}</span>
         {entry[field]}
+        <div className="text-[9px] text-gray-500 mt-1">ruta completa/complete journey</div>
       </div>;
     }
     if (field === "date_time") {

@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import { useToast } from "@/hooks/use-toast";
 import { parseMessage } from "@/lib/parser";
+import { detectLanguage } from "@/lib/parser/languageDetector";
 
 interface ChatInputProps {
   onSubmit: (message: string, language: "en" | "es") => void;
@@ -20,6 +21,14 @@ export const ChatInput = ({
 
   const handleMessageChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     setMessage(e.target.value);
+    
+    // Auto-detect language as user types (if enough text)
+    if (e.target.value.length > 5) {
+      const detectedLanguage = detectLanguage(e.target.value);
+      if (detectedLanguage === 'es' || detectedLanguage === 'en') {
+        setLanguage(detectedLanguage);
+      }
+    }
   };
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -32,7 +41,15 @@ export const ChatInput = ({
       });
       return;
     }
-    onSubmit(message, language);
+    
+    // Final language check before submission
+    const detectedLanguage = detectLanguage(message);
+    if (detectedLanguage === 'es' || detectedLanguage === 'en') {
+      onSubmit(message, detectedLanguage);
+    } else {
+      onSubmit(message, language);
+    }
+    
     setMessage("");
   };
 
@@ -41,7 +58,13 @@ export const ChatInput = ({
     if (e.key === 'Enter' && !e.shiftKey) {
       e.preventDefault(); // Prevent default behavior (newline)
       if (message.trim()) {
-        onSubmit(message, language);
+        // Final language check before submission
+        const detectedLanguage = detectLanguage(message);
+        if (detectedLanguage === 'es' || detectedLanguage === 'en') {
+          onSubmit(message, detectedLanguage);
+        } else {
+          onSubmit(message, language);
+        }
         setMessage("");
       }
     }

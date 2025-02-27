@@ -5,6 +5,7 @@ import { parseMessage } from "@/lib/parser";
 import { useToast } from "@/hooks/use-toast";
 import { createTravelEntry } from "@/services/travelEntryService";
 import { ChevronDown } from "lucide-react";
+import { detectLanguage } from "@/lib/parser/languageDetector";
 
 interface TravelFormProps {
   projectId?: string | null;
@@ -35,9 +36,10 @@ export const TravelForm = ({ projectId }: TravelFormProps) => {
       taxi_sharing: parsed.taxiSharing,
       contact: parsed.contact,
       claimed_by: [],
-      language: parsed.language as 'en' | 'es',
+      language: currentLanguage, // Use the detected language
       project_id: projectId || 'default',
-      dietary_restrictions: parsed.dietary_restrictions || null
+      dietary_restrictions: parsed.dietary_restrictions || null,
+      date_time: parsed.date_time || null
     };
 
     const { error } = await createTravelEntry(newEntry);
