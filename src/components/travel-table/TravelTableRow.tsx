@@ -60,7 +60,7 @@ export const TravelTableRow = ({
       return <div>
           <div className="whitespace-pre-line mb-2">{claimedByContent}</div>
           <div className="mb-2">
-            <span className="font-medium">{entry.available_spots} {entry.available_spots === 1 ? 'Plaza' : 'Plazas'}</span>
+            <span className="text-xs text-gray-500">{entry.available_spots} {entry.available_spots === 1 ? 'Plaza' : 'Plazas'}</span>
             <br/>
             <span className="text-xs text-gray-500">{entry.available_spots} spots available</span>
           </div>

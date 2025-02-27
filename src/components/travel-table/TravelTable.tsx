@@ -57,7 +57,7 @@ export const TravelTable = ({
             <p className="text-[9px] text-gray-500">Scroll to the right to see or edit your text</p>
           </div>
           <div className="flex items-center ml-2">
-            <img src="/lovable-uploads/e2610671-0670-4558-bf9f-f6ff9f960402.png" alt="Scroll" className="h-6 w-6 object-contain" />
+            <img src="/lovable-uploads/0347ed37-e470-46cd-a263-99763613105a.png" alt="Scroll" className="h-6 w-6 object-contain" />
           </div>
         </div>
         <div className="overflow-x-auto overflow-y-auto scrollbar-visible" style={{
