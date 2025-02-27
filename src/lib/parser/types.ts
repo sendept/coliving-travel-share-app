@@ -14,6 +14,7 @@ export interface ParsedTravel {
 export interface PatternSet {
   name: RegExp;
   spots: RegExp;
+  route: RegExp; // Added the route property
   from: RegExp;
   to: RegExp;
   via: RegExp;
