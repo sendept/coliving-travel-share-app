@@ -32,18 +32,22 @@ export const ChatInput = ({ onSubmit }: ChatInputProps) => {
     setMessage("");
   };
 
-  const getPlaceholder = () => {
-    return "Share your travel plans here... / Comparte tus planes de viaje aquí...";
-  };
-
   return (
     <form onSubmit={handleSubmit} className="relative mt-5">
       <Textarea
         value={message}
         onChange={handleMessageChange}
-        placeholder={getPlaceholder()}
-        className="min-h-[140px] pr-12 resize-none border-0 bg-[#FFFFFF] rounded-lg hover:rounded-lg focus:rounded-lg"
+        placeholder=""
+        className="min-h-[140px] pr-12 resize-none border-0 bg-[#FFFFFF] rounded-2xl hover:rounded-2xl focus:rounded-2xl"
       />
+      <div className="absolute top-8 left-4 text-gray-500">
+        <p className="font-medium text-base mt-8">
+          Comparte tus planes de viaje aquí. (Yo soy María y viajo desde Santiago hasta Lisboa. Voy a parar en Vigo. Tengo 3 plazas libres. Mi contacto: 123456789)
+        </p>
+        <p className="text-sm mt-2">
+          Share your travel plans here (e.g. I am Fabrizio, and I want to share a taxi from Porto airport to Sende. There are 3 more spots in the car. My contact is 123456789)
+        </p>
+      </div>
       <div className="absolute bottom-2 right-2">
         <Button 
           type="submit" 
@@ -51,13 +55,13 @@ export const ChatInput = ({ onSubmit }: ChatInputProps) => {
           className="bg-gray-400 hover:bg-gray-500 text-white rounded-full p-2 w-8 h-8 flex items-center justify-center"
         >
           <img 
-            src="/lovable-uploads/ed4b1385-2c2c-4ac5-8dba-315b6b787da1.png" 
+            src="/lovable-uploads/e1013e67-093e-4e89-8c93-cc1efa1ad085.png" 
             alt="Send" 
-            className="w-8 h-8"
+            className="w-6 h-6"
           />
         </Button>
       </div>
-      <div className="mt-3 text-center text-sm text-gray-500 flex items-center justify-center gap-2">
+      <div className="mt-4 text-center text-sm text-gray-500 flex items-center justify-center gap-2 font-medium">
         <span>See other shared rides / Ver otros viajes compartidos</span>
         <ChevronDown className="h-4 w-4" />
       </div>

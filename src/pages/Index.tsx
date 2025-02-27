@@ -29,7 +29,7 @@ const Index = () => {
     });
   };
 
-  return <div className="product-hunt-container">
+  return <div className="product-hunt-container relative pb-20">
       <div>
         <PageHeader />
       </div>
@@ -40,6 +40,16 @@ const Index = () => {
             <TravelTable entries={entries} onClaimSpot={handleClaimSpot} />
           </div>
         </div>
+      </div>
+      <div className="absolute bottom-0 right-4 text-sm text-gray-500 pb-2">
+        <a 
+          href="https://airtable.com/appSEq5rTb2wminZh/shrevCpLAyaJQJXS5" 
+          target="_blank" 
+          rel="noopener noreferrer"
+          className="text-gray-500 hover:text-gray-700"
+        >
+          Report a bug or suggest changes
+        </a>
       </div>
     </div>;
 };
