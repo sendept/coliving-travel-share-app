@@ -1,3 +1,4 @@
+
 import { TravelTable } from "@/components/travel-table/TravelTable";
 import { PageHeader } from "@/components/PageHeader";
 import { TravelForm } from "@/components/travel-form/TravelForm";
@@ -5,11 +6,13 @@ import { useTravelEntries } from "@/hooks/useTravelEntries";
 import { useToast } from "@/hooks/use-toast";
 import { claimTravelSpot } from "@/services/travelEntryService";
 import { ChevronDown } from "lucide-react";
+
 const Index = () => {
   const entries = useTravelEntries();
   const {
     toast
   } = useToast();
+
   const handleClaimSpot = async (id: string, name: string) => {
     const entry = entries.find(e => e.id === id);
     if (!entry) return;
@@ -30,6 +33,7 @@ const Index = () => {
       description: `${name} has successfully claimed a spot.`
     });
   };
+
   return <div className="product-hunt-container relative pb-20">
       <div>
         <PageHeader />
@@ -39,7 +43,7 @@ const Index = () => {
         <div className="relative">
           <div className="text-center my-4">
             <div className="mt-4 mb-5 text-sm text-gray-500 flex items-center justify-center gap-2 font-medium">
-              <span className="py-px my-[9px]">See other shared rides / Ver otros viajes compartidos</span>
+              <span className="mt-4 mb-5">See other shared rides / Ver otros viajes compartidos</span>
               <ChevronDown className="h-4 w-4" />
             </div>
           </div>
@@ -63,4 +67,5 @@ const Index = () => {
       </footer>
     </div>;
 };
+
 export default Index;
