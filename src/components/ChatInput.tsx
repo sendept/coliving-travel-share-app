@@ -1,5 +1,5 @@
 
-import { useState } from "react";
+import { useState, KeyboardEvent } from "react";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import { useToast } from "@/hooks/use-toast";
@@ -36,6 +36,18 @@ export const ChatInput = ({
     setMessage("");
   };
 
+  const handleKeyDown = (e: KeyboardEvent<HTMLTextAreaElement>) => {
+    // If Enter is pressed without Shift key, submit the form
+    if (e.key === 'Enter' && !e.shiftKey) {
+      e.preventDefault(); // Prevent default behavior (newline)
+      if (message.trim()) {
+        onSubmit(message, language);
+        setMessage("");
+      }
+    }
+    // If Shift+Enter is pressed, allow default behavior (newline)
+  };
+
   const toggleLanguage = () => {
     setLanguage(prev => prev === "en" ? "es" : "en");
   };
@@ -54,7 +66,8 @@ export const ChatInput = ({
       <div className="relative">
         <Textarea 
           value={message} 
-          onChange={handleMessageChange} 
+          onChange={handleMessageChange}
+          onKeyDown={handleKeyDown}
           placeholder="" 
           className="min-h-[156px] pr-12 resize-none border-0 bg-[#FFFFFF] rounded-none pt-[40px] px-[40px] pb-[40px] focus:ring-0 focus:outline-none" 
         />

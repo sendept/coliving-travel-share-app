@@ -91,21 +91,21 @@ export const TravelTableRow = ({
             <Edit2 className="h-4 w-4" />
           </Button>}
       </TableCell>
-      <TableCell className="font-medium border-r">
-        {renderCell("name")}
+      <TableCell className="border-r">
+        {renderCell("claimed_by")}
       </TableCell>
       <TableCell className="border-r">{renderCell("available_spots")}</TableCell>
-      <TableCell className="border-r">{renderCell("date_time")}</TableCell>
       <TableCell className="whitespace-pre-line py-4 border-r">
         {renderCell("route")}
       </TableCell>
+      <TableCell className="border-r">{renderCell("date_time")}</TableCell>
       <TableCell className="mx-[90px] border-r">{renderCell("transport")}</TableCell>
       <TableCell className="border-r">{renderCell("contact")}</TableCell>
       <TableCell className="whitespace-pre-line border-r">
-        {renderCell("claimed_by")}
+        {renderCell("dietary_restrictions")}
       </TableCell>
-      <TableCell className="border-r">
-        {isEditing ? <EditForm entry={entry} editForm={editForm} setEditForm={setEditForm} field="dietary_restrictions" /> : entry.dietary_restrictions || "-"}
+      <TableCell className="font-medium border-r">
+        {renderCell("name")}
       </TableCell>
     </TableRow>;
 };

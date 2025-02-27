@@ -1,3 +1,4 @@
+
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Check, Edit2 } from "lucide-react";
@@ -24,8 +25,8 @@ export const EditableTitle = ({
       </div>;
   }
   return <div className="relative max-w-[700px] min-w-[350px] mx-auto">
-      <h1 className="font-semibold tracking-tight pr-8 text-2xl">{title}</h1>
-      <Button variant="ghost" size="icon" onClick={onEdit} className="h-8 w-8 absolute right-0 top-1/2 -translate-y-1/2">
+      <h1 className="font-semibold tracking-tight pr-8 text-3xl">{title}</h1>
+      <Button variant="ghost" size="icon" onClick={onEdit} className="h-8 w-8 absolute right-0 top-1/2 -translate-y-1/2 hidden sm:flex">
         <Edit2 className="h-4 w-4" />
       </Button>
     </div>;

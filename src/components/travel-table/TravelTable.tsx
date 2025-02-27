@@ -57,8 +57,7 @@ export const TravelTable = ({
             <p className="text-[9px] text-gray-500">Scroll to the right to see or edit your text</p>
           </div>
           <div className="flex items-center ml-2">
-            <ChevronLeft className="h-4 w-4 text-gray-500" />
-            <ChevronRight className="h-4 w-4 text-gray-500" />
+            <img src="/lovable-uploads/e2610671-0670-4558-bf9f-f6ff9f960402.png" alt="Scroll" className="h-6 w-6" />
           </div>
         </div>
         <div className="overflow-x-auto overflow-y-auto scrollbar-visible" style={{
@@ -76,21 +75,21 @@ export const TravelTable = ({
                     <div className="text-sm">Editar</div>
                     <div className="text-[10px]">Edit</div>
                   </TableHead>
-                  <TableHead className="w-[150px] text-center align-middle border-r">
-                    <div className="text-sm">Nombre</div>
-                    <div className="text-[10px]">Name</div>
+                  <TableHead className="w-[200px] text-center align-middle border-r">
+                    <div className="text-sm">Únete</div>
+                    <div className="text-[10px]">Join ride</div>
                   </TableHead>
                   <TableHead className="w-[120px] text-center align-middle py-0 my-0 border-r">
                     <div className="text-sm">Plazas</div>
                     <div className="text-[10px] whitespace-nowrap">Available Spots</div>
                   </TableHead>
-                  <TableHead className="w-[150px] text-center align-middle border-r">
-                    <div className="text-sm">Fecha/Hora</div>
-                    <div className="text-[10px]">Date/Hour</div>
-                  </TableHead>
                   <TableHead className="min-w-[400px] text-center align-middle border-r">
                     <div className="text-sm">Ruta</div>
                     <div className="text-[10px]">Route</div>
+                  </TableHead>
+                  <TableHead className="w-[150px] text-center align-middle border-r">
+                    <div className="text-sm whitespace-nowrap">Fecha/Hora</div>
+                    <div className="text-[10px] whitespace-nowrap">Date/Hour</div>
                   </TableHead>
                   <TableHead className="w-[120px] text-center align-middle border-r">
                     <div className="text-sm">Transporte</div>
@@ -100,13 +99,13 @@ export const TravelTable = ({
                     <div className="text-sm">Contacto</div>
                     <div className="text-[10px]">Contact</div>
                   </TableHead>
-                  <TableHead className="w-[200px] text-center align-middle border-r">
-                    <div className="text-sm">Únete</div>
-                    <div className="text-[10px]">Join</div>
-                  </TableHead>
                   <TableHead className="w-[150px] text-center align-middle border-r">
                     <div className="text-sm">Dieta</div>
                     <div className="text-[10px]">Diet</div>
+                  </TableHead>
+                  <TableHead className="w-[150px] text-center align-middle border-r">
+                    <div className="text-sm">Nombre</div>
+                    <div className="text-[10px]">Name</div>
                   </TableHead>
                 </TableRow>
               </TableHeader>

@@ -41,7 +41,7 @@ const Index = () => {
           <div className="text-center my-4">
             <div className="mt-4 mb-5 text-sm text-gray-500 flex items-center justify-center gap-2 font-medium">
               <span className="mt-4 mb-5">View or join other shared rides / Baja para ver o unirte a otros viajes</span>
-              <ChevronDown className="h-4 w-4" />
+              <img src="/lovable-uploads/71ee60f2-96be-4e68-a606-5bca2bd72699.png" alt="Scroll down" className="h-6 w-6" />
             </div>
           </div>
           <div className="product-hunt-card px-0 py-0">
