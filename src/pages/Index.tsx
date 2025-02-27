@@ -5,6 +5,7 @@ import { TravelForm } from "@/components/travel-form/TravelForm";
 import { useTravelEntries } from "@/hooks/useTravelEntries";
 import { useToast } from "@/hooks/use-toast";
 import { claimTravelSpot } from "@/services/travelEntryService";
+import { ChevronDown } from "lucide-react";
 
 const Index = () => {
   const entries = useTravelEntries();
@@ -36,21 +37,35 @@ const Index = () => {
       <div className="py-8 space-y-8">
         <TravelForm />
         <div className="relative">
+          <div className="text-center my-4">
+            <div className="mt-4 mb-5 text-sm text-gray-500 flex items-center justify-center gap-2 font-medium">
+              <span>See other shared rides / Ver otros viajes compartidos</span>
+              <ChevronDown className="h-4 w-4" />
+            </div>
+          </div>
           <div className="product-hunt-card px-0 py-0">
             <TravelTable entries={entries} onClaimSpot={handleClaimSpot} />
           </div>
         </div>
       </div>
-      <div className="absolute bottom-0 right-4 text-sm text-gray-500 pb-2">
+      <div className="absolute bottom-0 right-4 text-[9px] text-gray-500 pb-2">
         <a 
           href="https://airtable.com/appSEq5rTb2wminZh/shrevCpLAyaJQJXS5" 
           target="_blank" 
           rel="noopener noreferrer"
-          className="text-gray-500 hover:text-gray-700"
+          className="text-gray-500 hover:text-gray-700 underline"
         >
           Report a bug or suggest changes
         </a>
       </div>
+      <footer className="fixed bottom-0 left-0 right-0 text-center text-sm text-muted-foreground py-4 bg-white">
+        <span className="inline-flex items-center gap-1">
+          Feel free to use it. Built by
+          <a href="https://sende.co" target="_blank" rel="noopener noreferrer">
+            <img src="/lovable-uploads/5939e496-5d0c-421e-9294-eb688e353313.png" alt="Sende" className="h-6" />
+          </a>
+        </span>
+      </footer>
     </div>;
 };
 
