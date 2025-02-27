@@ -1,6 +1,5 @@
 
 import { Input } from "@/components/ui/input";
-import { Check } from "lucide-react";
 import type { TravelEntry } from "./types";
 import { Textarea } from "@/components/ui/textarea";
 
@@ -12,12 +11,6 @@ interface EditFormProps {
 }
 
 export const EditForm = ({ entry, editForm, setEditForm, field }: EditFormProps) => {
-  const renderCheckIcon = () => (
-    <div className="absolute bottom-1 right-1">
-      <Check className="h-3 w-3 text-gray-400" />
-    </div>
-  );
-
   if (field === "taxi_sharing") {
     return (
       <div className="relative">
@@ -31,7 +24,6 @@ export const EditForm = ({ entry, editForm, setEditForm, field }: EditFormProps)
           <option value="true">Yes</option>
           <option value="false">No</option>
         </select>
-        {renderCheckIcon()}
       </div>
     );
   }
@@ -47,7 +39,6 @@ export const EditForm = ({ entry, editForm, setEditForm, field }: EditFormProps)
           <option value="en">English</option>
           <option value="es">Spanish</option>
         </select>
-        {renderCheckIcon()}
       </div>
     );
   }
@@ -63,7 +54,6 @@ export const EditForm = ({ entry, editForm, setEditForm, field }: EditFormProps)
           }
           className="w-20 bg-white"
         />
-        {renderCheckIcon()}
       </div>
     );
   }
@@ -76,7 +66,6 @@ export const EditForm = ({ entry, editForm, setEditForm, field }: EditFormProps)
           onChange={(e) => setEditForm({ ...editForm, [field]: e.target.value })}
           className={`${field === "route" ? "w-full min-w-[400px]" : "w-full"} bg-white rounded-lg`}
         />
-        {renderCheckIcon()}
       </div>
     );
   }
@@ -88,7 +77,6 @@ export const EditForm = ({ entry, editForm, setEditForm, field }: EditFormProps)
         onChange={(e) => setEditForm({ ...editForm, [field]: e.target.value })}
         className="w-full bg-white rounded-lg"
       />
-      {renderCheckIcon()}
     </div>
   );
 };

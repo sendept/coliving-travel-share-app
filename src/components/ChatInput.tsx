@@ -1,3 +1,4 @@
+
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
@@ -69,7 +70,8 @@ export const ChatInput = ({
               <p className="text-base md:text-base text-[11px] text-left font-normal py-px my-0 flex items-start mb-[40px]">
                 {helpText.main}
               </p>
-              {window.innerWidth >= 768 && (
+              {/* Only show English translation help text on desktop */}
+              {window.innerWidth >= 768 && language === "en" && (
                 <p className="text-[9px] font-normal my-0 text-left px-0 py-[6px] sm:text-[9px] text-[8px]">
                   {helpText.sub}
                 </p>
