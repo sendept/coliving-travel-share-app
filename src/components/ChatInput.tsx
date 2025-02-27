@@ -62,17 +62,20 @@ export const ChatInput = ({
           value={message} 
           onChange={handleMessageChange} 
           placeholder="" 
-          className="min-h-[156px] pr-12 resize-none border-0 bg-[#FFFFFF] rounded-none pt-[40px] pl-[40px] focus:ring-0 focus:outline-none" 
+          className="min-h-[156px] pr-12 resize-none border-0 bg-[#FFFFFF] rounded-none pt-[40px] px-[40px] pb-[40px] focus:ring-0 focus:outline-none" 
         />
         <div className="absolute text-gray-500 w-full h-full top-0 left-0 flex flex-col justify-start px-[40px] pt-[40px] pointer-events-none">
           {!message && (
             <>
-              <p className="text-base text-left font-normal py-px my-0 flex items-start">
+              <p className="text-base md:text-base text-[11px] text-left font-normal py-px my-0 flex items-start">
                 {helpText.main}
               </p>
-              <p className="text-[9px] font-normal my-0 text-left px-0 py-[6px] sm:text-[9px] text-[8px]">
-                {helpText.sub}
-              </p>
+              {/* Show the subtitle help text only on desktop for Spanish or always for English */}
+              {(language === "en" || window.innerWidth >= 768) && (
+                <p className="text-[9px] font-normal my-0 text-left px-0 py-[6px] sm:text-[9px] text-[8px]">
+                  {helpText.sub}
+                </p>
+              )}
             </>
           )}
           {/* Add blinking cursor when empty */}
