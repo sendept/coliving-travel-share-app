@@ -78,10 +78,6 @@ export const ChatInput = ({
               )}
             </>
           )}
-          {/* Add blinking cursor when empty - positioned with text spacing */}
-          {!message && (
-            <div className="absolute top-[40px] left-[40px] ml-[calc(100%-4px)] h-[14px] w-[1px] bg-gray-500 animate-pulse"></div>
-          )}
         </div>
       </div>
       <div className="absolute bottom-2 right-2 flex items-center">

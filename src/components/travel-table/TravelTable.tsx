@@ -131,6 +131,17 @@ export const TravelTable = ({
             </Table>
           </div>
         </div>
+        {/* Vertical bug report link */}
+        <div className="absolute bottom-4 right-1 origin-bottom-right rotate-90 transform">
+          <a 
+            href="https://airtable.com/appSEq5rTb2wminZh/shrevCpLAyaJQJXS5" 
+            target="_blank" 
+            rel="noopener noreferrer" 
+            className="text-[9px] text-gray-500 hover:text-gray-700 underline whitespace-nowrap"
+          >
+            Report a bug or suggest changes
+          </a>
+        </div>
       </div>
       <footer className="fixed bottom-0 left-0 right-0 text-center text-sm text-muted-foreground py-4 mt-[90px] bg-white">
         <span className="inline-flex items-center">
