@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { Table, TableBody, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { useToast } from "@/hooks/use-toast";
@@ -7,27 +6,24 @@ import { TravelTableRow } from "./TravelTableRow";
 import { getTranslation } from "@/lib/translations";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import type { TravelEntry, TravelTableProps } from "./types";
-
 export type { TravelEntry } from "./types";
-
 export const TravelTable = ({
   entries,
   onClaimSpot
 }: TravelTableProps) => {
   const [editingEntry, setEditingEntry] = useState<string | null>(null);
   const [editForm, setEditForm] = useState<Partial<TravelEntry>>({});
-  const { toast } = useToast();
-
+  const {
+    toast
+  } = useToast();
   const handleStartEdit = (entry: TravelEntry) => {
     setEditingEntry(entry.id);
     setEditForm(entry);
   };
-
   const handleCancelEdit = () => {
     setEditingEntry(null);
     setEditForm({});
   };
-
   const handleSaveEdit = async () => {
     if (!editingEntry || !editForm) return;
     const {
@@ -51,7 +47,6 @@ export const TravelTable = ({
     setEditingEntry(null);
     setEditForm({});
   };
-
   const language: 'en' | 'es' = entries[0]?.language || 'en';
   return <div className="relative min-h-[calc(100vh-400px)]">
       <div className="bg-[#F5F5F5] p-4 rounded-lg">
@@ -66,11 +61,13 @@ export const TravelTable = ({
           </div>
         </div>
         <div className="overflow-x-auto overflow-y-auto scrollbar-visible" style={{
-          scrollbarWidth: 'thin',
-          scrollbarColor: '#888 #F5F5F5',
+        scrollbarWidth: 'thin',
+        scrollbarColor: '#888 #F5F5F5',
+        transform: 'rotateX(180deg)'
+      }}>
+          <div style={{
           transform: 'rotateX(180deg)'
         }}>
-          <div style={{ transform: 'rotateX(180deg)' }}>
             <Table>
               <TableHeader>
                 <TableRow className="border-none bg-[#F5F5F5]">
@@ -113,32 +110,14 @@ export const TravelTable = ({
                 </TableRow>
               </TableHeader>
               <TableBody>
-                {entries.map((entry, index) => (
-                  <TravelTableRow 
-                    key={entry.id} 
-                    entry={entry} 
-                    editingEntry={editingEntry} 
-                    editForm={editForm} 
-                    setEditForm={setEditForm} 
-                    onSaveEdit={handleSaveEdit} 
-                    onCancelEdit={handleCancelEdit} 
-                    onStartEdit={handleStartEdit} 
-                    onClaimSpot={onClaimSpot}
-                    className="bg-[#F5F5F5]"
-                  />
-                ))}
+                {entries.map((entry, index) => <TravelTableRow key={entry.id} entry={entry} editingEntry={editingEntry} editForm={editForm} setEditForm={setEditForm} onSaveEdit={handleSaveEdit} onCancelEdit={handleCancelEdit} onStartEdit={handleStartEdit} onClaimSpot={onClaimSpot} className="bg-[#F5F5F5]" />)}
               </TableBody>
             </Table>
           </div>
         </div>
         {/* Vertical bug report link */}
         <div className="absolute bottom-4 right-1 origin-bottom-right rotate-90 transform">
-          <a 
-            href="https://airtable.com/appSEq5rTb2wminZh/shrevCpLAyaJQJXS5" 
-            target="_blank" 
-            rel="noopener noreferrer" 
-            className="text-[9px] text-gray-500 hover:text-gray-700 underline whitespace-nowrap"
-          >
+          <a href="https://airtable.com/appSEq5rTb2wminZh/shrevCpLAyaJQJXS5" target="_blank" rel="noopener noreferrer" className="text-[9px] text-gray-500 hover:text-gray-700 underline whitespace-nowrap px-0 py-0 mx-[10px] my-0">
             Report a bug or suggest changes
           </a>
         </div>
