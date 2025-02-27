@@ -2,10 +2,10 @@
 export const detectTransport = (message: string): string => {
   // First check for taxi sharing patterns
   const taxiPatterns = [
-    /(?:share|looking\s+for|need).+(?:taxi|cab|ride)/i,  // English
-    /(?:compartir|busco|necesito).+(?:taxi|coche)/i,     // Spanish
-    /(?:partager|cherche).+(?:taxi|voiture)/i,           // French
-    /taxi|cab/i                                          // Generic
+    /(?:share|looking\s+for|need).+(?:taxi|cab|ride|uber|bolt)/i,  // English
+    /(?:compartir|busco|necesito).+(?:taxi|coche|uber|bolt)/i,     // Spanish
+    /(?:partager|cherche).+(?:taxi|voiture|uber|bolt)/i,           // French
+    /taxi|cab|uber|bolt/i                                          // Generic
   ];
 
   const isTaxiSharing = taxiPatterns.some(pattern => pattern.test(message));
