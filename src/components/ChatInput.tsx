@@ -4,7 +4,6 @@ import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import { useToast } from "@/hooks/use-toast";
 import { parseMessage } from "@/lib/parser";
-import { ChevronDown } from "lucide-react";
 
 interface ChatInputProps {
   onSubmit: (message: string) => void;
@@ -37,8 +36,13 @@ export const ChatInput = ({
   };
 
   return <form onSubmit={handleSubmit} className="relative mt-5">
-      <Textarea value={message} onChange={handleMessageChange} placeholder="" className="min-h-[156px] pr-12 resize-none border-0 bg-[#FFFFFF] rounded-none" />
-      <div className="absolute top-4 left-4 text-gray-500">
+      <Textarea 
+        value={message} 
+        onChange={handleMessageChange} 
+        placeholder="" 
+        className="min-h-[156px] pr-12 resize-none border-0 bg-[#FFFFFF] rounded-none pt-[40px] pl-[40px]" 
+      />
+      <div className="absolute top-4 left-4 text-gray-500 pointer-events-none">
         <p className="text-base mt-4 text-left mx-[15px] font-normal py-px my-0">
           <span className="mr-2 inline-block w-[1px] h-[14px] bg-gray-500 animate-pulse"></span>Escribe tu ruta aquí: (Yo soy María y viajo desde Santiago hasta Lisboa. 
 Voy a parar en Vigo. Tengo 3 plazas libres. Mi contacto: 123456789)</p>

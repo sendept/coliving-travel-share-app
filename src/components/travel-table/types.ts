@@ -15,6 +15,7 @@ export interface TravelEntry {
   last_edited_at?: string;
   language: 'en' | 'es';
   project_id: string;
+  date_time?: string;
 }
 
 export interface Project {
