@@ -1,3 +1,4 @@
+
 import { useState } from "react";
 import { Table, TableBody, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { useToast } from "@/hooks/use-toast";
@@ -100,8 +101,8 @@ export const TravelTable = ({
                     <div className="text-[10px]">Contact</div>
                   </TableHead>
                   <TableHead className="w-[200px] text-center align-middle border-r">
-                    <div className="text-sm">Reservar</div>
-                    <div className="text-[10px]">Claim</div>
+                    <div className="text-sm">Únete</div>
+                    <div className="text-[10px]">Join</div>
                   </TableHead>
                   <TableHead className="w-[150px] text-center align-middle border-r">
                     <div className="text-sm">Dieta</div>

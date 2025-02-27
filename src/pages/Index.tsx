@@ -1,3 +1,4 @@
+
 import { TravelTable } from "@/components/travel-table/TravelTable";
 import { PageHeader } from "@/components/PageHeader";
 import { TravelForm } from "@/components/travel-form/TravelForm";
@@ -39,7 +40,7 @@ const Index = () => {
         <div className="relative">
           <div className="text-center my-4">
             <div className="mt-4 mb-5 text-sm text-gray-500 flex items-center justify-center gap-2 font-medium">
-              <span className="mt-4 mb-5">See other shared rides / Ver otros viajes compartidos</span>
+              <span className="mt-4 mb-5">View or join other shared rides / Baja para ver o unirte a otros viajes</span>
               <ChevronDown className="h-4 w-4" />
             </div>
           </div>
