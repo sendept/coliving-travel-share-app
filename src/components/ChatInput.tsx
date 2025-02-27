@@ -1,12 +1,12 @@
 
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import { useToast } from "@/hooks/use-toast";
 import { parseMessage } from "@/lib/parser";
 
 interface ChatInputProps {
-  onSubmit: (message: string) => void;
+  onSubmit: (message: string, language: "en" | "es") => void;
 }
 
 export const ChatInput = ({
@@ -32,7 +32,7 @@ export const ChatInput = ({
       });
       return;
     }
-    onSubmit(message);
+    onSubmit(message, language);
     setMessage("");
   };
 
