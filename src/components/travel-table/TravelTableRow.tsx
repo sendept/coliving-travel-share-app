@@ -71,6 +71,10 @@ export const TravelTableRow = ({
     if (field === "route") {
       return <div className="whitespace-pre-line">{entry[field]}</div>;
     }
+    if (field === "date_time") {
+      // Format the date if it exists, otherwise return "-"
+      return entry[field] ? new Date(entry[field]).toLocaleString() : "-";
+    }
     return entry[field];
   };
 
@@ -91,6 +95,7 @@ export const TravelTableRow = ({
         {renderCell("name")}
       </TableCell>
       <TableCell className="border-r">{renderCell("available_spots")}</TableCell>
+      <TableCell className="border-r">{renderCell("date_time")}</TableCell>
       <TableCell className="whitespace-pre-line py-4 border-r">
         {renderCell("route")}
       </TableCell>

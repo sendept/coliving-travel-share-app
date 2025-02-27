@@ -86,6 +86,10 @@ export const TravelTable = ({
                     <div className="text-sm">Plazas</div>
                     <div className="text-[10px] whitespace-nowrap">Available Spots</div>
                   </TableHead>
+                  <TableHead className="w-[150px] text-center align-middle border-r">
+                    <div className="text-sm">Fecha/Hora</div>
+                    <div className="text-[10px]">Date/Hour</div>
+                  </TableHead>
                   <TableHead className="min-w-[400px] text-center align-middle border-r">
                     <div className="text-sm">Ruta</div>
                     <div className="text-[10px]">Route</div>
