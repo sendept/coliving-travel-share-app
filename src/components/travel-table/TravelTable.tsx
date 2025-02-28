@@ -60,7 +60,7 @@ export const TravelTable = ({
             <img src="/lovable-uploads/0347ed37-e470-46cd-a263-99763613105a.png" alt="Scroll" className="h-8 w-8 object-contain" />
           </div>
         </div>
-        <div className="md:overflow-visible overflow-x-auto overflow-y-auto scrollbar-visible" style={{
+        <div className="lg:overflow-visible overflow-x-auto overflow-y-auto scrollbar-visible" style={{
         scrollbarWidth: 'thin',
         scrollbarColor: '#888 #F5F5F5',
         transform: 'rotateX(180deg)'
@@ -75,23 +75,23 @@ export const TravelTable = ({
                     <div className="text-sm">Editar</div>
                     <div className="text-[10px]">Edit</div>
                   </TableHead>
-                  <TableHead className="w-[240px] text-center align-middle border-r">
+                  <TableHead className="lg:w-[240px] w-[160px] text-center align-middle border-r">
                     <div className="text-sm">Viajar juntos</div>
                     <div className="text-[10px]">Travel together</div>
                   </TableHead>
-                  <TableHead className="min-w-[400px] max-w-[500px] text-center align-middle border-r">
+                  <TableHead className="lg:w-[400px] min-w-[300px] text-center align-middle border-r">
                     <div className="text-sm">Ruta</div>
                     <div className="text-[10px]">Route</div>
                   </TableHead>
-                  <TableHead className="w-[150px] text-center align-middle border-r">
+                  <TableHead className="lg:w-[150px] w-[120px] text-center align-middle border-r">
                     <div className="text-sm whitespace-nowrap">Fecha/Hora</div>
                     <div className="text-[10px] whitespace-nowrap">Date/Hour</div>
                   </TableHead>
-                  <TableHead className="w-[150px] text-center align-middle border-r">
+                  <TableHead className="lg:w-[150px] w-[120px] text-center align-middle border-r">
                     <div className="text-sm">Contacto</div>
                     <div className="text-[10px]">Contact</div>
                   </TableHead>
-                  <TableHead className="w-[150px] text-center align-middle border-r">
+                  <TableHead className="lg:w-[150px] w-[120px] text-center align-middle border-r">
                     <div className="text-sm">Dieta</div>
                     <div className="text-[10px]">Diet</div>
                   </TableHead>

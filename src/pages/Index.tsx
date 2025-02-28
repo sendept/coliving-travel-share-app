@@ -44,7 +44,7 @@ const Index = () => {
               <img src="/lovable-uploads/7b37375b-3bd2-4a96-b1a3-2e2a6a7bcbbb.png" alt="Scroll down" className="h-8 w-8 object-contain" />
             </div>
           </div>
-          <div className="product-hunt-card px-0 py-0">
+          <div className="product-hunt-card px-0 py-0 lg:w-screen lg:max-w-none lg:left-1/2 lg:right-1/2 lg:ml-[-50vw] lg:mr-[-50vw] lg:relative">
             <TravelTable entries={entries} onClaimSpot={handleClaimSpot} />
           </div>
         </div>
