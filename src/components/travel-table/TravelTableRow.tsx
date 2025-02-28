@@ -141,11 +141,11 @@ export const TravelTableRow = ({
             <Edit2 className="h-4 w-4" />
           </Button>}
       </TableCell>
-      <TableCell className="border-r">
-        {renderCell("claimed_by")}
-      </TableCell>
       <TableCell className="whitespace-pre-line py-4 border-r">
         {renderCell("route")}
+      </TableCell>
+      <TableCell className="border-r">
+        {renderCell("claimed_by")}
       </TableCell>
       <TableCell className="border-r">{renderCell("date_time")}</TableCell>
       <TableCell className="border-r">{renderCell("contact")}</TableCell>
