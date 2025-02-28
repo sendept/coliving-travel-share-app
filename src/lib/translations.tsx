@@ -68,6 +68,14 @@ const translations: Translations = {
 };
 
 export const getTranslation = (key: string, lang: 'en' | 'es' | 'fr' = 'en'): string => {
-  const translation = translations[key] || {};
+  // Check if key exists in translations
+  if (!translations[key]) {
+    return key; // Return the key itself as fallback
+  }
+  
+  // Now we can safely access the language-specific translation
+  const translation = translations[key];
+  
+  // Return the translation in the requested language or fall back to English or key
   return translation[lang] || translation.en || key;
 };
