@@ -110,6 +110,22 @@ const extractTaxiServices = (message: string): string[] => {
   return taxiServices;
 };
 
+// Function to detect if message mentions sharing with another person
+const detectSharingWithOthers = (message: string): boolean => {
+  const lowercaseMessage = message.toLowerCase();
+  return /\b(with|con|avec)\s+(\w+)\b/i.test(lowercaseMessage) || 
+         /\b(me and|yo y|moi et)\s+(\w+)\b/i.test(lowercaseMessage) ||
+         /\b(going|traveling|viajando|voyageant)\s+with\s+(\w+)\b/i.test(lowercaseMessage) ||
+         /\b(we are|somos|nous sommes)\b/i.test(lowercaseMessage) ||
+         /\b(two of us|nosotros dos|nous deux)\b/i.test(lowercaseMessage);
+};
+
+// Function to check if public transit (bus, train) is mentioned
+const isPublicTransit = (message: string): boolean => {
+  const lowercaseMessage = message.toLowerCase();
+  return /\b(bus|autobus|autobús|coach|train|tren|metro|subway|underground|tube)\b/i.test(lowercaseMessage);
+};
+
 export const parseMessage = (message: string): ParsedTravel | null => {
   try {
     const language = detectLanguage(message);
@@ -171,6 +187,12 @@ export const parseMessage = (message: string): ParsedTravel | null => {
     // Extract any taxi services mentioned
     const taxiServices = extractTaxiServices(message);
     
+    // Detect if sharing with others
+    const isSharingWithOthers = detectSharingWithOthers(message);
+    
+    // Check for public transit
+    const publicTransit = isPublicTransit(message);
+    
     // Construct the route, including taxi service mentions if found
     let route = allStops.length > 0 ? allStops.join(" → ") : "Unknown route";
     
@@ -191,6 +213,22 @@ export const parseMessage = (message: string): ParsedTravel | null => {
 
     // Extract taxi sharing preference
     const taxiSharing = patterns.taxi.test(message);
+
+    // Auto-set available spots if not explicitly specified
+    if (availableSpots === 0) {
+      if (taxiSharing || taxiServices.length > 0 || transport.toLowerCase().includes('taxi') || 
+          transport.toLowerCase().includes('cab') || transport.toLowerCase().includes('uber') || 
+          transport.toLowerCase().includes('bolt') || publicTransit) {
+        // For taxis, cabs, Uber, Bolt or public transportation
+        availableSpots = 3;
+      } else if (isSharingWithOthers) {
+        // If sharing with another person (2 people total)
+        availableSpots = 2;
+      } else {
+        // Default
+        availableSpots = 1;
+      }
+    }
 
     // Extract contact information
     let contact = "";
