@@ -14,7 +14,7 @@ export const ChatInput = ({
   onSubmit
 }: ChatInputProps) => {
   const [message, setMessage] = useState("");
-  const [language, setLanguage] = useState<"en" | "es">("es");
+  const [language, setLanguage] = useState<"en" | "es">("en");
   const {
     toast
   } = useToast();

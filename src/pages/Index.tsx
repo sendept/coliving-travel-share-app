@@ -49,11 +49,6 @@ const Index = () => {
           </div>
         </div>
       </div>
-      <div className="absolute bottom-0 right-4 text-[9px] text-gray-500 pb-2">
-        <a href="https://airtable.com/appSEq5rTb2wminZh/shrevCpLAyaJQJXS5" target="_blank" rel="noopener noreferrer" className="text-gray-500 hover:text-gray-700 underline text-[9px]">
-          Report a bug or suggest changes
-        </a>
-      </div>
       <footer className="fixed bottom-0 left-0 right-0 text-center text-sm text-muted-foreground py-4 bg-white">
         <span className="inline-flex items-center gap-1 mx-0">
           Feel free to use it. Built by

@@ -57,8 +57,8 @@ export const ClaimForm = ({ entry, onClaim }: ClaimFormProps) => {
         onClick={handleClaim}
         className="bg-[#F97316] hover:bg-[#F97316]/90 text-white"
       >
-        <span>Únete</span>
-        <span className="text-white/70 ml-1">/ Join</span>
+        <span>Join</span>
+        <span className="text-white/70 ml-1">/ Únete</span>
       </Button>
     </div>
   );
