@@ -1,6 +1,17 @@
 
 export const detectTransport = (message: string): string => {
-  // First check for taxi sharing patterns
+  // First check for airplane/flight patterns
+  const planePatterns = [
+    /(?:fly|flight|plane|avion|vuelo|volar)/i,
+  ];
+
+  const isPlane = planePatterns.some(pattern => pattern.test(message));
+  
+  if (isPlane) {
+    return "✈️"; // Airplane emoji
+  }
+
+  // Check for taxi patterns
   const taxiPatterns = [
     /(?:share|looking\s+for|need).+(?:taxi|cab|ride|uber|bolt)/i,  // English
     /(?:compartir|busco|necesito).+(?:taxi|coche|uber|bolt)/i,     // Spanish
@@ -14,7 +25,18 @@ export const detectTransport = (message: string): string => {
     return "🚖"; // Taxi emoji
   }
 
-  // If not taxi, check for other transport types
+  // Check for bus or van patterns
+  const busVanPatterns = [
+    /\b(?:bus|autobus|van|furgoneta|shuttle)\b/i
+  ];
+
+  const isBusOrVan = busVanPatterns.some(pattern => pattern.test(message));
+  
+  if (isBusOrVan) {
+    return "🚌"; // Bus emoji
+  }
+
+  // If not special transport, check for other transport types
   const transportTypes = message.match(/\b(car|coche|auto|bus|autobus|train|tren|plane|avion|van|furgoneta|voiture|train|avion|van)\b/i);
   let transport = "🚗";  // Default to car emoji
   

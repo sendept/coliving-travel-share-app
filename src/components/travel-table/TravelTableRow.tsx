@@ -23,7 +23,10 @@ const getTransportIcon = (transport: string) => {
   if (transport_lower.includes('taxi') || transport_lower.includes('uber') || transport_lower.includes('bolt')) return "🚖";
   if (transport_lower.includes('bus') || transport_lower.includes('van')) return "🚌";
   if (transport_lower.includes('train')) return "🚂";
+  if (transport_lower.includes('plane') || transport_lower.includes('fly') || transport_lower === "✈️") return "✈️";
   if (transport_lower.includes('car')) return "🚗";
+  // If the transport is already an emoji, return it directly
+  if (/\p{Emoji}/u.test(transport)) return transport;
   return "🚗"; // Default to car if no match
 };
 
@@ -65,8 +68,9 @@ export const TravelTableRow = ({
         </div>;
     }
     if (field === "route") {
+      const transportIcon = getTransportIcon(entry.transport);
       return <div className="whitespace-pre-line">
-        <span className="mr-2">{getTransportIcon(entry.transport)}</span>
+        <span className="mr-2 text-lg">{transportIcon}</span>
         {entry[field]}
         <div 
           className="text-[9px] text-gray-500 mt-1 hover:text-blue-500 cursor-pointer"
