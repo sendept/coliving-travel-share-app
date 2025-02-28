@@ -77,15 +77,15 @@ export const ChatInput = ({
   const helpText = getHelpText();
 
   return <form onSubmit={handleSubmit} className="relative mt-5">
-      <div className="relative">
+      <div className="relative rounded-md overflow-hidden">
         <Textarea 
           value={message} 
           onChange={handleMessageChange}
           onKeyDown={handleKeyDown}
           placeholder="" 
-          className="min-h-[156px] resize-none border-0 bg-[#FFFFFF] rounded-none p-10 focus:ring-0 focus:outline-none text-sm" 
+          className="min-h-[156px] resize-none border-0 bg-[#FFFFFF] rounded-md p-5 md:p-10 focus:ring-0 focus:outline-none text-sm" 
         />
-        <div className="absolute text-gray-500 w-full h-full top-0 left-0 p-10 pointer-events-none">
+        <div className="absolute text-gray-500 w-full h-full top-0 left-0 p-5 md:p-10 pointer-events-none">
           {!message && (
             <p className="text-sm text-left font-normal opacity-80">
               {helpText}
