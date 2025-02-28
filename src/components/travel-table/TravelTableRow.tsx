@@ -115,12 +115,12 @@ export const TravelTableRow = ({
       const dateTimeValue = entry.date_time || dateTimeInfo || "-";
       return (
         <div>
-          {dateTimeValue}
+          <div className="mb-0">{dateTimeValue}</div>
           <div 
-            className="text-[9px] text-gray-500 mt-1 hover:text-blue-500 cursor-pointer"
+            className="text-[9px] text-gray-500 mt-0 hover:text-blue-500 cursor-pointer"
             onClick={() => onStartEdit(entry)}
           >
-            Click to edit date/time
+            Click to edit
           </div>
         </div>
       );
