@@ -132,7 +132,7 @@ export const parseMessage = (message: string): ParsedTravel | null => {
     let dietary_restrictions = "";
     
     if (dietaryMatch) {
-      const allergy = dietaryMatch[1]?.trim() || dietaryMatch[2]?.trim() || "";
+      const allergy = dietaryMatch[1]?.trim() || dietaryMatch[2]?.trim() || dietaryMatch[3]?.trim() || dietaryMatch[4]?.trim() || "";
       if (allergy) {
         dietary_restrictions = `Allergic to: ${allergy}`;
       } else if (dietaryMatch[0].toLowerCase().includes('vegetarian')) {
@@ -141,15 +141,13 @@ export const parseMessage = (message: string): ParsedTravel | null => {
         dietary_restrictions = 'Vegan';
       } else if (dietaryMatch[0].toLowerCase().includes('halal')) {
         dietary_restrictions = 'Halal';
+      } else if (dietaryMatch[0].toLowerCase().includes('don\'t eat') || dietaryMatch[0].toLowerCase().includes('do not eat')) {
+        const restriction = dietaryMatch[0].match(/don'?t\s+eat\s+([^,.]+)|do\s+not\s+eat\s+([^,.]+)/i);
+        if (restriction) {
+          const food = restriction[1] || restriction[2];
+          dietary_restrictions = `Does not eat: ${food}`;
+        }
       }
-    }
-
-    // Extract date and time information if available
-    const dateTimeMatch = message.match(/(\d{1,2}\/\d{1,2}\/\d{2,4}|\d{1,2}-\d{1,2}-\d{2,4}|\d{1,2}\.\d{1,2}\.\d{2,4})(?:\s+at\s+|\s+a\s+las\s+)?(\d{1,2}:\d{2}(?:\s*[ap]m)?)?/i);
-    let date_time = "";
-    
-    if (dateTimeMatch) {
-      date_time = dateTimeMatch[0];
     }
 
     console.log("Parsed travel data:", {
@@ -160,8 +158,7 @@ export const parseMessage = (message: string): ParsedTravel | null => {
       taxiSharing,
       contact,
       language,
-      dietary_restrictions,
-      date_time
+      dietary_restrictions
     });
 
     return {
@@ -172,8 +169,7 @@ export const parseMessage = (message: string): ParsedTravel | null => {
       taxiSharing,
       contact,
       language,
-      dietary_restrictions,
-      date_time
+      dietary_restrictions
     };
   } catch (error) {
     console.error("Error parsing message:", error);

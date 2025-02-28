@@ -38,8 +38,8 @@ export const TravelForm = ({ projectId }: TravelFormProps) => {
       claimed_by: [],
       language: currentLanguage, // Use the detected language
       project_id: projectId || 'default',
-      dietary_restrictions: parsed.dietary_restrictions || null,
-      date_time: parsed.date_time || null
+      dietary_restrictions: parsed.dietary_restrictions || null
+      // Removed date_time field which was causing the error
     };
 
     const { error } = await createTravelEntry(newEntry);

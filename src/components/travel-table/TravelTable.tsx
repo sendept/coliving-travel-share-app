@@ -76,8 +76,8 @@ export const TravelTable = ({
                     <div className="text-[10px]">Edit</div>
                   </TableHead>
                   <TableHead className="w-[240px] text-center align-middle border-r">
-                    <div className="text-sm">Únete</div>
-                    <div className="text-[10px]">Join ride</div>
+                    <div className="text-sm">Viajar juntos</div>
+                    <div className="text-[10px]">Travel together</div>
                   </TableHead>
                   <TableHead className="min-w-[400px] max-w-[500px] text-center align-middle border-r">
                     <div className="text-sm">Ruta</div>

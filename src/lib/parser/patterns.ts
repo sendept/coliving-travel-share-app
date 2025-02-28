@@ -9,7 +9,7 @@ export const spanishPatterns: PatternSet = {
   to: /(?:a|hasta|hacia|para)\s+([^,]+?)(?=\s+(?:desde|de|por|via|y|$))/i,
   via: /(?:por|pasando\s+por|via|parando\s+en)\s+([^,]+)/i,
   taxi: /(?:taxi|cab|compartir\s+(?:taxi|coche|viaje|transporte))/i,
-  dietary: /(?:alerg[ií](?:co|ca)\s+(?:al?|a\s+la|a\s+los?)\s+([^,.]+)|no\s+(?:como|puedo\s+comer)\s+([^,.]+)|(?:soy|como)\s+(?:vegetariano?a?|vegano?a?)|halal|sin\s+(?:gluten|lactosa)|celiaco?a?)/i,
+  dietary: /(?:alerg[ií](?:co|ca)\s+(?:al?|a\s+la|a\s+los?)\s+([^,.]+)|no\s+(?:como|puedo\s+comer|consumo)\s+([^,.]+)|(?:soy|como)\s+(?:vegetariano?a?|vegano?a?)|halal|sin\s+(?:gluten|lactosa)|celiaco?a?|no\s+como\s+([^,.]+))/i,
   contact: /(?:contacto|teléfono|tel|móvil|celular|número)(?:\s*(?:es|:))?\s*([0-9+\s]+)/i
 };
 
@@ -21,7 +21,7 @@ export const englishPatterns: PatternSet = {
   to: /(?:to|towards|heading\s+to)\s+([^,]+?)(?=\s+(?:from|via|through|and|$))/i,
   via: /(?:via|through|stopping\s+(?:at|in))\s+([^,]+)/i,
   taxi: /(?:taxi|cab|share(?:\s+a)?\s+(?:taxi|ride|car|transport)|looking\s+to\s+share)/i,
-  dietary: /(?:allerg(?:y|ic)\s+to\s+([^,.]+)|cannot\s+eat\s+([^,.]+)|(?:I\s+am|I'?m)\s+(?:vegetarian|vegan)|halal|gluten[\s-]free|dairy[\s-]free|celiac)/i,
+  dietary: /(?:allerg(?:y|ic)\s+to\s+([^,.]+)|cannot\s+eat\s+([^,.]+)|(?:I\s+am|I'?m)\s+(?:vegetarian|vegan)|halal|gluten[\s-]free|dairy[\s-]free|celiac|I\s+don'?t\s+eat\s+([^,.]+)|I\s+do\s+not\s+eat\s+([^,.]+))/i,
   contact: /(?:contact|phone|tel|mobile|cell|number)(?:\s*(?:is|:))?\s*([0-9+\s]+)/i
 };
 

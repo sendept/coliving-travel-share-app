@@ -1,6 +1,7 @@
 
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
+import { KeyboardEvent } from "react";
 import type { TravelEntry } from "./types";
 
 interface EditFormProps {
@@ -8,11 +9,19 @@ interface EditFormProps {
   editForm: Partial<TravelEntry>;
   setEditForm: (form: Partial<TravelEntry>) => void;
   field: keyof TravelEntry;
+  onSave?: () => void;
 }
 
-export const EditForm = ({ entry, editForm, setEditForm, field }: EditFormProps) => {
+export const EditForm = ({ entry, editForm, setEditForm, field, onSave }: EditFormProps) => {
   const handleChange = (value: any) => {
     setEditForm({ ...editForm, [field]: value });
+  };
+
+  const handleKeyDown = (e: KeyboardEvent<HTMLTextAreaElement | HTMLInputElement>) => {
+    if (e.key === 'Enter' && !e.shiftKey && onSave) {
+      e.preventDefault();
+      onSave();
+    }
   };
 
   if (field === 'claimed_by') {
@@ -28,6 +37,7 @@ export const EditForm = ({ entry, editForm, setEditForm, field }: EditFormProps)
             id="name-input"
             value={editForm.name !== undefined ? editForm.name : entry.name}
             onChange={(e) => setEditForm({ ...editForm, name: e.target.value })}
+            onKeyDown={handleKeyDown}
             className="mt-1"
           />
         </div>
@@ -40,6 +50,7 @@ export const EditForm = ({ entry, editForm, setEditForm, field }: EditFormProps)
               .filter(line => line !== '');
             handleChange(newClaimedBy);
           }}
+          onKeyDown={handleKeyDown}
           className="min-h-[80px]"
           placeholder="Enter claimed users (one per line)"
         />
@@ -52,6 +63,7 @@ export const EditForm = ({ entry, editForm, setEditForm, field }: EditFormProps)
             type="number"
             value={editForm.available_spots !== undefined ? editForm.available_spots : entry.available_spots}
             onChange={(e) => setEditForm({ ...editForm, available_spots: parseInt(e.target.value) || 0 })}
+            onKeyDown={handleKeyDown}
             className="w-16 h-6 py-1 px-2 text-xs"
             min="0"
           />
@@ -65,6 +77,7 @@ export const EditForm = ({ entry, editForm, setEditForm, field }: EditFormProps)
       <Textarea
         value={editForm[field] !== undefined ? String(editForm[field]) : String(entry[field] || '')}
         onChange={(e) => handleChange(e.target.value)}
+        onKeyDown={handleKeyDown}
         className="min-h-[80px]"
       />
     );
@@ -80,6 +93,7 @@ export const EditForm = ({ entry, editForm, setEditForm, field }: EditFormProps)
         }
         handleChange(value);
       }}
+      onKeyDown={handleKeyDown}
       type={field === 'available_spots' ? 'number' : 'text'}
       min={field === 'available_spots' ? 0 : undefined}
     />

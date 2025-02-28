@@ -42,7 +42,7 @@ export const TravelTableRow = ({
 
   const renderCell = (field: keyof TravelEntry) => {
     if (isEditing) {
-      return <EditForm entry={entry} editForm={editForm} setEditForm={setEditForm} field={field} />;
+      return <EditForm entry={entry} editForm={editForm} setEditForm={setEditForm} field={field} onSave={onSaveEdit} />;
     }
     if (field === "claimed_by") {
       const claimedByContent = Array.isArray(entry[field]) && entry[field].length > 0 ? entry[field].join(", ") : "-";
