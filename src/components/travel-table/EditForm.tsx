@@ -75,7 +75,7 @@ export const EditForm = ({ entry, editForm, setEditForm, field, onSave }: EditFo
   if (field === 'route' || field === 'dietary_restrictions') {
     return (
       <Textarea
-        value={editForm[field] !== undefined ? String(editForm[field]) : String(entry[field] || '')}
+        value={editForm[field] !== undefined ? String(editForm[field] || '') : String(entry[field] || '')}
         onChange={(e) => handleChange(e.target.value)}
         onKeyDown={handleKeyDown}
         className="min-h-[80px]"
@@ -86,17 +86,18 @@ export const EditForm = ({ entry, editForm, setEditForm, field, onSave }: EditFo
   if (field === 'date_time') {
     return (
       <Input
-        value={editForm[field] !== undefined ? String(editForm[field]) : String(entry[field] || '')}
+        value={editForm[field] !== undefined ? String(editForm[field] || '') : String(entry[field] || '')}
         onChange={(e) => handleChange(e.target.value)}
         onKeyDown={handleKeyDown}
         placeholder="e.g., 1.9 around 11:00 am"
+        className="w-full"
       />
     );
   }
 
   return (
     <Input
-      value={editForm[field] !== undefined ? String(editForm[field]) : String(entry[field] || '')}
+      value={editForm[field] !== undefined ? String(editForm[field] || '') : String(entry[field] || '')}
       onChange={(e) => {
         let value: any = e.target.value;
         if (field === 'available_spots') {

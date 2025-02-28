@@ -96,7 +96,7 @@ export const ChatInput = ({
         />
         <div className="absolute text-gray-500 w-full h-full top-0 left-0 flex flex-col justify-between px-[40px] py-[40px] pointer-events-none">
           {!message && (
-            <p className="text-sm text-left font-normal py-px my-0 flex items-start opacity-70">
+            <p className="text-sm text-left font-normal py-px my-0 flex items-start opacity-80">
               {helpText}
             </p>
           )}

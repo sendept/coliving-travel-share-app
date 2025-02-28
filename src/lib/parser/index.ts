@@ -85,6 +85,30 @@ const extractDateTime = (message: string): string => {
   return "";
 };
 
+// Function to extract taxi service mentions
+const extractTaxiServices = (message: string): string[] => {
+  const taxiServices = [];
+  
+  // Check for common taxi service names
+  if (/\buber\b/i.test(message)) {
+    taxiServices.push('Uber');
+  }
+  if (/\bbolt\b/i.test(message)) {
+    taxiServices.push('Bolt');
+  }
+  if (/\btaxi\b/i.test(message)) {
+    taxiServices.push('Taxi');
+  }
+  if (/\bcabify\b/i.test(message)) {
+    taxiServices.push('Cabify');
+  }
+  if (/\blyft\b/i.test(message)) {
+    taxiServices.push('Lyft');
+  }
+  
+  return taxiServices;
+};
+
 export const parseMessage = (message: string): ParsedTravel | null => {
   try {
     const language = detectLanguage(message);
@@ -142,7 +166,24 @@ export const parseMessage = (message: string): ParsedTravel | null => {
 
     // Extract route with multiple stops
     const allStops = extractMultipleStops(message);
-    const route = allStops.length > 0 ? allStops.join(" → ") : "Unknown route";
+    
+    // Extract any taxi services mentioned
+    const taxiServices = extractTaxiServices(message);
+    
+    // Construct the route, including taxi service mentions if found
+    let route = allStops.length > 0 ? allStops.join(" → ") : "Unknown route";
+    
+    // If taxi services were mentioned but not included in the route, add them
+    if (taxiServices.length > 0) {
+      const servicesText = taxiServices.join("/");
+      if (!route.includes(servicesText)) {
+        if (route === "Unknown route") {
+          route = `Travel by ${servicesText}`;
+        } else {
+          route = `${route} (by ${servicesText})`;
+        }
+      }
+    }
 
     // Detect transport type
     const transport = detectTransport(message);

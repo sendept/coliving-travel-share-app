@@ -17,52 +17,72 @@ export const TravelTable = ({
   const {
     toast
   } = useToast();
+  
   const handleStartEdit = (entry: TravelEntry) => {
     setEditingEntry(entry.id);
     setEditForm(entry);
   };
+  
   const handleCancelEdit = () => {
     setEditingEntry(null);
     setEditForm({});
   };
+  
   const handleSaveEdit = async () => {
     if (!editingEntry || !editForm) return;
     
-    // Make sure to properly handle date_time field
-    const updateData = {
-      ...editForm,
-      last_edited_at: new Date().toISOString()
-    };
-    
-    // Ensure date_time is properly set to null if empty
-    if (updateData.date_time === "") {
-      updateData.date_time = null;
-    }
-    
-    console.log("Updating entry with data:", updateData);
-    
-    const {
-      error
-    } = await supabase.from('travel_entries').update(updateData).eq('id', editingEntry);
-    
-    if (error) {
-      console.error('Error saving changes:', error);
+    try {
+      // Create a clean update object
+      const updateData: Partial<TravelEntry> = {
+        ...editForm,
+        last_edited_at: new Date().toISOString()
+      };
+      
+      // Handle empty strings for nullable fields
+      if (updateData.date_time === '') {
+        updateData.date_time = null;
+      }
+      
+      if (updateData.dietary_restrictions === '') {
+        updateData.dietary_restrictions = null;
+      }
+      
+      console.log("Updating entry with data:", updateData);
+      
+      const { error } = await supabase
+        .from('travel_entries')
+        .update(updateData)
+        .eq('id', editingEntry);
+      
+      if (error) {
+        console.error('Error saving changes:', error);
+        toast({
+          title: "Error saving changes",
+          description: error.message || "Could not save your changes",
+          variant: "destructive"
+        });
+        return;
+      }
+      
+      toast({
+        title: "Changes saved",
+        description: "Your changes have been saved successfully"
+      });
+      
+      setEditingEntry(null);
+      setEditForm({});
+    } catch (err) {
+      console.error("Unexpected error in handleSaveEdit:", err);
       toast({
         title: "Error saving changes",
-        description: "Could not save your changes",
+        description: "An unexpected error occurred",
         variant: "destructive"
       });
-      return;
     }
-    
-    toast({
-      title: "Changes saved",
-      description: "Your changes have been saved successfully"
-    });
-    setEditingEntry(null);
-    setEditForm({});
   };
+  
   const language: 'en' | 'es' = entries[0]?.language || 'en';
+  
   return <div className="relative min-h-[calc(100vh-400px)]">
       <div className="bg-[#F5F5F5] p-4 rounded-lg">
         <div className="text-left mb-16 md:hidden flex items-center">

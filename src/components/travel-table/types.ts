@@ -20,7 +20,7 @@ export interface TravelEntry {
   contact: string;
   language: 'en' | 'es';
   dietary_restrictions: string | null;
-  date_time?: string | null;
+  date_time: string | null;
   project_id?: string;
   last_edited_at?: string;
   last_edited_by?: string;
