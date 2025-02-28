@@ -86,7 +86,7 @@ export const EditForm = ({ entry, editForm, setEditForm, field, onSave }: EditFo
   if (field === 'date_time') {
     return (
       <Input
-        value={editForm[field] !== undefined ? String(editForm[field] || '') : String(entry[field] || '')}
+        value={editForm.date_time !== undefined ? String(editForm.date_time || '') : String(entry.date_time || '')}
         onChange={(e) => handleChange(e.target.value)}
         onKeyDown={handleKeyDown}
         placeholder="e.g., 1.9 around 11:00 am"

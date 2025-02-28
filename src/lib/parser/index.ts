@@ -88,21 +88,22 @@ const extractDateTime = (message: string): string => {
 // Function to extract taxi service mentions
 const extractTaxiServices = (message: string): string[] => {
   const taxiServices = [];
+  const lowercaseMessage = message.toLowerCase();
   
   // Check for common taxi service names
-  if (/\buber\b/i.test(message)) {
+  if (/\buber\b/i.test(lowercaseMessage)) {
     taxiServices.push('Uber');
   }
-  if (/\bbolt\b/i.test(message)) {
+  if (/\bbolt\b/i.test(lowercaseMessage)) {
     taxiServices.push('Bolt');
   }
-  if (/\btaxi\b/i.test(message)) {
+  if (/\btaxi\b/i.test(lowercaseMessage)) {
     taxiServices.push('Taxi');
   }
-  if (/\bcabify\b/i.test(message)) {
+  if (/\bcabify\b/i.test(lowercaseMessage)) {
     taxiServices.push('Cabify');
   }
-  if (/\blyft\b/i.test(message)) {
+  if (/\blyft\b/i.test(lowercaseMessage)) {
     taxiServices.push('Lyft');
   }
   
