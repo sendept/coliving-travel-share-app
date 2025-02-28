@@ -105,9 +105,9 @@ export const ChatInput = ({
             </button>
           </div>
           <Button type="submit" className="p-0 m-0 h-auto w-auto bg-transparent hover:bg-transparent">
-            <img src="/lovable-uploads/7c201b73-452d-4ae2-91c1-a85e6b1acd23.png" alt="Send" className="w-4 h-4 sm:w-4 sm:h-4 md:w-4 md:h-4" style={{ 
-              width: 'clamp(1rem, 4vw, 1.25rem)', 
-              height: 'clamp(1rem, 4vw, 1.25rem)'
+            <img src="/lovable-uploads/7c201b73-452d-4ae2-91c1-a85e6b1acd23.png" alt="Send" className="w-6 h-6 sm:w-6 sm:h-6 md:w-6 md:h-6" style={{ 
+              width: 'clamp(1.5rem, 6vw, 1.875rem)', 
+              height: 'clamp(1.5rem, 6vw, 1.875rem)'
             }} />
           </Button>
         </div>
