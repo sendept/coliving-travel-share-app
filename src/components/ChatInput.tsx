@@ -83,7 +83,7 @@ export const ChatInput = ({
           onChange={handleMessageChange}
           onKeyDown={handleKeyDown}
           placeholder="" 
-          className="min-h-[156px] resize-none border-0 bg-[#FFFFFF] rounded-lg p-5 md:p-10 focus:ring-1 focus:outline-none text-sm focus:border-ph-orange focus:ring-ph-orange focus-visible:ring-ph-orange focus-visible:ring-1 focus-visible:border-ph-orange" 
+          className="min-h-[156px] resize-none bg-[#FFFFFF] rounded-lg p-5 md:p-10 focus:outline-none text-sm border border-transparent focus:border-[#F97316] focus:ring-[#F97316] focus-visible:border-[#F97316] focus-visible:ring-[#F97316] focus-visible:ring-1" 
         />
         <div className="absolute text-gray-500 w-full h-full top-0 left-0 p-5 md:p-10 pointer-events-none">
           {!message && (
