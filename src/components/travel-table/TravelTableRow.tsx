@@ -30,6 +30,34 @@ const getTransportIcon = (transport: string) => {
   return "🚗"; // Default to car if no match
 };
 
+// Function to extract date/time information from a route
+const extractDateTimeInfo = (route: string) => {
+  // Common date patterns
+  const datePatterns = [
+    // DD/MM/YYYY or DD-MM-YYYY formats
+    /\b\d{1,2}[\/\-\.]\d{1,2}(?:[\/\-\.]\d{2,4})?\b/,
+    // Month names
+    /\b(?:Jan(?:uary)?|Feb(?:ruary)?|Mar(?:ch)?|Apr(?:il)?|May|Jun(?:e)?|Jul(?:y)?|Aug(?:ust)?|Sep(?:tember)?|Oct(?:ober)?|Nov(?:ember)?|Dec(?:ember)?)\s+\d{1,2}(?:st|nd|rd|th)?,?\s*(?:\d{2,4})?\b/i,
+    // Time patterns
+    /\b(?:\d{1,2}:\d{2}(?::\d{2})?\s*(?:am|pm|AM|PM)?|\d{1,2}\s*(?:am|pm|AM|PM))/,
+    // Words like "tomorrow", "today", etc.
+    /\b(?:today|tomorrow|tonight|this\s+(?:morning|afternoon|evening))\b/i,
+    // Spanish date formats
+    /\b(?:lunes|martes|miércoles|jueves|viernes|sábado|domingo),?\s+\d{1,2}\s+de\s+(?:enero|febrero|marzo|abril|mayo|junio|julio|agosto|septiembre|octubre|noviembre|diciembre)\b/i,
+    // Common date-related terms with numbers
+    /\b(?:fecha|date|día|day|hora|hour|time)[:s\s]+[\w\s\d.,:\-\/]+\b/i
+  ];
+
+  for (const pattern of datePatterns) {
+    const match = route.match(pattern);
+    if (match) {
+      return match[0];
+    }
+  }
+
+  return "";
+};
+
 export const TravelTableRow = ({
   entry,
   editingEntry,
@@ -42,6 +70,9 @@ export const TravelTableRow = ({
   className = ""
 }: TravelTableRowProps) => {
   const isEditing = editingEntry === entry.id;
+  
+  // Extract date/time information from the route
+  const dateTimeInfo = extractDateTimeInfo(entry.route);
 
   const renderCell = (field: keyof TravelEntry) => {
     if (isEditing) {
@@ -57,13 +88,13 @@ export const TravelTableRow = ({
             )}
           </div>
           <div className="mb-2">
-            <span className="text-xs text-gray-500">{entry.available_spots} {entry.available_spots === 1 ? 'Plaza' : 'Plazas'}</span>
-            <br/>
             <span className="text-xs text-gray-500">{entry.available_spots} spots available</span>
+            <br/>
+            <span className="text-xs text-gray-500">{entry.available_spots} {entry.available_spots === 1 ? 'Plaza' : 'Plazas'}</span>
           </div>
           {entry.available_spots > 0 && <div>
             <ClaimForm entry={entry} onClaim={onClaimSpot} />
-            <div className="text-[9px] text-gray-500 mt-1">unete/join as co-traveller</div>
+            <div className="text-[9px] text-gray-500 mt-1">join/unete as co-traveller</div>
           </div>}
         </div>;
     }
@@ -81,9 +112,9 @@ export const TravelTableRow = ({
       </div>;
     }
     if (field === "date_time") {
-      return entry[field] ? new Date(entry[field]).toLocaleString() : "-";
+      return dateTimeInfo || "-";
     }
-    return entry[field];
+    return entry[field] || "-";
   };
 
   return <TableRow className={className}>

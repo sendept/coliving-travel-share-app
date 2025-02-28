@@ -50,7 +50,7 @@ export const TravelTable = ({
   };
   const language: 'en' | 'es' = entries[0]?.language || 'en';
   return <div className="relative min-h-[calc(100vh-400px)]">
-      <div className="bg-[#F5F5F5] p-4 rounded-lg px-10">
+      <div className="bg-[#F5F5F5] p-4 rounded-lg px-6 sm:px-8 md:px-12 lg:px-20">
         <div className="text-left mb-16 md:hidden flex items-center">
           <div>
             <p className="text-[9px] text-gray-500">Desliza hacia la derecha para editar o ver tu texto</p>
@@ -104,7 +104,7 @@ export const TravelTable = ({
           </div>
         </div>
         {/* Vertical bug report link */}
-        <div className="absolute bottom-4 right-1 origin-bottom-right rotate-90 transform z-10">
+        <div className="absolute bottom-4 right-4 md:right-6 lg:right-8 origin-bottom-right rotate-90 transform z-10">
           <a 
             href="https://airtable.com/appSEq5rTb2wminZh/shrevCpLAyaJQJXS5" 
             target="_blank" 
