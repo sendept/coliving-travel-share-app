@@ -81,7 +81,8 @@ export const TravelTable = ({
     }
   };
   
-  const language: 'en' | 'es' = entries[0]?.language || 'en';
+  // Updated to handle 'fr' language type
+  const language: 'en' | 'es' | 'fr' = entries[0]?.language || 'en';
   
   return <div className="relative min-h-[calc(100vh-400px)]">
       <div className="bg-[#F5F5F5] p-4 rounded-lg">

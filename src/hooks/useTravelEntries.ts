@@ -34,7 +34,7 @@ export const useTravelEntries = (projectId?: string | null) => {
       if (data) {
         setEntries(data.map(entry => ({
           ...entry,
-          language: entry.language as 'en' | 'es'
+          language: entry.language as 'en' | 'es' | 'fr'
         })) as TravelEntry[]);
       }
     };
@@ -57,13 +57,13 @@ export const useTravelEntries = (projectId?: string | null) => {
           if (payload.eventType === 'INSERT') {
             const newEntry = {
               ...payload.new,
-              language: payload.new.language as 'en' | 'es'
+              language: payload.new.language as 'en' | 'es' | 'fr'
             } as TravelEntry;
             setEntries((prev) => [newEntry, ...prev]);
           } else if (payload.eventType === 'UPDATE') {
             const updatedEntry = {
               ...payload.new,
-              language: payload.new.language as 'en' | 'es'
+              language: payload.new.language as 'en' | 'es' | 'fr'
             } as TravelEntry;
             setEntries((prev) =>
               prev.map((entry) =>

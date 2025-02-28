@@ -1,57 +1,73 @@
 
-import React from 'react';
+// We need to add French translations to complement the English and Spanish ones
 
-type TranslationKey = 'name' | 'availableSpots' | 'route' | 'transport' | 'taxiSharing' | 'contact' | 'claimedBy' | 'actions' | 'title' | 'subtitle' | 'diet';
+interface Translations {
+  [key: string]: {
+    en: string;
+    es: string;
+    fr: string;
+  };
+}
 
-const translations: Record<'en' | 'es', Record<TranslationKey, string>> = {
-  en: {
-    name: 'Name\nNombre',
-    availableSpots: 'Available Spots\nPlazas',
-    route: 'Route\nRuta',
-    transport: 'Transport\nTransporte',
-    taxiSharing: 'Taxi Sharing\nCompartir Taxi',
-    contact: 'Contact\nContacto',
-    claimedBy: 'Claimed By\nReservado Por',
-    actions: 'Actions\nAcciones',
-    title: 'Share Your Travel Plan  Comparte tu plan de viaje',
-    subtitle: 'Coordinate your journey  Coordina tu viaje',
-    diet: 'Diet/Allergies\nDietas/Alergias'
+const translations: Translations = {
+  travelTogether: {
+    en: "Travel together",
+    es: "Viajar juntos",
+    fr: "Voyager ensemble"
   },
-  es: {
-    name: 'Nombre\nName',
-    availableSpots: 'Plazas\nAvailable Spots',
-    route: 'Ruta\nRoute',
-    transport: 'Transporte\nTransport',
-    taxiSharing: 'Compartir Taxi\nTaxi Sharing',
-    contact: 'Contacto\nContact',
-    claimedBy: 'Reservado Por\nClaimed By',
-    actions: 'Acciones\nActions',
-    title: 'Comparte tu plan de viaje  Share Your Travel Plan',
-    subtitle: 'Coordina tu viaje  Coordinate your journey',
-    diet: 'Dietas/Alergias\nDiet/Allergies'
+  route: {
+    en: "Route",
+    es: "Ruta",
+    fr: "Itinéraire"
+  },
+  dateTime: {
+    en: "Date/Hour",
+    es: "Fecha/Hora",
+    fr: "Date/Heure"
+  },
+  contact: {
+    en: "Contact",
+    es: "Contacto",
+    fr: "Contact"
+  },
+  diet: {
+    en: "Diet",
+    es: "Dieta",
+    fr: "Régime"
+  },
+  edit: {
+    en: "Edit",
+    es: "Editar",
+    fr: "Modifier"
+  },
+  claimSpot: {
+    en: "Claim a spot",
+    es: "Reservar un lugar",
+    fr: "Réserver une place"
+  },
+  save: {
+    en: "Save",
+    es: "Guardar",
+    fr: "Enregistrer"
+  },
+  cancel: {
+    en: "Cancel",
+    es: "Cancelar",
+    fr: "Annuler"
+  },
+  someoneClaimed: {
+    en: "Someone claimed a spot",
+    es: "Alguien reservó un lugar",
+    fr: "Quelqu'un a réservé une place"
+  },
+  yourName: {
+    en: "Your name",
+    es: "Tu nombre",
+    fr: "Votre nom"
   }
 };
 
-const splitTranslation = (text: string): React.JSX.Element => {
-  if (text.includes('\n')) {
-    const [primary, secondary] = text.split('\n');
-    return (
-      <div className="text-center">
-        <div className="text-foreground">{primary}</div>
-        <div className="text-muted-foreground text-sm">{secondary}</div>
-      </div>
-    );
-  }
-  
-  const [primary, secondary] = text.split('  ');
-  return (
-    <div className="text-center">
-      <div className="text-foreground">{primary}</div>
-      <div className="text-muted-foreground text-sm">{secondary}</div>
-    </div>
-  );
-};
-
-export const getTranslation = (key: TranslationKey, language: 'en' | 'es' = 'en'): React.JSX.Element => {
-  return splitTranslation(translations[language][key]);
+export const getTranslation = (key: string, lang: 'en' | 'es' | 'fr' = 'en'): string => {
+  const translation = translations[key] || {};
+  return translation[lang] || translation.en || key;
 };
