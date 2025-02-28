@@ -77,9 +77,9 @@ export const ChatInput = ({
 
   const getHelpText = () => {
     if (language === "es") {
-      return "Escribe tu ruta aquí: (Yo soy María y viajo desde Santiago hasta Lisboa. Voy a parar en Vigo. Fecha: 1.9 sobre las 11:00 am. Tengo 3 plazas libres. Mi contacto: 123456789)";
+      return "Escribe tu ruta aquí: Yo soy María y viajo desde Santiago hasta Lisboa. Voy a parar en Vigo. Fecha: 1.9 sobre las 11:00 am. Tengo 3 plazas libres. Mi contacto: 123456789";
     } else {
-      return "Write your route here: (I am Fabrizio and I'm traveling from Lisbon to Santiago. I'll stop in Porto. Date: 1.9 around 11:00 am. I have 2 seats available. My contact: 987654321)";
+      return "Write your route here: I am Fabrizio and I'm traveling from Lisbon to Santiago. I'll stop in Porto. Date: 1.9 around 11:00 am. I have 2 seats available. My contact: 987654321";
     }
   };
 
@@ -92,11 +92,11 @@ export const ChatInput = ({
           onChange={handleMessageChange}
           onKeyDown={handleKeyDown}
           placeholder="" 
-          className="min-h-[156px] pr-12 resize-none border-0 bg-[#FFFFFF] rounded-none pt-[40px] px-[40px] pb-[40px] focus:ring-0 focus:outline-none text-[15px]" 
+          className="min-h-[156px] pr-12 resize-none border-0 bg-[#FFFFFF] rounded-none pt-[40px] px-[40px] pb-[40px] focus:ring-0 focus:outline-none text-sm" 
         />
         <div className="absolute text-gray-500 w-full h-full top-0 left-0 flex flex-col justify-between px-[40px] py-[40px] pointer-events-none">
           {!message && (
-            <p className="text-[10px] sm:text-[15px] text-left font-normal py-px my-0 flex items-start">
+            <p className="text-sm text-left font-normal py-px my-0 flex items-start opacity-70">
               {helpText}
             </p>
           )}
