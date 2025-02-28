@@ -86,13 +86,13 @@ export const TravelTable = ({
   
   return <div className="relative min-h-[calc(100vh-400px)]">
       <div className="bg-[#F5F5F5] p-4 rounded-lg">
-        <div className="text-left mb-16 md:hidden flex items-center">
-          <div>
+        <div className="text-left mb-16 md:hidden flex flex-col items-center">
+          <div className="text-center">
             <p className="text-[9px] text-gray-500">Desliza hacia la derecha para editar o ver tu texto</p>
             <p className="text-[9px] text-gray-500">Scroll to the right to see or edit your text</p>
           </div>
-          <div className="flex items-center ml-2">
-            <img src="/lovable-uploads/0347ed37-e470-46cd-a263-99763613105a.png" alt="Scroll" className="h-8 w-8 object-contain" />
+          <div className="flex items-center justify-center mt-2">
+            <img src="/lovable-uploads/0347ed37-e470-46cd-a263-99763613105a.png" alt="Scroll" className="h-12 w-12 object-contain" />
           </div>
         </div>
         <div className="lg:overflow-visible overflow-x-auto overflow-y-auto scrollbar-visible" style={{
@@ -110,13 +110,13 @@ export const TravelTable = ({
                     <div className="text-sm">Edit</div>
                     <div className="text-[10px]">Editar</div>
                   </TableHead>
-                  <TableHead className="lg:w-[240px] w-[160px] text-center align-middle border-r">
-                    <div className="text-sm">Travel together</div>
-                    <div className="text-[10px]">Viajar juntos</div>
-                  </TableHead>
                   <TableHead className="lg:w-[400px] min-w-[300px] text-center align-middle border-r">
                     <div className="text-sm">Route</div>
                     <div className="text-[10px]">Ruta</div>
+                  </TableHead>
+                  <TableHead className="lg:w-[240px] w-[160px] text-center align-middle border-r">
+                    <div className="text-sm">Travel together</div>
+                    <div className="text-[10px]">Viajar juntos</div>
                   </TableHead>
                   <TableHead className="lg:w-[150px] w-[120px] text-center align-middle border-r">
                     <div className="text-sm whitespace-nowrap">Date/Hour</div>

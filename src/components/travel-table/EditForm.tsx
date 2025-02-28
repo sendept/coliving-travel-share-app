@@ -38,7 +38,7 @@ export const EditForm = ({ entry, editForm, setEditForm, field, onSave }: EditFo
             value={editForm.name !== undefined ? editForm.name : entry.name}
             onChange={(e) => setEditForm({ ...editForm, name: e.target.value })}
             onKeyDown={handleKeyDown}
-            className="mt-1"
+            className="mt-1 bg-white"
           />
         </div>
         <Textarea
@@ -51,7 +51,7 @@ export const EditForm = ({ entry, editForm, setEditForm, field, onSave }: EditFo
             handleChange(newClaimedBy);
           }}
           onKeyDown={handleKeyDown}
-          className="min-h-[80px]"
+          className="min-h-[80px] bg-white"
           placeholder="Enter claimed users (one per line)"
         />
         <div className="flex items-center gap-2">
@@ -64,7 +64,7 @@ export const EditForm = ({ entry, editForm, setEditForm, field, onSave }: EditFo
             value={editForm.available_spots !== undefined ? editForm.available_spots : entry.available_spots}
             onChange={(e) => setEditForm({ ...editForm, available_spots: parseInt(e.target.value) || 0 })}
             onKeyDown={handleKeyDown}
-            className="w-16 h-6 py-1 px-2 text-xs"
+            className="w-16 h-6 py-1 px-2 text-xs bg-white"
             min="0"
           />
         </div>
@@ -78,7 +78,7 @@ export const EditForm = ({ entry, editForm, setEditForm, field, onSave }: EditFo
         value={editForm[field] !== undefined ? String(editForm[field] || '') : String(entry[field] || '')}
         onChange={(e) => handleChange(e.target.value)}
         onKeyDown={handleKeyDown}
-        className="min-h-[80px]"
+        className="min-h-[80px] bg-white"
       />
     );
   }
@@ -90,7 +90,7 @@ export const EditForm = ({ entry, editForm, setEditForm, field, onSave }: EditFo
         onChange={(e) => handleChange(e.target.value)}
         onKeyDown={handleKeyDown}
         placeholder="e.g., 1.9 around 11:00 am"
-        className="w-full"
+        className="w-full bg-white"
       />
     );
   }
@@ -108,6 +108,7 @@ export const EditForm = ({ entry, editForm, setEditForm, field, onSave }: EditFo
       onKeyDown={handleKeyDown}
       type={field === 'available_spots' ? 'number' : 'text'}
       min={field === 'available_spots' ? 0 : undefined}
+      className="bg-white"
     />
   );
 };

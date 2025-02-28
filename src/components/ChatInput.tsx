@@ -87,7 +87,7 @@ export const ChatInput = ({
         />
         <div className="absolute text-gray-500 w-full h-full top-0 left-0 flex flex-col justify-between px-[40px] py-[40px] pointer-events-none">
           {!message && (
-            <p className="text-sm text-left font-normal py-px my-0 flex items-start opacity-80">
+            <p className="text-sm text-left font-normal my-[10px] mx-[10px] flex items-start opacity-80">
               {helpText}
             </p>
           )}
@@ -106,7 +106,10 @@ export const ChatInput = ({
           </button>
         </div>
         <Button type="submit" className="p-0 m-0 h-auto w-auto bg-transparent hover:bg-transparent">
-          <img src="/lovable-uploads/7c201b73-452d-4ae2-91c1-a85e6b1acd23.png" alt="Send" className="w-6 h-6" />
+          <img src="/lovable-uploads/7c201b73-452d-4ae2-91c1-a85e6b1acd23.png" alt="Send" className="w-6 h-6 sm:w-6 sm:h-6 md:w-6 md:h-6 lg:w-6 lg:h-6" style={{ 
+            width: 'clamp(1.75rem, 8vw, 2.5rem)', 
+            height: 'clamp(1.75rem, 8vw, 2.5rem)'
+          }} />
         </Button>
       </div>
     </form>;
