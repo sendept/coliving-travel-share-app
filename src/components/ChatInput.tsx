@@ -92,11 +92,11 @@ export const ChatInput = ({
           onChange={handleMessageChange}
           onKeyDown={handleKeyDown}
           placeholder="" 
-          className="min-h-[156px] pr-12 resize-none border-0 bg-[#FFFFFF] rounded-none pt-[40px] px-[40px] pb-[40px] focus:ring-0 focus:outline-none" 
+          className="min-h-[156px] pr-12 resize-none border-0 bg-[#FFFFFF] rounded-none pt-[40px] px-[40px] pb-[40px] focus:ring-0 focus:outline-none text-[15px]" 
         />
         <div className="absolute text-gray-500 w-full h-full top-0 left-0 flex flex-col justify-between px-[40px] py-[40px] pointer-events-none">
           {!message && (
-            <p className="text-[11px] sm:text-base text-left font-normal py-px my-0 flex items-start">
+            <p className="text-[10px] sm:text-[15px] text-left font-normal py-px my-0 flex items-start">
               {helpText}
             </p>
           )}

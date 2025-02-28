@@ -138,7 +138,7 @@ export const TravelTableRow = ({
       </TableCell>
       <TableCell className="border-r">{renderCell("date_time")}</TableCell>
       <TableCell className="border-r">{renderCell("contact")}</TableCell>
-      <TableCell className="whitespace-pre-line border-r">
+      <TableCell className="whitespace-pre-line">
         {renderCell("dietary_restrictions")}
       </TableCell>
     </TableRow>;

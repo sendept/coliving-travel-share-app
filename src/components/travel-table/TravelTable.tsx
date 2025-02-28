@@ -50,7 +50,7 @@ export const TravelTable = ({
   };
   const language: 'en' | 'es' = entries[0]?.language || 'en';
   return <div className="relative min-h-[calc(100vh-400px)]">
-      <div className="bg-[#F5F5F5] p-4 rounded-lg px-6 sm:px-8 md:px-12 lg:px-20">
+      <div className="bg-[#F5F5F5] p-4 rounded-lg">
         <div className="text-left mb-16 md:hidden flex items-center">
           <div>
             <p className="text-[9px] text-gray-500">Desliza hacia la derecha para editar o ver tu texto</p>
@@ -91,7 +91,7 @@ export const TravelTable = ({
                     <div className="text-sm">Contact</div>
                     <div className="text-[10px]">Contacto</div>
                   </TableHead>
-                  <TableHead className="lg:w-[150px] w-[120px] text-center align-middle border-r">
+                  <TableHead className="lg:w-[150px] w-[120px] text-center align-middle">
                     <div className="text-sm">Diet</div>
                     <div className="text-[10px]">Dieta</div>
                   </TableHead>
