@@ -85,11 +85,13 @@ export const ChatInput = ({
           placeholder="" 
           className="min-h-[156px] resize-none border-0 bg-[#FFFFFF] rounded-none pt-[40px] px-[40px] pb-[60px] focus:ring-0 focus:outline-none text-sm" 
         />
-        <div className="absolute text-gray-500 w-full h-full top-0 left-0 flex flex-col justify-start px-[40px] py-[40px] pointer-events-none">
+        <div className="absolute text-gray-500 w-full h-full top-0 left-0 p-6 pointer-events-none">
           {!message && (
-            <p className="text-sm text-left font-normal px-[10px] py-[10px] flex items-start opacity-80">
-              {helpText}
-            </p>
+            <div className="p-4">
+              <p className="text-sm text-left font-normal opacity-80">
+                {helpText}
+              </p>
+            </div>
           )}
         </div>
       </div>
