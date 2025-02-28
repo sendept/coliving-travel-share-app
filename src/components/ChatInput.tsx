@@ -83,17 +83,17 @@ export const ChatInput = ({
           onChange={handleMessageChange}
           onKeyDown={handleKeyDown}
           placeholder="" 
-          className="min-h-[156px] pr-12 resize-none border-0 bg-[#FFFFFF] rounded-none pt-[40px] px-[40px] pb-[40px] focus:ring-0 focus:outline-none text-sm" 
+          className="min-h-[156px] resize-none border-0 bg-[#FFFFFF] rounded-none pt-[40px] px-[40px] pb-[60px] focus:ring-0 focus:outline-none text-sm" 
         />
-        <div className="absolute text-gray-500 w-full h-full top-0 left-0 flex flex-col justify-between px-[40px] py-[40px] pointer-events-none">
+        <div className="absolute text-gray-500 w-full h-full top-0 left-0 flex flex-col justify-start px-[40px] py-[40px] pointer-events-none">
           {!message && (
-            <p className="text-sm text-left font-normal my-[10px] mx-[10px] flex items-start opacity-80">
+            <p className="text-sm text-left font-normal px-[10px] py-[10px] flex items-start opacity-80">
               {helpText}
             </p>
           )}
         </div>
       </div>
-      <div className="absolute bottom-2 right-2 flex items-center">
+      <div className="absolute bottom-4 right-4 flex items-center">
         <div className="mr-3 text-xs">
           <button 
             type="button"
@@ -106,7 +106,7 @@ export const ChatInput = ({
           </button>
         </div>
         <Button type="submit" className="p-0 m-0 h-auto w-auto bg-transparent hover:bg-transparent">
-          <img src="/lovable-uploads/7c201b73-452d-4ae2-91c1-a85e6b1acd23.png" alt="Send" className="w-6 h-6 sm:w-6 sm:h-6 md:w-6 md:h-6 lg:w-6 lg:h-6" style={{ 
+          <img src="/lovable-uploads/7c201b73-452d-4ae2-91c1-a85e6b1acd23.png" alt="Send" className="w-6 h-6 sm:w-7 sm:h-7 md:w-8 md:h-8" style={{ 
             width: 'clamp(1.75rem, 8vw, 2.5rem)', 
             height: 'clamp(1.75rem, 8vw, 2.5rem)'
           }} />
