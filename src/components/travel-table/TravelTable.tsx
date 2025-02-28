@@ -27,13 +27,26 @@ export const TravelTable = ({
   };
   const handleSaveEdit = async () => {
     if (!editingEntry || !editForm) return;
-    const {
-      error
-    } = await supabase.from('travel_entries').update({
+    
+    // Make sure to properly handle date_time field
+    const updateData = {
       ...editForm,
       last_edited_at: new Date().toISOString()
-    }).eq('id', editingEntry);
+    };
+    
+    // Ensure date_time is properly set to null if empty
+    if (updateData.date_time === "") {
+      updateData.date_time = null;
+    }
+    
+    console.log("Updating entry with data:", updateData);
+    
+    const {
+      error
+    } = await supabase.from('travel_entries').update(updateData).eq('id', editingEntry);
+    
     if (error) {
+      console.error('Error saving changes:', error);
       toast({
         title: "Error saving changes",
         description: "Could not save your changes",
@@ -41,6 +54,7 @@ export const TravelTable = ({
       });
       return;
     }
+    
     toast({
       title: "Changes saved",
       description: "Your changes have been saved successfully"

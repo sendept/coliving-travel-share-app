@@ -3,7 +3,7 @@ import { TableCell, TableRow } from "@/components/ui/table";
 import { Button } from "@/components/ui/button";
 import { ClaimForm } from "./ClaimForm";
 import { EditForm } from "./EditForm";
-import { Plane, Car, Bike, Train, Bus, Edit2, Check, X, CarTaxiFront } from "lucide-react";
+import { Edit2, Check, X } from "lucide-react";
 import type { TravelEntry } from "./types";
 
 interface TravelTableRowProps {
@@ -112,7 +112,18 @@ export const TravelTableRow = ({
       </div>;
     }
     if (field === "date_time") {
-      return entry.date_time || dateTimeInfo || "-";
+      const dateTimeValue = entry.date_time || dateTimeInfo || "-";
+      return (
+        <div>
+          {dateTimeValue}
+          <div 
+            className="text-[9px] text-gray-500 mt-1 hover:text-blue-500 cursor-pointer"
+            onClick={() => onStartEdit(entry)}
+          >
+            Click to edit date/time
+          </div>
+        </div>
+      );
     }
     return entry[field] || "-";
   };
