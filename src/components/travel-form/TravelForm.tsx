@@ -36,10 +36,10 @@ export const TravelForm = ({ projectId }: TravelFormProps) => {
       taxi_sharing: parsed.taxiSharing,
       contact: parsed.contact,
       claimed_by: [],
-      language: currentLanguage, // Use the detected language
+      language: currentLanguage,
       project_id: projectId || 'default',
-      dietary_restrictions: parsed.dietary_restrictions || null
-      // Removed date_time field which was causing the error
+      dietary_restrictions: parsed.dietary_restrictions || null,
+      date_time: parsed.date_time || null
     };
 
     const { error } = await createTravelEntry(newEntry);

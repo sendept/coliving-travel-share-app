@@ -66,7 +66,13 @@ const extractDateTime = (message: string): string => {
     /(?:date|fecha|time|hora|on|el|día)[:s]?\s*([\d.\/\-]+)/i,
     
     // Match specific date format from the text
-    /\b(\d{1,2}[.\/]\d{1,2}(?:[.\/]\d{2,4})?(?:\s*(?:at|a las|around|sobre las|sobre|hacia)?\s*\d{1,2}(?::\d{2})?\s*(?:am|pm|a\.m\.|p\.m\.)?)?)\b/
+    /\b(\d{1,2}[.\/]\d{1,2}(?:[.\/]\d{2,4})?(?:\s*(?:at|a las|around|sobre las|sobre|hacia)?\s*\d{1,2}(?::\d{2})?\s*(?:am|pm|a\.m\.|p\.m\.)?)?)\b/,
+    
+    // Match time patterns
+    /\b(\d{1,2}(?::\d{2})?\s*(?:am|pm|a\.m\.|p\.m\.))\b/i,
+    
+    // Match dates with month names
+    /\b(\d{1,2}\s+(?:jan|feb|mar|apr|may|jun|jul|aug|sep|oct|nov|dec|january|february|march|april|may|june|july|august|september|october|november|december|enero|febrero|marzo|abril|mayo|junio|julio|agosto|septiembre|octubre|noviembre|diciembre)(?:\s+\d{2,4})?(?:\s*(?:at|a las|around|sobre las|sobre|hacia)?\s*\d{1,2}(?::\d{2})?\s*(?:am|pm|a\.m\.|p\.m\.)?)?)\b/i
   ];
 
   for (const pattern of datePatterns) {
