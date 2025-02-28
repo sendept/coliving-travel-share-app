@@ -112,7 +112,7 @@ export const TravelTableRow = ({
       </div>;
     }
     if (field === "date_time") {
-      return dateTimeInfo || "-";
+      return entry.date_time || dateTimeInfo || "-";
     }
     return entry[field] || "-";
   };
