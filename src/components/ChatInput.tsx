@@ -87,7 +87,7 @@ export const ChatInput = ({
         />
         <div className="absolute text-gray-500 w-full h-full top-0 left-0 p-5 md:p-10 pointer-events-none">
           {!message && (
-            <p className="text-sm text-left font-normal opacity-80">
+            <p className="text-sm text-left font-normal opacity-95">
               {helpText}
             </p>
           )}
