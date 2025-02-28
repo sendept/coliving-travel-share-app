@@ -18,7 +18,7 @@ export interface TravelEntry {
   transport: string;
   taxi_sharing: boolean;
   contact: string;
-  language: 'en' | 'es';
+  language: 'en' | 'es' | 'fr';
   dietary_restrictions: string | null;
   date_time: string | null;
   project_id?: string;

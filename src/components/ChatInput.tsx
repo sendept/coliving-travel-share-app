@@ -7,14 +7,15 @@ import { parseMessage } from "@/lib/parser";
 import { detectLanguage } from "@/lib/parser/languageDetector";
 
 interface ChatInputProps {
-  onSubmit: (message: string, language: "en" | "es") => void;
+  onSubmit: (message: string, language: "en" | "es" | "fr") => void;
 }
 
 export const ChatInput = ({
   onSubmit
 }: ChatInputProps) => {
   const [message, setMessage] = useState("");
-  const [language, setLanguage] = useState<"en" | "es">("en");
+  const [selectedLanguage, setSelectedLanguage] = useState<"en" | "es">("en");
+  const [detectedLanguage, setDetectedLanguage] = useState<"en" | "es" | "fr">("en");
   const {
     toast
   } = useToast();
@@ -24,10 +25,8 @@ export const ChatInput = ({
     
     // Auto-detect language as user types (if enough text)
     if (e.target.value.length > 5) {
-      const detectedLanguage = detectLanguage(e.target.value);
-      if (detectedLanguage === 'es' || detectedLanguage === 'en') {
-        setLanguage(detectedLanguage);
-      }
+      const detected = detectLanguage(e.target.value);
+      setDetectedLanguage(detected);
     }
   };
 
@@ -42,13 +41,9 @@ export const ChatInput = ({
       return;
     }
     
-    // Final language check before submission
-    const detectedLanguage = detectLanguage(message);
-    if (detectedLanguage === 'es' || detectedLanguage === 'en') {
-      onSubmit(message, detectedLanguage);
-    } else {
-      onSubmit(message, language);
-    }
+    // Use detected language for submission, regardless of UI selection
+    const detected = detectLanguage(message);
+    onSubmit(message, detected);
     
     setMessage("");
   };
@@ -58,13 +53,9 @@ export const ChatInput = ({
     if (e.key === 'Enter' && !e.shiftKey) {
       e.preventDefault(); // Prevent default behavior (newline)
       if (message.trim()) {
-        // Final language check before submission
-        const detectedLanguage = detectLanguage(message);
-        if (detectedLanguage === 'es' || detectedLanguage === 'en') {
-          onSubmit(message, detectedLanguage);
-        } else {
-          onSubmit(message, language);
-        }
+        // Use detected language for submission, regardless of UI selection
+        const detected = detectLanguage(message);
+        onSubmit(message, detected);
         setMessage("");
       }
     }
@@ -72,11 +63,11 @@ export const ChatInput = ({
   };
 
   const toggleLanguage = () => {
-    setLanguage(prev => prev === "en" ? "es" : "en");
+    setSelectedLanguage(prev => prev === "en" ? "es" : "en");
   };
 
   const getHelpText = () => {
-    if (language === "es") {
+    if (selectedLanguage === "es") {
       return "Escribe tu ruta aquí: Yo soy María y viajo desde Santiago hasta Lisboa. Voy a parar en Vigo. Fecha: 1.9 sobre las 11:00 am. Tengo 3 plazas libres. Mi contacto: 123456789";
     } else {
       return "Write your route here: I am Fabrizio and I'm traveling from Lisbon to Santiago. I'll stop in Porto. Date: 1.9 around 11:00 am. I have 2 seats available. My contact: 987654321";
@@ -109,9 +100,9 @@ export const ChatInput = ({
             onClick={toggleLanguage} 
             className="text-gray-500 hover:text-gray-700 focus:outline-none"
           >
-            <span className={language === "en" ? "font-bold" : "font-normal"}>EN</span>
+            <span className={selectedLanguage === "en" ? "font-bold" : "font-normal"}>EN</span>
             {" / "}
-            <span className={language === "es" ? "font-bold" : "font-normal"}>ES</span>
+            <span className={selectedLanguage === "es" ? "font-bold" : "font-normal"}>ES</span>
           </button>
         </div>
         <Button type="submit" className="p-0 m-0 h-auto w-auto bg-transparent hover:bg-transparent">

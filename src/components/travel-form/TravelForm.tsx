@@ -16,8 +16,12 @@ export const TravelForm = ({ projectId }: TravelFormProps) => {
   const [success, setSuccess] = useState(false);
   const [language, setLanguage] = useState<"en" | "es">("es");
 
-  const handleSubmit = async (message: string, currentLanguage: "en" | "es") => {
-    setLanguage(currentLanguage);
+  const handleSubmit = async (message: string, detectedLanguage: "en" | "es" | "fr") => {
+    // Update UI language based on detected language (only for en/es)
+    if (detectedLanguage === "en" || detectedLanguage === "es") {
+      setLanguage(detectedLanguage);
+    }
+    
     const parsed = parseMessage(message);
     if (!parsed) {
       toast({
@@ -29,6 +33,9 @@ export const TravelForm = ({ projectId }: TravelFormProps) => {
     }
 
     try {
+      // Use the language detected from the parser, which may include French
+      const submissionLanguage = parsed.language === "fr" ? "en" : parsed.language;
+      
       const newEntry = {
         name: parsed.name,
         available_spots: parsed.availableSpots,
@@ -37,7 +44,7 @@ export const TravelForm = ({ projectId }: TravelFormProps) => {
         taxi_sharing: parsed.taxiSharing,
         contact: parsed.contact,
         claimed_by: [],
-        language: currentLanguage,
+        language: submissionLanguage,
         project_id: projectId || 'default',
         dietary_restrictions: parsed.dietary_restrictions || null,
         date_time: parsed.date_time || null
