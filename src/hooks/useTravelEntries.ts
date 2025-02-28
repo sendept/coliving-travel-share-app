@@ -70,6 +70,10 @@ export const useTravelEntries = (projectId?: string | null) => {
                 entry.id === payload.new.id ? updatedEntry : entry
               )
             );
+          } else if (payload.eventType === 'DELETE') {
+            setEntries((prev) => 
+              prev.filter((entry) => entry.id !== payload.old.id)
+            );
           }
         }
       )

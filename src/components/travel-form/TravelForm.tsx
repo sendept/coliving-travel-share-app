@@ -28,42 +28,55 @@ export const TravelForm = ({ projectId }: TravelFormProps) => {
       return;
     }
 
-    const newEntry = {
-      name: parsed.name,
-      available_spots: parsed.availableSpots,
-      route: parsed.route,
-      transport: parsed.transport,
-      taxi_sharing: parsed.taxiSharing,
-      contact: parsed.contact,
-      claimed_by: [],
-      language: currentLanguage,
-      project_id: projectId || 'default',
-      dietary_restrictions: parsed.dietary_restrictions || null,
-      date_time: parsed.date_time || null
-    };
+    try {
+      const newEntry = {
+        name: parsed.name,
+        available_spots: parsed.availableSpots,
+        route: parsed.route,
+        transport: parsed.transport,
+        taxi_sharing: parsed.taxiSharing,
+        contact: parsed.contact,
+        claimed_by: [],
+        language: currentLanguage,
+        project_id: projectId || 'default',
+        dietary_restrictions: parsed.dietary_restrictions || null,
+        date_time: parsed.date_time || null
+      };
 
-    const { error } = await createTravelEntry(newEntry);
+      console.log("Submitting new entry:", newEntry);
 
-    if (error) {
-      console.error('Error inserting entry:', error);
+      const { error, data } = await createTravelEntry(newEntry);
+
+      if (error) {
+        console.error('Error inserting entry:', error);
+        toast({
+          title: "Error adding travel plan",
+          description: "Could not save your travel plan: " + error.message,
+          variant: "destructive",
+        });
+        return;
+      }
+
+      console.log("Entry created successfully:", data);
+      
+      setSuccess(true);
+      toast({
+        title: "Travel plan added!",
+        description: "Your travel plan has been successfully added to the list.",
+      });
+
+      // Reset success message after 10 seconds
+      setTimeout(() => {
+        setSuccess(false);
+      }, 10000);
+    } catch (err) {
+      console.error("Unexpected error in handleSubmit:", err);
       toast({
         title: "Error adding travel plan",
-        description: "Could not save your travel plan",
+        description: "An unexpected error occurred",
         variant: "destructive",
       });
-      return;
     }
-
-    setSuccess(true);
-    toast({
-      title: "Travel plan added!",
-      description: "Your travel plan has been successfully added to the list.",
-    });
-
-    // Reset success message after 10 seconds
-    setTimeout(() => {
-      setSuccess(false);
-    }, 10000);
   };
 
   const successMessage = language === "es" 
