@@ -83,36 +83,34 @@ export const ChatInput = ({
           onChange={handleMessageChange}
           onKeyDown={handleKeyDown}
           placeholder="" 
-          className="min-h-[156px] resize-none border-0 bg-[#FFFFFF] rounded-none pt-[40px] px-[40px] pb-[60px] focus:ring-0 focus:outline-none text-sm" 
+          className="min-h-[156px] resize-none border-0 bg-[#FFFFFF] rounded-none p-10 focus:ring-0 focus:outline-none text-sm" 
         />
-        <div className="absolute text-gray-500 w-full h-full top-0 left-0 p-6 pointer-events-none">
+        <div className="absolute text-gray-500 w-full h-full top-0 left-0 p-10 pointer-events-none">
           {!message && (
-            <div className="p-4">
-              <p className="text-sm text-left font-normal opacity-80">
-                {helpText}
-              </p>
-            </div>
+            <p className="text-sm text-left font-normal opacity-80">
+              {helpText}
+            </p>
           )}
         </div>
-      </div>
-      <div className="absolute bottom-4 right-4 flex items-center">
-        <div className="mr-3 text-xs">
-          <button 
-            type="button"
-            onClick={toggleLanguage} 
-            className="text-gray-500 hover:text-gray-700 focus:outline-none"
-          >
-            <span className={selectedLanguage === "en" ? "font-bold" : "font-normal"}>EN</span>
-            {" / "}
-            <span className={selectedLanguage === "es" ? "font-bold" : "font-normal"}>ES</span>
-          </button>
+        <div className="absolute bottom-10 right-10 flex items-center">
+          <div className="mr-3 text-xs">
+            <button 
+              type="button"
+              onClick={toggleLanguage} 
+              className="text-gray-500 hover:text-gray-700 focus:outline-none"
+            >
+              <span className={selectedLanguage === "en" ? "font-bold" : "font-normal"}>EN</span>
+              {" / "}
+              <span className={selectedLanguage === "es" ? "font-bold" : "font-normal"}>ES</span>
+            </button>
+          </div>
+          <Button type="submit" className="p-0 m-0 h-auto w-auto bg-transparent hover:bg-transparent">
+            <img src="/lovable-uploads/7c201b73-452d-4ae2-91c1-a85e6b1acd23.png" alt="Send" className="w-6 h-6 sm:w-7 sm:h-7 md:w-8 md:h-8" style={{ 
+              width: 'clamp(1.75rem, 8vw, 2.5rem)', 
+              height: 'clamp(1.75rem, 8vw, 2.5rem)'
+            }} />
+          </Button>
         </div>
-        <Button type="submit" className="p-0 m-0 h-auto w-auto bg-transparent hover:bg-transparent">
-          <img src="/lovable-uploads/7c201b73-452d-4ae2-91c1-a85e6b1acd23.png" alt="Send" className="w-6 h-6 sm:w-7 sm:h-7 md:w-8 md:h-8" style={{ 
-            width: 'clamp(1.75rem, 8vw, 2.5rem)', 
-            height: 'clamp(1.75rem, 8vw, 2.5rem)'
-          }} />
-        </Button>
       </div>
     </form>;
 };
