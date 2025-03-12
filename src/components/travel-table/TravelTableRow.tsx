@@ -1,4 +1,3 @@
-
 import { TableCell, TableRow } from "@/components/ui/table";
 import { Button } from "@/components/ui/button";
 import { ClaimForm } from "./ClaimForm";
@@ -25,26 +24,17 @@ const getTransportIcon = (transport: string) => {
   if (transport_lower.includes('train')) return "🚂";
   if (transport_lower.includes('plane') || transport_lower.includes('fly') || transport_lower === "✈️") return "✈️";
   if (transport_lower.includes('car')) return "🚗";
-  // If the transport is already an emoji, return it directly
   if (/\p{Emoji}/u.test(transport)) return transport;
-  return "🚗"; // Default to car if no match
+  return "🚗";
 };
 
-// Function to extract date/time information from a route
 const extractDateTimeInfo = (route: string) => {
-  // Common date patterns
   const datePatterns = [
-    // DD/MM/YYYY or DD-MM-YYYY formats
     /\b\d{1,2}[\/\-\.]\d{1,2}(?:[\/\-\.]\d{2,4})?\b/,
-    // Month names
     /\b(?:Jan(?:uary)?|Feb(?:ruary)?|Mar(?:ch)?|Apr(?:il)?|May|Jun(?:e)?|Jul(?:y)?|Aug(?:ust)?|Sep(?:tember)?|Oct(?:ober)?|Nov(?:ember)?|Dec(?:ember)?)\s+\d{1,2}(?:st|nd|rd|th)?,?\s*(?:\d{2,4})?\b/i,
-    // Time patterns
     /\b(?:\d{1,2}:\d{2}(?::\d{2})?\s*(?:am|pm|AM|PM)?|\d{1,2}\s*(?:am|pm|AM|PM))/,
-    // Words like "tomorrow", "today", etc.
     /\b(?:today|tomorrow|tonight|this\s+(?:morning|afternoon|evening))\b/i,
-    // Spanish date formats
     /\b(?:lunes|martes|miércoles|jueves|viernes|sábado|domingo),?\s+\d{1,2}\s+de\s+(?:enero|febrero|marzo|abril|mayo|junio|julio|agosto|septiembre|octubre|noviembre|diciembre)\b/i,
-    // Common date-related terms with numbers
     /\b(?:fecha|date|día|day|hora|hour|time)[:s\s]+[\w\s\d.,:\-\/]+\b/i
   ];
 
@@ -70,65 +60,42 @@ export const TravelTableRow = ({
   className = ""
 }: TravelTableRowProps) => {
   const isEditing = editingEntry === entry.id;
-  
-  // Extract date/time information from the route
-  const dateTimeInfo = extractDateTimeInfo(entry.route);
+  const transportIcon = getTransportIcon(entry.transport);
 
-  const renderCell = (field: keyof TravelEntry) => {
-    if (isEditing) {
-      return <EditForm entry={entry} editForm={editForm} setEditForm={setEditForm} field={field} onSave={onSaveEdit} />;
-    }
-    if (field === "claimed_by") {
-      const claimedByContent = Array.isArray(entry[field]) && entry[field].length > 0 ? entry[field].join(", ") : "-";
-      return <div>
-          <div className="mb-2">
-            <span className="font-medium text-black">{entry.name}</span>
-            {claimedByContent !== "-" && (
-              <div className="text-gray-600">+ {claimedByContent}</div>
-            )}
-          </div>
-          <div className="mb-2">
-            <span className="text-xs text-gray-500">{entry.available_spots} spots available</span>
-            <br/>
-            <span className="text-xs text-gray-500">{entry.available_spots} {entry.available_spots === 1 ? 'Plaza' : 'Plazas'}</span>
-          </div>
-          {entry.available_spots > 0 && <div>
-            <ClaimForm entry={entry} onClaim={onClaimSpot} />
-            <div className="text-[9px] text-gray-500 mt-1">join/unete as co-traveller</div>
-          </div>}
-        </div>;
-    }
-    if (field === "route") {
-      const transportIcon = getTransportIcon(entry.transport);
-      return <div className="whitespace-pre-line">
-        <span className="mr-2 text-lg">{transportIcon}</span>
-        {entry[field]}
-        <div 
-          className="text-[9px] text-gray-500 mt-1 hover:text-blue-500 cursor-pointer"
-          onClick={() => onStartEdit(entry)}
-        >
-          Click to edit route
-        </div>
-      </div>;
-    }
-    if (field === "date_time") {
-      const dateTimeValue = entry.date_time || dateTimeInfo || "-";
-      return (
-        <div>
-          <div className="mb-0">{dateTimeValue}</div>
-          <div 
-            className="text-[9px] text-gray-500 mt-0 hover:text-blue-500 cursor-pointer"
-            onClick={() => onStartEdit(entry)}
-          >
-            Click to edit
+  const renderMobileLayout = () => (
+    <div className="md:hidden p-4 border-b">
+      <div className="mb-4">
+        <h3 className="text-gray-600 mb-2">Travel together with {entry.name}</h3>
+        <div className="flex items-start gap-2">
+          <span className="text-lg">{transportIcon}</span>
+          <div>
+            <div className="font-medium">{entry.route}</div>
+            <div className="text-xs text-gray-500 mt-1">
+              {entry.name} can edit errors here
+            </div>
           </div>
         </div>
-      );
-    }
-    return entry[field] || "-";
-  };
+      </div>
 
-  return <TableRow className={className}>
+      {Array.isArray(entry.claimed_by) && entry.claimed_by.length > 0 && (
+        <div className="mb-3 text-sm">
+          + {entry.claimed_by.join(", ")} travel with {entry.name}
+        </div>
+      )}
+
+      <div className="space-y-2">
+        <div className="text-sm text-gray-600">
+          {entry.available_spots} spot{entry.available_spots !== 1 ? 's' : ''} left
+          <br />
+          {entry.available_spots} plaza{entry.available_spots !== 1 ? 's' : ''} disponible
+        </div>
+        <ClaimForm entry={entry} onClaim={onClaimSpot} />
+      </div>
+    </div>
+  );
+
+  const renderDesktopLayout = () => (
+    <TableRow className={`hidden md:table-row ${className}`}>
       <TableCell className="w-[80px]">
         {isEditing ? <div className="flex space-x-2">
             <Button variant="ghost" size="icon" onClick={onSaveEdit} className="h-8 w-8">
@@ -152,5 +119,66 @@ export const TravelTableRow = ({
       <TableCell className="whitespace-pre-line">
         {renderCell("dietary_restrictions")}
       </TableCell>
-    </TableRow>;
+    </TableRow>
+  );
+
+  return (
+    <>
+      {renderMobileLayout()}
+      {renderDesktopLayout()}
+    </>
+  );
+};
+
+const renderCell = (field: keyof TravelEntry) => {
+  if (isEditing) {
+    return <EditForm entry={entry} editForm={editForm} setEditForm={setEditForm} field={field} onSave={onSaveEdit} />;
+  }
+  if (field === "claimed_by") {
+    const claimedByContent = Array.isArray(entry[field]) && entry[field].length > 0 ? entry[field].join(", ") : "-";
+    return <div>
+        <div className="mb-2">
+          <span className="font-medium text-black">{entry.name}</span>
+          {claimedByContent !== "-" && (
+            <div className="text-gray-600">+ {claimedByContent}</div>
+          )}
+        </div>
+        <div className="mb-2">
+          <span className="text-xs text-gray-500">{entry.available_spots} spots available</span>
+          <br/>
+          <span className="text-xs text-gray-500">{entry.available_spots} {entry.available_spots === 1 ? 'Plaza' : 'Plazas'}</span>
+        </div>
+        {entry.available_spots > 0 && <div>
+          <ClaimForm entry={entry} onClaim={onClaimSpot} />
+          <div className="text-[9px] text-gray-500 mt-1">join/unete as co-traveller</div>
+        </div>}
+      </div>;
+  }
+  if (field === "route") {
+    return <div className="whitespace-pre-line">
+      <span className="mr-2 text-lg">{transportIcon}</span>
+      {entry[field]}
+      <div 
+        className="text-[9px] text-gray-500 mt-1 hover:text-blue-500 cursor-pointer"
+        onClick={() => onStartEdit(entry)}
+      >
+        Click to edit route
+      </div>
+    </div>;
+  }
+  if (field === "date_time") {
+    const dateTimeValue = entry.date_time || extractDateTimeInfo(entry.route) || "-";
+    return (
+      <div>
+        <div className="mb-0">{dateTimeValue}</div>
+        <div 
+          className="text-[9px] text-gray-500 mt-0 hover:text-blue-500 cursor-pointer"
+          onClick={() => onStartEdit(entry)}
+        >
+          Click to edit
+        </div>
+      </div>
+    );
+  }
+  return entry[field] || "-";
 };

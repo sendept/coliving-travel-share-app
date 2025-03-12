@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -44,7 +43,7 @@ export const ClaimForm = ({ entry, onClaim }: ClaimFormProps) => {
   };
 
   return (
-    <div className="flex gap-2">
+    <div className="flex gap-2 items-center">
       <Input
         placeholder="Name/Nombre"
         value={claimName}
@@ -55,10 +54,9 @@ export const ClaimForm = ({ entry, onClaim }: ClaimFormProps) => {
       <Button
         variant="secondary"
         onClick={handleClaim}
-        className="bg-[#F97316] hover:bg-[#F97316]/90 text-white"
+        className="bg-[#F97316] hover:bg-[#F97316]/90 text-white whitespace-nowrap"
       >
-        <span>Join</span>
-        <span className="text-white/70 ml-1">/ Únete</span>
+        Join / Únete
       </Button>
     </div>
   );

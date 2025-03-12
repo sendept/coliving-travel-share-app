@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { Table, TableBody, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { useToast } from "@/hooks/use-toast";
@@ -6,7 +5,6 @@ import { supabase } from "@/integrations/supabase/client";
 import { TravelTableRow } from "./TravelTableRow";
 import { getTranslation } from "@/lib/translations";
 import type { TravelEntry, TravelTableProps } from "./types";
-export type { TravelEntry } from "./types";
 
 export const TravelTable = ({
   entries,
@@ -32,13 +30,11 @@ export const TravelTable = ({
     if (!editingEntry || !editForm) return;
     
     try {
-      // Create a clean update object
       const updateData: Partial<TravelEntry> = {
         ...editForm,
         last_edited_at: new Date().toISOString()
       };
       
-      // Handle empty strings for nullable fields
       if (updateData.date_time === '') {
         updateData.date_time = null;
       }
@@ -81,28 +77,35 @@ export const TravelTable = ({
     }
   };
   
-  // Updated to handle 'fr' language type
   const language: 'en' | 'es' | 'fr' = entries[0]?.language || 'en';
   
-  return <div className="relative min-h-[calc(100vh-400px)]">
-      <div className="bg-[#F5F5F5] p-4 rounded-lg">
-        <div className="text-left mb-16 md:hidden flex flex-col items-center">
-          <div className="text-center">
-            <p className="text-[9px] text-gray-500">Desliza hacia la derecha para editar o ver tu texto</p>
-            <p className="text-[9px] text-gray-500">Scroll to the right to see or edit your text</p>
-          </div>
-          <div className="flex items-center justify-center mt-2">
-            <img src="/lovable-uploads/0347ed37-e470-46cd-a263-99763613105a.png" alt="Scroll" className="h-12 w-12 object-contain" />
-          </div>
-        </div>
+  return (
+    <div className="relative">
+      <div className="md:hidden bg-white rounded-lg overflow-hidden">
+        {entries.map((entry) => (
+          <TravelTableRow
+            key={entry.id}
+            entry={entry}
+            editingEntry={editingEntry}
+            editForm={editForm}
+            setEditForm={setEditForm}
+            onSaveEdit={handleSaveEdit}
+            onCancelEdit={handleCancelEdit}
+            onStartEdit={handleStartEdit}
+            onClaimSpot={onClaimSpot}
+          />
+        ))}
+      </div>
+
+      <div className="hidden md:block bg-[#F5F5F5] p-4 rounded-lg">
         <div className="lg:overflow-visible overflow-x-auto overflow-y-auto scrollbar-visible" style={{
-        scrollbarWidth: 'thin',
-        scrollbarColor: '#888 #F5F5F5',
-        transform: 'rotateX(180deg)'
-      }}>
-          <div style={{
+          scrollbarWidth: 'thin',
+          scrollbarColor: '#888 #F5F5F5',
           transform: 'rotateX(180deg)'
         }}>
+          <div style={{
+            transform: 'rotateX(180deg)'
+          }}>
             <Table className="w-full">
               <TableHeader>
                 <TableRow className="border-none bg-[#F5F5F5]">
@@ -138,18 +141,19 @@ export const TravelTable = ({
             </Table>
           </div>
         </div>
-        {/* Vertical bug report link */}
-        <div className="absolute bottom-4 right-4 md:right-6 lg:right-8 origin-bottom-right rotate-90 transform z-10">
-          <a 
-            href="https://airtable.com/appSEq5rTb2wminZh/shrevCpLAyaJQJXS5" 
-            target="_blank" 
-            rel="noopener noreferrer" 
-            className="text-[9px] text-[#F97316] hover:text-[#F97316]/80 underline whitespace-nowrap px-0 py-0 mx-[10px] my-0 block mt-4"
-          >
-            Report a bug or suggest changes
-          </a>
-        </div>
       </div>
+
+      <div className="absolute bottom-4 right-4 md:right-6 lg:right-8 origin-bottom-right rotate-90 transform z-10">
+        <a 
+          href="https://airtable.com/appSEq5rTb2wminZh/shrevCpLAyaJQJXS5" 
+          target="_blank" 
+          rel="noopener noreferrer" 
+          className="text-[9px] text-[#F97316] hover:text-[#F97316]/80 underline whitespace-nowrap px-0 py-0 mx-[10px] my-0 block mt-4"
+        >
+          Report a bug or suggest changes
+        </a>
+      </div>
+
       <footer className="fixed bottom-0 left-0 right-0 text-center text-sm text-muted-foreground py-4 mt-[90px] bg-white">
         <span className="inline-flex items-center">
           Feel free to use it. Built by
@@ -158,5 +162,6 @@ export const TravelTable = ({
           </a>
         </span>
       </footer>
-    </div>;
+    </div>
+  );
 };
