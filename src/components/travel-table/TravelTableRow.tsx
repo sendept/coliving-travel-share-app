@@ -1,3 +1,4 @@
+
 import { TableCell, TableRow } from "@/components/ui/table";
 import { Button } from "@/components/ui/button";
 import { ClaimForm } from "./ClaimForm";
@@ -62,6 +63,75 @@ export const TravelTableRow = ({
   const isEditing = editingEntry === entry.id;
   const transportIcon = getTransportIcon(entry.transport);
 
+  const renderCell = (field: keyof TravelEntry) => {
+    if (isEditing) {
+      return <EditForm 
+        entry={entry} 
+        editForm={editForm} 
+        setEditForm={setEditForm} 
+        field={field} 
+        onSave={onSaveEdit} 
+      />;
+    }
+
+    if (field === "claimed_by") {
+      const claimedByContent = Array.isArray(entry[field]) && entry[field].length > 0 ? entry[field].join(", ") : "-";
+      return (
+        <div>
+          <div className="mb-2">
+            <span className="font-medium text-black">{entry.name}</span>
+            {claimedByContent !== "-" && (
+              <div className="text-gray-600">+ {claimedByContent}</div>
+            )}
+          </div>
+          <div className="mb-2">
+            <span className="text-xs text-gray-500">{entry.available_spots} spots available</span>
+            <br/>
+            <span className="text-xs text-gray-500">{entry.available_spots} {entry.available_spots === 1 ? 'Plaza' : 'Plazas'}</span>
+          </div>
+          {entry.available_spots > 0 && (
+            <div>
+              <ClaimForm entry={entry} onClaim={onClaimSpot} />
+              <div className="text-[9px] text-gray-500 mt-1">join/unete as co-traveller</div>
+            </div>
+          )}
+        </div>
+      );
+    }
+
+    if (field === "route") {
+      return (
+        <div className="whitespace-pre-line">
+          <span className="mr-2 text-lg">{transportIcon}</span>
+          {entry[field]}
+          <div 
+            className="text-[9px] text-gray-500 mt-1 hover:text-blue-500 cursor-pointer"
+            onClick={() => onStartEdit(entry)}
+          >
+            Click to edit route
+          </div>
+        </div>
+      );
+    }
+
+    if (field === "date_time") {
+      const dateTimeValue = entry.date_time || extractDateTimeInfo(entry.route) || "-";
+      return (
+        <div>
+          <div className="mb-0">{dateTimeValue}</div>
+          <div 
+            className="text-[9px] text-gray-500 mt-0 hover:text-blue-500 cursor-pointer"
+            onClick={() => onStartEdit(entry)}
+          >
+            Click to edit
+          </div>
+        </div>
+      );
+    }
+
+    return entry[field] || "-";
+  };
+
   const renderMobileLayout = () => (
     <div className="md:hidden p-4 border-b">
       <div className="mb-4">
@@ -97,16 +167,20 @@ export const TravelTableRow = ({
   const renderDesktopLayout = () => (
     <TableRow className={`hidden md:table-row ${className}`}>
       <TableCell className="w-[80px]">
-        {isEditing ? <div className="flex space-x-2">
+        {isEditing ? (
+          <div className="flex space-x-2">
             <Button variant="ghost" size="icon" onClick={onSaveEdit} className="h-8 w-8">
               <Check className="h-4 w-4" />
             </Button>
             <Button variant="ghost" size="icon" onClick={onCancelEdit} className="h-8 w-8">
               <X className="h-4 w-4" />
             </Button>
-          </div> : <Button variant="ghost" size="icon" onClick={() => onStartEdit(entry)} className="h-8 w-8">
+          </div>
+        ) : (
+          <Button variant="ghost" size="icon" onClick={() => onStartEdit(entry)} className="h-8 w-8">
             <Edit2 className="h-4 w-4" />
-          </Button>}
+          </Button>
+        )}
       </TableCell>
       <TableCell className="whitespace-pre-line py-4 border-r">
         {renderCell("route")}
@@ -130,55 +204,3 @@ export const TravelTableRow = ({
   );
 };
 
-const renderCell = (field: keyof TravelEntry) => {
-  if (isEditing) {
-    return <EditForm entry={entry} editForm={editForm} setEditForm={setEditForm} field={field} onSave={onSaveEdit} />;
-  }
-  if (field === "claimed_by") {
-    const claimedByContent = Array.isArray(entry[field]) && entry[field].length > 0 ? entry[field].join(", ") : "-";
-    return <div>
-        <div className="mb-2">
-          <span className="font-medium text-black">{entry.name}</span>
-          {claimedByContent !== "-" && (
-            <div className="text-gray-600">+ {claimedByContent}</div>
-          )}
-        </div>
-        <div className="mb-2">
-          <span className="text-xs text-gray-500">{entry.available_spots} spots available</span>
-          <br/>
-          <span className="text-xs text-gray-500">{entry.available_spots} {entry.available_spots === 1 ? 'Plaza' : 'Plazas'}</span>
-        </div>
-        {entry.available_spots > 0 && <div>
-          <ClaimForm entry={entry} onClaim={onClaimSpot} />
-          <div className="text-[9px] text-gray-500 mt-1">join/unete as co-traveller</div>
-        </div>}
-      </div>;
-  }
-  if (field === "route") {
-    return <div className="whitespace-pre-line">
-      <span className="mr-2 text-lg">{transportIcon}</span>
-      {entry[field]}
-      <div 
-        className="text-[9px] text-gray-500 mt-1 hover:text-blue-500 cursor-pointer"
-        onClick={() => onStartEdit(entry)}
-      >
-        Click to edit route
-      </div>
-    </div>;
-  }
-  if (field === "date_time") {
-    const dateTimeValue = entry.date_time || extractDateTimeInfo(entry.route) || "-";
-    return (
-      <div>
-        <div className="mb-0">{dateTimeValue}</div>
-        <div 
-          className="text-[9px] text-gray-500 mt-0 hover:text-blue-500 cursor-pointer"
-          onClick={() => onStartEdit(entry)}
-        >
-          Click to edit
-        </div>
-      </div>
-    );
-  }
-  return entry[field] || "-";
-};
