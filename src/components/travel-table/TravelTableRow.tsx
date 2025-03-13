@@ -152,12 +152,12 @@ export const TravelTableRow = ({
       <div className="mb-5">
         <div className="flex items-start gap-3">
           <span className="text-lg mt-1">{transportIcon}</span>
-          <div className="flex-1">
+          <div className="flex-1 text-left">
             <div className="font-medium text-[#222222] text-base">
               {getMobileRouteWithContact()}
             </div>
             <div 
-              className="text-xs text-gray-500 mt-2 hover:text-blue-500 cursor-pointer"
+              className="text-xs text-gray-500 mt-2 hover:text-blue-500 cursor-pointer text-left"
               onClick={() => onStartEdit(entry)}
             >
               {entry.name} can edit errors here
@@ -170,7 +170,7 @@ export const TravelTableRow = ({
         <ClaimForm entry={entry} onClaim={onClaimSpot} />
       </div>
 
-      <div className="text-sm text-gray-600 mt-4">
+      <div className="text-sm text-gray-600 mt-4 opacity-85">
         {Array.isArray(entry.claimed_by) && entry.claimed_by.length > 0 ? (
           <div>
             {entry.name}, {entry.claimed_by.join(", ")} + {entry.available_spots} spot{entry.available_spots !== 1 ? 's' : ''} left / {entry.available_spots} plaza{entry.available_spots !== 1 ? 's' : ''} disponible
