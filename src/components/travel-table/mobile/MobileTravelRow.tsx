@@ -33,7 +33,7 @@ export const MobileTravelRow = ({ entry, onStartEdit, onClaimSpot }: MobileTrave
         <div className="flex items-start gap-3">
           <span className="text-xl mt-1">{transportIcon}</span>
           <div className="flex-1 text-left">
-            <div className="font-medium text-[#222222] text-base mb-2 px-3 py-2 bg-gray-50 rounded-lg">
+            <div className="font-medium text-[#222222] text-base mb-2 px-3 py-2 rounded-lg">
               {getMobileRouteWithContact()}
             </div>
             <button 

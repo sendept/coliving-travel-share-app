@@ -44,17 +44,6 @@ const Index = () => {
       </div>
       <div className="py-8 space-y-8">
         <div className="relative">
-          <div className="text-center my-4">
-            <div className="mt-4 mb-5 text-sm text-gray-500 flex items-center justify-center gap-2 font-medium">
-              <span className="mt-4 mb-5">View or join other shared rides / Baja para ver o unirte a otros viajes</span>
-              <img 
-                src="/lovable-uploads/7b37375b-3bd2-4a96-b1a3-2e2a6a7bcbbb.png" 
-                alt="Scroll down" 
-                className="h-8 w-8 object-contain" 
-                loading="lazy"
-              />
-            </div>
-          </div>
           <div className="product-hunt-card px-0 py-0 lg:w-screen lg:max-w-none lg:left-1/2 lg:right-1/2 lg:ml-[-50vw] lg:mr-[-50vw] lg:relative">
             <TravelTable entries={entries} onClaimSpot={handleClaimSpot} />
           </div>
@@ -67,6 +56,16 @@ const Index = () => {
             <span className="text-gray-500">Comparte tu plan de viaje aquí</span>
           </h2>
           <TravelForm />
+          <div className="mt-4 text-center">
+            <a 
+              href="https://airtable.com/appSEq5rTb2wminZh/shrevCpLAyaJQJXS5" 
+              target="_blank" 
+              rel="noopener noreferrer" 
+              className="text-[#F97316] hover:text-[#F97316]/80 underline text-sm"
+            >
+              Report a bug or suggest changes
+            </a>
+          </div>
         </div>
       </div>
       <footer className="fixed bottom-0 left-0 right-0 text-center text-sm text-muted-foreground py-4 bg-white">
