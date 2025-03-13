@@ -134,12 +134,17 @@ export const TravelTableRow = ({
 
   const renderMobileLayout = () => (
     <div className="md:hidden p-4 border-b">
+      <div className="bg-gray-200 inline-block px-4 py-1 rounded-full mb-3">
+        <h3 className="text-gray-600 text-sm">Travel together with {entry.name}</h3>
+      </div>
+      
       <div className="mb-4">
-        <h3 className="text-gray-600 mb-2">Travel together with {entry.name}</h3>
         <div className="flex items-start gap-2">
           <span className="text-lg">{transportIcon}</span>
           <div>
-            <div className="font-medium">{entry.route}</div>
+            <div className="font-medium text-[#222222] text-base">
+              {entry.route}
+            </div>
             <div className="text-xs text-gray-500 mt-1">
               {entry.name} can edit errors here
             </div>
@@ -147,19 +152,20 @@ export const TravelTableRow = ({
         </div>
       </div>
 
-      {Array.isArray(entry.claimed_by) && entry.claimed_by.length > 0 && (
-        <div className="mb-3 text-sm">
-          + {entry.claimed_by.join(", ")} travel with {entry.name}
-        </div>
-      )}
-
-      <div className="space-y-2">
-        <div className="text-sm text-gray-600">
-          {entry.available_spots} spot{entry.available_spots !== 1 ? 's' : ''} left
-          <br />
-          {entry.available_spots} plaza{entry.available_spots !== 1 ? 's' : ''} disponible
-        </div>
+      <div className="mb-3 flex gap-2 items-center">
         <ClaimForm entry={entry} onClaim={onClaimSpot} />
+      </div>
+
+      <div className="text-sm text-gray-600">
+        {Array.isArray(entry.claimed_by) && entry.claimed_by.length > 0 ? (
+          <div>
+            {entry.name}, {entry.claimed_by.join(", ")} + {entry.available_spots} spot{entry.available_spots !== 1 ? 's' : ''} left / {entry.available_spots} plaza{entry.available_spots !== 1 ? 's' : ''} disponible
+          </div>
+        ) : (
+          <div>
+            {entry.name} + {entry.available_spots} spot{entry.available_spots !== 1 ? 's' : ''} left / {entry.available_spots} plaza{entry.available_spots !== 1 ? 's' : ''} disponible
+          </div>
+        )}
       </div>
     </div>
   );
@@ -203,4 +209,3 @@ export const TravelTableRow = ({
     </>
   );
 };
-

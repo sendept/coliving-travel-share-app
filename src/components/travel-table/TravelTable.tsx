@@ -1,3 +1,4 @@
+
 import { useState } from "react";
 import { Table, TableBody, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { useToast } from "@/hooks/use-toast";
@@ -81,7 +82,7 @@ export const TravelTable = ({
   
   return (
     <div className="relative">
-      <div className="md:hidden bg-white rounded-lg overflow-hidden">
+      <div className="md:hidden bg-white rounded-xl overflow-hidden shadow-sm">
         {entries.map((entry) => (
           <TravelTableRow
             key={entry.id}
