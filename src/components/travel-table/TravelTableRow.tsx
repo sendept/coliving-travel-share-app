@@ -1,3 +1,4 @@
+
 import { TableCell, TableRow } from "@/components/ui/table";
 import { Button } from "@/components/ui/button";
 import { ClaimForm } from "./ClaimForm";
@@ -80,7 +81,7 @@ export const TravelTableRow = ({
           <div className="mb-2">
             <span className="font-medium text-black">{entry.name}</span>
             {claimedByContent !== "-" && (
-              <div className="text-gray-600">+ {claimedByContent}</div>
+              <div className="text-gray-600 opacity-85">{claimedByContent}</div>
             )}
           </div>
           <div className="mb-2">
@@ -151,11 +152,11 @@ export const TravelTableRow = ({
         <div className="flex items-start gap-3">
           <span className="text-xl mt-1">{transportIcon}</span>
           <div className="flex-1 text-left">
-            <div className="font-medium text-[#222222] text-base">
+            <div className="font-medium text-[#222222] text-base mb-2 px-3 py-2 bg-gray-50 rounded-lg">
               {getMobileRouteWithContact()}
             </div>
             <button 
-              className="text-xs text-gray-500 mt-2 hover:text-blue-500 cursor-pointer text-left"
+              className="text-xs text-gray-500 hover:text-blue-500 cursor-pointer text-left ml-2"
               onClick={() => onStartEdit(entry)}
             >
               {entry.name} can edit errors here

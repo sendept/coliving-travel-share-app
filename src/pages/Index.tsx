@@ -38,7 +38,7 @@ const Index = () => {
   const headerComponent = useMemo(() => <PageHeader />, []);
   
   return (
-    <div className="product-hunt-container relative pb-20">
+    <div className="product-hunt-container relative pb-32">
       <div>
         {headerComponent}
       </div>
@@ -60,8 +60,12 @@ const Index = () => {
           </div>
         </div>
         
-        <div className="mt-8 text-center">
-          <h2 className="text-lg font-medium mb-3">Share your Travel plan here / Comparte tu plan de viaje aquí</h2>
+        <div className="mt-12 text-center mb-16">
+          <h2 className="text-lg font-medium mb-3">
+            <span>Share your Travel plan here</span>
+            <br />
+            <span className="text-gray-500">Comparte tu plan de viaje aquí</span>
+          </h2>
           <TravelForm />
         </div>
       </div>
