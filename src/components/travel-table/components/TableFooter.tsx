@@ -3,7 +3,7 @@ import React from "react";
 
 export const TableFooter = () => {
   return (
-    <footer className="fixed bottom-0 left-0 right-0 text-center text-sm text-muted-foreground py-4 mt-[40px] bg-white">
+    <footer className="fixed bottom-0 left-0 right-0 text-center text-sm text-muted-foreground py-2 mt-[40px] bg-white">
       <span className="inline-flex items-center">
         Feel free to use it. Built by
         <a href="https://sende.co" target="_blank" rel="noopener noreferrer" className="inline-flex items-center ml-1">

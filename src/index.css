@@ -158,6 +158,11 @@ button, a {
   @apply min-h-[44px] sm:min-h-[36px] px-4 py-2;
 }
 
+/* Small links exception */
+.text-[9px] {
+  @apply min-h-0 py-0;
+}
+
 /* Safe area insets for modern iOS devices */
 @supports (padding: max(0px)) {
   .product-hunt-container {
@@ -185,6 +190,6 @@ button, a {
 
 /* Bug report link */
 .bug-report-link {
-  @apply text-[#F97316] hover:text-[#F97316]/80 underline whitespace-nowrap;
+  @apply text-[#F97316] hover:text-[#F97316]/80 underline whitespace-nowrap text-[9px] text-left;
   z-index: 50;
 }

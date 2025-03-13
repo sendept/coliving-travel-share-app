@@ -1,4 +1,3 @@
-
 import { TravelTable } from "@/components/travel-table/TravelTable";
 import { PageHeader } from "@/components/PageHeader";
 import { TravelForm } from "@/components/travel-form/TravelForm";
@@ -11,7 +10,6 @@ const Index = () => {
   const entries = useTravelEntries();
   const { toast } = useToast();
   
-  // Memoize the handler to prevent unnecessary re-renders
   const handleClaimSpot = useCallback(async (id: string, name: string) => {
     const entry = entries.find(e => e.id === id);
     if (!entry) return;
@@ -34,9 +32,8 @@ const Index = () => {
     });
   }, [entries, toast]);
 
-  // Memoize the rendered components to prevent unnecessary re-renders
   const headerComponent = useMemo(() => <PageHeader />, []);
-  
+
   return (
     <div className="product-hunt-container relative pb-32">
       <div>
@@ -56,19 +53,19 @@ const Index = () => {
             <span className="text-gray-500">Comparte tu plan de viaje aquí</span>
           </h2>
           <TravelForm />
-          <div className="mt-4 text-center">
+          <div className="mt-2 text-left px-4 mb-[40px]">
             <a 
               href="https://airtable.com/appSEq5rTb2wminZh/shrevCpLAyaJQJXS5" 
               target="_blank" 
               rel="noopener noreferrer" 
-              className="text-[#F97316] hover:text-[#F97316]/80 underline text-sm"
+              className="text-[#F97316] hover:text-[#F97316]/80 underline text-[9px]"
             >
               Report a bug or suggest changes
             </a>
           </div>
         </div>
       </div>
-      <footer className="fixed bottom-0 left-0 right-0 text-center text-sm text-muted-foreground py-4 bg-white">
+      <footer className="fixed bottom-0 left-0 right-0 text-center text-sm text-muted-foreground py-2 bg-white">
         <span className="inline-flex items-center gap-1 mx-0">
           Feel free to use it. Built by
           <a href="https://sende.co" target="_blank" rel="noopener noreferrer" className="px-0">
