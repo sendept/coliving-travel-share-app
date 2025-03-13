@@ -36,7 +36,6 @@ const Index = () => {
 
   // Memoize the rendered components to prevent unnecessary re-renders
   const headerComponent = useMemo(() => <PageHeader />, []);
-  const formComponent = useMemo(() => <TravelForm />, []);
   
   return (
     <div className="product-hunt-container relative pb-20">
@@ -44,7 +43,6 @@ const Index = () => {
         {headerComponent}
       </div>
       <div className="py-8 space-y-8">
-        {formComponent}
         <div className="relative">
           <div className="text-center my-4">
             <div className="mt-4 mb-5 text-sm text-gray-500 flex items-center justify-center gap-2 font-medium">
@@ -53,13 +51,18 @@ const Index = () => {
                 src="/lovable-uploads/7b37375b-3bd2-4a96-b1a3-2e2a6a7bcbbb.png" 
                 alt="Scroll down" 
                 className="h-8 w-8 object-contain" 
-                loading="lazy" // Optimize image loading
+                loading="lazy"
               />
             </div>
           </div>
           <div className="product-hunt-card px-0 py-0 lg:w-screen lg:max-w-none lg:left-1/2 lg:right-1/2 lg:ml-[-50vw] lg:mr-[-50vw] lg:relative">
             <TravelTable entries={entries} onClaimSpot={handleClaimSpot} />
           </div>
+        </div>
+        
+        <div className="mt-8 text-center">
+          <h2 className="text-lg font-medium mb-3">Share your Travel plan here / Comparte tu plan de viaje aquí</h2>
+          <TravelForm />
         </div>
       </div>
       <footer className="fixed bottom-0 left-0 right-0 text-center text-sm text-muted-foreground py-4 bg-white">
@@ -70,7 +73,7 @@ const Index = () => {
               src="/lovable-uploads/5939e496-5d0c-421e-9294-eb688e353313.png" 
               alt="Sende" 
               className="h-6" 
-              loading="lazy" // Optimize image loading
+              loading="lazy"
             />
           </a>
         </span>
