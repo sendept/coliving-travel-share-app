@@ -6,10 +6,12 @@ import { useTravelEntries } from "@/hooks/useTravelEntries";
 import { useToast } from "@/hooks/use-toast";
 import { claimTravelSpot } from "@/services/travelEntryService";
 import { useCallback, useMemo } from "react";
+import { useIsMobile } from "@/hooks/use-mobile";
 
 const Index = () => {
   const entries = useTravelEntries();
   const { toast } = useToast();
+  const isMobile = useIsMobile();
   
   const handleClaimSpot = useCallback(async (id: string, name: string) => {
     const entry = entries.find(e => e.id === id);
@@ -48,7 +50,7 @@ const Index = () => {
         </div>
         
         <div className="mt-12 text-center mb-16">
-          <h2 className="text-lg font-medium mb-3">
+          <h2 className={`text-lg font-medium mb-3 ${isMobile ? 'mx-auto text-center w-full' : ''}`}>
             <span>Share your Travel plan here</span>
             <br />
             <span className="text-gray-500">Comparte tu plan de viaje aquí</span>
