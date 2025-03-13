@@ -132,31 +132,45 @@ export const TravelTableRow = ({
     return entry[field] || "-";
   };
 
+  const getMobileRouteWithContact = () => {
+    let routeText = entry.route;
+    
+    // Add contact information to route display if available
+    if (entry.contact) {
+      routeText += `\n\nContact: ${entry.contact}`;
+    }
+    
+    return routeText;
+  };
+
   const renderMobileLayout = () => (
-    <div className="md:hidden p-4 border-b">
-      <div className="bg-gray-200 inline-block px-4 py-1 rounded-full mb-3">
+    <div className="md:hidden p-5 border-b mb-3">
+      <div className="bg-gray-200 inline-block px-4 py-1 rounded-full mb-4">
         <h3 className="text-gray-600 text-sm">Travel together with {entry.name}</h3>
       </div>
       
-      <div className="mb-4">
-        <div className="flex items-start gap-2">
-          <span className="text-lg">{transportIcon}</span>
-          <div>
+      <div className="mb-5">
+        <div className="flex items-start gap-3">
+          <span className="text-lg mt-1">{transportIcon}</span>
+          <div className="flex-1">
             <div className="font-medium text-[#222222] text-base">
-              {entry.route}
+              {getMobileRouteWithContact()}
             </div>
-            <div className="text-xs text-gray-500 mt-1">
+            <div 
+              className="text-xs text-gray-500 mt-2 hover:text-blue-500 cursor-pointer"
+              onClick={() => onStartEdit(entry)}
+            >
               {entry.name} can edit errors here
             </div>
           </div>
         </div>
       </div>
 
-      <div className="mb-3 flex gap-2 items-center">
+      <div className="mb-5">
         <ClaimForm entry={entry} onClaim={onClaimSpot} />
       </div>
 
-      <div className="text-sm text-gray-600">
+      <div className="text-sm text-gray-600 mt-4">
         {Array.isArray(entry.claimed_by) && entry.claimed_by.length > 0 ? (
           <div>
             {entry.name}, {entry.claimed_by.join(", ")} + {entry.available_spots} spot{entry.available_spots !== 1 ? 's' : ''} left / {entry.available_spots} plaza{entry.available_spots !== 1 ? 's' : ''} disponible
