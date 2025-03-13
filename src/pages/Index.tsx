@@ -1,3 +1,4 @@
+
 import { TravelTable } from "@/components/travel-table/TravelTable";
 import { PageHeader } from "@/components/PageHeader";
 import { TravelForm } from "@/components/travel-form/TravelForm";
@@ -53,7 +54,7 @@ const Index = () => {
             <span className="text-gray-500">Comparte tu plan de viaje aquí</span>
           </h2>
           <TravelForm />
-          <div className="mt-2 text-left px-4 mb-[40px]">
+          <div className="mt-2 text-center mb-[40px]">
             <a 
               href="https://airtable.com/appSEq5rTb2wminZh/shrevCpLAyaJQJXS5" 
               target="_blank" 

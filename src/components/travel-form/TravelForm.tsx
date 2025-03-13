@@ -76,6 +76,22 @@ export const TravelForm = ({ projectId }: TravelFormProps) => {
       setTimeout(() => {
         setSuccess(false);
       }, 10000);
+      
+      // Scroll to the new entry in the table
+      setTimeout(() => {
+        // The id is in the data.id field from the response
+        if (data?.id) {
+          const entryElement = document.getElementById(`entry-${data.id}`);
+          if (entryElement) {
+            entryElement.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            // Briefly highlight the entry
+            entryElement.classList.add('bg-orange-50');
+            setTimeout(() => {
+              entryElement.classList.remove('bg-orange-50');
+            }, 3000);
+          }
+        }
+      }, 1000); // Wait for the table to refresh
     } catch (err) {
       console.error("Unexpected error in handleSubmit:", err);
       toast({

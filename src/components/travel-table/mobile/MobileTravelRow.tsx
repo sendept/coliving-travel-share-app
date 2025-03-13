@@ -3,6 +3,7 @@ import { Button } from "@/components/ui/button";
 import { ClaimForm } from "../ClaimForm";
 import type { TravelEntry } from "../types";
 import { getTransportIcon } from "../utils/transportIconUtils";
+import { getTranslation } from "@/lib/translations";
 
 interface MobileTravelRowProps {
   entry: TravelEntry;
@@ -12,6 +13,7 @@ interface MobileTravelRowProps {
 
 export const MobileTravelRow = ({ entry, onStartEdit, onClaimSpot }: MobileTravelRowProps) => {
   const transportIcon = getTransportIcon(entry.transport);
+  const language = entry.language as "en" | "es" | "fr";
 
   const getMobileRouteWithContact = () => {
     let routeText = entry.route;
@@ -23,8 +25,16 @@ export const MobileTravelRow = ({ entry, onStartEdit, onClaimSpot }: MobileTrave
     return routeText;
   };
 
+  const getEditButtonText = () => {
+    if (language === "es") {
+      return `${entry.name} puede editar errores aquí`;
+    } else {
+      return `${entry.name} can edit errors here`;
+    }
+  };
+
   return (
-    <div className="md:hidden p-5 border-b mb-3 bg-white rounded-xl shadow-sm">
+    <div className="md:hidden p-5 border-b mb-3 bg-white rounded-xl shadow-sm" id={`entry-${entry.id}`}>
       <div className="bg-gray-200 inline-block px-4 py-1 rounded-full mb-4">
         <h3 className="text-gray-600 text-sm">Travel together with {entry.name}</h3>
       </div>
@@ -40,7 +50,7 @@ export const MobileTravelRow = ({ entry, onStartEdit, onClaimSpot }: MobileTrave
               className="text-xs text-gray-500 hover:text-blue-500 cursor-pointer text-left ml-2"
               onClick={() => onStartEdit(entry)}
             >
-              {entry.name} can edit errors here
+              {getEditButtonText()}
             </button>
           </div>
         </div>
