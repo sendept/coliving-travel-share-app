@@ -79,9 +79,10 @@ export const TravelForm = ({ projectId }: TravelFormProps) => {
       
       // Scroll to the new entry in the table
       setTimeout(() => {
-        // The id is in the data.id field from the response
-        if (data?.id) {
-          const entryElement = document.getElementById(`entry-${data.id}`);
+        // Check if data exists and is an array with at least one element
+        if (data && Array.isArray(data) && data.length > 0 && data[0].id) {
+          const entryId = data[0].id;
+          const entryElement = document.getElementById(`entry-${entryId}`);
           if (entryElement) {
             entryElement.scrollIntoView({ behavior: 'smooth', block: 'center' });
             // Briefly highlight the entry
