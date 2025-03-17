@@ -7,6 +7,7 @@ import { useToast } from "@/hooks/use-toast";
 import { claimTravelSpot } from "@/services/travelEntryService";
 import { useCallback, useMemo } from "react";
 import { useIsMobile } from "@/hooks/use-mobile";
+import { getTranslation } from "@/lib/translations";
 
 const Index = () => {
   const entries = useTravelEntries();
@@ -51,10 +52,15 @@ const Index = () => {
         
         <div className="mt-32 text-center mb-32">
           <h2 className={`text-3xl md:text-4xl font-medium mb-10 ${isMobile ? 'mx-auto text-center w-full' : ''}`}>
-            <span>Invite others to travel with you</span>
+            <span>{getTranslation("inviteOthers", "en")}</span>
             <br />
-            <span className="text-gray-500">Comparte tu plan de viaje aquí</span>
+            <span className="text-gray-500">{getTranslation("shareYourCarTaxi", "es")}</span>
           </h2>
+          <p className="mb-8 text-gray-600">
+            {getTranslation("formExplanation", "en")}
+            <br />
+            {getTranslation("formExplanation", "es")}
+          </p>
           <TravelForm />
         </div>
       </div>

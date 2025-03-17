@@ -74,6 +74,16 @@ const translations: Translations = {
     en: "spots remaining",
     es: "Queda",
     fr: "places restantes"
+  },
+  shareYourCarTaxi: {
+    en: "Share your car, taxi or bus",
+    es: "Comparte tu coche, o taxi, o bus",
+    fr: "Partagez votre voiture, taxi ou bus"
+  },
+  formExplanation: {
+    en: "When you fill this form, your answers will be added up in the table",
+    es: "Cuando rellenes este formulario, tus respuestas se añadirán a la tabla",
+    fr: "Lorsque vous remplissez ce formulaire, vos réponses seront ajoutées au tableau"
   }
 };
 

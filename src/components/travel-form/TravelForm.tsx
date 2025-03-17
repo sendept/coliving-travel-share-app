@@ -6,6 +6,7 @@ import { FormLayout } from "./components/FormLayout";
 import { useFormPlaceholders } from "./hooks/useFormPlaceholders";
 import { useTravelForm } from "./hooks/useTravelForm";
 import { TravelFormProps } from "./types";
+import { getTranslation } from "@/lib/translations";
 
 export const TravelForm = ({ projectId }: TravelFormProps) => {
   const {
@@ -30,9 +31,9 @@ export const TravelForm = ({ projectId }: TravelFormProps) => {
           onSubmit={onSubmit} 
           submitLabel={language === "en" ? "Submit" : "Enviar"}
         >
-          <div className="flex items-center justify-between mb-3">
+          <div className="flex items-center justify-between mb-3 mt-2">
             <label className="text-gray-700 text-left block text-sm font-medium">
-              {language === "en" ? "Your name" : "Tu nombre"}
+              {getTranslation("yourName", language)}
             </label>
             <LanguageToggle language={language} onToggle={handleToggleLanguage} />
           </div>
@@ -49,7 +50,7 @@ export const TravelForm = ({ projectId }: TravelFormProps) => {
           <FormField
             name="route"
             control={form.control}
-            label={language === "en" ? "Route" : "Ruta"}
+            label={getTranslation("route", language)}
             placeholder={getPlaceholder("route")}
             isTextarea={true}
             focusedField={focusedField}
@@ -87,7 +88,7 @@ export const TravelForm = ({ projectId }: TravelFormProps) => {
             <FormField
               name="dateTime"
               control={form.control}
-              label={language === "en" ? "Date & time" : "Fecha y hora"}
+              label={getTranslation("dateTime", language)}
               placeholder={getPlaceholder("dateTime")}
               className="flex-1"
               focusedField={focusedField}
@@ -98,7 +99,7 @@ export const TravelForm = ({ projectId }: TravelFormProps) => {
             <FormField
               name="contact"
               control={form.control}
-              label={language === "en" ? "Contact" : "Contacto"}
+              label={getTranslation("contact", language)}
               placeholder={getPlaceholder("contact")}
               className="flex-1"
               focusedField={focusedField}
@@ -110,7 +111,7 @@ export const TravelForm = ({ projectId }: TravelFormProps) => {
           <FormField
             name="dietaryRestrictions"
             control={form.control}
-            label={language === "en" ? "Diet/allergies" : "Dieta/alergias"}
+            label={getTranslation("diet", language)}
             placeholder={getPlaceholder("dietaryRestrictions")}
             focusedField={focusedField}
             onFocus={handleFocus}
