@@ -49,8 +49,8 @@ const Index = () => {
           </div>
         </div>
         
-        <div className="mt-12 text-center mb-24">
-          <h2 className={`text-2xl md:text-3xl font-medium mb-6 ${isMobile ? 'mx-auto text-center w-full' : ''}`}>
+        <div className="mt-24 text-center mb-32">
+          <h2 className={`text-3xl md:text-4xl font-medium mb-10 ${isMobile ? 'mx-auto text-center w-full' : ''}`}>
             <span>Share your Travel plan here</span>
             <br />
             <span className="text-gray-500">Comparte tu plan de viaje aquí</span>

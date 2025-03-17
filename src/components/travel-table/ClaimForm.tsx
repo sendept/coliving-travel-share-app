@@ -44,21 +44,26 @@ export const ClaimForm = ({ entry, onClaim }: ClaimFormProps) => {
   };
 
   return (
-    <div className="flex gap-3 items-center w-full">
-      <Input
-        placeholder="Name / Nombre"
-        value={claimName}
-        onChange={(e) => setClaimName(e.target.value)}
-        onKeyPress={handleKeyPress}
-        className="w-full md:w-32 bg-white border border-gray-200 rounded-full h-[46px] text-center text-base"
-      />
-      <Button
-        variant="secondary"
-        onClick={handleClaim}
-        className="bg-[#F97316] hover:bg-[#F97316]/90 text-white whitespace-nowrap rounded-full h-[46px] px-6 text-base"
-      >
-        Join / Únete
-      </Button>
+    <div className="flex flex-col items-center w-full">
+      <div className="flex gap-3 items-center w-full">
+        <Input
+          placeholder="Name / Nombre"
+          value={claimName}
+          onChange={(e) => setClaimName(e.target.value)}
+          onKeyPress={handleKeyPress}
+          className="w-full md:w-32 bg-white border border-gray-200 rounded-full h-[46px] text-center text-base"
+        />
+        <Button
+          variant="secondary"
+          onClick={handleClaim}
+          className="bg-[#F97316] hover:bg-[#F97316]/90 text-white whitespace-nowrap rounded-full h-[46px] px-6 text-base"
+        >
+          Join / Únete
+        </Button>
+      </div>
+      <div className="text-xs text-gray-500 mt-1 text-center">
+        join/unete as a co-traveller
+      </div>
     </div>
   );
 };

@@ -139,8 +139,8 @@ export const TravelForm = ({ projectId }: TravelFormProps) => {
         route: "Write your route (add any comment)",
         availableSpots: "Number of available spots",
         transport: "Type of transport (car, bus, taxi, etc.)",
-        dateTime: "Write a date and approx hour (e.g., 1.9 around 11:00 am)",
-        contact: "Your contact (preferably WhatsApp number)",
+        dateTime: "Date and approx hour",
+        contact: "Preferably WhatsApp",
         dietaryRestrictions: "Diet/allergies (optional)"
       },
       es: {
@@ -148,8 +148,8 @@ export const TravelForm = ({ projectId }: TravelFormProps) => {
         route: "Escribe tu ruta (añade cualquier comentario)",
         availableSpots: "Número de plazas disponibles",
         transport: "Tipo de transporte (coche, autobús, taxi, etc.)",
-        dateTime: "Escribe una fecha y hora aproximada (ej., 1.9 sobre las 11:00 am)",
-        contact: "Tu contacto (preferiblemente número de WhatsApp)",
+        dateTime: "Fecha y hora aproximada",
+        contact: "Preferiblemente WhatsApp",
         dietaryRestrictions: "Dieta/alergias (opcional)"
       }
     };
@@ -170,18 +170,18 @@ export const TravelForm = ({ projectId }: TravelFormProps) => {
   };
 
   return (
-    <div className="bg-[#FFFFFF] max-w-2xl mx-auto rounded-lg">
-      <div className="relative rounded-lg overflow-hidden">
+    <div className="bg-[#FFFFFF] max-w-2xl mx-auto rounded-xl">
+      <div className="relative rounded-xl overflow-hidden">
         <Form {...form}>
-          <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-5 p-5 md:p-10 bg-[#FFFFFF] rounded-lg">
-            <div className="flex items-center justify-between mb-1">
+          <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-5 p-5 md:p-10 bg-[#FFFFFF] rounded-xl">
+            <div className="flex items-center justify-between mb-3">
               <label className="text-gray-700 text-left block text-sm font-medium">
                 {language === "en" ? "Your name" : "Tu nombre"}
               </label>
               <button 
                 type="button"
                 onClick={handleToggleLanguage} 
-                className="text-gray-500 hover:text-gray-700 focus:outline-none text-xs"
+                className="text-gray-500 hover:text-gray-700 focus:outline-none text-xs ml-2"
               >
                 <span className={language === "en" ? "font-bold" : "font-normal"}>EN</span>
                 {" / "}
@@ -216,7 +216,7 @@ export const TravelForm = ({ projectId }: TravelFormProps) => {
               name="route"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel className="text-gray-700 text-left block mb-1.5 text-sm font-medium">
+                  <FormLabel className="text-gray-700 text-left block mb-3 text-sm font-medium">
                     {language === "en" ? "Route" : "Ruta"}
                   </FormLabel>
                   <FormControl>
@@ -243,7 +243,7 @@ export const TravelForm = ({ projectId }: TravelFormProps) => {
                 name="availableSpots"
                 render={({ field }) => (
                   <FormItem className="flex-1">
-                    <FormLabel className="text-gray-700 text-left block mb-1.5 text-sm font-medium">
+                    <FormLabel className="text-gray-700 text-left block mb-3 text-sm font-medium">
                       {language === "en" ? "Available spots" : "Plazas disponibles"}
                     </FormLabel>
                     <FormControl>
@@ -272,7 +272,7 @@ export const TravelForm = ({ projectId }: TravelFormProps) => {
                 name="transport"
                 render={({ field }) => (
                   <FormItem className="flex-1">
-                    <FormLabel className="text-gray-700 text-left block mb-1.5 text-sm font-medium">
+                    <FormLabel className="text-gray-700 text-left block mb-3 text-sm font-medium">
                       {language === "en" ? "Transport type" : "Tipo de transporte"}
                     </FormLabel>
                     <FormControl>
@@ -293,62 +293,64 @@ export const TravelForm = ({ projectId }: TravelFormProps) => {
               />
             </div>
             
-            <FormField
-              control={form.control}
-              name="dateTime"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel className="text-gray-700 text-left block mb-1.5 text-sm font-medium">
-                    {language === "en" ? "Date & time" : "Fecha y hora"}
-                  </FormLabel>
-                  <FormControl>
-                    <Input 
-                      placeholder={getPlaceholder("dateTime")}
-                      className={`
-                        border-transparent focus:outline-none 
-                        ${focusedField === "dateTime" ? "ring-1 ring-[#F97316]" : ""} 
-                        focus-visible:ring-1 focus-visible:ring-[#F97316]
-                      `}
-                      onFocus={() => handleFocus("dateTime")}
-                      onBlur={handleBlur}
-                      {...field} 
-                    />
-                  </FormControl>
-                </FormItem>
-              )}
-            />
-            
-            <FormField
-              control={form.control}
-              name="contact"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel className="text-gray-700 text-left block mb-1.5 text-sm font-medium">
-                    {language === "en" ? "Contact" : "Contacto"}
-                  </FormLabel>
-                  <FormControl>
-                    <Input 
-                      placeholder={getPlaceholder("contact")}
-                      className={`
-                        border-transparent focus:outline-none 
-                        ${focusedField === "contact" ? "ring-1 ring-[#F97316]" : ""} 
-                        focus-visible:ring-1 focus-visible:ring-[#F97316]
-                      `}
-                      onFocus={() => handleFocus("contact")}
-                      onBlur={handleBlur}
-                      {...field} 
-                    />
-                  </FormControl>
-                </FormItem>
-              )}
-            />
+            <div className="flex flex-col sm:flex-row gap-4">
+              <FormField
+                control={form.control}
+                name="dateTime"
+                render={({ field }) => (
+                  <FormItem className="flex-1">
+                    <FormLabel className="text-gray-700 text-left block mb-3 text-sm font-medium">
+                      {language === "en" ? "Date & time" : "Fecha y hora"}
+                    </FormLabel>
+                    <FormControl>
+                      <Input 
+                        placeholder={getPlaceholder("dateTime")}
+                        className={`
+                          border-transparent focus:outline-none 
+                          ${focusedField === "dateTime" ? "ring-1 ring-[#F97316]" : ""} 
+                          focus-visible:ring-1 focus-visible:ring-[#F97316]
+                        `}
+                        onFocus={() => handleFocus("dateTime")}
+                        onBlur={handleBlur}
+                        {...field} 
+                      />
+                    </FormControl>
+                  </FormItem>
+                )}
+              />
+              
+              <FormField
+                control={form.control}
+                name="contact"
+                render={({ field }) => (
+                  <FormItem className="flex-1">
+                    <FormLabel className="text-gray-700 text-left block mb-3 text-sm font-medium">
+                      {language === "en" ? "Contact" : "Contacto"}
+                    </FormLabel>
+                    <FormControl>
+                      <Input 
+                        placeholder={getPlaceholder("contact")}
+                        className={`
+                          border-transparent focus:outline-none 
+                          ${focusedField === "contact" ? "ring-1 ring-[#F97316]" : ""} 
+                          focus-visible:ring-1 focus-visible:ring-[#F97316]
+                        `}
+                        onFocus={() => handleFocus("contact")}
+                        onBlur={handleBlur}
+                        {...field} 
+                      />
+                    </FormControl>
+                  </FormItem>
+                )}
+              />
+            </div>
             
             <FormField
               control={form.control}
               name="dietaryRestrictions"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel className="text-gray-700 text-left block mb-1.5 text-sm font-medium">
+                  <FormLabel className="text-gray-700 text-left block mb-3 text-sm font-medium">
                     {language === "en" ? "Diet/allergies" : "Dieta/alergias"}
                   </FormLabel>
                   <FormControl>
