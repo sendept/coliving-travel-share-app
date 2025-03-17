@@ -1,38 +1,50 @@
 
+import { Button } from "@/components/ui/button";
 import { ClaimForm } from "../ClaimForm";
 import type { TravelEntry } from "../types";
+import { Phone } from "lucide-react";
 
 interface ClaimedByCellProps {
   entry: TravelEntry;
-  onClaimSpot: (id: string, name: string, contact?: string) => void;
+  onClaimSpot: (id: string, name: string) => void;
   isEditing: boolean;
 }
 
 export const ClaimedByCell = ({ entry, onClaimSpot, isEditing }: ClaimedByCellProps) => {
   if (isEditing) return null;
-  
-  const claimedByContent = Array.isArray(entry.claimed_by) && entry.claimed_by.length > 0 
-    ? entry.claimed_by.join(", ") 
-    : "-";
-  
+
+  const hasContact = !!entry.contact && entry.contact.trim() !== '';
+
   return (
     <div>
-      <div className="mb-2">
-        <span className="font-medium text-black">{entry.name}</span>
-        {claimedByContent !== "-" && (
-          <div className="text-gray-600 opacity-85">{claimedByContent}</div>
+      <div className="flex flex-col space-y-1 mb-2">
+        <div className="flex items-center">
+          <span className="font-medium">{entry.name}</span>
+          {hasContact && (
+            <div className="ml-2 flex items-center text-sm text-gray-500">
+              <Phone size={12} className="mr-1" />
+              <span>{entry.contact}</span>
+            </div>
+          )}
+        </div>
+        
+        {Array.isArray(entry.claimed_by) && entry.claimed_by.length > 0 && (
+          <div className="text-sm text-gray-500">
+            + {entry.claimed_by.join(", ")}
+          </div>
         )}
       </div>
-      <div className="mb-2">
-        <span className="text-xs text-gray-500">{entry.available_spots} spots available</span>
-        <br/>
-        <span className="text-xs text-gray-500">
-          {entry.available_spots <= 1 ? "Queda" : "Quedan"} {entry.available_spots} {entry.available_spots === 1 ? 'plaza' : 'plazas'}
-        </span>
-      </div>
-      {entry.available_spots > 0 && (
+
+      {entry.available_spots > 0 ? (
         <div>
+          <div className="text-sm text-gray-500 mb-2">
+            {entry.available_spots} {entry.available_spots === 1 ? 'spot' : 'spots'} left
+          </div>
           <ClaimForm entry={entry} onClaim={onClaimSpot} />
+        </div>
+      ) : (
+        <div className="text-sm text-amber-500">
+          No spots left
         </div>
       )}
     </div>

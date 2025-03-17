@@ -4,7 +4,7 @@ import React from "react";
 export const TableFooter = () => {
   return (
     <footer className="fixed bottom-0 left-0 right-0 text-center text-sm text-muted-foreground py-2 mt-[40px] bg-white">
-      <span className="inline-flex items-center">
+      <span className="inline-flex items-center gap-1">
         <a 
           href="https://sende.co/share-app" 
           target="_blank" 

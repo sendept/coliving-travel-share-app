@@ -4,6 +4,7 @@ import { ClaimForm } from "../ClaimForm";
 import type { TravelEntry } from "../types";
 import { getTransportIcon } from "../utils/transportIconUtils";
 import { getTranslation } from "@/lib/translations";
+import { Phone } from "lucide-react";
 
 interface MobileTravelRowProps {
   entry: TravelEntry;
@@ -14,22 +15,17 @@ interface MobileTravelRowProps {
 export const MobileTravelRow = ({ entry, onStartEdit, onClaimSpot }: MobileTravelRowProps) => {
   const transportIcon = getTransportIcon(entry.transport);
   const language = entry.language as "en" | "es" | "fr";
+  const hasContact = !!entry.contact && entry.contact.trim() !== '';
 
-  const getMobileRouteWithContact = () => {
-    let routeText = entry.route;
-    
-    if (entry.contact) {
-      routeText += `\n\nContact: ${entry.contact}`;
-    }
-    
-    return routeText;
+  const getMobileRoute = () => {
+    return entry.route;
   };
 
   const getEditButtonText = () => {
     if (language === "es") {
-      return `${entry.name} puede editar errores aquí`;
+      return `${entry.name} puede editar aquí`;
     } else {
-      return `${entry.name} can edit errors here`;
+      return `${entry.name} can edit here`;
     }
   };
 
@@ -44,7 +40,7 @@ export const MobileTravelRow = ({ entry, onStartEdit, onClaimSpot }: MobileTrave
           <span className="text-xl mt-1">{transportIcon}</span>
           <div className="flex-1 text-left">
             <div className="font-medium text-[#222222] text-base mb-2 px-3 py-2 rounded-lg">
-              {getMobileRouteWithContact()}
+              {getMobileRoute()}
             </div>
             <button 
               className="text-xs text-gray-500 hover:text-blue-500 cursor-pointer text-left ml-2"
@@ -55,6 +51,13 @@ export const MobileTravelRow = ({ entry, onStartEdit, onClaimSpot }: MobileTrave
           </div>
         </div>
       </div>
+      
+      {hasContact && (
+        <div className="mb-4 flex items-center text-sm text-gray-600">
+          <Phone size={14} className="mr-2" />
+          <span>Contact: {entry.contact}</span>
+        </div>
+      )}
 
       <div className="mb-6">
         <ClaimForm entry={entry} onClaim={onClaimSpot} />

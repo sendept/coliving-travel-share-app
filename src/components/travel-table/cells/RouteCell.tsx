@@ -22,7 +22,7 @@ export const RouteCell = ({ entry, onStartEdit, isEditing }: RouteCellProps) => 
         className="text-[9px] text-gray-500 mt-1 hover:text-blue-500 cursor-pointer text-center w-full"
         onClick={() => onStartEdit(entry)}
       >
-        {entry.name} can edit route here
+        {entry.name} can edit here
       </div>
     </div>
   );

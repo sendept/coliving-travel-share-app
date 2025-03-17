@@ -60,7 +60,7 @@
 }
 
 .product-hunt-card {
-  @apply bg-white rounded-lg border border-gray-200 hover:shadow-lg transition-shadow duration-200;
+  @apply bg-white rounded-lg border-none hover:shadow-none transition-shadow duration-200;
 }
 
 .product-hunt-input {
@@ -68,7 +68,7 @@
 }
 
 .product-hunt-button {
-  @apply w-full sm:w-auto bg-[#F97316] hover:bg-[#F97316]/90 text-white font-medium px-4 py-2 rounded-lg transition-colors duration-200 text-sm sm:text-base;
+  @apply w-full sm:w-auto bg-[#F97316] hover:bg-[#F97316]/90 text-white font-medium px-4 py-2 rounded-md transition-colors duration-200 text-sm sm:text-base;
 }
 
 /* Custom scrollbar styles */
@@ -119,6 +119,7 @@
     padding-right: 10px;
     border: none !important;
     border-radius: 0 !important;
+    background-color: white !important;
   }
   
   /* Fullscreen table */
@@ -130,6 +131,7 @@
     margin-left: -50vw;
     margin-right: -50vw;
     border: none !important;
+    background-color: white !important;
   }
 }
 
@@ -182,6 +184,7 @@ button, a {
 /* Remove border lines */
 .bg-white {
   border: none !important;
+  box-shadow: none !important;
 }
 
 /* Ensure check icons in edit forms are properly positioned */
@@ -199,23 +202,28 @@ form label {
   @apply text-left block;
 }
 
-/* Loading states */
-.loading {
-  @apply opacity-75 pointer-events-none select-none;
+/* Claim form input styles */
+.claim-form input {
+  @apply border-t border-gray-300;
+  border-radius: 0.375rem;
 }
 
-/* Focus states */
-.focus-ring {
-  @apply focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary;
+/* Remove all table borders */
+.border-t, .border-b {
+  border: none !important;
 }
 
-/* Bug report link */
-.bug-report-link {
-  @apply text-[#F97316] hover:text-[#F97316]/80 underline whitespace-nowrap text-[9px] text-left;
-  z-index: 50;
+/* Increase spacing between header and table */
+.product-hunt-container .py-8 {
+  padding-top: 2.5rem;
 }
 
-/* Form styles */
-.form-control-focus {
-  @apply border-[#F97316] ring-1 ring-[#F97316];
+/* Footer spacing */
+.footer-link:hover {
+  @apply text-blue-500;
+}
+
+/* Remove table inner background shade */
+tr:nth-child(odd), tr:nth-child(even) {
+  background-color: white !important;
 }
