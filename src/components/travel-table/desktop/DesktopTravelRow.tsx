@@ -51,7 +51,7 @@ export const DesktopTravelRow = ({
           </Button>
         )}
       </TableCell>
-      <TableCell className="whitespace-pre-line py-4 border-r">
+      <TableCell className="whitespace-pre-line py-4">
         {isEditing ? renderEditForm("route") : (
           <RouteCell 
             entry={entry} 
@@ -60,7 +60,7 @@ export const DesktopTravelRow = ({
           />
         )}
       </TableCell>
-      <TableCell className="border-r">
+      <TableCell>
         {isEditing ? renderEditForm("claimed_by") : (
           <ClaimedByCell 
             entry={entry} 
@@ -69,7 +69,7 @@ export const DesktopTravelRow = ({
           />
         )}
       </TableCell>
-      <TableCell className="border-r">
+      <TableCell>
         {isEditing ? renderEditForm("date_time") : (
           <DateTimeCell 
             entry={entry} 
@@ -78,7 +78,7 @@ export const DesktopTravelRow = ({
           />
         )}
       </TableCell>
-      <TableCell className="border-r">
+      <TableCell>
         {isEditing ? renderEditForm("contact") : (entry.contact || "-")}
       </TableCell>
       <TableCell className="whitespace-pre-line">

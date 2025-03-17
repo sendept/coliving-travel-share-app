@@ -46,7 +46,7 @@ export const TravelTable = ({ entries, onClaimSpot }: TravelTableProps) => {
             onCancelEdit={handleCancelEdit} 
             onStartEdit={handleStartEdit} 
             onClaimSpot={onClaimSpot} 
-            className="bg-[#F5F5F5]"
+            className={index % 2 !== 0 ? "bg-[#f0f0f0]" : "bg-white"}
           />
         ))}
       </TableContainer>
