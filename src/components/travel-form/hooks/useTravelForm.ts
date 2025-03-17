@@ -91,15 +91,15 @@ export const useTravelForm = (projectId?: string | null) => {
         setSuccess(false);
       }, 10000);
       
-      // Scroll to the top of the table
-      setTimeout(() => {
-        const tableElement = document.querySelector('.responsive-table');
-        if (tableElement) {
-          tableElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
-        }
+      // Immediately scroll to the top of the table
+      const tableElement = document.querySelector('.responsive-table');
+      if (tableElement) {
+        tableElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
         
-        // Then find and highlight the new entry
-        if (data && Array.isArray(data) && data.length > 0 && data[0].id) {
+      // Then find and highlight the new entry
+      if (data && Array.isArray(data) && data.length > 0 && data[0].id) {
+        setTimeout(() => {
           const entryId = data[0].id;
           const entryElement = document.getElementById(`entry-${entryId}`);
           if (entryElement) {
@@ -110,8 +110,8 @@ export const useTravelForm = (projectId?: string | null) => {
               entryElement.classList.remove('bg-orange-50');
             }, 3000);
           }
-        }
-      }, 1000); // Wait for the table to refresh
+        }, 500); // reduced wait time for a smoother experience
+      }
     } catch (err) {
       console.error("Unexpected error in handleSubmit:", err);
       toast({
