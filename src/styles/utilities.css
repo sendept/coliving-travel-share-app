@@ -1,0 +1,58 @@
+
+/* Custom scrollbar styles */
+.scrollbar-visible::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+  display: block;
+}
+
+.scrollbar-visible::-webkit-scrollbar-track {
+  background: #FBF8F5;
+  border-radius: 4px;
+}
+
+.scrollbar-visible::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 4px;
+}
+
+.scrollbar-visible::-webkit-scrollbar-thumb:hover {
+  background: #666;
+}
+
+/* Override the scrollbar-hidden class */
+.scrollbar-hidden::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+  display: block;
+}
+
+.scrollbar-hidden {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* Touch-friendly inputs */
+input, select, textarea {
+  @apply min-h-[44px] sm:min-h-[36px];
+}
+
+/* Better tap targets */
+button, a {
+  @apply min-h-[44px] sm:min-h-[36px] px-4 py-2;
+}
+
+/* Small links exception */
+.text-[9px] {
+  @apply min-h-0 py-0;
+}
+
+/* Footer spacing */
+.footer-link:hover {
+  @apply text-blue-500;
+}
+
+/* Make form labels left aligned */
+form label {
+  @apply text-left block;
+}

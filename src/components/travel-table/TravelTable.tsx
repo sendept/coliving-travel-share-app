@@ -17,7 +17,7 @@ export const TravelTable = ({ entries, onClaimSpot }: TravelTableProps) => {
   } = useEditForm();
   
   return (
-    <div className="relative">
+    <div className="relative mt-12">
       <MobileContainer>
         {entries.map((entry, index) => (
           <TravelTableRow

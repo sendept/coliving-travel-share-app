@@ -1,0 +1,42 @@
+
+.product-hunt-container {
+  @apply w-full mx-auto px-4 sm:px-6 lg:px-8;
+}
+
+@media (min-width: 1024px) {
+  .product-hunt-container {
+    @apply max-w-5xl;
+  }
+}
+
+.product-hunt-header {
+  @apply py-4 sm:py-6 lg:py-8 border-b border-gray-200;
+}
+
+.product-hunt-card {
+  @apply bg-white rounded-lg border-none hover:shadow-none transition-shadow duration-200;
+}
+
+/* Root element styles */
+#root {
+  width: 100%;
+  margin: 0 auto;
+  padding: 1rem;
+  text-align: center;
+}
+
+@media (min-width: 768px) {
+  #root {
+    max-width: 1280px;
+    padding: 2rem;
+  }
+}
+
+/* Safe area insets for modern iOS devices */
+@supports (padding: max(0px)) {
+  .product-hunt-container {
+    padding-left: max(1rem, env(safe-area-inset-left));
+    padding-right: max(1rem, env(safe-area-inset-right));
+    padding-bottom: max(1rem, env(safe-area-inset-bottom));
+  }
+}

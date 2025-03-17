@@ -1,0 +1,93 @@
+
+/* Responsive table styles */
+@media (min-width: 1024px) {
+  .responsive-table table {
+    width: 100%;
+    table-layout: fixed;
+  }
+
+  /* Make the table fit on large screens without horizontal scrolling */
+  .product-hunt-card {
+    max-width: 100vw;
+    overflow-x: visible;
+    padding-left: 10px;
+    padding-right: 10px;
+    border: none !important;
+    border-radius: 0 !important;
+    background-color: white !important;
+  }
+  
+  /* Fullscreen table */
+  .fullscreen-table {
+    width: 100vw;
+    position: relative;
+    left: 50%;
+    right: 50%;
+    margin-left: -50vw;
+    margin-right: -50vw;
+    border: none !important;
+    background-color: white !important;
+  }
+}
+
+/* Mobile-first table styles */
+@media (max-width: 1023px) {
+  .responsive-table {
+    @apply block w-full overflow-x-auto -mx-4 px-4;
+  }
+
+  .responsive-table table {
+    @apply min-w-full;
+  }
+
+  .responsive-table th,
+  .responsive-table td {
+    @apply p-2 text-sm;
+    min-width: 120px;
+  }
+}
+
+/* Remove hover effects from table rows */
+.md\:table-row:hover {
+  background-color: transparent !important;
+}
+
+/* Remove border lines */
+.bg-white {
+  border: none !important;
+  box-shadow: none !important;
+}
+
+/* Remove all table borders */
+.border-t, .border-b {
+  border: none !important;
+}
+
+/* Increase spacing between header and table */
+.product-hunt-container .py-8 {
+  padding-top: 2.5rem;
+}
+
+/* Row coloring for even and odd rows */
+tr:nth-child(even) {
+  background-color: #F5F5F5 !important;
+}
+
+tr:nth-child(odd) {
+  background-color: white !important;
+}
+
+/* Keep table header always white */
+thead tr {
+  background-color: white !important;
+}
+
+/* Ensure check icons in edit forms are properly positioned */
+.check-icon {
+  @apply absolute right-2 bottom-2 text-green-600 cursor-pointer;
+}
+
+/* Add hover effect to check icons */
+.check-icon:hover {
+  @apply text-green-800;
+}
