@@ -44,7 +44,7 @@ export const ClaimedByCell = ({ entry, onClaimSpot, isEditing }: ClaimedByCellPr
         </div>
       ) : (
         <div className="text-sm text-amber-500">
-          No spots left
+          0 spots/plazas
         </div>
       )}
     </div>
