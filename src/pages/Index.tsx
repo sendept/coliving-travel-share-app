@@ -66,7 +66,10 @@ const Index = () => {
       </div>
       <footer className="fixed bottom-0 left-0 right-0 text-center text-sm text-muted-foreground py-2 bg-white">
         <span className="inline-flex items-center gap-1 mx-0">
-          Feel free to use it. Built by
+          <a href="https://sende.co/share-app" target="_blank" rel="noopener noreferrer">
+            Feel free to use this app at your space
+          </a>
+          Built by
           <a href="https://sende.co" target="_blank" rel="noopener noreferrer" className="px-0">
             <img 
               src="/lovable-uploads/5939e496-5d0c-421e-9294-eb688e353313.png" 

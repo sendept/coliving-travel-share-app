@@ -9,7 +9,7 @@ interface TableContainerProps {
 
 export const TableContainer = ({ children }: TableContainerProps) => {
   return (
-    <div className="hidden md:block bg-[#F5F5F5] p-4 rounded-lg">
+    <div className="hidden md:block bg-white p-4 rounded-lg">
       <div 
         className="lg:overflow-visible overflow-x-auto overflow-y-auto scrollbar-visible" 
         style={{
