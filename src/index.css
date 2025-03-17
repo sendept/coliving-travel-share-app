@@ -1,3 +1,4 @@
+
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
 
 @tailwind base;
@@ -204,7 +205,7 @@ form label {
 
 /* Claim form input styles */
 .claim-form input {
-  @apply border-t border-gray-300;
+  @apply border border-gray-300;
   border-radius: 0.375rem;
 }
 
@@ -223,7 +224,21 @@ form label {
   @apply text-blue-500;
 }
 
-/* Remove table inner background shade */
-tr:nth-child(odd), tr:nth-child(even) {
+/* Row coloring for even and odd rows */
+tr:nth-child(even) {
+  background-color: #F5F5F5 !important;
+}
+
+tr:nth-child(odd) {
   background-color: white !important;
+}
+
+/* Keep table header always white */
+thead tr {
+  background-color: white !important;
+}
+
+/* Add border to textarea and input elements */
+textarea, input {
+  border: 1px solid #D1D5DB !important;
 }

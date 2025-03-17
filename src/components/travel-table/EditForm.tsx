@@ -31,6 +31,9 @@ export const EditForm = ({ entry, editForm, setEditForm, field, onSave }: EditFo
     if (onSave) onSave();
   };
 
+  const inputClasses = "bg-white border border-gray-300 px-3 py-2 rounded-md pr-8";
+  const textareaClasses = "min-h-[80px] bg-white border border-gray-300 px-3 py-2 rounded-md pr-8";
+
   if (field === 'claimed_by') {
     // Special handling for editing claimed users
     const claimedBy = Array.isArray(editForm.claimed_by) ? editForm.claimed_by : entry.claimed_by || [];
@@ -48,7 +51,7 @@ export const EditForm = ({ entry, editForm, setEditForm, field, onSave }: EditFo
               onKeyDown={handleKeyDown}
               onFocus={() => setIsFocused(true)}
               onBlur={() => setIsFocused(false)}
-              className="mt-1 bg-white pr-8"
+              className={`mt-1 ${inputClasses}`}
             />
             {isFocused && (
               <Check 
@@ -72,7 +75,7 @@ export const EditForm = ({ entry, editForm, setEditForm, field, onSave }: EditFo
             onKeyDown={handleKeyDown}
             onFocus={() => setIsFocused(true)}
             onBlur={() => setIsFocused(false)}
-            className="min-h-[80px] bg-white pr-8"
+            className={textareaClasses}
             placeholder="Enter claimed users (one per line)"
           />
           {isFocused && (
@@ -96,7 +99,7 @@ export const EditForm = ({ entry, editForm, setEditForm, field, onSave }: EditFo
               onKeyDown={handleKeyDown}
               onFocus={() => setIsFocused(true)}
               onBlur={() => setIsFocused(false)}
-              className="w-16 h-6 py-1 px-2 text-xs bg-white pr-6"
+              className="w-16 h-6 py-1 px-2 text-xs border border-gray-300 rounded-md pr-6"
               min="0"
             />
             {isFocused && (
@@ -121,7 +124,7 @@ export const EditForm = ({ entry, editForm, setEditForm, field, onSave }: EditFo
           onKeyDown={handleKeyDown}
           onFocus={() => setIsFocused(true)}
           onBlur={() => setIsFocused(false)}
-          className="min-h-[80px] bg-white pr-8"
+          className={textareaClasses}
         />
         {isFocused && (
           <Check 
@@ -144,7 +147,7 @@ export const EditForm = ({ entry, editForm, setEditForm, field, onSave }: EditFo
           onFocus={() => setIsFocused(true)}
           onBlur={() => setIsFocused(false)}
           placeholder="e.g., 1.9 around 11:00 am"
-          className="w-full bg-white pr-8"
+          className={`w-full ${inputClasses}`}
         />
         {isFocused && (
           <Check 
@@ -173,7 +176,7 @@ export const EditForm = ({ entry, editForm, setEditForm, field, onSave }: EditFo
         onBlur={() => setIsFocused(false)}
         type={field === 'available_spots' ? 'number' : 'text'}
         min={field === 'available_spots' ? 0 : undefined}
-        className="bg-white pr-8"
+        className={inputClasses}
       />
       {isFocused && (
         <Check 

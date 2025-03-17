@@ -19,7 +19,7 @@ export const TravelTable = ({ entries, onClaimSpot }: TravelTableProps) => {
   return (
     <div className="relative">
       <MobileContainer>
-        {entries.map((entry) => (
+        {entries.map((entry, index) => (
           <TravelTableRow
             key={entry.id}
             entry={entry}
@@ -30,6 +30,7 @@ export const TravelTable = ({ entries, onClaimSpot }: TravelTableProps) => {
             onCancelEdit={handleCancelEdit}
             onStartEdit={handleStartEdit}
             onClaimSpot={onClaimSpot}
+            isAlternate={index % 2 !== 0}
           />
         ))}
       </MobileContainer>
@@ -46,7 +47,7 @@ export const TravelTable = ({ entries, onClaimSpot }: TravelTableProps) => {
             onCancelEdit={handleCancelEdit} 
             onStartEdit={handleStartEdit} 
             onClaimSpot={onClaimSpot} 
-            className={index % 2 !== 0 ? "bg-[#f0f0f0]" : "bg-white"}
+            isAlternate={index % 2 !== 0}
           />
         ))}
       </TableContainer>

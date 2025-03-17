@@ -14,6 +14,7 @@ interface TravelTableRowProps {
   onStartEdit: (entry: TravelEntry) => void;
   onClaimSpot: (id: string, name: string) => void;
   className?: string;
+  isAlternate?: boolean;
 }
 
 export const TravelTableRow = ({
@@ -25,7 +26,8 @@ export const TravelTableRow = ({
   onCancelEdit,
   onStartEdit,
   onClaimSpot,
-  className = ""
+  className = "",
+  isAlternate = false
 }: TravelTableRowProps) => {
   const isEditing = editingEntry === entry.id;
 
@@ -41,12 +43,15 @@ export const TravelTableRow = ({
     );
   };
 
+  const rowClassName = isAlternate ? "bg-[#F5F5F5]" : "bg-white";
+
   return (
     <>
       <MobileTravelRow 
         entry={entry} 
         onStartEdit={onStartEdit} 
         onClaimSpot={onClaimSpot} 
+        isAlternate={isAlternate}
       />
       
       <DesktopTravelRow 
@@ -58,7 +63,7 @@ export const TravelTableRow = ({
         onCancelEdit={onCancelEdit}
         onStartEdit={onStartEdit}
         onClaimSpot={onClaimSpot}
-        className={className}
+        className={`${rowClassName} ${className}`}
         renderEditForm={renderCell}
       />
     </>

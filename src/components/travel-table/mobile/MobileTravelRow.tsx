@@ -10,12 +10,19 @@ interface MobileTravelRowProps {
   entry: TravelEntry;
   onStartEdit: (entry: TravelEntry) => void;
   onClaimSpot: (id: string, name: string) => void;
+  isAlternate?: boolean;
 }
 
-export const MobileTravelRow = ({ entry, onStartEdit, onClaimSpot }: MobileTravelRowProps) => {
+export const MobileTravelRow = ({ 
+  entry, 
+  onStartEdit, 
+  onClaimSpot,
+  isAlternate = false 
+}: MobileTravelRowProps) => {
   const transportIcon = getTransportIcon(entry.transport);
   const language = entry.language as "en" | "es" | "fr";
   const hasContact = !!entry.contact && entry.contact.trim() !== '';
+  const bgColor = isAlternate ? "bg-[#F5F5F5]" : "bg-white";
 
   const getMobileRoute = () => {
     return entry.route;
@@ -30,7 +37,7 @@ export const MobileTravelRow = ({ entry, onStartEdit, onClaimSpot }: MobileTrave
   };
 
   return (
-    <div className="md:hidden p-5 border-b mb-3 bg-white rounded-xl shadow-sm" id={`entry-${entry.id}`}>
+    <div className={`md:hidden p-5 border-b mb-3 ${bgColor} rounded-xl shadow-sm`} id={`entry-${entry.id}`}>
       <div className="bg-gray-200 inline-block px-4 py-1 rounded-full mb-4">
         <h3 className="text-gray-600 text-sm">Travel together with {entry.name}</h3>
       </div>
