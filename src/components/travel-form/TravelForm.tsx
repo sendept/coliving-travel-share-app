@@ -121,7 +121,7 @@ export const TravelForm = ({ projectId }: TravelFormProps) => {
       
       {success && <SuccessMessage message={getSuccessMessage()} />}
       
-      <div className="mt-2 text-center">
+      <div className="mt-4 text-center pb-2">
         <a 
           href="https://airtable.com/appSEq5rTb2wminZh/shrevCpLAyaJQJXS5" 
           target="_blank" 

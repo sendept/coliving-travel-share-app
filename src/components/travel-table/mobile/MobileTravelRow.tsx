@@ -63,11 +63,11 @@ export const MobileTravelRow = ({ entry, onStartEdit, onClaimSpot }: MobileTrave
       <div className="text-sm text-gray-600 mt-5 opacity-85">
         {Array.isArray(entry.claimed_by) && entry.claimed_by.length > 0 ? (
           <div>
-            {entry.name}, {entry.claimed_by.join(", ")} + {entry.available_spots} spot{entry.available_spots !== 1 ? 's' : ''} left / {entry.available_spots} plaza{entry.available_spots !== 1 ? 's' : ''} disponible
+            {entry.name}, {entry.claimed_by.join(", ")} + Queda {entry.available_spots} {entry.available_spots !== 1 ? 'plazas' : 'plaza'}
           </div>
         ) : (
           <div>
-            {entry.name} + {entry.available_spots} spot{entry.available_spots !== 1 ? 's' : ''} left / {entry.available_spots} plaza{entry.available_spots !== 1 ? 's' : ''} disponible
+            {entry.name} + Queda {entry.available_spots} {entry.available_spots !== 1 ? 'plazas' : 'plaza'}
           </div>
         )}
       </div>

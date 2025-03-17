@@ -64,6 +64,16 @@ const translations: Translations = {
     en: "Your name",
     es: "Tu nombre",
     fr: "Votre nom"
+  },
+  inviteOthers: {
+    en: "Invite others to travel with you",
+    es: "Invita a otros a viajar contigo",
+    fr: "Invitez d'autres personnes à voyager avec vous"
+  },
+  spotsRemaining: {
+    en: "spots remaining",
+    es: "Queda",
+    fr: "places restantes"
   }
 };
 

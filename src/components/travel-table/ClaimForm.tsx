@@ -61,9 +61,6 @@ export const ClaimForm = ({ entry, onClaim }: ClaimFormProps) => {
           Join / Únete
         </Button>
       </div>
-      <div className="text-xs text-gray-500 mt-1 text-center">
-        join/unete as a co-traveler
-      </div>
     </div>
   );
 };
