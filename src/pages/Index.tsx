@@ -42,15 +42,15 @@ const Index = () => {
       <div>
         {headerComponent}
       </div>
-      <div className="py-8 space-y-8">
+      <div className="py-8 space-y-12">
         <div className="relative">
           <div className="product-hunt-card px-0 py-0 lg:w-screen lg:max-w-none lg:left-1/2 lg:right-1/2 lg:ml-[-50vw] lg:mr-[-50vw] lg:relative">
             <TravelTable entries={entries} onClaimSpot={handleClaimSpot} />
           </div>
         </div>
         
-        <div className="mt-12 text-center mb-16">
-          <h2 className={`text-xl md:text-2xl font-medium mb-3 ${isMobile ? 'mx-auto text-center w-full' : ''}`}>
+        <div className="mt-12 text-center mb-24">
+          <h2 className={`text-2xl md:text-3xl font-medium mb-6 ${isMobile ? 'mx-auto text-center w-full' : ''}`}>
             <span>Share your Travel plan here</span>
             <br />
             <span className="text-gray-500">Comparte tu plan de viaje aquí</span>

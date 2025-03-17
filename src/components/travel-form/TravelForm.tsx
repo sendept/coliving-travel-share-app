@@ -101,9 +101,8 @@ export const TravelForm = ({ projectId }: TravelFormProps) => {
         setSuccess(false);
       }, 10000);
       
-      // Scroll to the new entry in the table and to the top of the table
+      // Scroll to the top of the table
       setTimeout(() => {
-        // First scroll to the top of the table
         const tableElement = document.querySelector('.responsive-table');
         if (tableElement) {
           tableElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
@@ -174,9 +173,9 @@ export const TravelForm = ({ projectId }: TravelFormProps) => {
     <div className="bg-[#FFFFFF] max-w-2xl mx-auto rounded-lg">
       <div className="relative rounded-lg overflow-hidden">
         <Form {...form}>
-          <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4 p-5 md:p-10 bg-[#FFFFFF] rounded-lg">
+          <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-5 p-5 md:p-10 bg-[#FFFFFF] rounded-lg">
             <div className="flex items-center justify-between mb-1">
-              <label className="text-gray-700 text-left block">
+              <label className="text-gray-700 text-left block text-sm font-medium">
                 {language === "en" ? "Your name" : "Tu nombre"}
               </label>
               <button 
@@ -199,9 +198,9 @@ export const TravelForm = ({ projectId }: TravelFormProps) => {
                     <Input 
                       placeholder={getPlaceholder("name")}
                       className={`
-                        focus:outline-none 
-                        ${focusedField === "name" ? "border-[#F97316] ring-[#F97316]" : "border-transparent"} 
-                        focus-visible:ring-[#F97316]
+                        focus:outline-none border-transparent
+                        ${focusedField === "name" ? "ring-1 ring-[#F97316]" : ""} 
+                        focus-visible:ring-1 focus-visible:ring-[#F97316]
                       `}
                       onFocus={() => handleFocus("name")}
                       onBlur={handleBlur}
@@ -217,17 +216,17 @@ export const TravelForm = ({ projectId }: TravelFormProps) => {
               name="route"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel className="text-gray-700 text-left block">
+                  <FormLabel className="text-gray-700 text-left block mb-1.5 text-sm font-medium">
                     {language === "en" ? "Route" : "Ruta"}
                   </FormLabel>
                   <FormControl>
                     <Textarea 
                       placeholder={getPlaceholder("route")}
                       className={`
-                        min-h-[100px] resize-none 
+                        min-h-[100px] resize-none border-transparent
                         focus:outline-none 
-                        ${focusedField === "route" ? "border-[#F97316] ring-[#F97316]" : "border-transparent"} 
-                        focus-visible:ring-[#F97316]
+                        ${focusedField === "route" ? "ring-1 ring-[#F97316]" : ""} 
+                        focus-visible:ring-1 focus-visible:ring-[#F97316]
                       `}
                       onFocus={() => handleFocus("route")}
                       onBlur={handleBlur}
@@ -244,7 +243,7 @@ export const TravelForm = ({ projectId }: TravelFormProps) => {
                 name="availableSpots"
                 render={({ field }) => (
                   <FormItem className="flex-1">
-                    <FormLabel className="text-gray-700 text-left block">
+                    <FormLabel className="text-gray-700 text-left block mb-1.5 text-sm font-medium">
                       {language === "en" ? "Available spots" : "Plazas disponibles"}
                     </FormLabel>
                     <FormControl>
@@ -253,9 +252,9 @@ export const TravelForm = ({ projectId }: TravelFormProps) => {
                         min="0"
                         placeholder={getPlaceholder("availableSpots")}
                         className={`
-                          focus:outline-none 
-                          ${focusedField === "availableSpots" ? "border-[#F97316] ring-[#F97316]" : "border-transparent"} 
-                          focus-visible:ring-[#F97316]
+                          border-transparent focus:outline-none 
+                          ${focusedField === "availableSpots" ? "ring-1 ring-[#F97316]" : ""} 
+                          focus-visible:ring-1 focus-visible:ring-[#F97316]
                         `}
                         onFocus={() => handleFocus("availableSpots")}
                         onBlur={handleBlur}
@@ -273,16 +272,16 @@ export const TravelForm = ({ projectId }: TravelFormProps) => {
                 name="transport"
                 render={({ field }) => (
                   <FormItem className="flex-1">
-                    <FormLabel className="text-gray-700 text-left block">
+                    <FormLabel className="text-gray-700 text-left block mb-1.5 text-sm font-medium">
                       {language === "en" ? "Transport type" : "Tipo de transporte"}
                     </FormLabel>
                     <FormControl>
                       <Input 
                         placeholder={getPlaceholder("transport")}
                         className={`
-                          focus:outline-none 
-                          ${focusedField === "transport" ? "border-[#F97316] ring-[#F97316]" : "border-transparent"} 
-                          focus-visible:ring-[#F97316]
+                          border-transparent focus:outline-none 
+                          ${focusedField === "transport" ? "ring-1 ring-[#F97316]" : ""} 
+                          focus-visible:ring-1 focus-visible:ring-[#F97316]
                         `}
                         onFocus={() => handleFocus("transport")}
                         onBlur={handleBlur}
@@ -299,16 +298,16 @@ export const TravelForm = ({ projectId }: TravelFormProps) => {
               name="dateTime"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel className="text-gray-700 text-left block">
+                  <FormLabel className="text-gray-700 text-left block mb-1.5 text-sm font-medium">
                     {language === "en" ? "Date & time" : "Fecha y hora"}
                   </FormLabel>
                   <FormControl>
                     <Input 
                       placeholder={getPlaceholder("dateTime")}
                       className={`
-                        focus:outline-none 
-                        ${focusedField === "dateTime" ? "border-[#F97316] ring-[#F97316]" : "border-transparent"} 
-                        focus-visible:ring-[#F97316]
+                        border-transparent focus:outline-none 
+                        ${focusedField === "dateTime" ? "ring-1 ring-[#F97316]" : ""} 
+                        focus-visible:ring-1 focus-visible:ring-[#F97316]
                       `}
                       onFocus={() => handleFocus("dateTime")}
                       onBlur={handleBlur}
@@ -324,16 +323,16 @@ export const TravelForm = ({ projectId }: TravelFormProps) => {
               name="contact"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel className="text-gray-700 text-left block">
+                  <FormLabel className="text-gray-700 text-left block mb-1.5 text-sm font-medium">
                     {language === "en" ? "Contact" : "Contacto"}
                   </FormLabel>
                   <FormControl>
                     <Input 
                       placeholder={getPlaceholder("contact")}
                       className={`
-                        focus:outline-none 
-                        ${focusedField === "contact" ? "border-[#F97316] ring-[#F97316]" : "border-transparent"} 
-                        focus-visible:ring-[#F97316]
+                        border-transparent focus:outline-none 
+                        ${focusedField === "contact" ? "ring-1 ring-[#F97316]" : ""} 
+                        focus-visible:ring-1 focus-visible:ring-[#F97316]
                       `}
                       onFocus={() => handleFocus("contact")}
                       onBlur={handleBlur}
@@ -349,16 +348,16 @@ export const TravelForm = ({ projectId }: TravelFormProps) => {
               name="dietaryRestrictions"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel className="text-gray-700 text-left block">
+                  <FormLabel className="text-gray-700 text-left block mb-1.5 text-sm font-medium">
                     {language === "en" ? "Diet/allergies" : "Dieta/alergias"}
                   </FormLabel>
                   <FormControl>
                     <Input 
                       placeholder={getPlaceholder("dietaryRestrictions")}
                       className={`
-                        focus:outline-none 
-                        ${focusedField === "dietaryRestrictions" ? "border-[#F97316] ring-[#F97316]" : "border-transparent"} 
-                        focus-visible:ring-[#F97316]
+                        border-transparent focus:outline-none 
+                        ${focusedField === "dietaryRestrictions" ? "ring-1 ring-[#F97316]" : ""} 
+                        focus-visible:ring-1 focus-visible:ring-[#F97316]
                       `}
                       onFocus={() => handleFocus("dietaryRestrictions")}
                       onBlur={handleBlur}
