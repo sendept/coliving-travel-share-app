@@ -1,7 +1,5 @@
 
 import { TableCell, TableRow } from "@/components/ui/table";
-import { Button } from "@/components/ui/button";
-import { Edit2, Check, X } from "lucide-react";
 import { RouteCell } from "../cells/RouteCell";
 import { ClaimedByCell } from "../cells/ClaimedByCell";
 import { DateTimeCell } from "../cells/DateTimeCell";
@@ -34,23 +32,7 @@ export const DesktopTravelRow = ({
   const isEditing = editingEntry === entry.id;
   
   return (
-    <TableRow className={`hidden md:table-row ${className}`}>
-      <TableCell className="w-[80px]">
-        {isEditing ? (
-          <div className="flex space-x-2">
-            <Button variant="ghost" size="icon" onClick={onSaveEdit} className="h-8 w-8">
-              <Check className="h-4 w-4" />
-            </Button>
-            <Button variant="ghost" size="icon" onClick={onCancelEdit} className="h-8 w-8">
-              <X className="h-4 w-4" />
-            </Button>
-          </div>
-        ) : (
-          <Button variant="ghost" size="icon" onClick={() => onStartEdit(entry)} className="h-8 w-8">
-            <Edit2 className="h-4 w-4" />
-          </Button>
-        )}
-      </TableCell>
+    <TableRow className={`hidden md:table-row ${className} hover:bg-transparent`}>
       <TableCell className="whitespace-pre-line py-4">
         {isEditing ? renderEditForm("route") : (
           <RouteCell 

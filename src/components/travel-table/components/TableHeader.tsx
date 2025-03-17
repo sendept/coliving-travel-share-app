@@ -4,11 +4,7 @@ import { TableHead, TableHeader as ShadcnTableHeader, TableRow } from "@/compone
 export const TableHeader = () => {
   return (
     <ShadcnTableHeader>
-      <TableRow className="border-b border-gray-200 bg-white">
-        <TableHead className="w-[80px] text-center align-middle">
-          <div className="text-sm text-black font-medium uppercase">EDIT</div>
-          <div className="text-[10px] text-gray-500">Editar</div>
-        </TableHead>
+      <TableRow className="bg-white">
         <TableHead className="lg:w-[400px] min-w-[300px] text-center align-middle">
           <div className="text-sm text-black font-medium uppercase">ROUTE</div>
           <div className="text-[10px] text-gray-500">Ruta</div>

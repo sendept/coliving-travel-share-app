@@ -82,7 +82,7 @@ export const ClaimForm = ({ entry, onClaim }: ClaimFormProps) => {
             value={claimName}
             onChange={(e) => setClaimName(e.target.value)}
             onKeyPress={handleNameKeyPress}
-            className="w-full md:w-32 bg-white border border-gray-200 rounded-full h-[46px] text-center text-base"
+            className="w-full md:w-32 bg-white border border-gray-200 rounded-md h-[46px] text-center text-base"
           />
         ) : (
           <Input
@@ -90,14 +90,14 @@ export const ClaimForm = ({ entry, onClaim }: ClaimFormProps) => {
             value={claimContact}
             onChange={(e) => setClaimContact(e.target.value)}
             onKeyPress={handleContactKeyPress}
-            className="w-full md:w-32 bg-white border border-gray-200 rounded-full h-[46px] text-center text-base"
+            className="w-full md:w-32 bg-white border border-gray-200 rounded-md h-[46px] text-center text-base"
             autoFocus
           />
         )}
         <Button
           variant="secondary"
           onClick={handleClaim}
-          className="bg-[#F97316] hover:bg-[#F97316]/90 text-white whitespace-nowrap rounded-full h-[46px] px-6 text-base"
+          className="bg-[#F97316] hover:bg-[#F97316]/90 text-white whitespace-nowrap rounded-md h-[46px] px-6 text-base"
         >
           {!showContactField ? "Join / Únete" : "Submit / Enviar"}
         </Button>
