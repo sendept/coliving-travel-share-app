@@ -24,12 +24,15 @@ export const createTravelEntry = async (newEntry: Omit<TravelEntry, 'id' | 'crea
   return { data, error };
 };
 
-export const claimTravelSpot = async (entry: TravelEntry, name: string) => {
+export const claimTravelSpot = async (entry: TravelEntry, name: string, contact?: string) => {
+  // If contact is provided, store it with the name
+  const claimText = contact ? `${name} (${contact})` : name;
+  
   const { error } = await supabase
     .from('travel_entries')
     .update({
       available_spots: entry.available_spots - 1,
-      claimed_by: [...entry.claimed_by, name],
+      claimed_by: [...entry.claimed_by, claimText],
     })
     .eq('id', entry.id);
   return { error };

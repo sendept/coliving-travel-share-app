@@ -14,11 +14,11 @@ const Index = () => {
   const { toast } = useToast();
   const isMobile = useIsMobile();
   
-  const handleClaimSpot = useCallback(async (id: string, name: string) => {
+  const handleClaimSpot = useCallback(async (id: string, name: string, contact?: string) => {
     const entry = entries.find(e => e.id === id);
     if (!entry) return;
     
-    const { error } = await claimTravelSpot(entry, name);
+    const { error } = await claimTravelSpot(entry, name, contact);
     
     if (error) {
       console.error('Error updating entry:', error);

@@ -4,7 +4,7 @@ import type { TravelEntry } from "../types";
 
 interface ClaimedByCellProps {
   entry: TravelEntry;
-  onClaimSpot: (id: string, name: string) => void;
+  onClaimSpot: (id: string, name: string, contact?: string) => void;
   isEditing: boolean;
 }
 
