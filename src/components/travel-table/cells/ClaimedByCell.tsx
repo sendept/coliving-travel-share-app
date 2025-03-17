@@ -26,7 +26,9 @@ export const ClaimedByCell = ({ entry, onClaimSpot, isEditing }: ClaimedByCellPr
       <div className="mb-2">
         <span className="text-xs text-gray-500">{entry.available_spots} spots available</span>
         <br/>
-        <span className="text-xs text-gray-500">Queda {entry.available_spots} {entry.available_spots === 1 ? 'plaza' : 'plazas'}</span>
+        <span className="text-xs text-gray-500">
+          {entry.available_spots <= 1 ? "Queda" : "Quedan"} {entry.available_spots} {entry.available_spots === 1 ? 'plaza' : 'plazas'}
+        </span>
       </div>
       {entry.available_spots > 0 && (
         <div>
