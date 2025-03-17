@@ -193,3 +193,23 @@ button, a {
   @apply text-[#F97316] hover:text-[#F97316]/80 underline whitespace-nowrap text-[9px] text-left;
   z-index: 50;
 }
+
+/* Form styles */
+.form-control-focus {
+  @apply border-[#F97316] ring-1 ring-[#F97316];
+}
+
+/* Ensure check icons in edit forms are properly positioned */
+.check-icon {
+  @apply absolute right-2 bottom-2 text-green-600 cursor-pointer;
+}
+
+/* Add hover effect to check icons */
+.check-icon:hover {
+  @apply text-green-800;
+}
+
+/* Make form labels left aligned */
+form label {
+  @apply text-left block;
+}

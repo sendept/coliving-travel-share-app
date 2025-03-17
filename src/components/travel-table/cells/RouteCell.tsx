@@ -19,7 +19,7 @@ export const RouteCell = ({ entry, onStartEdit, isEditing }: RouteCellProps) => 
       <span className="mr-2 text-lg">{transportIcon}</span>
       {entry.route}
       <div 
-        className="text-[9px] text-gray-500 mt-1 hover:text-blue-500 cursor-pointer text-center"
+        className="text-[9px] text-gray-500 mt-1 hover:text-blue-500 cursor-pointer text-center w-full"
         onClick={() => onStartEdit(entry)}
       >
         Click to edit route

@@ -155,7 +155,8 @@ export const PageHeader = () => {
             </Button>
           </> : <>
             <EditableTitle isEditing={false} title={settings.name} onEdit={() => setEditing(true)} onChange={() => {}} onSave={() => {}} />
-            <p className="text-base text-gray-500 font-normal break-words whitespace-pre-wrap">
+            <p className={cn("text-base md:text-xl text-gray-500 font-normal break-words whitespace-pre-wrap", 
+                       settings.subtitle_style?.fontSize ? fontSizes[settings.subtitle_style.fontSize] : fontSizes.medium)}>
               {settings.subtitle}
             </p>
           </>}

@@ -2,7 +2,7 @@
 import { useState } from "react";
 import { useToast } from "@/hooks/use-toast";
 import { createTravelEntry } from "@/services/travelEntryService";
-import { ChevronDown } from "lucide-react";
+import { ChevronUp } from "lucide-react";
 import { detectLanguage } from "@/lib/parser/languageDetector";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -28,6 +28,7 @@ export const TravelForm = ({ projectId }: TravelFormProps) => {
   const { toast } = useToast();
   const [success, setSuccess] = useState(false);
   const [language, setLanguage] = useState<"en" | "es">("en");
+  const [focusedField, setFocusedField] = useState<string | null>(null);
 
   const form = useForm<TravelFormValues>({
     defaultValues: {
@@ -100,9 +101,15 @@ export const TravelForm = ({ projectId }: TravelFormProps) => {
         setSuccess(false);
       }, 10000);
       
-      // Scroll to the new entry in the table
+      // Scroll to the new entry in the table and to the top of the table
       setTimeout(() => {
-        // Check if data exists and is an array with at least one element
+        // First scroll to the top of the table
+        const tableElement = document.querySelector('.responsive-table');
+        if (tableElement) {
+          tableElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+        
+        // Then find and highlight the new entry
         if (data && Array.isArray(data) && data.length > 0 && data[0].id) {
           const entryId = data[0].id;
           const entryElement = document.getElementById(`entry-${entryId}`);
@@ -152,35 +159,52 @@ export const TravelForm = ({ projectId }: TravelFormProps) => {
   };
 
   const successMessage = language === "es" 
-    ? "¡Excelente! Desplázate hacia abajo para ver o editar tu plan de viaje."
-    : "Great! Scroll down to see or edit your travel plan.";
+    ? "¡Excelente! Desplázate hacia arriba para ver o editar tu plan de viaje."
+    : "Great! Scroll up to see or edit your travel plan.";
+
+  const handleFocus = (field: string) => {
+    setFocusedField(field);
+  };
+
+  const handleBlur = () => {
+    setFocusedField(null);
+  };
 
   return (
-    <div className="bg-[#FFFFFF] max-w-2xl mx-auto">
+    <div className="bg-[#FFFFFF] max-w-2xl mx-auto rounded-lg">
       <div className="relative rounded-lg overflow-hidden">
-        <div className="flex justify-end mb-1">
-          <button 
-            type="button"
-            onClick={handleToggleLanguage} 
-            className="text-gray-500 hover:text-gray-700 focus:outline-none text-xs"
-          >
-            <span className={language === "en" ? "font-bold" : "font-normal"}>EN</span>
-            {" / "}
-            <span className={language === "es" ? "font-bold" : "font-normal"}>ES</span>
-          </button>
-        </div>
         <Form {...form}>
-          <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4 p-5 md:p-10 bg-[#FFFFFF] rounded-lg border border-transparent focus-within:border-[#F97316]">
+          <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4 p-5 md:p-10 bg-[#FFFFFF] rounded-lg">
+            <div className="flex items-center justify-between mb-1">
+              <label className="text-gray-700 text-left block">
+                {language === "en" ? "Your name" : "Tu nombre"}
+              </label>
+              <button 
+                type="button"
+                onClick={handleToggleLanguage} 
+                className="text-gray-500 hover:text-gray-700 focus:outline-none text-xs"
+              >
+                <span className={language === "en" ? "font-bold" : "font-normal"}>EN</span>
+                {" / "}
+                <span className={language === "es" ? "font-bold" : "font-normal"}>ES</span>
+              </button>
+            </div>
+            
             <FormField
               control={form.control}
               name="name"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel className="text-gray-700 text-left block">{language === "en" ? "Your name" : "Tu nombre"}</FormLabel>
                   <FormControl>
                     <Input 
                       placeholder={getPlaceholder("name")}
-                      className="focus:outline-none focus:ring-[#F97316] focus:border-[#F97316] focus-visible:ring-[#F97316]"
+                      className={`
+                        focus:outline-none 
+                        ${focusedField === "name" ? "border-[#F97316] ring-[#F97316]" : "border-transparent"} 
+                        focus-visible:ring-[#F97316]
+                      `}
+                      onFocus={() => handleFocus("name")}
+                      onBlur={handleBlur}
                       {...field} 
                     />
                   </FormControl>
@@ -199,7 +223,14 @@ export const TravelForm = ({ projectId }: TravelFormProps) => {
                   <FormControl>
                     <Textarea 
                       placeholder={getPlaceholder("route")}
-                      className="min-h-[100px] resize-none focus:outline-none focus:ring-[#F97316] focus:border-[#F97316] focus-visible:ring-[#F97316]"
+                      className={`
+                        min-h-[100px] resize-none 
+                        focus:outline-none 
+                        ${focusedField === "route" ? "border-[#F97316] ring-[#F97316]" : "border-transparent"} 
+                        focus-visible:ring-[#F97316]
+                      `}
+                      onFocus={() => handleFocus("route")}
+                      onBlur={handleBlur}
                       {...field} 
                     />
                   </FormControl>
@@ -221,7 +252,13 @@ export const TravelForm = ({ projectId }: TravelFormProps) => {
                         type="number"
                         min="0"
                         placeholder={getPlaceholder("availableSpots")}
-                        className="focus:outline-none focus:ring-[#F97316] focus:border-[#F97316] focus-visible:ring-[#F97316]"
+                        className={`
+                          focus:outline-none 
+                          ${focusedField === "availableSpots" ? "border-[#F97316] ring-[#F97316]" : "border-transparent"} 
+                          focus-visible:ring-[#F97316]
+                        `}
+                        onFocus={() => handleFocus("availableSpots")}
+                        onBlur={handleBlur}
                         {...field}
                         onChange={(e) => field.onChange(parseInt(e.target.value) || 0)}
                         value={field.value}
@@ -242,7 +279,13 @@ export const TravelForm = ({ projectId }: TravelFormProps) => {
                     <FormControl>
                       <Input 
                         placeholder={getPlaceholder("transport")}
-                        className="focus:outline-none focus:ring-[#F97316] focus:border-[#F97316] focus-visible:ring-[#F97316]"
+                        className={`
+                          focus:outline-none 
+                          ${focusedField === "transport" ? "border-[#F97316] ring-[#F97316]" : "border-transparent"} 
+                          focus-visible:ring-[#F97316]
+                        `}
+                        onFocus={() => handleFocus("transport")}
+                        onBlur={handleBlur}
                         {...field} 
                       />
                     </FormControl>
@@ -262,7 +305,13 @@ export const TravelForm = ({ projectId }: TravelFormProps) => {
                   <FormControl>
                     <Input 
                       placeholder={getPlaceholder("dateTime")}
-                      className="focus:outline-none focus:ring-[#F97316] focus:border-[#F97316] focus-visible:ring-[#F97316]"
+                      className={`
+                        focus:outline-none 
+                        ${focusedField === "dateTime" ? "border-[#F97316] ring-[#F97316]" : "border-transparent"} 
+                        focus-visible:ring-[#F97316]
+                      `}
+                      onFocus={() => handleFocus("dateTime")}
+                      onBlur={handleBlur}
                       {...field} 
                     />
                   </FormControl>
@@ -281,7 +330,13 @@ export const TravelForm = ({ projectId }: TravelFormProps) => {
                   <FormControl>
                     <Input 
                       placeholder={getPlaceholder("contact")}
-                      className="focus:outline-none focus:ring-[#F97316] focus:border-[#F97316] focus-visible:ring-[#F97316]"
+                      className={`
+                        focus:outline-none 
+                        ${focusedField === "contact" ? "border-[#F97316] ring-[#F97316]" : "border-transparent"} 
+                        focus-visible:ring-[#F97316]
+                      `}
+                      onFocus={() => handleFocus("contact")}
+                      onBlur={handleBlur}
                       {...field} 
                     />
                   </FormControl>
@@ -300,7 +355,13 @@ export const TravelForm = ({ projectId }: TravelFormProps) => {
                   <FormControl>
                     <Input 
                       placeholder={getPlaceholder("dietaryRestrictions")}
-                      className="focus:outline-none focus:ring-[#F97316] focus:border-[#F97316] focus-visible:ring-[#F97316]"
+                      className={`
+                        focus:outline-none 
+                        ${focusedField === "dietaryRestrictions" ? "border-[#F97316] ring-[#F97316]" : "border-transparent"} 
+                        focus-visible:ring-[#F97316]
+                      `}
+                      onFocus={() => handleFocus("dietaryRestrictions")}
+                      onBlur={handleBlur}
                       {...field} 
                     />
                   </FormControl>
@@ -321,7 +382,7 @@ export const TravelForm = ({ projectId }: TravelFormProps) => {
         <div className="bg-green-50 border border-green-200 text-green-700 px-4 py-3 rounded relative mt-2 text-center">
           <p className="text-sm flex items-center justify-center">
             {successMessage}
-            <ChevronDown className="h-4 w-4 ml-1" />
+            <ChevronUp className="h-4 w-4 ml-1" />
           </p>
         </div>
       )}

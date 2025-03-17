@@ -50,7 +50,7 @@ const Index = () => {
         </div>
         
         <div className="mt-12 text-center mb-16">
-          <h2 className={`text-lg font-medium mb-3 ${isMobile ? 'mx-auto text-center w-full' : ''}`}>
+          <h2 className={`text-xl md:text-2xl font-medium mb-3 ${isMobile ? 'mx-auto text-center w-full' : ''}`}>
             <span>Share your Travel plan here</span>
             <br />
             <span className="text-gray-500">Comparte tu plan de viaje aquí</span>
