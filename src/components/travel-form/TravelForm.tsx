@@ -17,6 +17,8 @@ interface TravelFormProps {
 interface TravelFormValues {
   name: string;
   route: string;
+  availableSpots: number;
+  transport: string;
   dateTime: string;
   contact: string;
   dietaryRestrictions: string;
@@ -25,12 +27,14 @@ interface TravelFormValues {
 export const TravelForm = ({ projectId }: TravelFormProps) => {
   const { toast } = useToast();
   const [success, setSuccess] = useState(false);
-  const [language, setLanguage] = useState<"en" | "es">("es");
+  const [language, setLanguage] = useState<"en" | "es">("en");
 
   const form = useForm<TravelFormValues>({
     defaultValues: {
       name: "",
       route: "",
+      availableSpots: 2,
+      transport: "car",
       dateTime: "",
       contact: "",
       dietaryRestrictions: ""
@@ -54,9 +58,9 @@ export const TravelForm = ({ projectId }: TravelFormProps) => {
       // Create a travel entry from form data
       const newEntry = {
         name: formData.name,
-        available_spots: 2, // Default to 2 available spots
+        available_spots: formData.availableSpots, 
         route: formData.route,
-        transport: "car", // Default transport type
+        transport: formData.transport.toLowerCase(), 
         taxi_sharing: formData.route.toLowerCase().includes("taxi"),
         contact: formData.contact,
         claimed_by: [],
@@ -126,14 +130,18 @@ export const TravelForm = ({ projectId }: TravelFormProps) => {
     const placeholders = {
       en: {
         name: "Your name",
-        route: "Write your route and means of transport (add any comment)",
+        route: "Write your route (add any comment)",
+        availableSpots: "Number of available spots",
+        transport: "Type of transport (car, bus, taxi, etc.)",
         dateTime: "Write a date and approx hour (e.g., 1.9 around 11:00 am)",
         contact: "Your contact (preferably WhatsApp number)",
         dietaryRestrictions: "Diet/allergies (optional)"
       },
       es: {
         name: "Tu nombre",
-        route: "Escribe tu ruta y medio de transporte (añade cualquier comentario)",
+        route: "Escribe tu ruta (añade cualquier comentario)",
+        availableSpots: "Número de plazas disponibles",
+        transport: "Tipo de transporte (coche, autobús, taxi, etc.)",
         dateTime: "Escribe una fecha y hora aproximada (ej., 1.9 sobre las 11:00 am)",
         contact: "Tu contacto (preferiblemente número de WhatsApp)",
         dietaryRestrictions: "Dieta/alergias (opcional)"
@@ -150,6 +158,17 @@ export const TravelForm = ({ projectId }: TravelFormProps) => {
   return (
     <div className="bg-[#FFFFFF] max-w-2xl mx-auto">
       <div className="relative rounded-lg overflow-hidden">
+        <div className="flex justify-end mb-1">
+          <button 
+            type="button"
+            onClick={handleToggleLanguage} 
+            className="text-gray-500 hover:text-gray-700 focus:outline-none text-xs"
+          >
+            <span className={language === "en" ? "font-bold" : "font-normal"}>EN</span>
+            {" / "}
+            <span className={language === "es" ? "font-bold" : "font-normal"}>ES</span>
+          </button>
+        </div>
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4 p-5 md:p-10 bg-[#FFFFFF] rounded-lg border border-transparent focus-within:border-[#F97316]">
             <FormField
@@ -157,7 +176,7 @@ export const TravelForm = ({ projectId }: TravelFormProps) => {
               name="name"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel className="text-gray-700">{language === "en" ? "Your name" : "Tu nombre"}</FormLabel>
+                  <FormLabel className="text-gray-700 text-left block">{language === "en" ? "Your name" : "Tu nombre"}</FormLabel>
                   <FormControl>
                     <Input 
                       placeholder={getPlaceholder("name")}
@@ -174,8 +193,8 @@ export const TravelForm = ({ projectId }: TravelFormProps) => {
               name="route"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel className="text-gray-700">
-                    {language === "en" ? "Route & transport" : "Ruta y transporte"}
+                  <FormLabel className="text-gray-700 text-left block">
+                    {language === "en" ? "Route" : "Ruta"}
                   </FormLabel>
                   <FormControl>
                     <Textarea 
@@ -188,12 +207,56 @@ export const TravelForm = ({ projectId }: TravelFormProps) => {
               )}
             />
             
+            <div className="flex flex-col sm:flex-row gap-4">
+              <FormField
+                control={form.control}
+                name="availableSpots"
+                render={({ field }) => (
+                  <FormItem className="flex-1">
+                    <FormLabel className="text-gray-700 text-left block">
+                      {language === "en" ? "Available spots" : "Plazas disponibles"}
+                    </FormLabel>
+                    <FormControl>
+                      <Input 
+                        type="number"
+                        min="0"
+                        placeholder={getPlaceholder("availableSpots")}
+                        className="focus:outline-none focus:ring-[#F97316] focus:border-[#F97316] focus-visible:ring-[#F97316]"
+                        {...field}
+                        onChange={(e) => field.onChange(parseInt(e.target.value) || 0)}
+                        value={field.value}
+                      />
+                    </FormControl>
+                  </FormItem>
+                )}
+              />
+              
+              <FormField
+                control={form.control}
+                name="transport"
+                render={({ field }) => (
+                  <FormItem className="flex-1">
+                    <FormLabel className="text-gray-700 text-left block">
+                      {language === "en" ? "Transport type" : "Tipo de transporte"}
+                    </FormLabel>
+                    <FormControl>
+                      <Input 
+                        placeholder={getPlaceholder("transport")}
+                        className="focus:outline-none focus:ring-[#F97316] focus:border-[#F97316] focus-visible:ring-[#F97316]"
+                        {...field} 
+                      />
+                    </FormControl>
+                  </FormItem>
+                )}
+              />
+            </div>
+            
             <FormField
               control={form.control}
               name="dateTime"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel className="text-gray-700">
+                  <FormLabel className="text-gray-700 text-left block">
                     {language === "en" ? "Date & time" : "Fecha y hora"}
                   </FormLabel>
                   <FormControl>
@@ -212,7 +275,7 @@ export const TravelForm = ({ projectId }: TravelFormProps) => {
               name="contact"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel className="text-gray-700">
+                  <FormLabel className="text-gray-700 text-left block">
                     {language === "en" ? "Contact" : "Contacto"}
                   </FormLabel>
                   <FormControl>
@@ -231,7 +294,7 @@ export const TravelForm = ({ projectId }: TravelFormProps) => {
               name="dietaryRestrictions"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel className="text-gray-700">
+                  <FormLabel className="text-gray-700 text-left block">
                     {language === "en" ? "Diet/allergies" : "Dieta/alergias"}
                   </FormLabel>
                   <FormControl>
@@ -245,17 +308,7 @@ export const TravelForm = ({ projectId }: TravelFormProps) => {
               )}
             />
             
-            <div className="flex justify-between items-center mt-6">
-              <button 
-                type="button"
-                onClick={handleToggleLanguage} 
-                className="text-gray-500 hover:text-gray-700 focus:outline-none text-xs"
-              >
-                <span className={language === "en" ? "font-bold" : "font-normal"}>EN</span>
-                {" / "}
-                <span className={language === "es" ? "font-bold" : "font-normal"}>ES</span>
-              </button>
-              
+            <div className="flex justify-end mt-6">
               <Button type="submit" className="bg-[#F97316] hover:bg-[#F97316]/90 text-white border-none">
                 {language === "en" ? "Submit" : "Enviar"}
               </Button>

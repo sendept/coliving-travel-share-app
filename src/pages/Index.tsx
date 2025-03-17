@@ -56,16 +56,6 @@ const Index = () => {
             <span className="text-gray-500">Comparte tu plan de viaje aquí</span>
           </h2>
           <TravelForm />
-          <div className="mt-2 text-center mb-[40px]">
-            <a 
-              href="https://airtable.com/appSEq5rTb2wminZh/shrevCpLAyaJQJXS5" 
-              target="_blank" 
-              rel="noopener noreferrer" 
-              className="text-[#F97316] hover:text-[#F97316]/80 underline text-[9px]"
-            >
-              Report a bug or suggest changes
-            </a>
-          </div>
         </div>
       </div>
       <footer className="fixed bottom-0 left-0 right-0 text-center text-sm text-muted-foreground py-2 bg-white">
