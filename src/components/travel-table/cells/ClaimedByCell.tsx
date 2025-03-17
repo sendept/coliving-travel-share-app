@@ -31,7 +31,6 @@ export const ClaimedByCell = ({ entry, onClaimSpot, isEditing }: ClaimedByCellPr
       {entry.available_spots > 0 && (
         <div>
           <ClaimForm entry={entry} onClaim={onClaimSpot} />
-          <div className="text-[9px] text-gray-500 mt-1">join/unete as co-traveller</div>
         </div>
       )}
     </div>

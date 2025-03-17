@@ -91,27 +91,32 @@ export const useTravelForm = (projectId?: string | null) => {
         setSuccess(false);
       }, 10000);
       
-      // Immediately scroll to the top of the table
-      const tableElement = document.querySelector('.responsive-table');
-      if (tableElement) {
-        tableElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
-      }
+      // Scroll to the top of the table immediately
+      setTimeout(() => {
+        const tableElement = document.querySelector('.responsive-table');
+        if (tableElement) {
+          window.scrollTo({
+            top: tableElement.getBoundingClientRect().top + window.scrollY - 20,
+            behavior: 'smooth'
+          });
+        }
         
-      // Then find and highlight the new entry
-      if (data && Array.isArray(data) && data.length > 0 && data[0].id) {
-        setTimeout(() => {
-          const entryId = data[0].id;
-          const entryElement = document.getElementById(`entry-${entryId}`);
-          if (entryElement) {
-            entryElement.scrollIntoView({ behavior: 'smooth', block: 'center' });
-            // Briefly highlight the entry
-            entryElement.classList.add('bg-orange-50');
-            setTimeout(() => {
-              entryElement.classList.remove('bg-orange-50');
-            }, 3000);
-          }
-        }, 500); // reduced wait time for a smoother experience
-      }
+        // Then find and highlight the new entry
+        if (data && Array.isArray(data) && data.length > 0 && data[0].id) {
+          setTimeout(() => {
+            const entryId = data[0].id;
+            const entryElement = document.getElementById(`entry-${entryId}`);
+            if (entryElement) {
+              entryElement.scrollIntoView({ behavior: 'smooth', block: 'center' });
+              // Briefly highlight the entry
+              entryElement.classList.add('bg-orange-50');
+              setTimeout(() => {
+                entryElement.classList.remove('bg-orange-50');
+              }, 3000);
+            }
+          }, 500); // reduced wait time for a smoother experience
+        }
+      }, 100); // Short delay to ensure DOM is updated
     } catch (err) {
       console.error("Unexpected error in handleSubmit:", err);
       toast({
