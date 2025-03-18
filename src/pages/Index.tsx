@@ -1,4 +1,3 @@
-
 import { TravelTable } from "@/components/travel-table/TravelTable";
 import { PageHeader } from "@/components/PageHeader";
 import { TravelForm } from "@/components/travel-form/TravelForm";
@@ -51,7 +50,7 @@ const Index = () => {
           </div>
         </div>
         
-        <div className="mt-32 text-center mb-8">
+        <div className="mt-48 text-center mb-8">
           <h2 className={`text-3xl md:text-4xl font-medium mb-10 ${isMobile ? 'mx-auto text-center w-full' : ''}`}>
             <span>{getTranslation("inviteOthers", "en")}</span>
             <br />
@@ -66,7 +65,7 @@ const Index = () => {
         </div>
       </div>
       
-      <div className="mt-16">
+      <div>
         <TableFooter />
       </div>
     </div>

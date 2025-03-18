@@ -38,16 +38,17 @@ export const ClaimedByCell = ({ entry, onClaimSpot, isEditing }: ClaimedByCellPr
         </div>
         
         {Array.isArray(entry.claimed_by) && entry.claimed_by.length > 0 && (
-          <div className="text-center">
+          <div className="text-center flex flex-col space-y-1 mt-2">
             {entry.claimed_by.map((name, index) => {
               const [bgColor, textColor] = coTravelerColorPairs[index % coTravelerColorPairs.length];
               return (
                 <span 
                   key={index}
-                  className="text-sm font-normal px-1 py-0.5 rounded mx-1"
+                  className="text-sm font-normal px-2 py-1 rounded mx-auto"
                   style={{
                     backgroundColor: bgColor,
-                    color: textColor
+                    color: textColor,
+                    display: "inline-block"
                   }}
                 >
                   {name}

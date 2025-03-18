@@ -79,7 +79,7 @@ tr:nth-child(odd) {
 }
 
 tr:nth-child(even) {
-  background-color: white !important;
+  background-color: #F5F5F5 !important;
 }
 
 /* Keep table header always white */
