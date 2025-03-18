@@ -17,7 +17,7 @@ export const TableFooter = () => {
       <div className="flex justify-center items-center mt-1">
         <span className="mr-1">Built by</span>
         <a href="https://sende.co" target="_blank" rel="noopener noreferrer" className="inline-flex items-center">
-          <img src="/lovable-uploads/5939e496-5d0c-421e-9294-eb688e353313.png" alt="Sende" className="h-7" />
+          <img src="/lovable-uploads/5939e496-5d0c-421e-9294-eb688e353313.png" alt="Sende" className="h-8" />
         </a>
       </div>
     </footer>
