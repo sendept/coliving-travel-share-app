@@ -51,13 +51,13 @@ const Index = () => {
           </div>
         </div>
         
-        <div className="mt-16 text-center mb-8" style={{ marginTop: '60px' }}>
-          <h2 className={`text-3xl md:text-4xl font-medium mb-10 ${isMobile ? 'mx-auto text-center w-full' : ''}`}>
+        <div className="mt-16 mb-8" style={{ marginTop: '60px' }}>
+          <h2 className={`text-3xl md:text-4xl font-medium mb-10 ${isMobile ? 'text-left px-4' : 'text-center'}`}>
             <span>{getTranslation("inviteOthers", "en")}</span>
             <br />
             <span className="text-gray-500">{getTranslation("shareYourCarTaxi", "es")}</span>
           </h2>
-          <p className="mb-8 text-gray-600">
+          <p className={`mb-8 text-gray-600 ${isMobile ? 'text-left px-4' : 'text-center'}`}>
             {getTranslation("formExplanation", "en")}
             <br />
             {getTranslation("formExplanation", "es")}

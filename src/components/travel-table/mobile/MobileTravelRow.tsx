@@ -46,7 +46,7 @@ export const MobileTravelRow = ({
   };
 
   return (
-    <div className={`md:hidden p-5 border-b mb-3 ${bgColor} rounded-xl shadow-sm`} id={`entry-${entry.id}`}>
+    <div className={`md:hidden p-5 border-b mb-3 ${bgColor} rounded-none shadow-sm`} id={`entry-${entry.id}`}>
       <div className="bg-gray-200 inline-block px-4 py-1 rounded-full mb-4">
         <h3 className="text-gray-600 text-sm">Travel together with {entry.name}</h3>
       </div>
@@ -55,7 +55,7 @@ export const MobileTravelRow = ({
         <div className="flex items-start gap-3">
           <span className="text-xl mt-1">{transportIcon}</span>
           <div className="flex-1 text-left">
-            <div className="font-medium text-[#222222] text-base mb-2 px-3 py-2 rounded-lg border border-gray-300">
+            <div className="font-medium text-[#222222] text-base mb-2 px-3 py-2 rounded-lg">
               {getMobileRoute()}
             </div>
             <button 
@@ -104,17 +104,16 @@ export const MobileTravelRow = ({
               </div>
             </div>
             <div className="text-gray-600">
-              {entry.available_spots <= 1 ? "Queda" : "Quedan"} {entry.available_spots} {entry.available_spots === 1 ? 'plaza' : 'plazas'}
+              {entry.available_spots > 0 && (
+                <>{entry.available_spots <= 1 ? "Queda" : "Quedan"} {entry.available_spots} {entry.available_spots === 1 ? 'plaza' : 'plazas'}</>
+              )}
             </div>
           </div>
         ) : (
           <div className="text-gray-600">
-            {entry.name} + {entry.available_spots <= 1 ? "Queda" : "Quedan"} {entry.available_spots} {entry.available_spots === 1 ? 'plaza' : 'plazas'}
-          </div>
-        )}
-        {entry.available_spots <= 0 && (
-          <div className="text-xs text-gray-400 font-medium mt-1">
-            0 spots/plazas
+            {entry.name} + {entry.available_spots > 0 && (
+              <>{entry.available_spots <= 1 ? "Queda" : "Quedan"} {entry.available_spots} {entry.available_spots === 1 ? 'plaza' : 'plazas'}</>
+            )}
           </div>
         )}
       </div>

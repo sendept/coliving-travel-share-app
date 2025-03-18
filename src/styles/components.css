@@ -74,3 +74,16 @@ textarea, input {
 .claim-form .button-name-input {
   border: 1px solid #C8C8C9 !important;
 }
+
+/* Mobile form alignment */
+@media (max-width: 767px) {
+  .mt-16.text-center h2,
+  .mt-16.text-center p {
+    text-align: left !important;
+  }
+  
+  .mt-16.text-center p {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+}
