@@ -16,10 +16,10 @@ export const ClaimedByCell = ({ entry, onClaimSpot, isEditing }: ClaimedByCellPr
   const hasContact = !!entry.contact && entry.contact.trim() !== '';
 
   return (
-    <div>
+    <div className="flex flex-col space-y-1">
       <div className="flex flex-col space-y-1 mb-2">
-        <div className="flex items-center">
-          <span className="font-medium">{entry.name}</span>
+        <div className="flex items-center justify-center">
+          <span className="font-medium text-center">{entry.name}</span>
           {hasContact && (
             <div className="ml-2 flex items-center text-sm text-gray-500">
               <Phone size={12} className="mr-1" />
@@ -29,7 +29,7 @@ export const ClaimedByCell = ({ entry, onClaimSpot, isEditing }: ClaimedByCellPr
         </div>
         
         {Array.isArray(entry.claimed_by) && entry.claimed_by.length > 0 && (
-          <div className="text-sm text-gray-500">
+          <div className="text-sm text-gray-500 text-center">
             + {entry.claimed_by.join(", ")}
           </div>
         )}
