@@ -9,7 +9,7 @@ import { TravelFormValues } from "../types";
 interface FormFieldProps {
   name: keyof TravelFormValues;
   control: Control<TravelFormValues>;
-  label?: string;
+  label?: ReactNode; // Changed from string to ReactNode
   placeholder: string;
   isTextarea?: boolean;
   type?: string;
