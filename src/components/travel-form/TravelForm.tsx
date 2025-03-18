@@ -132,7 +132,7 @@ export const TravelForm = ({ projectId }: TravelFormProps) => {
           href="https://airtable.com/appSEq5rTb2wminZh/shrevCpLAyaJQJXS5" 
           target="_blank" 
           rel="noopener noreferrer" 
-          className="text-[#F97316] hover:text-[#F97316]/80 underline text-[9px]"
+          className="text-blue-500 hover:text-blue-600 underline text-[9px]"
         >
           Report a bug or suggest changes
         </a>

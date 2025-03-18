@@ -83,7 +83,7 @@ export const MobileTravelRow = ({
           </div>
         )}
         {entry.available_spots <= 0 && (
-          <div className="text-gray-700 font-medium mt-1">
+          <div className="text-xs text-gray-400 font-medium mt-1">
             0 spots/plazas
           </div>
         )}

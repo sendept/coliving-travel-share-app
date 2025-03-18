@@ -18,7 +18,7 @@ export const FormLayout = ({ form, onSubmit, children, submitLabel }: FormLayout
       <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-5 p-5 md:p-10 bg-[#FFFFFF] rounded-xl">
         {children}
         <div className="flex justify-end mt-6">
-          <Button type="submit" className="bg-[#F97316] hover:bg-[#F97316]/90 text-white border-none">
+          <Button type="submit" className="bg-blue-500 hover:bg-blue-600 text-white border-none">
             {submitLabel}
           </Button>
         </div>

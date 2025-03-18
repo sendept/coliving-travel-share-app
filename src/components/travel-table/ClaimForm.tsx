@@ -100,7 +100,7 @@ export const ClaimForm = ({ entry, onClaim }: ClaimFormProps) => {
           className={`
             whitespace-nowrap rounded-md h-[46px] px-6 text-base
             ${showContactField 
-              ? "bg-[#F97316] hover:bg-[#F97316]/90 text-white" 
+              ? "bg-blue-500 hover:bg-blue-600 text-white" 
               : "bg-transparent text-blue-500 hover:bg-blue-500 hover:text-white border border-blue-500"}
           `}
         >

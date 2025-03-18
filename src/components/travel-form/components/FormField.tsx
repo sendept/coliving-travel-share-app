@@ -9,7 +9,7 @@ import { TravelFormValues } from "../types";
 interface FormFieldProps {
   name: keyof TravelFormValues;
   control: Control<TravelFormValues>;
-  label?: ReactNode; // Changed from string to ReactNode
+  label?: ReactNode;
   placeholder: string;
   isTextarea?: boolean;
   type?: string;
@@ -53,8 +53,8 @@ export const FormField = ({
                 className={`
                   min-h-[100px] resize-none border-0
                   focus:outline-none 
-                  ${focusedField === name ? "ring-1 ring-[#F97316]" : ""} 
-                  focus-visible:ring-1 focus-visible:ring-[#F97316]
+                  ${focusedField === name ? "ring-1 ring-blue-500" : ""} 
+                  focus-visible:ring-1 focus-visible:ring-blue-500
                 `}
                 onFocus={() => onFocus(name)}
                 onBlur={onBlur}
@@ -68,8 +68,8 @@ export const FormField = ({
                 className={`
                   border-0
                   focus:outline-none 
-                  ${focusedField === name ? "ring-1 ring-[#F97316]" : ""} 
-                  focus-visible:ring-1 focus-visible:ring-[#F97316]
+                  ${focusedField === name ? "ring-1 ring-blue-500" : ""} 
+                  focus-visible:ring-1 focus-visible:ring-blue-500
                 `}
                 onFocus={() => onFocus(name)}
                 onBlur={onBlur}

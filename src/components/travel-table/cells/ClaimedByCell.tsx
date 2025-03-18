@@ -43,7 +43,7 @@ export const ClaimedByCell = ({ entry, onClaimSpot, isEditing }: ClaimedByCellPr
           <ClaimForm entry={entry} onClaim={onClaimSpot} />
         </div>
       ) : (
-        <div className="text-sm text-gray-700 font-medium">
+        <div className="text-xs text-gray-400 font-medium">
           0 spots/plazas
         </div>
       )}
