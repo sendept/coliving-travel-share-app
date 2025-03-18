@@ -31,7 +31,7 @@ export const InputField = ({
   return (
     <div className="relative">
       <Input
-        value={String(value)} // Convert to string to fix the type error
+        value={String(value)}
         onChange={(e) => {
           let inputValue = e.target.value;
           if (type === "number") {

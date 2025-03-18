@@ -4,7 +4,7 @@ import { FormControl, FormField as UIFormField, FormItem, FormLabel } from "@/co
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Control } from "react-hook-form";
-import { TravelFormValues } from "../types";
+import { TravelFormValues } from "./types";
 
 interface FormFieldProps {
   name: keyof TravelFormValues;
@@ -51,15 +51,16 @@ export const FormField = ({
               <Textarea
                 placeholder={placeholder}
                 className={`
-                  min-h-[100px] resize-none
+                  min-h-[100px] resize-none border-0
                   focus:outline-none 
-                  ${focusedField === name ? "ring-1 ring-blue-500" : ""} 
+                  ${focusedField === name.toString() ? "ring-1 ring-blue-500" : ""} 
                   focus-visible:ring-1 focus-visible:ring-blue-500
                   border-transparent !important
                 `}
-                onFocus={() => onFocus(name)}
+                onFocus={() => onFocus(name.toString())}
                 onBlur={onBlur}
                 {...field}
+                name={field.name.toString()}
               />
             ) : (
               <Input
@@ -67,14 +68,16 @@ export const FormField = ({
                 min={min}
                 placeholder={placeholder}
                 className={`
+                  border-0
                   focus:outline-none 
-                  ${focusedField === name ? "ring-1 ring-blue-500" : ""} 
+                  ${focusedField === name.toString() ? "ring-1 ring-blue-500" : ""} 
                   focus-visible:ring-1 focus-visible:ring-blue-500
                   border-transparent !important
                 `}
-                onFocus={() => onFocus(name)}
+                onFocus={() => onFocus(name.toString())}
                 onBlur={onBlur}
                 {...field}
+                name={field.name.toString()}
                 onChange={(e) => {
                   if (type === "number") {
                     field.onChange(parseInt(e.target.value) || 0);
