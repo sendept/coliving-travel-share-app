@@ -50,7 +50,7 @@
 
 /* Explicitly remove hover effects from table rows */
 .md\:table-row:hover {
-  background-color: transparent !important;
+  background-color: inherit !important;
 }
 
 tr:hover {
@@ -73,7 +73,7 @@ tr:hover {
   padding-top: 2.5rem;
 }
 
-/* Row coloring - always keep first row white, alternate subsequent rows */
+/* Fixed alternating row colors - always keep first row white */
 tr:first-child {
   background-color: white !important;
 }
@@ -104,5 +104,18 @@ thead tr {
 /* Table textarea focus styles */
 .table-textarea:focus, .table-input:focus {
   border-color: #1EAEDB !important;
+  outline: none;
+}
+
+/* Input and textarea styles for the table */
+.table-cell input, 
+.table-cell textarea {
+  border: 1px solid #e2e8f0 !important;
+  border-radius: 0.375rem;
+}
+
+.table-cell input:focus, 
+.table-cell textarea:focus {
+  border-color: #3b82f6 !important;
   outline: none;
 }

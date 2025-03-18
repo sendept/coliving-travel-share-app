@@ -31,9 +31,9 @@ export const EditForm = ({ entry, editForm, setEditForm, field, onSave }: EditFo
     if (onSave) onSave();
   };
 
-  // Add focused state to input classes with blue border
-  const inputClasses = `bg-white border ${isFocused ? 'border-blue-500' : 'border-gray-300'} px-3 py-2 rounded-md pr-8 focus:outline-none`;
-  const textareaClasses = `min-h-[80px] bg-white border ${isFocused ? 'border-blue-500' : 'border-gray-300'} px-3 py-2 rounded-md pr-8 focus:outline-none`;
+  // Border styling
+  const inputClasses = `bg-white border border-gray-300 px-3 py-2 rounded-md pr-8 focus:outline-none focus:border-blue-500`;
+  const textareaClasses = `min-h-[80px] bg-white border border-gray-300 px-3 py-2 rounded-md pr-8 focus:outline-none focus:border-blue-500`;
 
   if (field === 'claimed_by') {
     // Special handling for editing claimed users
@@ -96,7 +96,7 @@ export const EditForm = ({ entry, editForm, setEditForm, field, onSave }: EditFo
               onKeyDown={handleKeyDown}
               onFocus={() => setIsFocused(true)}
               onBlur={() => setIsFocused(false)}
-              className={`w-16 h-6 py-1 px-2 text-xs border ${isFocused ? 'border-blue-500' : 'border-gray-300'} rounded-md pr-6 focus:outline-none`}
+              className={`w-16 h-6 py-1 px-2 text-xs border border-gray-300 rounded-md pr-6 focus:outline-none focus:border-blue-500`}
               min="0"
             />
             <Check 

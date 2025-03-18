@@ -15,7 +15,7 @@ interface TravelTableRowProps {
   onClaimSpot: (id: string, name: string) => void;
   className?: string;
   isAlternate?: boolean;
-  index: number; // Add index prop to determine row color
+  index: number;
 }
 
 export const TravelTableRow = ({
@@ -45,7 +45,7 @@ export const TravelTableRow = ({
     );
   };
 
-  // First row is always white, then alternate
+  // Fixed row background - first row is always white, then alternate
   const rowClassName = index === 0 ? "bg-white" : (index % 2 === 1 ? "bg-[#F5F5F5]" : "bg-white");
 
   return (
