@@ -46,12 +46,12 @@ const Index = () => {
       </div>
       <div className="py-8 space-y-12">
         <div className="relative">
-          <div className="product-hunt-card px-0 py-0 mx-auto lg:w-[calc(100%-40px)] lg:max-w-none bg-white">
+          <div className="product-hunt-card px-0 py-0 mx-auto bg-white w-full overflow-x-hidden">
             <TravelTable entries={entries} onClaimSpot={handleClaimSpot} />
           </div>
         </div>
         
-        <div className="mt-60 text-center mb-8">
+        <div className="mt-16 text-center mb-8" style={{ marginTop: '60px' }}>
           <h2 className={`text-3xl md:text-4xl font-medium mb-10 ${isMobile ? 'mx-auto text-center w-full' : ''}`}>
             <span>{getTranslation("inviteOthers", "en")}</span>
             <br />

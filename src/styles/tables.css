@@ -34,7 +34,7 @@
 /* Mobile-first table styles */
 @media (max-width: 1023px) {
   .responsive-table {
-    @apply block w-full overflow-x-auto -mx-4 px-4;
+    @apply block w-full overflow-x-hidden -mx-4 px-4;
   }
 
   .responsive-table table {
@@ -48,7 +48,7 @@
   }
 }
 
-/* Explicitly remove hover effects from table rows */
+/* Remove hover effects from table rows */
 .md\:table-row:hover {
   background-color: inherit !important;
 }
@@ -91,6 +91,26 @@ thead tr {
   background-color: white !important;
 }
 
+/* Style for table inputs and textareas */
+.table-cell input,
+.table-cell textarea,
+.table-textarea,
+.table-input {
+  border: 1px solid #e2e8f0 !important;
+  border-radius: 0.375rem;
+  width: 100%;
+  padding: 0.5rem;
+}
+
+.table-cell input:focus,
+.table-cell textarea:focus,
+.table-textarea:focus,
+.table-input:focus {
+  border-color: #3b82f6 !important;
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.1);
+}
+
 /* Ensure check icons in edit forms are properly positioned */
 .check-icon {
   @apply absolute right-2 bottom-2 text-green-600 cursor-pointer;
@@ -101,21 +121,18 @@ thead tr {
   @apply text-green-800;
 }
 
-/* Table textarea focus styles */
-.table-textarea:focus, .table-input:focus {
-  border-color: #1EAEDB !important;
-  outline: none;
-}
+/* Mobile styles */
+@media (max-width: 767px) {
+  /* Ensure mobile container is not scrollable horizontally */
+  .product-hunt-card {
+    width: 100% !important;
+    max-width: 100% !important;
+    overflow-x: hidden !important;
+    padding: 0 !important;
+  }
 
-/* Input and textarea styles for the table */
-.table-cell input, 
-.table-cell textarea {
-  border: 1px solid #e2e8f0 !important;
-  border-radius: 0.375rem;
-}
-
-.table-cell input:focus, 
-.table-cell textarea:focus {
-  border-color: #3b82f6 !important;
-  outline: none;
+  /* Apply border to mobile route display */
+  .font-medium.text-[#222222] {
+    border: 1px solid #e2e8f0;
+  }
 }

@@ -46,7 +46,9 @@ export const TravelTableRow = ({
   };
 
   // Fixed row background - first row is always white, then alternate
-  const rowClassName = index === 0 ? "bg-white" : (index % 2 === 1 ? "bg-[#F5F5F5]" : "bg-white");
+  const rowClassName = index === 0 
+    ? "bg-white" 
+    : (index % 2 === 1 ? "bg-[#F5F5F5]" : "bg-white");
 
   return (
     <>
@@ -54,7 +56,7 @@ export const TravelTableRow = ({
         entry={entry} 
         onStartEdit={onStartEdit} 
         onClaimSpot={onClaimSpot} 
-        isAlternate={isAlternate}
+        isAlternate={index % 2 === 1} // Make sure mobile rows alternate properly too
       />
       
       <DesktopTravelRow 
