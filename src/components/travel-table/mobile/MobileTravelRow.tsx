@@ -99,7 +99,7 @@ export const MobileTravelRow = ({
           <div className="flex items-start justify-center flex-col">
             <span className="text-xl mb-2 mx-auto">{transportIcon}</span>
             <div className="flex-1 text-center w-full">
-              <div className="font-medium text-[#222222] text-base mb-2 px-3 py-2 rounded-lg border border-gray-300 text-center">
+              <div className="font-medium text-[#222222] text-base mb-2 px-3 py-2 rounded-lg text-center border-0">
                 {getMobileRoute()}
               </div>
               <button 

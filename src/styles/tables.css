@@ -111,6 +111,11 @@ thead tr {
   box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.1);
 }
 
+/* Route element styling - no border */
+.font-medium.text-[#222222] {
+  border: 0 !important;
+}
+
 /* Ensure check icons in edit forms are properly positioned */
 .check-icon {
   @apply absolute right-2 bottom-2 text-green-600 cursor-pointer;
@@ -129,10 +134,5 @@ thead tr {
     max-width: 100% !important;
     overflow-x: hidden !important;
     padding: 0 !important;
-  }
-
-  /* Apply border to mobile route display */
-  .font-medium.text-[#222222] {
-    border: 1px solid #e2e8f0;
   }
 }

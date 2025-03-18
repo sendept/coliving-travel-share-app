@@ -31,9 +31,10 @@ export const EditForm = ({ entry, editForm, setEditForm, field, onSave }: EditFo
     if (onSave) onSave();
   };
 
-  // Border styling
+  // Updated border styling - adding border to editable inputs but not to route
   const inputClasses = `table-input bg-white border border-gray-300 px-3 py-2 rounded-md pr-8 focus:outline-none focus:border-blue-500`;
   const textareaClasses = `table-textarea min-h-[80px] bg-white border border-gray-300 px-3 py-2 rounded-md pr-8 focus:outline-none focus:border-blue-500`;
+  const routeTextareaClasses = `table-textarea min-h-[80px] bg-white border-0 px-3 py-2 rounded-md pr-8 focus:outline-none focus:ring-0`;
 
   if (field === 'claimed_by') {
     // Special handling for editing claimed users
@@ -110,7 +111,27 @@ export const EditForm = ({ entry, editForm, setEditForm, field, onSave }: EditFo
     );
   }
 
-  if (field === 'route' || field === 'dietary_restrictions') {
+  if (field === 'route') {
+    return (
+      <div className="relative">
+        <Textarea
+          value={editForm[field] !== undefined ? String(editForm[field] || '') : String(entry[field] || '')}
+          onChange={(e) => handleChange(e.target.value)}
+          onKeyDown={handleKeyDown}
+          onFocus={() => setIsFocused(true)}
+          onBlur={() => setIsFocused(false)}
+          className={`${routeTextareaClasses} claim-form border-0`}
+        />
+        <Check 
+          size={16} 
+          className="absolute right-2 bottom-2 text-green-600 cursor-pointer check-icon" 
+          onClick={confirmEdit}
+        />
+      </div>
+    );
+  }
+
+  if (field === 'dietary_restrictions') {
     return (
       <div className="relative">
         <Textarea

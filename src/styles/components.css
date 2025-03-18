@@ -61,11 +61,13 @@
 
 /* Form elements */
 textarea, input {
-  border: 0 !important;
+  border: 1px solid #e2e8f0 !important;
 }
 
 /* Override for Name/Nombre field in claim form */
-.claim-form input, input[placeholder="Name / Nombre"], input[placeholder="Contact / Contacto"] {
+.claim-form input, 
+input[placeholder="Name / Nombre"], 
+input[placeholder="Contact / Contacto"] {
   @apply border border-gray-300 !important;
   border-radius: 0.375rem;
 }
@@ -73,6 +75,11 @@ textarea, input {
 /* Add grey stroke to Name/Nombre button */
 .claim-form .button-name-input {
   border: 1px solid #C8C8C9 !important;
+}
+
+/* Exception for route display - no border */
+.font-medium.text-[#222222] {
+  border: 0 !important;
 }
 
 /* Mobile form alignment */
