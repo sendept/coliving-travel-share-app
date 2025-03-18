@@ -1,9 +1,10 @@
 
-import { Input } from "@/components/ui/input";
-import { Textarea } from "@/components/ui/textarea";
-import { Check } from "lucide-react";
 import { KeyboardEvent, useState } from "react";
 import type { TravelEntry } from "./types";
+import { TextAreaField } from "./edit-fields/TextAreaField";
+import { InputField } from "./edit-fields/InputField";
+import { ClaimedByField } from "./edit-fields/ClaimedByField";
+import { RouteField } from "./edit-fields/RouteField";
 
 interface EditFormProps {
   entry: TravelEntry;
@@ -31,170 +32,89 @@ export const EditForm = ({ entry, editForm, setEditForm, field, onSave }: EditFo
     if (onSave) onSave();
   };
 
-  // Updated border styling - adding border to editable inputs but not to route
+  // Common styling classes
   const inputClasses = `table-input bg-white border border-gray-300 px-3 py-2 rounded-md pr-8 focus:outline-none focus:border-blue-500`;
   const textareaClasses = `table-textarea min-h-[80px] bg-white border border-gray-300 px-3 py-2 rounded-md pr-8 focus:outline-none focus:border-blue-500`;
-  const routeTextareaClasses = `table-textarea min-h-[80px] bg-white border-0 px-3 py-2 rounded-md pr-8 focus:outline-none focus:ring-0`;
 
+  // Handles focus state
+  const handleFocus = () => setIsFocused(true);
+  const handleBlur = () => setIsFocused(false);
+
+  // Value for the field
+  const fieldValue = editForm[field] !== undefined ? String(editForm[field] || '') : String(entry[field] || '');
+
+  // Special handling for claimed_by field
   if (field === 'claimed_by') {
-    // Special handling for editing claimed users
-    const claimedBy = Array.isArray(editForm.claimed_by) ? editForm.claimed_by : entry.claimed_by || [];
-    const claimedByValue = claimedBy.join('\n');
-
     return (
-      <div className="space-y-2 relative">
-        <div className="mb-2">
-          <label htmlFor="name-input" className="text-xs">Driver/Organizer Name:</label>
-          <div className="relative">
-            <Input
-              id="name-input"
-              value={editForm.name !== undefined ? editForm.name : entry.name}
-              onChange={(e) => setEditForm({ ...editForm, name: e.target.value })}
-              onKeyDown={handleKeyDown}
-              onFocus={() => setIsFocused(true)}
-              onBlur={() => setIsFocused(false)}
-              className={`mt-1 ${inputClasses} claim-form input`}
-            />
-            <Check 
-              size={16} 
-              className="absolute right-2 bottom-2 text-green-600 cursor-pointer check-icon" 
-              onClick={confirmEdit}
-            />
-          </div>
-        </div>
-        <div className="relative">
-          <Textarea
-            value={claimedByValue}
-            onChange={(e) => {
-              const newClaimedBy = e.target.value
-                .split('\n')
-                .map(line => line.trim())
-                .filter(line => line !== '');
-              handleChange(newClaimedBy);
-            }}
-            onKeyDown={handleKeyDown}
-            onFocus={() => setIsFocused(true)}
-            onBlur={() => setIsFocused(false)}
-            className={`${textareaClasses} claim-form`}
-            placeholder="Enter claimed users (one per line)"
-          />
-          <Check 
-            size={16} 
-            className="absolute right-2 bottom-2 text-green-600 cursor-pointer check-icon" 
-            onClick={confirmEdit}
-          />
-        </div>
-        <div className="flex items-center gap-2 relative">
-          <label htmlFor="available-spots" className="text-xs whitespace-nowrap">
-            Available Spots:
-          </label>
-          <div className="relative">
-            <Input
-              id="available-spots"
-              type="number"
-              value={editForm.available_spots !== undefined ? editForm.available_spots : entry.available_spots}
-              onChange={(e) => setEditForm({ ...editForm, available_spots: parseInt(e.target.value) || 0 })}
-              onKeyDown={handleKeyDown}
-              onFocus={() => setIsFocused(true)}
-              onBlur={() => setIsFocused(false)}
-              className={`w-16 h-6 py-1 px-2 text-xs table-input border border-gray-300 rounded-md pr-6 focus:outline-none focus:border-blue-500 claim-form input`}
-              min="0"
-            />
-            <Check 
-              size={12} 
-              className="absolute right-1 bottom-[3px] text-green-600 cursor-pointer check-icon" 
-              onClick={confirmEdit}
-            />
-          </div>
-        </div>
-      </div>
+      <ClaimedByField
+        entry={entry}
+        editForm={editForm}
+        setEditForm={setEditForm}
+        onKeyDown={handleKeyDown}
+        onFocus={handleFocus}
+        onBlur={handleBlur}
+        onConfirm={confirmEdit}
+      />
     );
   }
 
+  // Special handling for route field
   if (field === 'route') {
     return (
-      <div className="relative">
-        <Textarea
-          value={editForm[field] !== undefined ? String(editForm[field] || '') : String(entry[field] || '')}
-          onChange={(e) => handleChange(e.target.value)}
-          onKeyDown={handleKeyDown}
-          onFocus={() => setIsFocused(true)}
-          onBlur={() => setIsFocused(false)}
-          className={`${routeTextareaClasses} claim-form border-0`}
-        />
-        <Check 
-          size={16} 
-          className="absolute right-2 bottom-2 text-green-600 cursor-pointer check-icon" 
-          onClick={confirmEdit}
-        />
-      </div>
+      <RouteField
+        value={fieldValue}
+        onChange={handleChange}
+        onKeyDown={handleKeyDown}
+        onFocus={handleFocus}
+        onBlur={handleBlur}
+        onConfirm={confirmEdit}
+      />
     );
   }
 
+  // Handling for dietary_restrictions field
   if (field === 'dietary_restrictions') {
     return (
-      <div className="relative">
-        <Textarea
-          value={editForm[field] !== undefined ? String(editForm[field] || '') : String(entry[field] || '')}
-          onChange={(e) => handleChange(e.target.value)}
-          onKeyDown={handleKeyDown}
-          onFocus={() => setIsFocused(true)}
-          onBlur={() => setIsFocused(false)}
-          className={`${textareaClasses} claim-form`}
-        />
-        <Check 
-          size={16} 
-          className="absolute right-2 bottom-2 text-green-600 cursor-pointer check-icon" 
-          onClick={confirmEdit}
-        />
-      </div>
+      <TextAreaField
+        value={fieldValue}
+        onChange={handleChange}
+        onKeyDown={handleKeyDown}
+        onFocus={handleFocus}
+        onBlur={handleBlur}
+        className={`${textareaClasses} claim-form`}
+        onConfirm={confirmEdit}
+      />
     );
   }
 
+  // Handling for date_time field
   if (field === 'date_time') {
     return (
-      <div className="relative">
-        <Input
-          value={editForm.date_time !== undefined ? String(editForm.date_time || '') : String(entry.date_time || '')}
-          onChange={(e) => handleChange(e.target.value)}
-          onKeyDown={handleKeyDown}
-          onFocus={() => setIsFocused(true)}
-          onBlur={() => setIsFocused(false)}
-          placeholder="e.g., 1.9 around 11:00 am"
-          className={`w-full ${inputClasses} claim-form input`}
-        />
-        <Check 
-          size={16} 
-          className="absolute right-2 bottom-2 text-green-600 cursor-pointer check-icon" 
-          onClick={confirmEdit}
-        />
-      </div>
+      <InputField
+        value={fieldValue}
+        onChange={handleChange}
+        onKeyDown={handleKeyDown}
+        onFocus={handleFocus}
+        onBlur={handleBlur}
+        className={`w-full ${inputClasses} claim-form input`}
+        placeholder="e.g., 1.9 around 11:00 am"
+        onConfirm={confirmEdit}
+      />
     );
   }
 
+  // Default handling for other fields
   return (
-    <div className="relative">
-      <Input
-        value={editForm[field] !== undefined ? String(editForm[field] || '') : String(entry[field] || '')}
-        onChange={(e) => {
-          let value: any = e.target.value;
-          if (field === 'available_spots') {
-            value = parseInt(value) || 0;
-          }
-          handleChange(value);
-        }}
-        onKeyDown={handleKeyDown}
-        onFocus={() => setIsFocused(true)}
-        onBlur={() => setIsFocused(false)}
-        type={field === 'available_spots' ? 'number' : 'text'}
-        min={field === 'available_spots' ? 0 : undefined}
-        className={`${inputClasses} claim-form input`}
-      />
-      <Check 
-        size={16} 
-        className="absolute right-2 bottom-2 text-green-600 cursor-pointer check-icon" 
-        onClick={confirmEdit}
-      />
-    </div>
+    <InputField
+      value={fieldValue}
+      onChange={handleChange}
+      onKeyDown={handleKeyDown}
+      onFocus={handleFocus}
+      onBlur={handleBlur}
+      className={`${inputClasses} claim-form input`}
+      type={field === 'available_spots' ? 'number' : 'text'}
+      min={field === 'available_spots' ? 0 : undefined}
+      onConfirm={confirmEdit}
+    />
   );
 };
