@@ -112,16 +112,6 @@ export const TravelForm = ({ projectId }: TravelFormProps) => {
               onBlur={handleBlur}
             />
           </div>
-          
-          <FormField
-            name="dietaryRestrictions"
-            control={form.control}
-            label={getTranslation("diet", language)}
-            placeholder={getPlaceholder("dietaryRestrictions")}
-            focusedField={focusedField}
-            onFocus={handleFocus}
-            onBlur={handleBlur}
-          />
         </FormLayout>
       </div>
       

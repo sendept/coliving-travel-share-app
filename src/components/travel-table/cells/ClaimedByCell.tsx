@@ -10,15 +10,13 @@ interface ClaimedByCellProps {
   isEditing: boolean;
 }
 
-// Define a set of pastel colors for co-travelers
-const coTravelerColors = [
-  "#F2FCE2", // Soft Green
-  "#FEF7CD", // Soft Yellow
-  "#FEC6A1", // Soft Orange
-  "#E5DEFF", // Soft Purple
-  "#FFDEE2", // Soft Pink
-  "#FDE1D3", // Soft Peach
-  "#D3E4FD"  // Soft Blue
+// Define color pairs for co-travelers [background, text]
+const coTravelerColorPairs = [
+  ["#F2FCE2", "#3D7B15"], // Soft Green / Dark Green
+  ["#E5DEFF", "#5E41D0"], // Soft Purple / Deep Purple
+  ["#FFDEE2", "#BD3A4C"], // Soft Pink / Deep Pink
+  ["#D3E4FD", "#2C65B1"], // Soft Blue / Deep Blue
+  ["#FDE1D3", "#B95F2E"]  // Soft Peach / Deep Orange
 ];
 
 export const ClaimedByCell = ({ entry, onClaimSpot, isEditing }: ClaimedByCellProps) => {
@@ -41,18 +39,21 @@ export const ClaimedByCell = ({ entry, onClaimSpot, isEditing }: ClaimedByCellPr
         
         {Array.isArray(entry.claimed_by) && entry.claimed_by.length > 0 && (
           <div className="text-center">
-            {entry.claimed_by.map((name, index) => (
-              <span 
-                key={index}
-                className="text-sm font-normal px-1 py-0.5 rounded mx-1"
-                style={{
-                  backgroundColor: coTravelerColors[index % coTravelerColors.length],
-                  color: "#333"
-                }}
-              >
-                {name}
-              </span>
-            ))}
+            {entry.claimed_by.map((name, index) => {
+              const [bgColor, textColor] = coTravelerColorPairs[index % coTravelerColorPairs.length];
+              return (
+                <span 
+                  key={index}
+                  className="text-sm font-normal px-1 py-0.5 rounded mx-1"
+                  style={{
+                    backgroundColor: bgColor,
+                    color: textColor
+                  }}
+                >
+                  {name}
+                </span>
+              );
+            })}
           </div>
         )}
       </div>

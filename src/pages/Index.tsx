@@ -62,7 +62,7 @@ const Index = () => {
             <br />
             {getTranslation("formExplanation", "es")}
           </p>
-          <TravelForm />
+          <TravelForm projectId={undefined} />
         </div>
       </div>
       
