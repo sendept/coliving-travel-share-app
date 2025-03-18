@@ -9,14 +9,14 @@ export const TableFooter = () => {
           href="https://sende.co/share-app" 
           target="_blank" 
           rel="noopener noreferrer" 
-          className="hover:text-blue-500 transition-colors duration-200"
+          className="text-blue-500 hover:text-blue-700 transition-colors duration-200"
         >
           Feel free to use this app at your space.
         </a>
       </span>
-      <div className="flex justify-center items-center mt-2">
+      <div className="flex justify-center items-center mt-1">
         <span>Built by</span>
-        <a href="https://sende.co" target="_blank" rel="noopener noreferrer" className="inline-flex items-center ml-2">
+        <a href="https://sende.co" target="_blank" rel="noopener noreferrer" className="inline-flex items-center ml-1">
           <img src="/lovable-uploads/5939e496-5d0c-421e-9294-eb688e353313.png" alt="Sende" className="h-6" />
         </a>
       </div>

@@ -69,12 +69,12 @@
 }
 
 /* Row coloring for even and odd rows - explicitly set white for odd rows */
-tr:nth-child(even) {
-  background-color: #F5F5F5 !important;
-}
-
 tr:nth-child(odd) {
   background-color: white !important;
+}
+
+tr:nth-child(even) {
+  background-color: #F5F5F5 !important;
 }
 
 /* Keep table header always white */

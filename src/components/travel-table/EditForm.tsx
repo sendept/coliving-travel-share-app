@@ -53,13 +53,11 @@ export const EditForm = ({ entry, editForm, setEditForm, field, onSave }: EditFo
               onBlur={() => setIsFocused(false)}
               className={`mt-1 ${inputClasses}`}
             />
-            {isFocused && (
-              <Check 
-                size={16} 
-                className="absolute right-2 bottom-2 text-green-600 cursor-pointer" 
-                onClick={confirmEdit}
-              />
-            )}
+            <Check 
+              size={16} 
+              className="absolute right-2 bottom-2 text-green-600 cursor-pointer check-icon" 
+              onClick={confirmEdit}
+            />
           </div>
         </div>
         <div className="relative">
@@ -78,13 +76,11 @@ export const EditForm = ({ entry, editForm, setEditForm, field, onSave }: EditFo
             className={textareaClasses}
             placeholder="Enter claimed users (one per line)"
           />
-          {isFocused && (
-            <Check 
-              size={16} 
-              className="absolute right-2 bottom-2 text-green-600 cursor-pointer" 
-              onClick={confirmEdit}
-            />
-          )}
+          <Check 
+            size={16} 
+            className="absolute right-2 bottom-2 text-green-600 cursor-pointer check-icon" 
+            onClick={confirmEdit}
+          />
         </div>
         <div className="flex items-center gap-2 relative">
           <label htmlFor="available-spots" className="text-xs whitespace-nowrap">
@@ -102,13 +98,11 @@ export const EditForm = ({ entry, editForm, setEditForm, field, onSave }: EditFo
               className="w-16 h-6 py-1 px-2 text-xs border border-gray-300 rounded-md pr-6"
               min="0"
             />
-            {isFocused && (
-              <Check 
-                size={12} 
-                className="absolute right-1 bottom-[3px] text-green-600 cursor-pointer" 
-                onClick={confirmEdit}
-              />
-            )}
+            <Check 
+              size={12} 
+              className="absolute right-1 bottom-[3px] text-green-600 cursor-pointer check-icon" 
+              onClick={confirmEdit}
+            />
           </div>
         </div>
       </div>
@@ -126,13 +120,11 @@ export const EditForm = ({ entry, editForm, setEditForm, field, onSave }: EditFo
           onBlur={() => setIsFocused(false)}
           className={textareaClasses}
         />
-        {isFocused && (
-          <Check 
-            size={16} 
-            className="absolute right-2 bottom-2 text-green-600 cursor-pointer" 
-            onClick={confirmEdit}
-          />
-        )}
+        <Check 
+          size={16} 
+          className="absolute right-2 bottom-2 text-green-600 cursor-pointer check-icon" 
+          onClick={confirmEdit}
+        />
       </div>
     );
   }
@@ -149,13 +141,11 @@ export const EditForm = ({ entry, editForm, setEditForm, field, onSave }: EditFo
           placeholder="e.g., 1.9 around 11:00 am"
           className={`w-full ${inputClasses}`}
         />
-        {isFocused && (
-          <Check 
-            size={16} 
-            className="absolute right-2 bottom-2 text-green-600 cursor-pointer" 
-            onClick={confirmEdit}
-          />
-        )}
+        <Check 
+          size={16} 
+          className="absolute right-2 bottom-2 text-green-600 cursor-pointer check-icon" 
+          onClick={confirmEdit}
+        />
       </div>
     );
   }
@@ -178,13 +168,11 @@ export const EditForm = ({ entry, editForm, setEditForm, field, onSave }: EditFo
         min={field === 'available_spots' ? 0 : undefined}
         className={inputClasses}
       />
-      {isFocused && (
-        <Check 
-          size={16} 
-          className="absolute right-2 bottom-2 text-green-600 cursor-pointer" 
-          onClick={confirmEdit}
-        />
-      )}
+      <Check 
+        size={16} 
+        className="absolute right-2 bottom-2 text-green-600 cursor-pointer check-icon" 
+        onClick={confirmEdit}
+      />
     </div>
   );
 };
