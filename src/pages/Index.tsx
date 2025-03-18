@@ -9,6 +9,7 @@ import { useCallback, useMemo } from "react";
 import { useIsMobile } from "@/hooks/use-mobile";
 import { getTranslation } from "@/lib/translations";
 import { TableFooter } from "@/components/travel-table/components/TableFooter";
+import { NavigationLinks } from "@/components/travel-table/components/NavigationLinks";
 
 const Index = () => {
   const entries = useTravelEntries();
@@ -44,6 +45,7 @@ const Index = () => {
       <div>
         {headerComponent}
       </div>
+      <NavigationLinks />
       <div className="py-8 space-y-12">
         <div className="relative">
           <div className="product-hunt-card px-0 py-0 mx-auto bg-white w-full overflow-x-hidden">
@@ -51,7 +53,7 @@ const Index = () => {
           </div>
         </div>
         
-        <div className="mt-16 mb-8" style={{ marginTop: '60px' }}>
+        <div className="mt-16 mb-8" style={{ marginTop: '60px' }} id="add-trip-section">
           <h2 className={`text-3xl md:text-4xl font-medium mb-10 ${isMobile ? 'text-left px-4' : 'text-center'}`}>
             <span>{getTranslation("inviteOthers", "en")}</span>
             <br />

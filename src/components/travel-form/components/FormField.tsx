@@ -55,6 +55,7 @@ export const FormField = ({
                   focus:outline-none 
                   ${focusedField === name ? "ring-1 ring-blue-500" : ""} 
                   focus-visible:ring-1 focus-visible:ring-blue-500
+                  border-transparent !important
                 `}
                 onFocus={() => onFocus(name)}
                 onBlur={onBlur}
@@ -70,6 +71,7 @@ export const FormField = ({
                   focus:outline-none 
                   ${focusedField === name ? "ring-1 ring-blue-500" : ""} 
                   focus-visible:ring-1 focus-visible:ring-blue-500
+                  border-transparent !important
                 `}
                 onFocus={() => onFocus(name)}
                 onBlur={onBlur}

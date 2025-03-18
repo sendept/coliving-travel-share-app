@@ -100,4 +100,10 @@ input[placeholder="Contact / Contacto"]:focus {
     padding-right: 1rem;
     color: #000000 !important;
   }
+  
+  /* Ensure borders on mobile version */
+  input[placeholder="Name / Nombre"], 
+  input[placeholder="Contact / Contacto"] {
+    @apply border border-gray-300 !important;
+  }
 }
