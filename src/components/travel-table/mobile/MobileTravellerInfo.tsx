@@ -50,7 +50,7 @@ export const MobileTravellerInfo = ({ entry }: MobileTravellerInfoProps) => {
                   >
                     <span>{name}</span>
                     {phoneNumber && (
-                      <span className="text-xs">{phoneNumber}</span>
+                      <span className="text-xs ml-1">{phoneNumber}</span>
                     )}
                   </span>
                 );

@@ -2,7 +2,6 @@
 import { Button } from "@/components/ui/button";
 import { ClaimForm } from "../ClaimForm";
 import type { TravelEntry } from "../types";
-import { Phone } from "lucide-react";
 
 interface ClaimedByCellProps {
   entry: TravelEntry;
@@ -31,7 +30,6 @@ export const ClaimedByCell = ({ entry, onClaimSpot, isEditing }: ClaimedByCellPr
           <span className="font-medium text-center">{entry.name}</span>
           {hasContact && (
             <div className="ml-2 flex items-center text-sm text-gray-500">
-              <Phone size={12} className="mr-1" />
               <span>{entry.contact}</span>
             </div>
           )}
