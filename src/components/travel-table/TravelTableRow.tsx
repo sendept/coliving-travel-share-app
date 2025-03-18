@@ -12,7 +12,7 @@ interface TravelTableRowProps {
   onSaveEdit: () => void;
   onCancelEdit: () => void;
   onStartEdit: (entry: TravelEntry) => void;
-  onClaimSpot: (id: string, name: string) => void;
+  onClaimSpot: (id: string, name: string, contact?: string) => void;
   className?: string;
   isAlternate?: boolean;
   index: number;
@@ -57,6 +57,11 @@ export const TravelTableRow = ({
         onStartEdit={onStartEdit} 
         onClaimSpot={onClaimSpot} 
         isAlternate={index % 2 === 1} // Make sure mobile rows alternate properly too
+        editingEntry={editingEntry}
+        editForm={editForm}
+        setEditForm={setEditForm}
+        onSaveEdit={onSaveEdit}
+        onCancelEdit={onCancelEdit}
       />
       
       <DesktopTravelRow 

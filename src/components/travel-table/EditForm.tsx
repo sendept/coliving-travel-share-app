@@ -52,7 +52,7 @@ export const EditForm = ({ entry, editForm, setEditForm, field, onSave }: EditFo
               onKeyDown={handleKeyDown}
               onFocus={() => setIsFocused(true)}
               onBlur={() => setIsFocused(false)}
-              className={`mt-1 ${inputClasses}`}
+              className={`mt-1 ${inputClasses} claim-form input`}
             />
             <Check 
               size={16} 
@@ -74,7 +74,7 @@ export const EditForm = ({ entry, editForm, setEditForm, field, onSave }: EditFo
             onKeyDown={handleKeyDown}
             onFocus={() => setIsFocused(true)}
             onBlur={() => setIsFocused(false)}
-            className={textareaClasses}
+            className={`${textareaClasses} claim-form`}
             placeholder="Enter claimed users (one per line)"
           />
           <Check 
@@ -96,7 +96,7 @@ export const EditForm = ({ entry, editForm, setEditForm, field, onSave }: EditFo
               onKeyDown={handleKeyDown}
               onFocus={() => setIsFocused(true)}
               onBlur={() => setIsFocused(false)}
-              className={`w-16 h-6 py-1 px-2 text-xs table-input border border-gray-300 rounded-md pr-6 focus:outline-none focus:border-blue-500`}
+              className={`w-16 h-6 py-1 px-2 text-xs table-input border border-gray-300 rounded-md pr-6 focus:outline-none focus:border-blue-500 claim-form input`}
               min="0"
             />
             <Check 
@@ -119,7 +119,7 @@ export const EditForm = ({ entry, editForm, setEditForm, field, onSave }: EditFo
           onKeyDown={handleKeyDown}
           onFocus={() => setIsFocused(true)}
           onBlur={() => setIsFocused(false)}
-          className={textareaClasses}
+          className={`${textareaClasses} claim-form`}
         />
         <Check 
           size={16} 
@@ -140,7 +140,7 @@ export const EditForm = ({ entry, editForm, setEditForm, field, onSave }: EditFo
           onFocus={() => setIsFocused(true)}
           onBlur={() => setIsFocused(false)}
           placeholder="e.g., 1.9 around 11:00 am"
-          className={`w-full ${inputClasses}`}
+          className={`w-full ${inputClasses} claim-form input`}
         />
         <Check 
           size={16} 
@@ -167,7 +167,7 @@ export const EditForm = ({ entry, editForm, setEditForm, field, onSave }: EditFo
         onBlur={() => setIsFocused(false)}
         type={field === 'available_spots' ? 'number' : 'text'}
         min={field === 'available_spots' ? 0 : undefined}
-        className={inputClasses}
+        className={`${inputClasses} claim-form input`}
       />
       <Check 
         size={16} 
