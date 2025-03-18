@@ -73,13 +73,17 @@ tr:hover {
   padding-top: 2.5rem;
 }
 
-/* Row coloring for even and odd rows - explicitly set white for odd rows */
-tr:nth-child(odd) {
+/* Row coloring - always keep first row white, alternate subsequent rows */
+tr:first-child {
   background-color: white !important;
 }
 
 tr:nth-child(even) {
   background-color: #F5F5F5 !important;
+}
+
+tr:nth-child(odd):not(:first-child) {
+  background-color: white !important;
 }
 
 /* Keep table header always white */
@@ -95,4 +99,10 @@ thead tr {
 /* Add hover effect to check icons */
 .check-icon:hover {
   @apply text-green-800;
+}
+
+/* Table textarea focus styles */
+.table-textarea:focus, .table-input:focus {
+  border-color: #1EAEDB !important;
+  outline: none;
 }

@@ -30,6 +30,7 @@ export const TravelTable = ({ entries, onClaimSpot }: TravelTableProps) => {
             onStartEdit={handleStartEdit}
             onClaimSpot={onClaimSpot}
             isAlternate={index % 2 !== 0}
+            index={index}
           />
         ))}
       </MobileContainer>
@@ -47,6 +48,7 @@ export const TravelTable = ({ entries, onClaimSpot }: TravelTableProps) => {
             onStartEdit={handleStartEdit} 
             onClaimSpot={onClaimSpot} 
             isAlternate={index % 2 !== 0}
+            index={index}
           />
         ))}
       </TableContainer>
