@@ -18,7 +18,7 @@ export const NavigationLinks = () => {
   };
 
   return (
-    <div className="w-full max-w-5xl mx-auto px-4 py-3 flex justify-center items-center space-x-6">
+    <div className="w-full max-w-5xl mx-auto px-4 py-8 flex justify-center items-center space-x-6 mt-4">
       <button 
         onClick={scrollToAvailableTrips}
         className="text-[#8A898C] hover:text-[#403E43] flex items-center font-medium text-sm transition-colors"

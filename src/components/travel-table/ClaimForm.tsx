@@ -82,7 +82,7 @@ export const ClaimForm = ({ entry, onClaim }: ClaimFormProps) => {
             value={claimName}
             onChange={(e) => setClaimName(e.target.value)}
             onKeyPress={handleNameKeyPress}
-            className="w-full md:w-64 bg-white rounded-md h-[46px] text-center text-base"
+            className="w-full md:w-[300px] bg-white rounded-md h-[52px] text-center text-base"
           />
         ) : (
           <Input
@@ -90,7 +90,7 @@ export const ClaimForm = ({ entry, onClaim }: ClaimFormProps) => {
             value={claimContact}
             onChange={(e) => setClaimContact(e.target.value)}
             onKeyPress={handleContactKeyPress}
-            className="w-full md:w-64 bg-white rounded-md h-[46px] text-center text-base"
+            className="w-full md:w-[300px] bg-white rounded-md h-[52px] text-center text-base"
             autoFocus
           />
         )}
@@ -98,7 +98,7 @@ export const ClaimForm = ({ entry, onClaim }: ClaimFormProps) => {
           variant={showContactField ? "secondary" : "outline"}
           onClick={handleClaim}
           className={`
-            whitespace-nowrap rounded-md h-[46px] px-6 text-base
+            whitespace-nowrap rounded-md h-[52px] px-6 text-base
             ${showContactField 
               ? "bg-blue-500 hover:bg-blue-600 text-white" 
               : "bg-transparent text-blue-500 hover:bg-blue-500 hover:text-white border border-blue-500"}

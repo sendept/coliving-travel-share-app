@@ -21,6 +21,16 @@ const coTravelerColorPairs = [
 export const ClaimedByCell = ({ entry, onClaimSpot, isEditing }: ClaimedByCellProps) => {
   if (isEditing) return null;
 
+  // Helper function to extract phone numbers from claimed by strings
+  const extractNameAndContact = (person: string) => {
+    const match = person.match(/^(.*?)(?:\s*\(([^)]+)\))?$/);
+    if (match) {
+      const [_, name, contact] = match;
+      return { name: name.trim(), contact: contact || null };
+    }
+    return { name: person, contact: null };
+  };
+
   const hasContact = !!entry.contact && entry.contact.trim() !== '';
 
   return (
@@ -37,20 +47,26 @@ export const ClaimedByCell = ({ entry, onClaimSpot, isEditing }: ClaimedByCellPr
         
         {Array.isArray(entry.claimed_by) && entry.claimed_by.length > 0 && (
           <div className="text-center flex flex-col space-y-1 mt-2">
-            {entry.claimed_by.map((name, index) => {
+            {entry.claimed_by.map((person, index) => {
               const [bgColor, textColor] = coTravelerColorPairs[index % coTravelerColorPairs.length];
+              const { name, contact } = extractNameAndContact(person);
               return (
-                <span 
+                <div 
                   key={index}
-                  className="text-sm font-normal px-2 py-1 rounded mx-auto"
+                  className="text-sm font-normal px-2 py-1 rounded mx-auto flex justify-between items-center"
                   style={{
                     backgroundColor: bgColor,
                     color: textColor,
-                    display: "inline-block"
+                    display: "flex",
+                    width: "100%",
+                    maxWidth: "280px"
                   }}
                 >
-                  {name}
-                </span>
+                  <span>{name}</span>
+                  {contact && (
+                    <span className="text-xs ml-2">{contact}</span>
+                  )}
+                </div>
               );
             })}
           </div>

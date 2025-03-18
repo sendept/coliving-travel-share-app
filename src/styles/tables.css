@@ -73,16 +73,8 @@ tr:hover {
   padding-top: 2.5rem;
 }
 
-/* Fixed alternating row colors - always keep first row white */
-tr:first-child {
-  background-color: white !important;
-}
-
-tr:nth-child(even) {
-  background-color: #F5F5F5 !important;
-}
-
-tr:nth-child(odd):not(:first-child) {
+/* Fixed alternating row colors - with white rows only */
+tr {
   background-color: white !important;
 }
 

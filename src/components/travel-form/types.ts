@@ -6,9 +6,8 @@ export interface TravelFormValues {
   transport: string;
   dateTime: string;
   contact: string;
-  dietaryRestrictions: string;
 }
 
 export interface TravelFormProps {
-  projectId?: string | null;
+  projectId: string | undefined;
 }

@@ -28,10 +28,13 @@ export const InputField = ({
   min,
   onConfirm
 }: InputFieldProps) => {
+  // Ensure value is always a string
+  const stringValue = typeof value === 'number' ? value.toString() : String(value);
+
   return (
     <div className="relative">
       <Input
-        value={String(value)}
+        value={stringValue}
         onChange={(e) => {
           let inputValue = e.target.value;
           if (type === "number") {
