@@ -10,6 +10,17 @@ interface ClaimedByCellProps {
   isEditing: boolean;
 }
 
+// Define a set of pastel colors for co-travelers
+const coTravelerColors = [
+  "#F2FCE2", // Soft Green
+  "#FEF7CD", // Soft Yellow
+  "#FEC6A1", // Soft Orange
+  "#E5DEFF", // Soft Purple
+  "#FFDEE2", // Soft Pink
+  "#FDE1D3", // Soft Peach
+  "#D3E4FD"  // Soft Blue
+];
+
 export const ClaimedByCell = ({ entry, onClaimSpot, isEditing }: ClaimedByCellProps) => {
   if (isEditing) return null;
 
@@ -29,8 +40,19 @@ export const ClaimedByCell = ({ entry, onClaimSpot, isEditing }: ClaimedByCellPr
         </div>
         
         {Array.isArray(entry.claimed_by) && entry.claimed_by.length > 0 && (
-          <div className="text-sm text-blue-500 text-center">
-            + {entry.claimed_by.join(", ")}
+          <div className="text-center">
+            {entry.claimed_by.map((name, index) => (
+              <span 
+                key={index}
+                className="text-sm font-medium px-1 py-0.5 rounded mx-1"
+                style={{
+                  backgroundColor: coTravelerColors[index % coTravelerColors.length],
+                  color: "#333"
+                }}
+              >
+                {name}
+              </span>
+            ))}
           </div>
         )}
       </div>

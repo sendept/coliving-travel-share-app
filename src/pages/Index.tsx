@@ -1,4 +1,3 @@
-
 import { TravelTable } from "@/components/travel-table/TravelTable";
 import { PageHeader } from "@/components/PageHeader";
 import { TravelForm } from "@/components/travel-form/TravelForm";
@@ -45,7 +44,7 @@ const Index = () => {
       </div>
       <div className="py-8 space-y-12">
         <div className="relative">
-          <div className="product-hunt-card px-0 py-0 mx-5 lg:w-[calc(100%-40px)] lg:max-w-none lg:left-1/2 lg:right-1/2 lg:ml-[-calc(50%-20px)] lg:mr-[-calc(50%-20px)] lg:relative">
+          <div className="product-hunt-card px-0 py-0 mx-auto lg:w-[calc(100%-40px)] lg:max-w-none bg-white">
             <TravelTable entries={entries} onClaimSpot={handleClaimSpot} />
           </div>
         </div>

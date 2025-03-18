@@ -9,7 +9,7 @@
   /* Make the table fit on large screens without horizontal scrolling */
   .product-hunt-card {
     max-width: calc(100% - 40px);
-    margin: 0 20px;
+    margin: 0 auto; /* Center the table */
     overflow-x: visible;
     padding-left: 10px;
     padding-right: 10px;

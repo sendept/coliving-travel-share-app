@@ -1,4 +1,3 @@
-
 .product-hunt-input {
   @apply w-full px-3 py-2 sm:px-4 sm:py-3 rounded-lg border border-gray-200 focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition-all duration-200 text-base sm:text-sm;
 }
@@ -68,4 +67,9 @@ textarea, input {
 .claim-form input, input[placeholder="Name / Nombre"] {
   @apply border border-gray-300 !important;
   border-radius: 0.375rem;
+}
+
+/* Add grey stroke to Name/Nombre button */
+.claim-form .button-name-input {
+  border: 1px solid #C8C8C9 !important;
 }
