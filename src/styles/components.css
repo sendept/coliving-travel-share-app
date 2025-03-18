@@ -92,5 +92,6 @@ input[placeholder="Contact / Contacto"] {
   .mt-16.text-center p {
     padding-left: 1rem;
     padding-right: 1rem;
+    color: #000000 !important;
   }
 }

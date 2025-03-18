@@ -16,8 +16,8 @@ export const RouteCell = ({ entry, onStartEdit, isEditing }: RouteCellProps) => 
 
   return (
     <div className="whitespace-pre-line">
-      <span className="mr-2 text-lg">{transportIcon}</span>
-      {entry.route}
+      <span className="inline-block mr-2 align-middle">{transportIcon}</span>
+      <span className="align-middle">{entry.route}</span>
       <div 
         className="text-[9px] text-gray-500 mt-1 hover:text-blue-500 cursor-pointer text-center w-full"
         onClick={() => onStartEdit(entry)}

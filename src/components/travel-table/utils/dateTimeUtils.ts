@@ -15,7 +15,16 @@ export const extractDateTimeInfo = (route: string): string => {
   for (const pattern of datePatterns) {
     const match = route.match(pattern);
     if (match) {
-      return match[0];
+      let dateTimeStr = match[0];
+      
+      // If date doesn't include year, add current year
+      const hasYear = /\b20\d{2}\b/.test(dateTimeStr);
+      if (!hasYear && /\d{1,2}[\/\-\.]\d{1,2}/.test(dateTimeStr)) {
+        const currentYear = new Date().getFullYear();
+        dateTimeStr = dateTimeStr.replace(/(\d{1,2}[\/\-\.]\d{1,2})/, `$1.${currentYear}`);
+      }
+      
+      return dateTimeStr;
     }
   }
 
