@@ -3,7 +3,7 @@ import React from "react";
 
 export const TableFooter = () => {
   return (
-    <footer className="text-center text-sm text-muted-foreground py-2">
+    <footer className="text-center text-sm text-muted-foreground py-4 mt-16">
       <span className="inline-flex items-center gap-1">
         <a 
           href="https://sende.co/share-app" 

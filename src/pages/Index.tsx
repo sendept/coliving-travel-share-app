@@ -1,3 +1,4 @@
+
 import { TravelTable } from "@/components/travel-table/TravelTable";
 import { PageHeader } from "@/components/PageHeader";
 import { TravelForm } from "@/components/travel-form/TravelForm";
@@ -7,6 +8,7 @@ import { claimTravelSpot } from "@/services/travelEntryService";
 import { useCallback, useMemo } from "react";
 import { useIsMobile } from "@/hooks/use-mobile";
 import { getTranslation } from "@/lib/translations";
+import { TableFooter } from "@/components/travel-table/components/TableFooter";
 
 const Index = () => {
   const entries = useTravelEntries();
@@ -62,6 +64,10 @@ const Index = () => {
           </p>
           <TravelForm />
         </div>
+      </div>
+      
+      <div className="mt-16">
+        <TableFooter />
       </div>
     </div>
   );

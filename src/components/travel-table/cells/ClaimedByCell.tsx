@@ -44,7 +44,7 @@ export const ClaimedByCell = ({ entry, onClaimSpot, isEditing }: ClaimedByCellPr
             {entry.claimed_by.map((name, index) => (
               <span 
                 key={index}
-                className="text-sm font-medium px-1 py-0.5 rounded mx-1"
+                className="text-sm font-normal px-1 py-0.5 rounded mx-1"
                 style={{
                   backgroundColor: coTravelerColors[index % coTravelerColors.length],
                   color: "#333"
