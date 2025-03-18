@@ -99,7 +99,12 @@ export const TravelForm = ({ projectId }: TravelFormProps) => {
             <FormField
               name="contact"
               control={form.control}
-              label={getTranslation("contact", language)}
+              label={
+                <div>
+                  {getTranslation("contact", language)}
+                  <span className="ml-1 text-xs text-gray-500">(add the country code)</span>
+                </div>
+              }
               placeholder={getPlaceholder("contact")}
               className="flex-1"
               focusedField={focusedField}

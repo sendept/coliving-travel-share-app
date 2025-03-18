@@ -51,7 +51,7 @@ export const FormField = ({
               <Textarea
                 placeholder={placeholder}
                 className={`
-                  min-h-[100px] resize-none border border-gray-300
+                  min-h-[100px] resize-none border border-transparent
                   focus:outline-none 
                   ${focusedField === name ? "ring-1 ring-[#F97316]" : ""} 
                   focus-visible:ring-1 focus-visible:ring-[#F97316]
@@ -66,7 +66,8 @@ export const FormField = ({
                 min={min}
                 placeholder={placeholder}
                 className={`
-                  border border-gray-300 focus:outline-none 
+                  ${name === "name" ? "border border-gray-300" : "border border-transparent"}
+                  focus:outline-none 
                   ${focusedField === name ? "ring-1 ring-[#F97316]" : ""} 
                   focus-visible:ring-1 focus-visible:ring-[#F97316]
                 `}

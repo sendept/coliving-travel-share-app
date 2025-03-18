@@ -82,7 +82,7 @@ export const ClaimForm = ({ entry, onClaim }: ClaimFormProps) => {
             value={claimName}
             onChange={(e) => setClaimName(e.target.value)}
             onKeyPress={handleNameKeyPress}
-            className="w-full md:w-32 bg-white border border-gray-200 rounded-md h-[46px] text-center text-base"
+            className="w-full md:w-32 bg-white border border-gray-300 rounded-md h-[46px] text-center text-base"
           />
         ) : (
           <Input
