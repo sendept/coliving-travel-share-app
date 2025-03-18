@@ -29,7 +29,7 @@ export const ClaimedByCell = ({ entry, onClaimSpot, isEditing }: ClaimedByCellPr
         </div>
         
         {Array.isArray(entry.claimed_by) && entry.claimed_by.length > 0 && (
-          <div className="text-sm text-gray-500 text-center">
+          <div className="text-sm text-blue-500 text-center">
             + {entry.claimed_by.join(", ")}
           </div>
         )}
@@ -43,7 +43,7 @@ export const ClaimedByCell = ({ entry, onClaimSpot, isEditing }: ClaimedByCellPr
           <ClaimForm entry={entry} onClaim={onClaimSpot} />
         </div>
       ) : (
-        <div className="text-sm text-amber-500">
+        <div className="text-sm text-gray-700 font-medium">
           0 spots/plazas
         </div>
       )}

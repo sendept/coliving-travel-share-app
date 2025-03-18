@@ -68,7 +68,7 @@
   padding-top: 2.5rem;
 }
 
-/* Row coloring for even and odd rows */
+/* Row coloring for even and odd rows - explicitly set white for odd rows */
 tr:nth-child(even) {
   background-color: #F5F5F5 !important;
 }
@@ -91,3 +91,4 @@ thead tr {
 .check-icon:hover {
   @apply text-green-800;
 }
+

@@ -95,11 +95,16 @@ export const ClaimForm = ({ entry, onClaim }: ClaimFormProps) => {
           />
         )}
         <Button
-          variant="secondary"
+          variant={showContactField ? "secondary" : "outline"}
           onClick={handleClaim}
-          className="bg-[#F97316] hover:bg-[#F97316]/90 text-white whitespace-nowrap rounded-md h-[46px] px-6 text-base"
+          className={`
+            whitespace-nowrap rounded-md h-[46px] px-6 text-base
+            ${showContactField 
+              ? "bg-[#F97316] hover:bg-[#F97316]/90 text-white" 
+              : "bg-transparent text-blue-500 hover:bg-blue-500 hover:text-white border border-blue-500"}
+          `}
         >
-          {!showContactField ? "Join / Únete" : "Submit / Enviar"}
+          {!showContactField ? "Join / Únete" : "Add number"}
         </Button>
       </div>
     </div>

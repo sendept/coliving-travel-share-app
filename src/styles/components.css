@@ -61,11 +61,12 @@
 
 /* Form elements */
 textarea, input {
-  border: 1px solid #D1D5DB !important;
+  border: 0 !important;
 }
 
-/* Claim form input styles */
-.claim-form input {
-  @apply border border-gray-300;
+/* Override for Name/Nombre field in claim form */
+.claim-form input, input[placeholder="Name / Nombre"] {
+  @apply border border-gray-300 !important;
   border-radius: 0.375rem;
 }
+

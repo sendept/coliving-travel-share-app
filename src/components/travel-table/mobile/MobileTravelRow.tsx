@@ -70,14 +70,21 @@ export const MobileTravelRow = ({
         <ClaimForm entry={entry} onClaim={onClaimSpot} />
       </div>
 
-      <div className="text-sm text-gray-600 mt-5 opacity-85">
+      <div className="text-sm mt-5 opacity-85">
         {Array.isArray(entry.claimed_by) && entry.claimed_by.length > 0 ? (
           <div>
-            {entry.name}, {entry.claimed_by.join(", ")} + {entry.available_spots <= 1 ? "Queda" : "Quedan"} {entry.available_spots} {entry.available_spots === 1 ? 'plaza' : 'plazas'}
+            <span className="text-gray-600">{entry.name}, </span>
+            <span className="text-blue-500">{entry.claimed_by.join(", ")}</span>
+            <span className="text-gray-600"> + {entry.available_spots <= 1 ? "Queda" : "Quedan"} {entry.available_spots} {entry.available_spots === 1 ? 'plaza' : 'plazas'}</span>
           </div>
         ) : (
-          <div>
+          <div className="text-gray-600">
             {entry.name} + {entry.available_spots <= 1 ? "Queda" : "Quedan"} {entry.available_spots} {entry.available_spots === 1 ? 'plaza' : 'plazas'}
+          </div>
+        )}
+        {entry.available_spots <= 0 && (
+          <div className="text-gray-700 font-medium mt-1">
+            0 spots/plazas
           </div>
         )}
       </div>
