@@ -17,10 +17,6 @@ export const TableHeader = () => {
           <div className="text-sm text-black font-medium uppercase whitespace-nowrap">DATE/HOUR</div>
           <div className="text-[10px] text-gray-500 whitespace-nowrap">Fecha/Hora</div>
         </TableHead>
-        <TableHead className="lg:w-[150px] w-[120px] text-center align-middle">
-          <div className="text-sm text-black font-medium uppercase">DIET</div>
-          <div className="text-[10px] text-gray-500">Dieta</div>
-        </TableHead>
       </TableRow>
     </ShadcnTableHeader>
   );

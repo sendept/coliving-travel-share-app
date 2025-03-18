@@ -60,9 +60,6 @@ export const DesktopTravelRow = ({
           />
         )}
       </TableCell>
-      <TableCell className="whitespace-pre-line">
-        {isEditing ? renderEditForm("dietary_restrictions") : (entry.dietary_restrictions || "-")}
-      </TableCell>
     </TableRow>
   );
 };

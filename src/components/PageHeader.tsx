@@ -132,9 +132,9 @@ export const PageHeader = () => {
 
   return <div className="space-y-4">
       <LogoSection logoUrl={settings.logo_url} onLogoUpdate={handleLogoUpdate} />
-      <div className="text-center space-y-2 px-4 sm:px-0">
+      <div className="text-center space-y-4 px-4 sm:px-0">
         {editing ? <>
-            <div className="space-y-2">
+            <div className="space-y-4">
               <EditableTitle isEditing={true} title={editForm.name} onEdit={() => {}} onChange={value => setEditForm(prev => ({
             ...prev,
             name: value
@@ -155,7 +155,7 @@ export const PageHeader = () => {
             </Button>
           </> : <>
             <EditableTitle isEditing={false} title={settings.name} onEdit={() => setEditing(true)} onChange={() => {}} onSave={() => {}} />
-            <p className={cn("text-base md:text-xl text-gray-500 font-normal break-words whitespace-pre-wrap max-w-2xl mx-auto", 
+            <p className={cn("text-base md:text-xl text-gray-500 font-normal break-words whitespace-pre-wrap max-w-2xl mx-auto mt-6", 
                        settings.subtitle_style?.fontSize ? fontSizes[settings.subtitle_style.fontSize] : fontSizes.medium)}>
               {settings.subtitle}
             </p>

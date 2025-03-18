@@ -2,7 +2,6 @@
 import { TravelTableRow } from "./TravelTableRow";
 import { TableContainer } from "./components/TableContainer";
 import { MobileContainer } from "./components/MobileContainer";
-import { TableFooter } from "./components/TableFooter";
 import { useEditForm } from "./hooks/useEditForm";
 import type { TravelTableProps } from "./types";
 
@@ -51,8 +50,6 @@ export const TravelTable = ({ entries, onClaimSpot }: TravelTableProps) => {
           />
         ))}
       </TableContainer>
-
-      <TableFooter />
     </div>
   );
 };

@@ -19,7 +19,7 @@ export const TableContainer = ({ children }: TableContainerProps) => {
         }}
       >
         <div style={{ transform: 'rotateX(180deg)' }}>
-          <Table className="w-full">
+          <Table className="w-full bg-white">
             <TableHeader />
             <TableBody>
               {children}
