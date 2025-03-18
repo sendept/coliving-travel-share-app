@@ -39,18 +39,18 @@ const Index = () => {
   const headerComponent = useMemo(() => <PageHeader />, []);
 
   return (
-    <div className="product-hunt-container relative pb-32">
+    <div className="product-hunt-container relative pb-4">
       <div>
         {headerComponent}
       </div>
       <div className="py-8 space-y-12">
         <div className="relative">
-          <div className="product-hunt-card px-0 py-0 lg:w-screen lg:max-w-none lg:left-1/2 lg:right-1/2 lg:ml-[-50vw] lg:mr-[-50vw] lg:relative">
+          <div className="product-hunt-card px-0 py-0 mx-5 lg:w-[calc(100%-40px)] lg:max-w-none lg:left-1/2 lg:right-1/2 lg:ml-[-calc(50%-20px)] lg:mr-[-calc(50%-20px)] lg:relative">
             <TravelTable entries={entries} onClaimSpot={handleClaimSpot} />
           </div>
         </div>
         
-        <div className="mt-32 text-center mb-32">
+        <div className="mt-32 text-center mb-8">
           <h2 className={`text-3xl md:text-4xl font-medium mb-10 ${isMobile ? 'mx-auto text-center w-full' : ''}`}>
             <span>{getTranslation("inviteOthers", "en")}</span>
             <br />

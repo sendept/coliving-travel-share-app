@@ -1,6 +1,9 @@
 
 .product-hunt-container {
   @apply w-full mx-auto px-4 sm:px-6 lg:px-8;
+  min-height: calc(100vh - 20px);
+  display: flex;
+  flex-direction: column;
 }
 
 @media (min-width: 1024px) {
@@ -23,6 +26,9 @@
   margin: 0 auto;
   padding: 1rem;
   text-align: center;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
 }
 
 @media (min-width: 768px) {
