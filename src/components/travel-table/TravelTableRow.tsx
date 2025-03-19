@@ -32,6 +32,7 @@ export const TravelTableRow = ({
   index
 }: TravelTableRowProps) => {
   const isEditing = editingEntry === entry.id;
+  const rowNumber = index + 1; // Create row number
 
   const renderCell = (field: keyof TravelEntry) => {
     return (
@@ -62,6 +63,7 @@ export const TravelTableRow = ({
         setEditForm={setEditForm}
         onSaveEdit={onSaveEdit}
         onCancelEdit={onCancelEdit}
+        rowNumber={rowNumber} // Pass row number to mobile row
       />
       
       <DesktopTravelRow 
@@ -75,6 +77,7 @@ export const TravelTableRow = ({
         onClaimSpot={onClaimSpot}
         className={`${rowClassName} ${className}`}
         renderEditForm={renderCell}
+        rowNumber={rowNumber} // Pass row number to desktop row
       />
     </>
   );

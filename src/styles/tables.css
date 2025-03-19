@@ -123,6 +123,13 @@ thead tr {
   @apply text-green-800;
 }
 
+/* Increase size of input fields in claim form */
+input[placeholder="Name / Nombre"],
+input[placeholder="Contact / Contacto"] {
+  height: 60px !important;
+  font-size: 1.1rem !important;
+}
+
 /* Mobile styles */
 @media (max-width: 767px) {
   /* Ensure mobile container is not scrollable horizontally */

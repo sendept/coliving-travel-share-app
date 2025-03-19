@@ -16,6 +16,7 @@ interface MobileTravelRowProps {
   setEditForm?: (form: Partial<TravelEntry>) => void;
   onSaveEdit?: () => void;
   onCancelEdit?: () => void;
+  rowNumber: number; // Add row number prop
 }
 
 export const MobileTravelRow = ({ 
@@ -27,13 +28,19 @@ export const MobileTravelRow = ({
   editForm = {},
   setEditForm = () => {},
   onSaveEdit = () => {},
-  onCancelEdit = () => {}
+  onCancelEdit = () => {},
+  rowNumber // Add row number to props
 }: MobileTravelRowProps) => {
   const bgColor = isAlternate ? "bg-[#F5F5F5]" : "bg-white";
   const isEditing = editingEntry === entry.id;
 
   return (
     <div className={`md:hidden p-5 border-b mb-3 ${bgColor} rounded-none shadow-sm`} id={`entry-${entry.id}`}>
+      {/* Row number badge */}
+      <div className="absolute top-2 left-2 bg-gray-200 rounded-full w-7 h-7 flex items-center justify-center text-gray-600 font-medium text-sm">
+        {rowNumber}
+      </div>
+      
       <MobileHeaderSection entry={entry} />
       
       {isEditing ? (
