@@ -1,3 +1,4 @@
+
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -69,13 +70,36 @@ export const ClaimForm = ({
       handleClaim();
     }
   };
+  
   return <div className="flex flex-col items-center w-full">
       <div className="flex gap-3 items-center w-full">
-        {!showContactField ? <Input placeholder="Name / Nombre" value={claimName} onChange={e => setClaimName(e.target.value)} onKeyPress={handleNameKeyPress} className="w-full md:w-[300px] bg-white rounded-md h-[52px] text-center text-base px-[78px]" /> : <Input placeholder="Contact / Contacto" value={claimContact} onChange={e => setClaimContact(e.target.value)} onKeyPress={handleContactKeyPress} className="w-full md:w-[300px] bg-white rounded-md h-[52px] text-center text-base" autoFocus />}
-        <Button variant={showContactField ? "secondary" : "outline"} onClick={handleClaim} className={`
+        {!showContactField ? (
+          <Input 
+            placeholder="Name / Nombre" 
+            value={claimName} 
+            onChange={e => setClaimName(e.target.value)} 
+            onKeyPress={handleNameKeyPress} 
+            className="flex-1 bg-white rounded-md h-[52px] text-center text-base" 
+          />
+        ) : (
+          <Input 
+            placeholder="Contact / Contacto" 
+            value={claimContact} 
+            onChange={e => setClaimContact(e.target.value)} 
+            onKeyPress={handleContactKeyPress}
+
+            className="flex-1 bg-white rounded-md h-[52px] text-center text-base" 
+            autoFocus 
+          />
+        )}
+        <Button 
+          variant={showContactField ? "secondary" : "outline"} 
+          onClick={handleClaim} 
+          className={`
             whitespace-nowrap rounded-md h-[52px] px-6 text-base
             ${showContactField ? "bg-blue-500 hover:bg-blue-600 text-white" : "bg-transparent text-blue-500 hover:bg-blue-500 hover:text-white border border-blue-500"}
-          `}>
+          `}
+        >
           {!showContactField ? "Join / Únete" : "Add number"}
         </Button>
       </div>

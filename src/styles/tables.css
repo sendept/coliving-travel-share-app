@@ -73,8 +73,13 @@ tr:hover {
   padding-top: 2.5rem;
 }
 
-/* Fixed alternating row colors - with white rows only */
-tr {
+/* Force all rows to have white background */
+tr, tbody tr, thead tr {
+  background-color: white !important;
+}
+
+/* Force alternating rows to be white too */
+tr:nth-child(odd), tr:nth-child(even) {
   background-color: white !important;
 }
 

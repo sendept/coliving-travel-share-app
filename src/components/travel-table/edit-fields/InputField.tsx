@@ -1,3 +1,4 @@
+
 import { Check } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { KeyboardEvent } from "react";
@@ -27,8 +28,10 @@ export const InputField = ({
   min,
   onConfirm
 }: InputFieldProps) => {
-  // Ensure value is always a string
-  const stringValue = typeof value === 'number' ? value.toString() : String(value);
+  // Ensure value is always a string for the Input component
+  const stringValue = value === null || value === undefined 
+    ? '' 
+    : String(value);
 
   return (
     <div className="relative">
@@ -37,8 +40,9 @@ export const InputField = ({
         onChange={(e) => {
           let inputValue = e.target.value;
           if (type === "number") {
-            // Use parsed value for the onChange handler but keep the input as string
-            onChange(parseInt(inputValue) || 0);
+            // For number inputs, pass a number to the handler if it's valid, or 0
+            const parsedValue = inputValue === '' ? '' : (parseInt(inputValue) || 0);
+            onChange(parsedValue);
           } else {
             onChange(inputValue);
           }
