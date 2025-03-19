@@ -6,6 +6,7 @@ export interface TravelFormValues {
   transport: string;
   dateTime: string;
   contact: string;
+  dietaryRestrictions?: string;
 }
 
 export interface TravelFormProps {

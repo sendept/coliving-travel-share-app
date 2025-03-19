@@ -1,4 +1,3 @@
-
 import { Check } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { KeyboardEvent } from "react";
@@ -38,9 +37,11 @@ export const InputField = ({
         onChange={(e) => {
           let inputValue = e.target.value;
           if (type === "number") {
-            inputValue = parseInt(inputValue) || 0;
+            // Use parsed value for the onChange handler but keep the input as string
+            onChange(parseInt(inputValue) || 0);
+          } else {
+            onChange(inputValue);
           }
-          onChange(inputValue);
         }}
         onKeyDown={onKeyDown}
         onFocus={onFocus}
