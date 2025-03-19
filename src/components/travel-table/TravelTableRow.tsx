@@ -46,10 +46,10 @@ export const TravelTableRow = ({
     );
   };
 
-  // Fixed row background - first row is always white, then alternate
-  const rowClassName = index === 0 
-    ? "bg-white" 
-    : (index % 2 === 1 ? "bg-[#F5F5F5]" : "bg-white");
+  // Alternating row background - even rows (2, 4, 6, etc.) get the light gray background
+  const rowClassName = rowNumber % 2 === 0 
+    ? "bg-[#F5F5F5]" 
+    : "bg-white";
 
   return (
     <>
@@ -57,7 +57,7 @@ export const TravelTableRow = ({
         entry={entry} 
         onStartEdit={onStartEdit} 
         onClaimSpot={onClaimSpot} 
-        isAlternate={index % 2 === 1} // Make sure mobile rows alternate properly too
+        isAlternate={rowNumber % 2 === 0} // Use the row number to determine alternating style
         editingEntry={editingEntry}
         editForm={editForm}
         setEditForm={setEditForm}

@@ -34,7 +34,7 @@ export const ClaimedByCell = ({ entry, onClaimSpot, isEditing }: ClaimedByCellPr
   const hasContact = !!entry.contact && entry.contact.trim() !== '';
 
   return (
-    <div className="flex flex-col space-y-1 w-full max-w-md">
+    <div className="flex flex-col space-y-1 w-full max-w-[300px] mx-auto">
       <div className="flex flex-col space-y-1 mb-2">
         <div className="flex items-center justify-center">
           <span className="font-medium text-center">{entry.name}</span>
@@ -58,7 +58,8 @@ export const ClaimedByCell = ({ entry, onClaimSpot, isEditing }: ClaimedByCellPr
                     backgroundColor: bgColor,
                     color: textColor,
                     display: "flex",
-                    width: "100%"
+                    width: "100%",
+                    maxWidth: "250px"
                   }}
                 >
                   <span>{name}</span>

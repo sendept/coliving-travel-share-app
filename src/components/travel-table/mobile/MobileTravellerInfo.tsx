@@ -42,7 +42,7 @@ export const MobileTravellerInfo = ({ entry }: MobileTravellerInfoProps) => {
                 return (
                   <span 
                     key={index}
-                    className="text-sm font-normal px-2 py-1 rounded flex justify-between items-center"
+                    className="text-sm font-normal px-2 py-1 rounded flex justify-between items-center max-w-[250px]"
                     style={{
                       backgroundColor: bgColor,
                       color: textColor,

@@ -34,12 +34,12 @@ export const DesktopTravelRow = ({
   const isEditing = editingEntry === entry.id;
   
   return (
-    <TableRow className={`hidden md:table-row ${className} hover:bg-transparent`}>
+    <TableRow className={`hidden md:table-row ${className}`}>
       {/* Row number cell */}
       <TableCell className="w-12 text-center font-medium text-gray-500">
         {rowNumber}
       </TableCell>
-      <TableCell className="whitespace-pre-line py-4">
+      <TableCell className="whitespace-pre-line py-4 w-1/2">
         {isEditing ? renderEditForm("route") : (
           <RouteCell 
             entry={entry} 
@@ -48,7 +48,7 @@ export const DesktopTravelRow = ({
           />
         )}
       </TableCell>
-      <TableCell>
+      <TableCell className="w-1/4">
         {isEditing ? renderEditForm("claimed_by") : (
           <ClaimedByCell 
             entry={entry} 
@@ -57,7 +57,7 @@ export const DesktopTravelRow = ({
           />
         )}
       </TableCell>
-      <TableCell>
+      <TableCell className="w-1/4">
         {isEditing ? renderEditForm("date_time") : (
           <DateTimeCell 
             entry={entry} 

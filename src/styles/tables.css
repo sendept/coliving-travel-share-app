@@ -73,14 +73,14 @@ tr:hover {
   padding-top: 2.5rem;
 }
 
-/* Force all rows to have white background */
+/* Allow rows to have different background colors now (removing forced white) */
 tr, tbody tr, thead tr {
-  background-color: white !important;
+  background-color: inherit !important;
 }
 
-/* Force alternating rows to be white too */
+/* No longer force all rows to be white */
 tr:nth-child(odd), tr:nth-child(even) {
-  background-color: white !important;
+  background-color: inherit !important;
 }
 
 /* Keep table header always white */
