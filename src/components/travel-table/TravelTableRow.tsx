@@ -32,7 +32,6 @@ export const TravelTableRow = ({
   index
 }: TravelTableRowProps) => {
   const isEditing = editingEntry === entry.id;
-  const rowNumber = index + 1; // Create row number
 
   const renderCell = (field: keyof TravelEntry) => {
     return (
@@ -47,7 +46,7 @@ export const TravelTableRow = ({
   };
 
   // Alternating row background - even rows (2, 4, 6, etc.) get the light gray background
-  const rowClassName = rowNumber % 2 === 0 
+  const rowClassName = index % 2 === 0 
     ? "bg-[#F5F5F5]" 
     : "bg-white";
 
@@ -57,13 +56,12 @@ export const TravelTableRow = ({
         entry={entry} 
         onStartEdit={onStartEdit} 
         onClaimSpot={onClaimSpot} 
-        isAlternate={rowNumber % 2 === 0} // Use the row number to determine alternating style
+        isAlternate={index % 2 === 0} // Use the index to determine alternating style
         editingEntry={editingEntry}
         editForm={editForm}
         setEditForm={setEditForm}
         onSaveEdit={onSaveEdit}
         onCancelEdit={onCancelEdit}
-        rowNumber={rowNumber} // Pass row number to mobile row
       />
       
       <DesktopTravelRow 
@@ -77,7 +75,6 @@ export const TravelTableRow = ({
         onClaimSpot={onClaimSpot}
         className={`${rowClassName} ${className}`}
         renderEditForm={renderCell}
-        rowNumber={rowNumber} // Pass row number to desktop row
       />
     </>
   );

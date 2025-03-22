@@ -1,3 +1,4 @@
+
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -74,14 +75,14 @@ export const ClaimForm = ({
 
   return (
     <div className="flex flex-col items-center w-full max-w-[300px] mx-auto">
-      <div className="flex gap-3 items-center w-full">
+      <div className="flex gap-3 items-center justify-center w-full">
         {!showContactField ? (
           <Input 
             placeholder="Name / Nombre" 
             value={claimName} 
             onChange={e => setClaimName(e.target.value)} 
             onKeyPress={handleNameKeyPress} 
-            className="flex-1 bg-white rounded-md h-[49px] text-center text-base w-[133px]" 
+            className="bg-white rounded-md h-[49px] text-center text-base w-[133px] flex-none" 
           />
         ) : (
           <Input 
@@ -89,7 +90,7 @@ export const ClaimForm = ({
             value={claimContact} 
             onChange={e => setClaimContact(e.target.value)} 
             onKeyPress={handleContactKeyPress} 
-            className="flex-1 bg-white rounded-md h-[49px] text-center text-base w-[133px]" 
+            className="bg-white rounded-md h-[49px] text-center text-base w-[133px] flex-none" 
             autoFocus 
           />
         )}
@@ -97,7 +98,7 @@ export const ClaimForm = ({
           variant={showContactField ? "secondary" : "outline"} 
           onClick={handleClaim} 
           className={`
-            whitespace-nowrap rounded-md h-[49px] w-[133px] px-6 text-base
+            rounded-md h-[49px] w-[133px] px-6 text-base flex-none
             ${showContactField ? "bg-blue-500 hover:bg-blue-600 text-white" : "bg-transparent text-blue-500 hover:bg-blue-500 hover:text-white border border-blue-500"}
           `}
         >

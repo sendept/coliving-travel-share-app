@@ -64,7 +64,7 @@ export const ClaimedByCell = ({ entry, onClaimSpot, isEditing }: ClaimedByCellPr
                 >
                   <span>{name}</span>
                   {contact && (
-                    <span className="text-xs ml-2">{contact}</span>
+                    <span className="text-xs ml-2 whitespace-nowrap">{contact}</span>
                   )}
                 </div>
               );
