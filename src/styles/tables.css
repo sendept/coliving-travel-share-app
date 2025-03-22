@@ -48,6 +48,17 @@
   }
 }
 
+/* Set alternating row colors */
+tr:nth-child(even),
+tr:nth-of-type(even) {
+  background-color: #F5F5F5 !important;
+}
+
+tr:nth-child(odd),
+tr:nth-of-type(odd) {
+  background-color: white !important;
+}
+
 /* Remove hover effects from table rows */
 .md\:table-row:hover {
   background-color: inherit !important;
@@ -71,16 +82,6 @@ tr:hover {
 /* Increase spacing between header and table */
 .product-hunt-container .py-8 {
   padding-top: 2.5rem;
-}
-
-/* Allow rows to have different background colors now (removing forced white) */
-tr, tbody tr, thead tr {
-  background-color: inherit !important;
-}
-
-/* No longer force all rows to be white */
-tr:nth-child(odd), tr:nth-child(even) {
-  background-color: inherit !important;
 }
 
 /* Keep table header always white */
@@ -138,5 +139,14 @@ input[placeholder="Contact / Contacto"] {
     max-width: 100% !important;
     overflow-x: hidden !important;
     padding: 0 !important;
+  }
+  
+  /* Apply alternating row colors in mobile view */
+  .md\:hidden:nth-of-type(even) {
+    background-color: #F5F5F5 !important;
+  }
+  
+  .md\:hidden:nth-of-type(odd) {
+    background-color: white !important;
   }
 }
