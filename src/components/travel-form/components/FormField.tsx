@@ -51,11 +51,11 @@ export const FormField = ({
               <Textarea
                 placeholder={placeholder}
                 className={`
-                  min-h-[100px] resize-none border-0
+                  min-h-[100px] resize-none
+                  border border-gray-300
                   focus:outline-none 
-                  ${focusedField === name ? "ring-1 ring-blue-500" : ""} 
-                  focus-visible:ring-1 focus-visible:ring-blue-500
-                  border-transparent !important
+                  ${focusedField === name ? "ring-0 border-blue-500" : ""} 
+                  focus-visible:ring-0 focus-visible:border-blue-500
                 `}
                 onFocus={() => onFocus(name)}
                 onBlur={onBlur}
@@ -67,11 +67,10 @@ export const FormField = ({
                 min={min}
                 placeholder={placeholder}
                 className={`
-                  border-0
+                  border border-gray-300
                   focus:outline-none 
-                  ${focusedField === name ? "ring-1 ring-blue-500" : ""} 
-                  focus-visible:ring-1 focus-visible:ring-blue-500
-                  border-transparent !important
+                  ${focusedField === name ? "ring-0 border-blue-500" : ""} 
+                  focus-visible:ring-0 focus-visible:border-blue-500
                 `}
                 onFocus={() => onFocus(name)}
                 onBlur={onBlur}

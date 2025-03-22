@@ -127,8 +127,15 @@ thead tr {
 /* Increase size of input fields in claim form */
 input[placeholder="Name / Nombre"],
 input[placeholder="Contact / Contacto"] {
-  height: 60px !important;
+  height: 49px !important;
   font-size: 1.1rem !important;
+  border: 1px solid #C8C8C9 !important; /* Added grey border */
+}
+
+input[placeholder="Name / Nombre"]:focus,
+input[placeholder="Contact / Contacto"]:focus {
+  border: 1px solid #1EAEDB !important; /* Blue border when focused */
+  outline: none;
 }
 
 /* Mobile styles */
@@ -149,4 +156,16 @@ input[placeholder="Contact / Contacto"] {
   .md\:hidden:nth-of-type(odd) {
     background-color: white !important;
   }
+}
+
+/* Form explanation text */
+.mt-16.text-center p {
+  color: #8A898C !important; /* Grey text color */
+}
+
+/* Edit mode focus styling */
+.claim-form input:focus,
+.claim-form textarea:focus {
+  border-color: #1EAEDB !important; 
+  outline: none !important;
 }

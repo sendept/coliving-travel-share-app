@@ -1,3 +1,4 @@
+
 .product-hunt-input {
   @apply w-full px-3 py-2 sm:px-4 sm:py-3 rounded-lg border border-gray-200 focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition-all duration-200 text-base sm:text-sm;
 }
@@ -100,7 +101,7 @@ input[placeholder="Contact / Contacto"]:focus {
   .mt-16.text-center p {
     padding-left: 1rem;
     padding-right: 1rem;
-    color: #000000 !important;
+    color: #8A898C !important; /* Changed text color to grey */
   }
   
   /* Ensure borders on mobile version */
@@ -110,6 +111,11 @@ input[placeholder="Contact / Contacto"]:focus {
     width: 133px !important;
     height: 49px !important;
   }
+}
+
+/* Form explanation text color */
+.formExplanation {
+  color: #8A898C !important;
 }
 
 /* Ensure full expansion of claim form elements */
@@ -122,4 +128,13 @@ input[placeholder="Contact / Contacto"]:focus {
   flex: 0 0 133px;
   width: 133px !important;
   height: 49px !important;
+}
+
+/* Enhanced active state for edit fields */
+.table-textarea:focus,
+.table-input:focus,
+.claim-form input:focus,
+.claim-form textarea:focus {
+  @apply border-blue-500 !important;
+  outline: none !important;
 }

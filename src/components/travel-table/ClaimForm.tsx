@@ -17,6 +17,8 @@ export const ClaimForm = ({
   const [claimName, setClaimName] = useState("");
   const [claimContact, setClaimContact] = useState("");
   const [showContactField, setShowContactField] = useState(false);
+  const [nameFieldFocused, setNameFieldFocused] = useState(false);
+  const [contactFieldFocused, setContactFieldFocused] = useState(false);
   const {
     toast
   } = useToast();
@@ -81,16 +83,28 @@ export const ClaimForm = ({
             placeholder="Name / Nombre" 
             value={claimName} 
             onChange={e => setClaimName(e.target.value)} 
-            onKeyPress={handleNameKeyPress} 
-            className="bg-white rounded-md h-[49px] text-center text-base w-[133px] flex-none" 
+            onKeyPress={handleNameKeyPress}
+            onFocus={() => setNameFieldFocused(true)}
+            onBlur={() => setNameFieldFocused(false)}
+            className={`
+              bg-white rounded-md h-[49px] text-center text-base w-[133px] flex-none
+              border border-gray-300
+              ${nameFieldFocused ? "border-blue-500" : ""}
+            `}
           />
         ) : (
           <Input 
             placeholder="Contact / Contacto" 
             value={claimContact} 
             onChange={e => setClaimContact(e.target.value)} 
-            onKeyPress={handleContactKeyPress} 
-            className="bg-white rounded-md h-[49px] text-center text-base w-[133px] flex-none" 
+            onKeyPress={handleContactKeyPress}
+            onFocus={() => setContactFieldFocused(true)}
+            onBlur={() => setContactFieldFocused(false)}
+            className={`
+              bg-white rounded-md h-[49px] text-center text-base w-[133px] flex-none
+              border border-gray-300
+              ${contactFieldFocused ? "border-blue-500" : ""}
+            `}
             autoFocus 
           />
         )}
