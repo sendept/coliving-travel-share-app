@@ -1,8 +1,11 @@
 
 import React from 'react';
 import { ArrowDown, ArrowRight } from 'lucide-react';
+import { useIsMobile } from '@/hooks/use-mobile';
 
 export const NavigationLinks = () => {
+  const isMobile = useIsMobile();
+  
   const scrollToAddTripForm = () => {
     const element = document.querySelector('.mt-16.mb-8');
     if (element) {
@@ -21,9 +24,9 @@ export const NavigationLinks = () => {
     <div className="w-full max-w-5xl mx-auto px-4 py-8 flex justify-center items-center space-x-6 mt-4">
       <button 
         onClick={scrollToAvailableTrips}
-        className="text-[#8A898C] hover:text-[#403E43] flex items-center font-medium text-base transition-colors"
+        className="text-[#8A898C] hover:text-[#403E43] flex items-center font-medium text-base transition-colors whitespace-nowrap"
       >
-        Scroll to view available trips
+        {isMobile ? "See trips" : "Scroll to view available trips"}
         <ArrowDown className="ml-1 w-4 h-4" />
       </button>
       

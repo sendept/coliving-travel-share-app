@@ -5,8 +5,6 @@ export const TableHeader = () => {
   return (
     <ShadcnTableHeader>
       <TableRow className="border-b-0 bg-white hover:bg-white">
-        {/* Row number header */}
-        <TableHead className="w-12 text-center">#</TableHead>
         <TableHead className="text-left text-base font-medium text-[#333333] w-1/2">
           Route
         </TableHead>

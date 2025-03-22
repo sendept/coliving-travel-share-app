@@ -72,7 +72,8 @@ export const ClaimForm = ({
     }
   };
 
-  return <div className="flex flex-col items-center w-full max-w-[300px] mx-auto">
+  return (
+    <div className="flex flex-col items-center w-full max-w-[300px] mx-auto">
       <div className="flex gap-3 items-center w-full">
         {!showContactField ? (
           <Input 
@@ -80,7 +81,7 @@ export const ClaimForm = ({
             value={claimName} 
             onChange={e => setClaimName(e.target.value)} 
             onKeyPress={handleNameKeyPress} 
-            className="flex-1 bg-white rounded-md h-[49px] text-center text-base px-2 w-[133px]" 
+            className="flex-1 bg-white rounded-md h-[49px] text-center text-base w-[133px]" 
           />
         ) : (
           <Input 
@@ -103,5 +104,6 @@ export const ClaimForm = ({
           {!showContactField ? "Join / Únete" : "Add number"}
         </Button>
       </div>
-    </div>;
+    </div>
+  );
 };

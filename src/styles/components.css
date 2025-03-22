@@ -70,6 +70,8 @@ input[placeholder="Name / Nombre"],
 input[placeholder="Contact / Contacto"] {
   @apply border border-gray-300 !important;
   border-radius: 0.375rem;
+  width: 133px !important;
+  height: 49px !important;
 }
 
 input[placeholder="Name / Nombre"]:focus,
@@ -105,5 +107,19 @@ input[placeholder="Contact / Contacto"]:focus {
   input[placeholder="Name / Nombre"], 
   input[placeholder="Contact / Contacto"] {
     @apply border border-gray-300 !important;
+    width: 133px !important;
+    height: 49px !important;
   }
 }
+
+/* Ensure full expansion of claim form elements */
+.flex.gap-3.items-center.w-full {
+  justify-content: center;
+  width: 100%;
+}
+
+.claim-form input, .claim-form button {
+  flex: 0 0 133px;
+  width: 133px !important;
+}
+

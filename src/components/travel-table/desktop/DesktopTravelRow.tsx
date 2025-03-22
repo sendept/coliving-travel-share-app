@@ -16,7 +16,7 @@ interface DesktopTravelRowProps {
   onClaimSpot: (id: string, name: string) => void;
   className?: string;
   renderEditForm: (field: keyof TravelEntry) => React.ReactNode;
-  rowNumber: number; // Add row number prop
+  rowNumber: number; // Keep for compatibility but don't display it
 }
 
 export const DesktopTravelRow = ({
@@ -29,16 +29,12 @@ export const DesktopTravelRow = ({
   onClaimSpot,
   className = "",
   renderEditForm,
-  rowNumber // Add row number to the props
+  rowNumber // Keep for compatibility
 }: DesktopTravelRowProps) => {
   const isEditing = editingEntry === entry.id;
   
   return (
     <TableRow className={`hidden md:table-row ${className}`}>
-      {/* Row number cell */}
-      <TableCell className="w-12 text-center font-medium text-gray-500">
-        {rowNumber}
-      </TableCell>
       <TableCell className="whitespace-pre-line py-4 w-1/2">
         {isEditing ? renderEditForm("route") : (
           <RouteCell 
