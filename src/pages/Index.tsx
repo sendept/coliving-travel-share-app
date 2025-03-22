@@ -59,10 +59,10 @@ const Index = () => {
             <br />
             <span className="text-gray-500">{getTranslation("shareYourCarTaxi", "es")}</span>
           </h2>
-          <p className={`mb-8 ${isMobile ? 'text-left px-4 text-black' : 'text-center text-gray-600'}`}>
-            {getTranslation("formExplanation", "en")}
+          <p className={`mb-8 ${isMobile ? 'text-left px-4' : 'text-center'}`}>
+            <span className="text-gray-700">{getTranslation("formExplanation", "en")}</span>
             <br />
-            {getTranslation("formExplanation", "es")}
+            <span className="text-gray-400">{getTranslation("formExplanation", "es")}</span>
           </p>
           <TravelForm projectId={undefined} />
         </div>
