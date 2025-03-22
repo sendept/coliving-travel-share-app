@@ -16,7 +16,7 @@ interface MobileTravelRowProps {
   setEditForm?: (form: Partial<TravelEntry>) => void;
   onSaveEdit?: () => void;
   onCancelEdit?: () => void;
-  rowNumber: number; // Keep for compatibility but don't display it
+  rowNumber?: number; // Made optional
 }
 
 export const MobileTravelRow = ({ 
@@ -29,7 +29,7 @@ export const MobileTravelRow = ({
   setEditForm = () => {},
   onSaveEdit = () => {},
   onCancelEdit = () => {},
-  rowNumber // Keep for compatibility
+  rowNumber // Keep for compatibility but don't display it
 }: MobileTravelRowProps) => {
   const bgColor = isAlternate ? "bg-[#F5F5F5]" : "bg-white";
   const isEditing = editingEntry === entry.id;

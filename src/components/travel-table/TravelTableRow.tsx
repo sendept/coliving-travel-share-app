@@ -62,6 +62,7 @@ export const TravelTableRow = ({
         setEditForm={setEditForm}
         onSaveEdit={onSaveEdit}
         onCancelEdit={onCancelEdit}
+        rowNumber={index} // Pass the index as rowNumber
       />
       
       <DesktopTravelRow 
@@ -75,6 +76,7 @@ export const TravelTableRow = ({
         onClaimSpot={onClaimSpot}
         className={`${rowClassName} ${className}`}
         renderEditForm={renderCell}
+        rowNumber={index} // Pass the index as rowNumber
       />
     </>
   );

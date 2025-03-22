@@ -16,7 +16,7 @@ interface DesktopTravelRowProps {
   onClaimSpot: (id: string, name: string) => void;
   className?: string;
   renderEditForm: (field: keyof TravelEntry) => React.ReactNode;
-  rowNumber: number; // Keep for compatibility but don't display it
+  rowNumber?: number; // Made optional
 }
 
 export const DesktopTravelRow = ({
@@ -29,7 +29,7 @@ export const DesktopTravelRow = ({
   onClaimSpot,
   className = "",
   renderEditForm,
-  rowNumber // Keep for compatibility
+  rowNumber // Keep for compatibility but don't display it
 }: DesktopTravelRowProps) => {
   const isEditing = editingEntry === entry.id;
   
