@@ -3,10 +3,12 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { useToast } from "@/hooks/use-toast";
 import type { TravelEntry } from "./types";
+
 interface ClaimFormProps {
   entry: TravelEntry;
   onClaim: (id: string, name: string, contact?: string) => void;
 }
+
 export const ClaimForm = ({
   entry,
   onClaim
@@ -17,6 +19,7 @@ export const ClaimForm = ({
   const {
     toast
   } = useToast();
+
   const handleClaim = () => {
     if (entry.available_spots <= 0) {
       toast({
@@ -44,6 +47,7 @@ export const ClaimForm = ({
       setShowContactField(true);
     }
   };
+
   const handleNameKeyPress = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === "Enter") {
       if (!showContactField) {
@@ -61,18 +65,41 @@ export const ClaimForm = ({
       }
     }
   };
+
   const handleContactKeyPress = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === "Enter") {
       handleClaim();
     }
   };
+
   return <div className="flex flex-col items-center w-full max-w-[300px] mx-auto">
       <div className="flex gap-3 items-center w-full">
-        {!showContactField ? <Input placeholder="Name / Nombre" value={claimName} onChange={e => setClaimName(e.target.value)} onKeyPress={handleNameKeyPress} className="flex-1 bg-white rounded-md h-[60px] text-center text-base text-lg px-[62px] mx-0 my-px py-0" /> : <Input placeholder="Contact / Contacto" value={claimContact} onChange={e => setClaimContact(e.target.value)} onKeyPress={handleContactKeyPress} className="flex-1 bg-white rounded-md h-[60px] text-center text-base text-lg" autoFocus />}
-        <Button variant={showContactField ? "secondary" : "outline"} onClick={handleClaim} className={`
-            whitespace-nowrap rounded-md h-[60px] px-6 text-base
+        {!showContactField ? (
+          <Input 
+            placeholder="Name / Nombre" 
+            value={claimName} 
+            onChange={e => setClaimName(e.target.value)} 
+            onKeyPress={handleNameKeyPress} 
+            className="flex-1 bg-white rounded-md h-[49px] text-center text-base px-2 w-[133px]" 
+          />
+        ) : (
+          <Input 
+            placeholder="Contact / Contacto" 
+            value={claimContact} 
+            onChange={e => setClaimContact(e.target.value)} 
+            onKeyPress={handleContactKeyPress} 
+            className="flex-1 bg-white rounded-md h-[49px] text-center text-base w-[133px]" 
+            autoFocus 
+          />
+        )}
+        <Button 
+          variant={showContactField ? "secondary" : "outline"} 
+          onClick={handleClaim} 
+          className={`
+            whitespace-nowrap rounded-md h-[49px] w-[133px] px-6 text-base
             ${showContactField ? "bg-blue-500 hover:bg-blue-600 text-white" : "bg-transparent text-blue-500 hover:bg-blue-500 hover:text-white border border-blue-500"}
-          `}>
+          `}
+        >
           {!showContactField ? "Join / Únete" : "Add number"}
         </Button>
       </div>
