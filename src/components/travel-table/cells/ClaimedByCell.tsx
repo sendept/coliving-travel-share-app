@@ -64,7 +64,7 @@ export const ClaimedByCell = ({ entry, onClaimSpot, isEditing }: ClaimedByCellPr
                 >
                   <span>{name}</span>
                   {contact && (
-                    <span className="text-xs ml-3" style={{ marginLeft: '12px' }}>{contact}</span>
+                    <span className="text-xs" style={{ marginLeft: '12px' }}>{contact}</span>
                   )}
                 </div>
               );
