@@ -91,6 +91,7 @@ export const ClaimForm = ({
               border border-gray-300
               ${nameFieldFocused ? "border-blue-500" : ""}
             `}
+            style={{ fontSize: '16px' }}
           />
         ) : (
           <Input 
@@ -105,6 +106,7 @@ export const ClaimForm = ({
               border border-gray-300
               ${contactFieldFocused ? "border-blue-500" : ""}
             `}
+            style={{ fontSize: '16px' }}
             autoFocus 
           />
         )}
@@ -115,6 +117,7 @@ export const ClaimForm = ({
             rounded-md h-[49px] w-[133px] px-6 text-base flex-none
             ${showContactField ? "bg-blue-500 hover:bg-blue-600 text-white" : "bg-transparent text-blue-500 hover:bg-blue-500 hover:text-white border border-blue-500"}
           `}
+          style={{ fontSize: '16px' }}
         >
           {!showContactField ? "Join / Únete" : "Add number"}
         </Button>
