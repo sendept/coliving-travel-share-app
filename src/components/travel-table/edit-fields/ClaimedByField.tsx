@@ -43,6 +43,7 @@ export const ClaimedByField = ({
             onFocus={onFocus}
             onBlur={onBlur}
             className={`mt-1 ${inputClasses} claim-form input`}
+            style={{ fontSize: '16px' }}
           />
           <Check 
             size={16} 
@@ -66,6 +67,7 @@ export const ClaimedByField = ({
           onBlur={onBlur}
           className={`${textareaClasses} claim-form`}
           placeholder="Enter claimed users (one per line)"
+          style={{ fontSize: '16px' }}
         />
         <Check 
           size={16} 
@@ -88,6 +90,7 @@ export const ClaimedByField = ({
             onBlur={onBlur}
             className={`w-16 h-6 py-1 px-2 text-xs table-input border border-gray-300 rounded-md pr-6 focus:outline-none focus:border-blue-500 claim-form input`}
             min="0"
+            style={{ fontSize: '16px' }}
           />
           <Check 
             size={12} 
