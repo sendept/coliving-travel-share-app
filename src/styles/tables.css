@@ -1,7 +1,9 @@
 
+
 input[placeholder="Name / Nombre"],
 input[placeholder="Contact / Contacto"] {
   height: 49px !important;
-  font-size: 16px !important; // Explicitly set to 16px to match Join/Únete button
+  font-size: 16px !important; /* Explicitly set to 16px to match Join/Únete button */
   border: 1px solid #C8C8C9 !important; /* Added grey border */
 }
+
