@@ -1,4 +1,3 @@
-
 import { TravelEntry } from "../types";
 
 interface MobileTravellerInfoProps {
@@ -50,7 +49,14 @@ export const MobileTravellerInfo = ({ entry }: MobileTravellerInfoProps) => {
                   >
                     <span>{name}</span>
                     {phoneNumber && (
-                      <span className="text-xs" style={{ marginLeft: '12px' }}>{phoneNumber}</span>
+                      <span 
+                        className="text-xs" 
+                        style={{ 
+                          marginLeft: '12px' // Set spacing to 12px as requested 
+                        }}
+                      >
+                        {phoneNumber}
+                      </span>
                     )}
                   </span>
                 );
