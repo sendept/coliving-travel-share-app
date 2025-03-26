@@ -50,26 +50,23 @@ export const ClaimedByCell = ({
         
         {Array.isArray(entry.claimed_by) && entry.claimed_by.length > 0 && <div className="text-center flex flex-col space-y-1 mt-2">
             {entry.claimed_by.map((person, index) => {
-          const [bgColor, textColor] = coTravelerColorPairs[index % coTravelerColorPairs.length];
-          const {
-            name,
-            contact
-          } = extractNameAndContact(person);
-          return <div key={index} style={{
-            backgroundColor: bgColor,
-            color: textColor,
-            display: "flex",
-            width: "100%",
-            maxWidth: "250px"
-          }} className="text-sm font-normal py-1 rounded mx-auto flex justify-between items-center px-[33px]">
-                  <span>{name}</span>
-                  {contact && <span className="text-xs" style={{
-              marginLeft: '12px'
-            }}>{contact}</span>}
-                </div>;
-        })}
-          </div>}
-      </div>
+        const [bgColor, textColor] = coTravelerColorPairs[index % coTravelerColorPairs.length];
+        const {
+          name,
+          contact
+        } = extractNameAndContact(person);
+        return <div key={index} style={{
+          backgroundColor: bgColor,
+          color: textColor,
+          display: "flex",
+          width: "100%",
+          maxWidth: "250px"
+        }} className="text-sm font-normal py-1 rounded mx-auto flex justify-between items-center px-[33px]">
+                <span>{name}</span>
+                {contact && <span className="text-xs ml-[12px]">{contact}</span>}
+              </div>;
+      })}
+        </div>}
 
       {entry.available_spots > 0 ? <div className="w-full">
           <div className="text-sm text-gray-500 mb-2">
