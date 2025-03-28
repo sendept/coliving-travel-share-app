@@ -55,7 +55,7 @@ export const PageHeader = () => {
         )}
       </div>
       <div className="text-center space-y-4 px-4 sm:px-0">
-        <div className="relative max-w-[700px] min-w-[350px] mx-auto">
+        <div className="relative max-w-[700px] mx-auto text-center">
           <h1 className="font-semibold tracking-tight text-3xl">{settings.name}</h1>
         </div>
         <p className={`text-base md:text-xl text-gray-500 font-normal break-words whitespace-pre-wrap max-w-2xl mx-auto mt-6 ${

@@ -7,7 +7,7 @@ interface MobileContainerProps {
 
 export const MobileContainer = ({ children }: MobileContainerProps) => {
   return (
-    <div className="md:hidden bg-white rounded-xl overflow-hidden shadow-sm">
+    <div className="md:hidden bg-white rounded-none overflow-hidden shadow-sm">
       {children}
     </div>
   );
