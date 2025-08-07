@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import { TravelEntry } from "@/components/travel-table/types";
 import { useToast } from "@/hooks/use-toast";
 import { supabase } from "@/integrations/supabase/client";
+import { isDateInPast } from "@/utils/dateUtils";
 
 export const useTravelEntries = (projectId?: string | null) => {
   const [entries, setEntries] = useState<TravelEntry[]>([]);
@@ -32,10 +33,21 @@ export const useTravelEntries = (projectId?: string | null) => {
       }
 
       if (data) {
-        setEntries(data.map(entry => ({
+        // Filter out entries with dates in the past
+        const currentEntries = data.filter(entry => !isDateInPast(entry.date_time));
+        
+        setEntries(currentEntries.map(entry => ({
           ...entry,
           language: entry.language as 'en' | 'es' | 'fr'
         })) as TravelEntry[]);
+        
+        // Delete past entries from database
+        const pastEntries = data.filter(entry => isDateInPast(entry.date_time));
+        if (pastEntries.length > 0) {
+          pastEntries.forEach(async (entry) => {
+            await supabase.from('travel_entries').delete().eq('id', entry.id);
+          });
+        }
       }
     };
 
